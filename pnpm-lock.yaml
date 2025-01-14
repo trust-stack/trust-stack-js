@@ -77,8 +77,6 @@ importers:
         specifier: ^8.15.0
         version: 8.15.0(eslint@9.15.0(jiti@2.4.2))(typescript@5.5.4)
 
-  packages/typescript-config: {}
-
 packages:
 
   '@esbuild/aix-ppc64@0.24.2':

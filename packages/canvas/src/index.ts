@@ -1,12 +1,12 @@
-import {Core} from "@truststack-sdk/core";
 import {
+  CoreClient,
   CreateCanvasTemplate,
   createCanvasTemplate,
   findCanvasTemplate,
   renderCanvasTemplate,
-} from "@truststack-sdk/core/client";
+} from "@truststack-sdk/core";
 
-export class CanvasClient extends Core {
+export class CanvasClient extends CoreClient {
   /**
    * Create a Canvas Template.
    * @param data - The data to create the Canvas Template.
