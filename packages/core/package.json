@@ -1,0 +1,22 @@
+{
+  "name": "@truststack-sdk/core",
+  "version": "0.0.1",
+  "description": "Core utilities for Trust Stack SDK, not intended for direct use",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "openapi-ts": "openapi-ts"
+  },
+  "keywords": [],
+  "author": "",
+  "devDependencies": {
+    "@hey-api/openapi-ts": "^0.61.3",
+    "tsup": "^8.3.5"
+  },
+  "dependencies": {
+    "@hey-api/client-fetch": "^0.6.0"
+  }
+}
