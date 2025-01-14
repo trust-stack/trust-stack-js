@@ -16,8 +16,8 @@
     "strict": true,
     "target": "ES2022",
     "paths": {
-      "@truststack-sdk/*": ["./packages/*/src"],
-      "@truststack-sdk/core/*": ["./packages/core/src/*"]
+      "@truststack/*": ["./packages/*/src"],
+      "@truststack/core/*": ["./packages/core/src/*"]
     }
   }
 }

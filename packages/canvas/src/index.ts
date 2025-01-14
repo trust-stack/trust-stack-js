@@ -4,7 +4,7 @@ import {
   createCanvasTemplate,
   findCanvasTemplate,
   renderCanvasTemplate,
-} from "@truststack-sdk/core";
+} from "@truststack/core";
 
 export class CanvasClient extends CoreClient {
   /**
