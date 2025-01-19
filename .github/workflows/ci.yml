@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js 20.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.x
+
+      - name: Install Dependencies
+        run: |
+          npm install -g pnpm
+          npm install -g turbo
+
+      - name: Install Dependencies
+        run: pnpm install
+
+      - name: Build
+        run: turbo build
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Install pnpm and TurboRepo
+        run: |
+          npm install -g pnpm
+          npm install -g turbo
+
+      - name: Install Dependencies
+        run: pnpm install
+
+      - name: Test
+        run: turbo test
