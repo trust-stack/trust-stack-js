@@ -12,7 +12,7 @@ import {
 export class AdminClient extends TrustStackClient {
   /**
    * Create an organization
-   * @param name - The name of the organization
+   * @param props - The properties of the organization
    * @param options - The request options
    * @returns The created organization
    */
@@ -30,8 +30,7 @@ export class AdminClient extends TrustStackClient {
 
   /**
    * Update an organization
-   * @param id - The ID of the organization
-   * @param name - The name of the organization
+   * @param props - The properties of the organization
    * @param options - The request options
    * @returns The updated organization
    */
