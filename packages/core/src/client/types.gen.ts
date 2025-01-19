@@ -48,7 +48,7 @@ export type CanvasTemplateInstance = {
     updatedAt: string;
 };
 
-export type UpsertLink = {
+export type UpsertLinkDto = {
     /**
      * The relation type of the link.
      */
@@ -71,7 +71,7 @@ export type UpsertLink = {
     lang?: Array<string>;
 };
 
-export type CreateLinkSet = {
+export type CreateLinkSetDto = {
     /**
      * The identifier of the Link Set.
      */
@@ -83,7 +83,7 @@ export type CreateLinkSet = {
     /**
      * The links of the Link Set.
      */
-    links: Array<UpsertLink>;
+    links: Array<UpsertLinkDto>;
 };
 
 export type Link = {
@@ -144,7 +144,7 @@ export type LinkSet = {
     updatedAt: string;
 };
 
-export type UpdateLinkSet = {
+export type UpdateLinkSetDto = {
     /**
      * The identifier of the Link Set.
      */
@@ -156,10 +156,10 @@ export type UpdateLinkSet = {
     /**
      * The links of the Link Set.
      */
-    links: Array<UpsertLink>;
+    links: Array<UpsertLinkDto>;
 };
 
-export type CreateExternalResolver = {
+export type CreateExternalResolverDto = {
     /**
      * The href of the External Resolver.
      */
@@ -178,7 +178,7 @@ export type CreateExternalResolver = {
     childExternalResolvers: Array<string>;
 };
 
-export type UpdateExternalResolver = {
+export type UpdateExternalResolverDto = {
     /**
      * The href of the External Resolver.
      */
@@ -197,23 +197,182 @@ export type UpdateExternalResolver = {
     childExternalResolvers: Array<string>;
 };
 
-export type FindCanvasTemplateData = {
+export type IssueCredentialRequest = {
+    [key: string]: unknown;
+};
+
+export type LinkedDataProof = {
+    type: string;
+    created: string;
+    verificationMethod: string;
+    proofPurpose: string;
+    jws: string;
+};
+
+export type VerifiableCredential = {
+    /**
+     * The JSON-LD context of the credential.
+     */
+    '@context': Array<string>;
+    /**
+     * The ID of the credential.
+     */
+    id: string;
+    /**
+     * The JSON-LD type of the credential.
+     */
+    type: Array<string>;
+    /**
+     * The issuer of the credential.
+     */
+    issuer: string;
+    /**
+     * The issuance date of the credential.
+     */
+    issuanceDate: string;
+    /**
+     * The expiration date of the credential.
+     */
+    expirationDate: string;
+    /**
+     * The subject of the credential.
+     */
+    credentialSubject: {
+        [key: string]: unknown;
+    };
+    proof: LinkedDataProof;
+};
+
+/**
+ * Options for specifying how the LinkedDataProof is created.
+ */
+export type VerifyOptions = {
+    /**
+     * The URI of the verificationMethod used for the proof. Default assertionMethod URI.
+     */
+    verificationMethod?: string;
+    /**
+     * The purpose of the proof. Default 'assertionMethod'.
+     */
+    proofPurpose?: string;
+    /**
+     * The date and time of the proof (with a maximum accuracy in seconds). Default current system time.
+     */
+    created?: string;
+    /**
+     * A challenge provided by the requesting party of the proof. For example 6e62f66e-67de-11eb-b490-ef3eeefa55f2
+     */
+    challenge?: string;
+    /**
+     * The intended domain of validity for the proof. For example website.example
+     */
+    domain?: string;
+};
+
+export type VerifyCredentialRequest = {
+    verifiableCredential: VerifiableCredential;
+    options?: VerifyOptions;
+};
+
+export type CreateOrganization = {
+    /**
+     * Name given to the organization.
+     */
+    name: string;
+};
+
+export type Organization = {
+    /**
+     * Unique identifier of the organization.
+     */
+    id: string;
+    /**
+     * Name given to the organization.
+     */
+    name: string;
+};
+
+export type UpdateOrganization = {
+    /**
+     * Name given to the organization.
+     */
+    name: string;
+};
+
+export type CreateDid = {
+    /**
+     * The name of the DID.
+     */
+    name: string;
+};
+
+export type Did = {
+    /**
+     * Unique identifier of the DID.
+     */
+    id: string;
+    /**
+     * The DID.
+     */
+    did: string;
+    /**
+     * The DID alias.
+     */
+    alias: string;
+    /**
+     * The name given to the DID.
+     */
+    name: string;
+};
+
+export type Paginated = {
+    total: number;
+    page: number;
+    limit: number;
+};
+
+export type PaginatedDids = {
+    /**
+     * The list of DIDs
+     */
+    items: Array<Did>;
+    /**
+     * The pagination metadata
+     */
+    metadata: Paginated;
+};
+
+export type HealthControllerGetStatusData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/health/status';
+};
+
+export type HealthControllerGetStatusResponses = {
+    200: unknown;
+};
+
+export type GetCanvasTemplateData = {
     body?: never;
     path: {
-        id: string;
+        /**
+         * The ID of the Canvas Template to find
+         */
+        id: unknown;
     };
     query?: never;
     url: '/canvas-templates/{id}';
 };
 
-export type FindCanvasTemplateResponses = {
+export type GetCanvasTemplateResponses = {
     /**
      * The Canvas Template was successfully obtained.
      */
     200: CanvasTemplate;
 };
 
-export type FindCanvasTemplateResponse = FindCanvasTemplateResponses[keyof FindCanvasTemplateResponses];
+export type GetCanvasTemplateResponse = GetCanvasTemplateResponses[keyof GetCanvasTemplateResponses];
 
 export type CreateCanvasTemplateData = {
     body: CreateCanvasTemplate;
@@ -232,8 +391,15 @@ export type CreateCanvasTemplateResponses = {
 export type CreateCanvasTemplateResponse = CreateCanvasTemplateResponses[keyof CreateCanvasTemplateResponses];
 
 export type RenderCanvasTemplateData = {
-    body?: never;
+    body: {
+        [key: string]: string | number | boolean | {
+            [key: string]: unknown;
+        } | Array<unknown>;
+    };
     path: {
+        /**
+         * The ID of the Canvas Template to render
+         */
         id: string;
     };
     query?: never;
@@ -248,3 +414,349 @@ export type RenderCanvasTemplateResponses = {
 };
 
 export type RenderCanvasTemplateResponse = RenderCanvasTemplateResponses[keyof RenderCanvasTemplateResponses];
+
+export type GetLinkSetsData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/link-sets';
+};
+
+export type GetLinkSetsResponses = {
+    /**
+     * The Link Sets were found and returned.
+     */
+    200: Array<LinkSet>;
+};
+
+export type GetLinkSetsResponse = GetLinkSetsResponses[keyof GetLinkSetsResponses];
+
+export type CreateLinkSetData = {
+    body: CreateLinkSetDto;
+    path?: never;
+    query?: never;
+    url: '/link-sets';
+};
+
+export type CreateLinkSetResponses = {
+    /**
+     * The Link Set was created.
+     */
+    201: LinkSet;
+};
+
+export type CreateLinkSetResponse = CreateLinkSetResponses[keyof CreateLinkSetResponses];
+
+export type DeleteLinkSetData = {
+    body?: never;
+    path: {
+        id: string;
+    };
+    query?: never;
+    url: '/link-sets/{id}';
+};
+
+export type DeleteLinkSetResponses = {
+    200: unknown;
+};
+
+export type GetLinkSetData = {
+    body?: never;
+    path: {
+        id: string;
+    };
+    query?: never;
+    url: '/link-sets/{id}';
+};
+
+export type GetLinkSetResponses = {
+    /**
+     * The Link Set was found and returned.
+     */
+    200: LinkSet;
+};
+
+export type GetLinkSetResponse = GetLinkSetResponses[keyof GetLinkSetResponses];
+
+export type UpdateLinkSetData = {
+    body: UpdateLinkSetDto;
+    path: {
+        id: string;
+    };
+    query?: never;
+    url: '/link-sets/{id}';
+};
+
+export type UpdateLinkSetResponses = {
+    /**
+     * The Link Set was updated.
+     */
+    201: LinkSet;
+};
+
+export type UpdateLinkSetResponse = UpdateLinkSetResponses[keyof UpdateLinkSetResponses];
+
+export type GetManyExternalResolversData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/external-resolvers';
+};
+
+export type GetManyExternalResolversResponses = {
+    200: unknown;
+};
+
+export type CreateExternalResolverData = {
+    body: CreateExternalResolverDto;
+    path?: never;
+    query?: never;
+    url: '/external-resolvers';
+};
+
+export type CreateExternalResolverResponses = {
+    201: unknown;
+};
+
+export type DeleteExternalResolverData = {
+    body?: never;
+    path: {
+        id: string;
+    };
+    query?: never;
+    url: '/external-resolvers/{id}';
+};
+
+export type DeleteExternalResolverResponses = {
+    200: unknown;
+};
+
+export type GetExternalResolverData = {
+    body?: never;
+    path: {
+        id: string;
+    };
+    query?: never;
+    url: '/external-resolvers/{id}';
+};
+
+export type GetExternalResolverResponses = {
+    200: unknown;
+};
+
+export type UpdateExternalResolverData = {
+    body: UpdateExternalResolverDto;
+    path: {
+        id: string;
+    };
+    query?: never;
+    url: '/external-resolvers/{id}';
+};
+
+export type UpdateExternalResolverResponses = {
+    200: unknown;
+};
+
+export type CredentialsControllerGetCredentialData = {
+    body?: never;
+    path: {
+        id: string;
+    };
+    query?: never;
+    url: '/credentials/{id}';
+};
+
+export type CredentialsControllerGetCredentialResponses = {
+    200: unknown;
+};
+
+export type CreateOrganizationData = {
+    body: CreateOrganization;
+    path?: never;
+    query?: never;
+    url: '/organizations';
+};
+
+export type CreateOrganizationErrors = {
+    /**
+     * Invalid request
+     */
+    400: unknown;
+};
+
+export type CreateOrganizationResponses = {
+    /**
+     * Organization created successfully
+     */
+    201: Organization;
+};
+
+export type CreateOrganizationResponse = CreateOrganizationResponses[keyof CreateOrganizationResponses];
+
+export type DeleteOrganizationData = {
+    body?: never;
+    path: {
+        id: string;
+    };
+    query?: never;
+    url: '/organizations/{id}';
+};
+
+export type DeleteOrganizationErrors = {
+    /**
+     * Organization not found
+     */
+    404: unknown;
+};
+
+export type DeleteOrganizationResponses = {
+    /**
+     * Organization deleted successfully
+     */
+    200: unknown;
+};
+
+export type GetOrganizationData = {
+    body?: never;
+    path: {
+        id: string;
+    };
+    query?: never;
+    url: '/organizations/{id}';
+};
+
+export type GetOrganizationErrors = {
+    /**
+     * Organization not found
+     */
+    404: unknown;
+};
+
+export type GetOrganizationResponses = {
+    /**
+     * Organization retrieved successfully
+     */
+    200: Organization;
+};
+
+export type GetOrganizationResponse = GetOrganizationResponses[keyof GetOrganizationResponses];
+
+export type UpdateOrganizationData = {
+    body: UpdateOrganization;
+    path: {
+        id: string;
+    };
+    query?: never;
+    url: '/organizations/{id}';
+};
+
+export type UpdateOrganizationErrors = {
+    /**
+     * Invalid request
+     */
+    400: unknown;
+    /**
+     * Organization not found
+     */
+    404: unknown;
+};
+
+export type UpdateOrganizationResponses = {
+    /**
+     * Organization updated successfully
+     */
+    200: Organization;
+};
+
+export type UpdateOrganizationResponse = UpdateOrganizationResponses[keyof UpdateOrganizationResponses];
+
+export type GetDidsData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * Page number (1-based)
+         */
+        page?: number;
+        /**
+         * Number of items per page
+         */
+        limit?: number;
+    };
+    url: '/did';
+};
+
+export type GetDidsResponses = {
+    /**
+     * DIDs fetched successfully
+     */
+    200: PaginatedDids;
+};
+
+export type GetDidsResponse = GetDidsResponses[keyof GetDidsResponses];
+
+export type CreateDidData = {
+    body: CreateDid;
+    path?: never;
+    query?: never;
+    url: '/did';
+};
+
+export type CreateDidErrors = {
+    /**
+     * Invalid request
+     */
+    400: unknown;
+};
+
+export type CreateDidResponses = {
+    /**
+     * DID created successfully
+     */
+    201: Did;
+};
+
+export type CreateDidResponse = CreateDidResponses[keyof CreateDidResponses];
+
+export type DeleteDidData = {
+    body?: never;
+    path: {
+        id: string;
+    };
+    query?: never;
+    url: '/did/{id}';
+};
+
+export type DeleteDidResponses = {
+    /**
+     * DID deleted successfully
+     */
+    204: void;
+};
+
+export type DeleteDidResponse = DeleteDidResponses[keyof DeleteDidResponses];
+
+export type GetDidData = {
+    body?: never;
+    path: {
+        id: string;
+    };
+    query?: never;
+    url: '/did/{id}';
+};
+
+export type GetDidErrors = {
+    /**
+     * DID not found
+     */
+    403: unknown;
+};
+
+export type GetDidResponses = {
+    /**
+     * DID fetched successfully
+     */
+    200: Did;
+};
+
+export type GetDidResponse = GetDidResponses[keyof GetDidResponses];

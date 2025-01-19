@@ -1,7 +1,7 @@
 {
-  "name": "@truststack/canvas",
+  "name": "@truststack/hermes",
   "version": "0.0.2",
-  "description": "Trust Stack API Client - A lightweight JS library for making with Trust Stacks Canvas API",
+  "description": "Trust Stack API Client - A lightweight JS library for making with Trust Stacks Hermes API",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",

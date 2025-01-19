@@ -19,14 +19,15 @@
         "/canvas-templates/{id}": {
             "get": {
                 "description": "Get a Canvas Template by id.",
-                "operationId": "findCanvasTemplate",
+                "operationId": "getCanvasTemplate",
                 "parameters": [
                     {
-                        "in": "path",
                         "name": "id",
                         "required": true,
+                        "in": "path",
+                        "description": "The ID of the Canvas Template to find",
                         "schema": {
-                            "type": "string"
+                            "example": "123"
                         }
                     }
                 ],
@@ -90,11 +91,43 @@
                         "name": "id",
                         "required": true,
                         "in": "path",
+                        "description": "The ID of the Canvas Template to render",
                         "schema": {
+                            "example": "123",
                             "type": "string"
                         }
                     }
                 ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "additionalProperties": {
+                                    "oneOf": [
+                                        {
+                                            "type": "string"
+                                        },
+                                        {
+                                            "type": "number"
+                                        },
+                                        {
+                                            "type": "boolean"
+                                        },
+                                        {
+                                            "type": "object"
+                                        },
+                                        {
+                                            "type": "array"
+                                        }
+                                    ],
+                                    "description": "Any valid JSON value"
+                                }
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "Instantiation of the Canvas Template as a Canvas Template Instance",
@@ -122,7 +155,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/CreateLinkSet"
+                                "$ref": "#/components/schemas/CreateLinkSetDto"
                             }
                         }
                     }
@@ -186,7 +219,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/UpdateLinkSet"
+                                "$ref": "#/components/schemas/UpdateLinkSetDto"
                             }
                         }
                     }
@@ -269,7 +302,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/CreateExternalResolver"
+                                "$ref": "#/components/schemas/CreateExternalResolverDto"
                             }
                         }
                     }
@@ -316,7 +349,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/UpdateExternalResolver"
+                                "$ref": "#/components/schemas/UpdateExternalResolverDto"
                             }
                         }
                     }
@@ -373,6 +406,306 @@
                 "summary": "",
                 "tags": [
                     "StackExternalResolver"
+                ]
+            }
+        },
+        "/credentials/{id}": {
+            "get": {
+                "description": "Retrieves a credential by its ID.",
+                "operationId": "CredentialsController_getCredential",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "summary": "Retrieves a credential by its ID.",
+                "tags": [
+                    "Verifier"
+                ]
+            }
+        },
+        "/organizations": {
+            "post": {
+                "operationId": "createOrganization",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateOrganization"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Organization created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Organization"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request"
+                    }
+                },
+                "summary": "Create an organization",
+                "tags": [
+                    "Organization"
+                ]
+            }
+        },
+        "/organizations/{id}": {
+            "get": {
+                "operationId": "getOrganization",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Organization retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Organization"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Organization not found"
+                    }
+                },
+                "summary": "Get an organization",
+                "tags": [
+                    "Organization"
+                ]
+            },
+            "put": {
+                "operationId": "updateOrganization",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateOrganization"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Organization updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Organization"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request"
+                    },
+                    "404": {
+                        "description": "Organization not found"
+                    }
+                },
+                "summary": "Update an organization",
+                "tags": [
+                    "Organization"
+                ]
+            },
+            "delete": {
+                "operationId": "deleteOrganization",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Organization deleted successfully"
+                    },
+                    "404": {
+                        "description": "Organization not found"
+                    }
+                },
+                "summary": "Delete an organization",
+                "tags": [
+                    "Organization"
+                ]
+            }
+        },
+        "/did": {
+            "post": {
+                "description": "Create a unique DID for the requested organization.",
+                "operationId": "createDid",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateDid"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "DID created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Did"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request"
+                    }
+                },
+                "summary": "",
+                "tags": [
+                    "Did"
+                ]
+            },
+            "get": {
+                "description": "Get all DIDs for the requested organization.",
+                "operationId": "getDids",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "required": false,
+                        "in": "query",
+                        "description": "Page number (1-based)",
+                        "schema": {
+                            "example": 1,
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "required": false,
+                        "in": "query",
+                        "description": "Number of items per page",
+                        "schema": {
+                            "example": 10,
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "DIDs fetched successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedDids"
+                                }
+                            }
+                        }
+                    }
+                },
+                "summary": "",
+                "tags": [
+                    "Did"
+                ]
+            }
+        },
+        "/did/{id}": {
+            "get": {
+                "description": "Get a DID by ID",
+                "operationId": "getDid",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "DID fetched successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Did"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "DID not found"
+                    }
+                },
+                "summary": "",
+                "tags": [
+                    "Did"
+                ]
+            },
+            "delete": {
+                "description": "Delete a DID by ID",
+                "operationId": "deleteDid",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "DID deleted successfully"
+                    }
+                },
+                "summary": "",
+                "tags": [
+                    "Did"
                 ]
             }
         }
@@ -497,7 +830,7 @@
                     "updatedAt"
                 ]
             },
-            "UpsertLink": {
+            "UpsertLinkDto": {
                 "type": "object",
                 "properties": {
                     "relationType": {
@@ -530,7 +863,7 @@
                     "title"
                 ]
             },
-            "CreateLinkSet": {
+            "CreateLinkSetDto": {
                 "type": "object",
                 "properties": {
                     "identifier": {
@@ -545,7 +878,7 @@
                         "description": "The links of the Link Set.",
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/UpsertLink"
+                            "$ref": "#/components/schemas/UpsertLinkDto"
                         }
                     }
                 },
@@ -639,7 +972,7 @@
                     "updatedAt"
                 ]
             },
-            "UpdateLinkSet": {
+            "UpdateLinkSetDto": {
                 "type": "object",
                 "properties": {
                     "identifier": {
@@ -654,7 +987,7 @@
                         "description": "The links of the Link Set.",
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/UpsertLink"
+                            "$ref": "#/components/schemas/UpsertLinkDto"
                         }
                     }
                 },
@@ -664,7 +997,7 @@
                     "links"
                 ]
             },
-            "CreateExternalResolver": {
+            "CreateExternalResolverDto": {
                 "type": "object",
                 "properties": {
                     "href": {
@@ -694,7 +1027,7 @@
                     "childExternalResolvers"
                 ]
             },
-            "UpdateExternalResolver": {
+            "UpdateExternalResolverDto": {
                 "type": "object",
                 "properties": {
                     "href": {
@@ -722,6 +1055,277 @@
                     "pattern",
                     "qualifier",
                     "childExternalResolvers"
+                ]
+            },
+            "IssueCredentialRequest": {
+                "type": "object",
+                "properties": {}
+            },
+            "LinkedDataProof": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string"
+                    },
+                    "created": {
+                        "type": "string"
+                    },
+                    "verificationMethod": {
+                        "type": "string"
+                    },
+                    "proofPurpose": {
+                        "type": "string"
+                    },
+                    "jws": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "type",
+                    "created",
+                    "verificationMethod",
+                    "proofPurpose",
+                    "jws"
+                ]
+            },
+            "VerifiableCredential": {
+                "type": "object",
+                "properties": {
+                    "@context": {
+                        "description": "The JSON-LD context of the credential.",
+                        "example": [
+                            "https://www.w3.org/2018/credentials/v1",
+                            "https://www.w3.org/2018/credentials/examples/v1"
+                        ],
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The ID of the credential.",
+                        "example": "http://example.gov/credentials/3732"
+                    },
+                    "type": {
+                        "description": "The JSON-LD type of the credential.",
+                        "example": [
+                            "VerifiableCredential",
+                            "UniversityDegreeCredential"
+                        ],
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "issuer": {
+                        "type": "string",
+                        "description": "The issuer of the credential.",
+                        "example": "did:example:123"
+                    },
+                    "issuanceDate": {
+                        "type": "string",
+                        "description": "The issuance date of the credential.",
+                        "example": "2020-03-16T22:37:26.544Z"
+                    },
+                    "expirationDate": {
+                        "type": "string",
+                        "description": "The expiration date of the credential.",
+                        "example": "2021-03-16T22:37:26.544Z"
+                    },
+                    "credentialSubject": {
+                        "type": "object",
+                        "description": "The subject of the credential.",
+                        "example": {
+                            "id": "did:example:123",
+                            "degree": {
+                                "type": "BachelorDegree",
+                                "name": "Bachelor of Science and Arts"
+                            }
+                        }
+                    },
+                    "proof": {
+                        "$ref": "#/components/schemas/LinkedDataProof"
+                    }
+                },
+                "required": [
+                    "@context",
+                    "id",
+                    "type",
+                    "issuer",
+                    "issuanceDate",
+                    "expirationDate",
+                    "credentialSubject",
+                    "proof"
+                ]
+            },
+            "VerifyOptions": {
+                "type": "object",
+                "properties": {
+                    "verificationMethod": {
+                        "type": "string",
+                        "description": "The URI of the verificationMethod used for the proof. Default assertionMethod URI.",
+                        "example": "did:example:123#z6MksHh7qHWvybLg5QTPPdG2DgEjjduBDArV9EF9mRiRzMBN"
+                    },
+                    "proofPurpose": {
+                        "type": "string",
+                        "description": "The purpose of the proof. Default 'assertionMethod'.",
+                        "example": "assertionMethod"
+                    },
+                    "created": {
+                        "type": "string",
+                        "description": "The date and time of the proof (with a maximum accuracy in seconds). Default current system time.",
+                        "example": "2020-04-02T18:48:36Z"
+                    },
+                    "challenge": {
+                        "type": "string",
+                        "description": "A challenge provided by the requesting party of the proof. For example 6e62f66e-67de-11eb-b490-ef3eeefa55f2",
+                        "example": "d436f0c8-fbd9-4e48-bbb2-55fc5d0920a8"
+                    },
+                    "domain": {
+                        "type": "string",
+                        "description": "The intended domain of validity for the proof. For example website.example",
+                        "example": "example.com"
+                    }
+                },
+                "description": "Options for specifying how the LinkedDataProof is created."
+            },
+            "VerifyCredentialRequest": {
+                "type": "object",
+                "properties": {
+                    "verifiableCredential": {
+                        "$ref": "#/components/schemas/VerifiableCredential"
+                    },
+                    "options": {
+                        "$ref": "#/components/schemas/VerifyOptions"
+                    }
+                },
+                "required": [
+                    "verifiableCredential"
+                ]
+            },
+            "CreateOrganization": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Name given to the organization."
+                    }
+                },
+                "required": [
+                    "name"
+                ]
+            },
+            "Organization": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Unique identifier of the organization."
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Name given to the organization."
+                    }
+                },
+                "required": [
+                    "id",
+                    "name"
+                ]
+            },
+            "UpdateOrganization": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Name given to the organization."
+                    }
+                },
+                "required": [
+                    "name"
+                ]
+            },
+            "CreateDid": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the DID.",
+                        "example": "acme"
+                    }
+                },
+                "required": [
+                    "name"
+                ]
+            },
+            "Did": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Unique identifier of the DID."
+                    },
+                    "did": {
+                        "type": "string",
+                        "description": "The DID."
+                    },
+                    "alias": {
+                        "type": "string",
+                        "description": "The DID alias."
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name given to the DID."
+                    }
+                },
+                "required": [
+                    "id",
+                    "did",
+                    "alias",
+                    "name"
+                ]
+            },
+            "Paginated": {
+                "type": "object",
+                "properties": {
+                    "total": {
+                        "type": "number"
+                    },
+                    "page": {
+                        "type": "number"
+                    },
+                    "limit": {
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "total",
+                    "page",
+                    "limit"
+                ]
+            },
+            "PaginatedDids": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "description": "The list of DIDs",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Did"
+                        }
+                    },
+                    "metadata": {
+                        "description": "The pagination metadata",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Paginated"
+                            }
+                        ]
+                    }
+                },
+                "required": [
+                    "items",
+                    "metadata"
                 ]
             }
         }

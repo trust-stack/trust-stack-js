@@ -2,3 +2,11 @@ dist/
 node_modules/
 *.log
 .turbo/
+
+.env
+
+# Cloudflare
+.wrangler/
+
+# Testing
+reports/
