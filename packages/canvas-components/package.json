@@ -53,7 +53,6 @@
     "jest": "^29.7.0",
     "jest-cli": "^29.7.0",
     "lit": "^3.2.1",
-    "puppeteer": "^21.9.0",
     "storybook": "^8.1.9",
     "storybook-addon-stencil": "^0.2.2",
     "unplugin-stencil": "^0.1.1"
