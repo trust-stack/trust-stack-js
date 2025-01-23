@@ -74,6 +74,9 @@ importers:
       '@types/node':
         specifier: ^16.18.11
         version: 16.18.124
+      chromatic:
+        specifier: ^11.25.1
+        version: 11.25.1
       jest:
         specifier: ^29.7.0
         version: 29.7.0(@types/node@16.18.124)
@@ -1438,6 +1441,18 @@ packages:
   chownr@2.0.0:
     resolution: {integrity: sha512-bIomtDF5KGpdogkLd9VspvFzk9KfpyyGlS8YFVZl7TGPBHL5snIOnxeshwVgPteQ9b4Eydl+pVbIyE1DcvCWgQ==}
     engines: {node: '>=10'}
+
+  chromatic@11.25.1:
+    resolution: {integrity: sha512-D0NdcGOSy84hqgNnSY7FM4TzB77RymRTowjm4hb1CV4wbk1djKTV4SJbbYVCzHFD+n/NOg/wtZ9Y7sjiRdy8dA==}
+    hasBin: true
+    peerDependencies:
+      '@chromatic-com/cypress': ^0.*.* || ^1.0.0
+      '@chromatic-com/playwright': ^0.*.* || ^1.0.0
+    peerDependenciesMeta:
+      '@chromatic-com/cypress':
+        optional: true
+      '@chromatic-com/playwright':
+        optional: true
 
   chromium-bidi@0.5.8:
     resolution: {integrity: sha512-blqh+1cEQbHBKmok3rVJkBlBxt9beKBgOsxbFgs7UJcoVbbeZ+K7+6liAsjgpc8l1Xd55cQUy14fXZdGSb4zIw==}
@@ -5116,6 +5131,8 @@ snapshots:
       readdirp: 4.1.1
 
   chownr@2.0.0: {}
+
+  chromatic@11.25.1: {}
 
   chromium-bidi@0.5.8(devtools-protocol@0.0.1232444):
     dependencies:
