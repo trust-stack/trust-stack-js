@@ -33,5 +33,5 @@ jobs:
       - name: Run Chromatic
         uses: chromaui/action@latest
         with:
-          working-directory: packages/canvas-components
+          workingDir: packages/canvas-components
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
