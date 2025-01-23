@@ -1,0 +1,16 @@
+:host {
+  display: block;
+}
+
+.container {
+  border-top-left-radius: var(--md-sys-shape-corner-extra-small);
+  border-top-right-radius: var(--md-sys-shape-corner-extra-small);
+  overflow: hidden;
+  max-height: 200px;
+}
+
+.container > img {
+  max-height: 200px;
+  width: 100%;
+  object-fit: cover;
+}
