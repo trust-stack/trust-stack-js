@@ -1,0 +1,11 @@
+:host {
+  display: block;
+}
+
+.card {
+  border-top-left-radius: var(--md-sys-shape-corner-medium);
+  border-top-right-radius: var(--md-sys-shape-corner-medium);
+  overflow: hidden;
+  text-align: center;
+  --md-elevation-level: 1;
+}

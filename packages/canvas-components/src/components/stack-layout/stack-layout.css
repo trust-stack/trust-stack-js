@@ -1,0 +1,24 @@
+stack-layout {
+  display: block;
+  position: relative;
+}
+
+.stack-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Target direct children of stack-container */
+.stack-container > * {
+  position: relative;
+  margin-top: calc(var(--overlap) * -1);
+}
+
+.stack-container > *:first-child {
+  margin-top: 0;
+}
+
+.stack-container > stack-section:not(:last-child) > *:first-child {
+  padding-bottom: var(--md-sys-spacing-large);
+}

@@ -1,0 +1,45 @@
+name: Components
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  chromatic:
+    name: Run Chromatic
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          # 👇 Tells the checkout which commit hash to reference
+          ref: ${{ github.event.pull_request.head.ref }}
+        env:
+          CHROMATIC_BRANCH: ${{ github.event.pull_request.head.ref || github.ref_name }}
+          CHROMATIC_SHA: ${{ github.event.pull_request.head.sha || github.ref }}
+          CHROMATIC_SLUG: ${{ github.repository }}
+
+      - name: Setup Node.js 20.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.x
+
+      - name: Install Dependencies
+        run: |
+          npm install -g pnpm
+          npm install -g turbo
+
+      - name: Install Dependencies
+        run: pnpm install
+        working-directory: packages/canvas-components
+
+      - name: Run Chromatic
+        uses: chromaui/action@latest
+        with:
+          workingDir: packages/canvas-components
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
