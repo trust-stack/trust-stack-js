@@ -7,11 +7,11 @@
 
 ## Properties
 
-| Property   | Attribute  | Description | Type                                                  | Default     |
-| ---------- | ---------- | ----------- | ----------------------------------------------------- | ----------- |
-| `headline` | `headline` |             | `string`                                              | `undefined` |
-| `subtitle` | `subtitle` |             | `string`                                              | `undefined` |
-| `variant`  | `variant`  |             | `"default" \| "primary" \| "secondary" \| "tertiary"` | `undefined` |
+| Property   | Attribute  | Description | Type                                                                       | Default     |
+| ---------- | ---------- | ----------- | -------------------------------------------------------------------------- | ----------- |
+| `headline` | `headline` |             | `string`                                                                   | `undefined` |
+| `subtitle` | `subtitle` |             | `string`                                                                   | `undefined` |
+| `variant`  | `variant`  |             | `"primary" \| "secondary" \| "surface" \| "surface-variant" \| "tertiary"` | `undefined` |
 
 
 ----------------------------------------------

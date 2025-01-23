@@ -6,11 +6,6 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
-    interface EventSection {
-        "headline": string;
-        "subtitle": string;
-        "variant"?: 'primary' | 'secondary' | 'tertiary' | 'default';
-    }
     interface HeaderImage {
         "headline": string;
         "image": string;
@@ -22,16 +17,13 @@ export namespace Components {
     interface StackSection {
         "headline": string;
         "subtitle": string;
-        "variant"?: 'primary' | 'secondary' | 'tertiary' | 'default';
+        "variant"?: 'primary' | 'secondary' | 'tertiary' | 'surface' | 'surface-variant';
+    }
+    interface StackSectionBlockImage {
+        "url": string;
     }
 }
 declare global {
-    interface HTMLEventSectionElement extends Components.EventSection, HTMLStencilElement {
-    }
-    var HTMLEventSectionElement: {
-        prototype: HTMLEventSectionElement;
-        new (): HTMLEventSectionElement;
-    };
     interface HTMLHeaderImageElement extends Components.HeaderImage, HTMLStencilElement {
     }
     var HTMLHeaderImageElement: {
@@ -50,19 +42,20 @@ declare global {
         prototype: HTMLStackSectionElement;
         new (): HTMLStackSectionElement;
     };
+    interface HTMLStackSectionBlockImageElement extends Components.StackSectionBlockImage, HTMLStencilElement {
+    }
+    var HTMLStackSectionBlockImageElement: {
+        prototype: HTMLStackSectionBlockImageElement;
+        new (): HTMLStackSectionBlockImageElement;
+    };
     interface HTMLElementTagNameMap {
-        "event-section": HTMLEventSectionElement;
         "header-image": HTMLHeaderImageElement;
         "stack-layout": HTMLStackLayoutElement;
         "stack-section": HTMLStackSectionElement;
+        "stack-section-block-image": HTMLStackSectionBlockImageElement;
     }
 }
 declare namespace LocalJSX {
-    interface EventSection {
-        "headline"?: string;
-        "subtitle"?: string;
-        "variant"?: 'primary' | 'secondary' | 'tertiary' | 'default';
-    }
     interface HeaderImage {
         "headline"?: string;
         "image"?: string;
@@ -74,23 +67,26 @@ declare namespace LocalJSX {
     interface StackSection {
         "headline"?: string;
         "subtitle"?: string;
-        "variant"?: 'primary' | 'secondary' | 'tertiary' | 'default';
+        "variant"?: 'primary' | 'secondary' | 'tertiary' | 'surface' | 'surface-variant';
+    }
+    interface StackSectionBlockImage {
+        "url"?: string;
     }
     interface IntrinsicElements {
-        "event-section": EventSection;
         "header-image": HeaderImage;
         "stack-layout": StackLayout;
         "stack-section": StackSection;
+        "stack-section-block-image": StackSectionBlockImage;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "event-section": LocalJSX.EventSection & JSXBase.HTMLAttributes<HTMLEventSectionElement>;
             "header-image": LocalJSX.HeaderImage & JSXBase.HTMLAttributes<HTMLHeaderImageElement>;
             "stack-layout": LocalJSX.StackLayout & JSXBase.HTMLAttributes<HTMLStackLayoutElement>;
             "stack-section": LocalJSX.StackSection & JSXBase.HTMLAttributes<HTMLStackSectionElement>;
+            "stack-section-block-image": LocalJSX.StackSectionBlockImage & JSXBase.HTMLAttributes<HTMLStackSectionBlockImageElement>;
         }
     }
 }
