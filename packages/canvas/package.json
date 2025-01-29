@@ -7,11 +7,21 @@
   "types": "./dist/index.d.ts",
   "license": "MIT",
   "private": false,
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
   "scripts": {
-    "build": "tsup src/index.ts --format cjs,esm --dts"
+    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "test": "vitest"
   },
   "dependencies": {
-    "@truststack/core": "workspace:*"
+    "@truststack/core": "workspace:*",
+    "ts-mixer": "^6.0.4",
+    "vitest": "^3.0.4"
   },
   "keywords": [],
   "author": "",
