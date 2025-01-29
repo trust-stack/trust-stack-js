@@ -21,9 +21,7 @@ export class AdminClient extends TrustStackClient {
     options?: RequestOptions
   ) {
     return createOrganization({
-      body: {
-        name: props.name,
-      },
+      body: props,
       headers: TrustStackClient.headers(options),
     });
   }

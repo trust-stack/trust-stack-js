@@ -1,9 +1,12 @@
 import {AdminClient} from "@truststack/admin";
 import {TrustStackClient} from "@truststack/core";
+import {beforeEach, describe, it} from "vitest";
 import {TestUtils} from "./test-utils";
 
 describe("AdminStackClient", () => {
-  TestUtils.Init();
+  beforeEach(() => {
+    TestUtils.Init();
+  });
 
   describe("request handling", () => {
     it("should make requests with correct headers from static config.", async () => {

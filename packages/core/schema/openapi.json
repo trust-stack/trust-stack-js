@@ -1,1333 +1,1788 @@
 {
-    "openapi": "3.0.0",
-    "paths": {
-        "/health/status": {
-            "get": {
-                "operationId": "HealthController_getStatus",
-                "parameters": [],
-                "responses": {
-                    "200": {
-                        "description": ""
-                    }
-                },
-                "summary": "Get the health status of the service",
-                "tags": [
-                    "Health"
-                ]
-            }
+  "openapi": "3.0.0",
+  "paths": {
+    "/health/status": {
+      "get": {
+        "operationId": "HealthController_getStatus",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
         },
-        "/canvas-templates/{id}": {
-            "get": {
-                "description": "Get a Canvas Template by id.",
-                "operationId": "getCanvasTemplate",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "required": true,
-                        "in": "path",
-                        "description": "The ID of the Canvas Template to find",
-                        "schema": {
-                            "example": "123"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "The Canvas Template was successfully obtained.",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/CanvasTemplate"
-                                }
-                            }
-                        }
-                    }
-                },
-                "summary": "",
-                "tags": [
-                    "CanvasTemplates"
-                ]
-            }
-        },
-        "/canvas-templates": {
-            "post": {
-                "description": "Create a Canvas Template.",
-                "operationId": "createCanvasTemplate",
-                "parameters": [],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/CreateCanvasTemplate"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "The Canvas Template that was created.",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/CanvasTemplate"
-                                }
-                            }
-                        }
-                    }
-                },
-                "summary": "",
-                "tags": [
-                    "CanvasTemplates"
-                ]
-            }
-        },
-        "/canvas-templates/{id}/render": {
-            "post": {
-                "description": "Create an instance of a Canvased Template.",
-                "operationId": "renderCanvasTemplate",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "required": true,
-                        "in": "path",
-                        "description": "The ID of the Canvas Template to render",
-                        "schema": {
-                            "example": "123",
-                            "type": "string"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "additionalProperties": {
-                                    "oneOf": [
-                                        {
-                                            "type": "string"
-                                        },
-                                        {
-                                            "type": "number"
-                                        },
-                                        {
-                                            "type": "boolean"
-                                        },
-                                        {
-                                            "type": "object"
-                                        },
-                                        {
-                                            "type": "array"
-                                        }
-                                    ],
-                                    "description": "Any valid JSON value"
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Instantiation of the Canvas Template as a Canvas Template Instance",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/CanvasTemplateInstance"
-                                }
-                            }
-                        }
-                    }
-                },
-                "summary": "",
-                "tags": [
-                    "CanvasTemplates"
-                ]
-            }
-        },
-        "/link-sets": {
-            "post": {
-                "operationId": "createLinkSet",
-                "parameters": [],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/CreateLinkSetDto"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "The Link Set was created.",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/LinkSet"
-                                }
-                            }
-                        }
-                    }
-                },
-                "summary": "Create a new Link Set",
-                "tags": [
-                    "StackLinkSet"
-                ]
-            },
-            "get": {
-                "operationId": "getLinkSets",
-                "parameters": [],
-                "responses": {
-                    "200": {
-                        "description": "The Link Sets were found and returned.",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/LinkSet"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "summary": "Get all paginated Link Sets",
-                "tags": [
-                    "StackLinkSet"
-                ]
-            }
-        },
-        "/link-sets/{id}": {
-            "put": {
-                "operationId": "updateLinkSet",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "required": true,
-                        "in": "path",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/UpdateLinkSetDto"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "The Link Set was updated.",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/LinkSet"
-                                }
-                            }
-                        }
-                    }
-                },
-                "summary": "Update an existing Link Set",
-                "tags": [
-                    "StackLinkSet"
-                ]
-            },
-            "get": {
-                "operationId": "getLinkSet",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "required": true,
-                        "in": "path",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "The Link Set was found and returned.",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/LinkSet"
-                                }
-                            }
-                        }
-                    }
-                },
-                "summary": "Get a Link Set by ID",
-                "tags": [
-                    "StackLinkSet"
-                ]
-            },
-            "delete": {
-                "operationId": "deleteLinkSet",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "required": true,
-                        "in": "path",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": ""
-                    }
-                },
-                "summary": "Delete a Link Set by ID",
-                "tags": [
-                    "StackLinkSet"
-                ]
-            }
-        },
-        "/external-resolvers": {
-            "post": {
-                "operationId": "createExternalResolver",
-                "parameters": [],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/CreateExternalResolverDto"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": ""
-                    }
-                },
-                "summary": "",
-                "tags": [
-                    "StackExternalResolver"
-                ]
-            },
-            "get": {
-                "operationId": "getManyExternalResolvers",
-                "parameters": [],
-                "responses": {
-                    "200": {
-                        "description": ""
-                    }
-                },
-                "summary": "",
-                "tags": [
-                    "StackExternalResolver"
-                ]
-            }
-        },
-        "/external-resolvers/{id}": {
-            "put": {
-                "operationId": "updateExternalResolver",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "required": true,
-                        "in": "path",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/UpdateExternalResolverDto"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": ""
-                    }
-                },
-                "summary": "",
-                "tags": [
-                    "StackExternalResolver"
-                ]
-            },
-            "get": {
-                "operationId": "getExternalResolver",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "required": true,
-                        "in": "path",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": ""
-                    }
-                },
-                "summary": "",
-                "tags": [
-                    "StackExternalResolver"
-                ]
-            },
-            "delete": {
-                "operationId": "deleteExternalResolver",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "required": true,
-                        "in": "path",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": ""
-                    }
-                },
-                "summary": "",
-                "tags": [
-                    "StackExternalResolver"
-                ]
-            }
-        },
-        "/credentials/{id}": {
-            "get": {
-                "description": "Retrieves a credential by its ID.",
-                "operationId": "CredentialsController_getCredential",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "required": true,
-                        "in": "path",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": ""
-                    }
-                },
-                "summary": "Retrieves a credential by its ID.",
-                "tags": [
-                    "Verifier"
-                ]
-            }
-        },
-        "/organizations": {
-            "post": {
-                "operationId": "createOrganization",
-                "parameters": [],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/CreateOrganization"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "Organization created successfully",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Organization"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid request"
-                    }
-                },
-                "summary": "Create an organization",
-                "tags": [
-                    "Organization"
-                ]
-            }
-        },
-        "/organizations/{id}": {
-            "get": {
-                "operationId": "getOrganization",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "required": true,
-                        "in": "path",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Organization retrieved successfully",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Organization"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Organization not found"
-                    }
-                },
-                "summary": "Get an organization",
-                "tags": [
-                    "Organization"
-                ]
-            },
-            "put": {
-                "operationId": "updateOrganization",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "required": true,
-                        "in": "path",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/UpdateOrganization"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Organization updated successfully",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Organization"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid request"
-                    },
-                    "404": {
-                        "description": "Organization not found"
-                    }
-                },
-                "summary": "Update an organization",
-                "tags": [
-                    "Organization"
-                ]
-            },
-            "delete": {
-                "operationId": "deleteOrganization",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "required": true,
-                        "in": "path",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Organization deleted successfully"
-                    },
-                    "404": {
-                        "description": "Organization not found"
-                    }
-                },
-                "summary": "Delete an organization",
-                "tags": [
-                    "Organization"
-                ]
-            }
-        },
-        "/did": {
-            "post": {
-                "description": "Create a unique DID for the requested organization.",
-                "operationId": "createDid",
-                "parameters": [],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/CreateDid"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "DID created successfully",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Did"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid request"
-                    }
-                },
-                "summary": "",
-                "tags": [
-                    "Did"
-                ]
-            },
-            "get": {
-                "description": "Get all DIDs for the requested organization.",
-                "operationId": "getDids",
-                "parameters": [
-                    {
-                        "name": "page",
-                        "required": false,
-                        "in": "query",
-                        "description": "Page number (1-based)",
-                        "schema": {
-                            "example": 1,
-                            "type": "number"
-                        }
-                    },
-                    {
-                        "name": "limit",
-                        "required": false,
-                        "in": "query",
-                        "description": "Number of items per page",
-                        "schema": {
-                            "example": 10,
-                            "type": "number"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "DIDs fetched successfully",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/PaginatedDids"
-                                }
-                            }
-                        }
-                    }
-                },
-                "summary": "",
-                "tags": [
-                    "Did"
-                ]
-            }
-        },
-        "/did/{id}": {
-            "get": {
-                "description": "Get a DID by ID",
-                "operationId": "getDid",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "required": true,
-                        "in": "path",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "DID fetched successfully",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Did"
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "DID not found"
-                    }
-                },
-                "summary": "",
-                "tags": [
-                    "Did"
-                ]
-            },
-            "delete": {
-                "description": "Delete a DID by ID",
-                "operationId": "deleteDid",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "required": true,
-                        "in": "path",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "204": {
-                        "description": "DID deleted successfully"
-                    }
-                },
-                "summary": "",
-                "tags": [
-                    "Did"
-                ]
-            }
-        }
+        "summary": "Get the health status of the service",
+        "tags": [
+          "Health"
+        ]
+      }
     },
-    "info": {
-        "title": "Trust Stack API",
-        "description": "Programmatic access to the Trust Stack API.",
-        "version": "1.0",
-        "contact": {}
-    },
-    "tags": [],
-    "servers": [],
-    "components": {
-        "securitySchemes": {
-            "bearer": {
-                "scheme": "bearer",
-                "bearerFormat": "JWT",
-                "type": "http"
+    "/link-sets": {
+      "post": {
+        "operationId": "createLinkSet",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateLinkSetDto"
+              }
             }
+          }
         },
-        "schemas": {
-            "CanvasTemplate": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "string",
-                        "description": "The unique identifier of the canvas template",
-                        "example": "123e4567-e89b-12d3-a456-426614174000"
-                    },
-                    "name": {
-                        "type": "string",
-                        "description": "The name of the template",
-                        "example": "Welcome Email Template"
-                    },
-                    "template": {
-                        "type": "string",
-                        "description": "The Handlebars template string",
-                        "example": "<h1>Hello {{name}}!</h1>"
-                    },
-                    "schema": {
-                        "type": "object",
-                        "description": "JSON schema defining the template variables",
-                        "example": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    },
-                    "createdAt": {
-                        "format": "date-time",
-                        "type": "string",
-                        "description": "When the template was created",
-                        "example": "2024-03-20T15:30:00.000Z"
-                    },
-                    "updatedAt": {
-                        "format": "date-time",
-                        "type": "string",
-                        "description": "When the template was last updated",
-                        "example": "2024-03-20T15:30:00.000Z"
-                    }
-                },
-                "required": [
-                    "id",
-                    "template",
-                    "schema",
-                    "createdAt",
-                    "updatedAt"
-                ]
-            },
-            "CreateCanvasTemplate": {
-                "type": "object",
-                "properties": {
-                    "name": {
-                        "type": "string"
-                    },
-                    "template": {
-                        "type": "string"
-                    },
-                    "schema": {
-                        "type": "object"
-                    }
-                },
-                "required": [
-                    "name",
-                    "template",
-                    "schema"
-                ]
-            },
-            "CanvasTemplateInstance": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "string"
-                    },
-                    "templateId": {
-                        "type": "string"
-                    },
-                    "variables": {
-                        "type": "object"
-                    },
-                    "renderedOutput": {
-                        "type": "string"
-                    },
-                    "createdAt": {
-                        "format": "date-time",
-                        "type": "string"
-                    },
-                    "updatedAt": {
-                        "format": "date-time",
-                        "type": "string"
-                    }
-                },
-                "required": [
-                    "id",
-                    "templateId",
-                    "variables",
-                    "renderedOutput",
-                    "createdAt",
-                    "updatedAt"
-                ]
-            },
-            "UpsertLinkDto": {
-                "type": "object",
-                "properties": {
-                    "relationType": {
-                        "type": "string",
-                        "description": "The relation type of the link."
-                    },
-                    "href": {
-                        "type": "string",
-                        "description": "The href of the link."
-                    },
-                    "objectKey": {
-                        "type": "string",
-                        "description": "The object key of the link, if TYPE is OBJECT."
-                    },
-                    "title": {
-                        "type": "string",
-                        "description": "The title of the link."
-                    },
-                    "lang": {
-                        "description": "The language of the link.",
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "required": [
-                    "relationType",
-                    "href",
-                    "title"
-                ]
-            },
-            "CreateLinkSetDto": {
-                "type": "object",
-                "properties": {
-                    "identifier": {
-                        "type": "string",
-                        "description": "The identifier of the Link Set."
-                    },
-                    "qualifier": {
-                        "type": "string",
-                        "description": "The qualifier of the Link Set."
-                    },
-                    "links": {
-                        "description": "The links of the Link Set.",
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/UpsertLinkDto"
-                        }
-                    }
-                },
-                "required": [
-                    "identifier",
-                    "qualifier",
-                    "links"
-                ]
-            },
-            "Link": {
-                "type": "object",
-                "properties": {
-                    "relationType": {
-                        "type": "string",
-                        "description": "The relation type of the link."
-                    },
-                    "href": {
-                        "type": "string",
-                        "description": "The href of the link."
-                    },
-                    "objectKey": {
-                        "type": "string",
-                        "description": "The object key of the link, if TYPE is OBJECT."
-                    },
-                    "title": {
-                        "type": "string",
-                        "description": "The title of the link"
-                    },
-                    "lang": {
-                        "description": "The language of the link.",
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    },
-                    "createdAt": {
-                        "format": "date-time",
-                        "type": "string",
-                        "description": "The creation date of the Link."
-                    },
-                    "updatedAt": {
-                        "format": "date-time",
-                        "type": "string",
-                        "description": "The last update date of the Link."
-                    }
-                },
-                "required": [
-                    "relationType",
-                    "title",
-                    "createdAt",
-                    "updatedAt"
-                ]
-            },
-            "LinkSet": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "string",
-                        "description": "The ID of the Link Set."
-                    },
-                    "identifier": {
-                        "type": "string",
-                        "description": "The identifier of the Link Set."
-                    },
-                    "qualifier": {
-                        "type": "string",
-                        "description": "The qualifier of the Link Set."
-                    },
-                    "links": {
-                        "description": "The links of the Link Set.",
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Link"
-                        }
-                    },
-                    "createdAt": {
-                        "format": "date-time",
-                        "type": "string",
-                        "description": "The creation date of the Link Set."
-                    },
-                    "updatedAt": {
-                        "format": "date-time",
-                        "type": "string",
-                        "description": "The last update date of the Link Set."
-                    }
-                },
-                "required": [
-                    "qualifier",
-                    "links",
-                    "createdAt",
-                    "updatedAt"
-                ]
-            },
-            "UpdateLinkSetDto": {
-                "type": "object",
-                "properties": {
-                    "identifier": {
-                        "type": "string",
-                        "description": "The identifier of the Link Set."
-                    },
-                    "qualifier": {
-                        "type": "string",
-                        "description": "The qualifier of the Link Set."
-                    },
-                    "links": {
-                        "description": "The links of the Link Set.",
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/UpsertLinkDto"
-                        }
-                    }
-                },
-                "required": [
-                    "identifier",
-                    "qualifier",
-                    "links"
-                ]
-            },
-            "CreateExternalResolverDto": {
-                "type": "object",
-                "properties": {
-                    "href": {
-                        "type": "string",
-                        "description": "The href of the External Resolver."
-                    },
-                    "pattern": {
-                        "type": "string",
-                        "description": "The pattern of the External Resolver."
-                    },
-                    "qualifier": {
-                        "type": "string",
-                        "description": "The qualifier of the External Resolver."
-                    },
-                    "childExternalResolvers": {
-                        "description": "The creation data of the External Resolver.",
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "required": [
-                    "href",
-                    "pattern",
-                    "qualifier",
-                    "childExternalResolvers"
-                ]
-            },
-            "UpdateExternalResolverDto": {
-                "type": "object",
-                "properties": {
-                    "href": {
-                        "type": "string",
-                        "description": "The href of the External Resolver."
-                    },
-                    "pattern": {
-                        "type": "string",
-                        "description": "The pattern of the External Resolver."
-                    },
-                    "qualifier": {
-                        "type": "string",
-                        "description": "The qualifier of the External Resolver."
-                    },
-                    "childExternalResolvers": {
-                        "description": "The creation data of the External Resolver.",
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "required": [
-                    "href",
-                    "pattern",
-                    "qualifier",
-                    "childExternalResolvers"
-                ]
-            },
-            "IssueCredentialRequest": {
-                "type": "object",
-                "properties": {}
-            },
-            "LinkedDataProof": {
-                "type": "object",
-                "properties": {
-                    "type": {
-                        "type": "string"
-                    },
-                    "created": {
-                        "type": "string"
-                    },
-                    "verificationMethod": {
-                        "type": "string"
-                    },
-                    "proofPurpose": {
-                        "type": "string"
-                    },
-                    "jws": {
-                        "type": "string"
-                    }
-                },
-                "required": [
-                    "type",
-                    "created",
-                    "verificationMethod",
-                    "proofPurpose",
-                    "jws"
-                ]
-            },
-            "VerifiableCredential": {
-                "type": "object",
-                "properties": {
-                    "@context": {
-                        "description": "The JSON-LD context of the credential.",
-                        "example": [
-                            "https://www.w3.org/2018/credentials/v1",
-                            "https://www.w3.org/2018/credentials/examples/v1"
-                        ],
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    },
-                    "id": {
-                        "type": "string",
-                        "description": "The ID of the credential.",
-                        "example": "http://example.gov/credentials/3732"
-                    },
-                    "type": {
-                        "description": "The JSON-LD type of the credential.",
-                        "example": [
-                            "VerifiableCredential",
-                            "UniversityDegreeCredential"
-                        ],
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    },
-                    "issuer": {
-                        "type": "string",
-                        "description": "The issuer of the credential.",
-                        "example": "did:example:123"
-                    },
-                    "issuanceDate": {
-                        "type": "string",
-                        "description": "The issuance date of the credential.",
-                        "example": "2020-03-16T22:37:26.544Z"
-                    },
-                    "expirationDate": {
-                        "type": "string",
-                        "description": "The expiration date of the credential.",
-                        "example": "2021-03-16T22:37:26.544Z"
-                    },
-                    "credentialSubject": {
-                        "type": "object",
-                        "description": "The subject of the credential.",
-                        "example": {
-                            "id": "did:example:123",
-                            "degree": {
-                                "type": "BachelorDegree",
-                                "name": "Bachelor of Science and Arts"
-                            }
-                        }
-                    },
-                    "proof": {
-                        "$ref": "#/components/schemas/LinkedDataProof"
-                    }
-                },
-                "required": [
-                    "@context",
-                    "id",
-                    "type",
-                    "issuer",
-                    "issuanceDate",
-                    "expirationDate",
-                    "credentialSubject",
-                    "proof"
-                ]
-            },
-            "VerifyOptions": {
-                "type": "object",
-                "properties": {
-                    "verificationMethod": {
-                        "type": "string",
-                        "description": "The URI of the verificationMethod used for the proof. Default assertionMethod URI.",
-                        "example": "did:example:123#z6MksHh7qHWvybLg5QTPPdG2DgEjjduBDArV9EF9mRiRzMBN"
-                    },
-                    "proofPurpose": {
-                        "type": "string",
-                        "description": "The purpose of the proof. Default 'assertionMethod'.",
-                        "example": "assertionMethod"
-                    },
-                    "created": {
-                        "type": "string",
-                        "description": "The date and time of the proof (with a maximum accuracy in seconds). Default current system time.",
-                        "example": "2020-04-02T18:48:36Z"
-                    },
-                    "challenge": {
-                        "type": "string",
-                        "description": "A challenge provided by the requesting party of the proof. For example 6e62f66e-67de-11eb-b490-ef3eeefa55f2",
-                        "example": "d436f0c8-fbd9-4e48-bbb2-55fc5d0920a8"
-                    },
-                    "domain": {
-                        "type": "string",
-                        "description": "The intended domain of validity for the proof. For example website.example",
-                        "example": "example.com"
-                    }
-                },
-                "description": "Options for specifying how the LinkedDataProof is created."
-            },
-            "VerifyCredentialRequest": {
-                "type": "object",
-                "properties": {
-                    "verifiableCredential": {
-                        "$ref": "#/components/schemas/VerifiableCredential"
-                    },
-                    "options": {
-                        "$ref": "#/components/schemas/VerifyOptions"
-                    }
-                },
-                "required": [
-                    "verifiableCredential"
-                ]
-            },
-            "CreateOrganization": {
-                "type": "object",
-                "properties": {
-                    "name": {
-                        "type": "string",
-                        "description": "Name given to the organization."
-                    }
-                },
-                "required": [
-                    "name"
-                ]
-            },
-            "Organization": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "string",
-                        "description": "Unique identifier of the organization."
-                    },
-                    "name": {
-                        "type": "string",
-                        "description": "Name given to the organization."
-                    }
-                },
-                "required": [
-                    "id",
-                    "name"
-                ]
-            },
-            "UpdateOrganization": {
-                "type": "object",
-                "properties": {
-                    "name": {
-                        "type": "string",
-                        "description": "Name given to the organization."
-                    }
-                },
-                "required": [
-                    "name"
-                ]
-            },
-            "CreateDid": {
-                "type": "object",
-                "properties": {
-                    "name": {
-                        "type": "string",
-                        "description": "The name of the DID.",
-                        "example": "acme"
-                    }
-                },
-                "required": [
-                    "name"
-                ]
-            },
-            "Did": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "string",
-                        "description": "Unique identifier of the DID."
-                    },
-                    "did": {
-                        "type": "string",
-                        "description": "The DID."
-                    },
-                    "alias": {
-                        "type": "string",
-                        "description": "The DID alias."
-                    },
-                    "name": {
-                        "type": "string",
-                        "description": "The name given to the DID."
-                    }
-                },
-                "required": [
-                    "id",
-                    "did",
-                    "alias",
-                    "name"
-                ]
-            },
-            "Paginated": {
-                "type": "object",
-                "properties": {
-                    "total": {
-                        "type": "number"
-                    },
-                    "page": {
-                        "type": "number"
-                    },
-                    "limit": {
-                        "type": "number"
-                    }
-                },
-                "required": [
-                    "total",
-                    "page",
-                    "limit"
-                ]
-            },
-            "PaginatedDids": {
-                "type": "object",
-                "properties": {
-                    "items": {
-                        "description": "The list of DIDs",
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Did"
-                        }
-                    },
-                    "metadata": {
-                        "description": "The pagination metadata",
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/Paginated"
-                            }
-                        ]
-                    }
-                },
-                "required": [
-                    "items",
-                    "metadata"
-                ]
+        "responses": {
+          "201": {
+            "description": "The Link Set was created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LinkSet"
+                }
+              }
             }
-        }
+          }
+        },
+        "summary": "Create a new Link Set",
+        "tags": [
+          "StackLinkSet"
+        ]
+      },
+      "get": {
+        "operationId": "getLinkSets",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The Link Sets were found and returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LinkSet"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get all paginated Link Sets",
+        "tags": [
+          "StackLinkSet"
+        ]
+      }
+    },
+    "/link-sets/{id}": {
+      "put": {
+        "operationId": "updateLinkSet",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateLinkSetDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The Link Set was updated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LinkSet"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Update an existing Link Set",
+        "tags": [
+          "StackLinkSet"
+        ]
+      },
+      "get": {
+        "operationId": "getLinkSet",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Link Set was found and returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LinkSet"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get a Link Set by ID",
+        "tags": [
+          "StackLinkSet"
+        ]
+      },
+      "delete": {
+        "operationId": "deleteLinkSet",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Delete a Link Set by ID",
+        "tags": [
+          "StackLinkSet"
+        ]
+      }
+    },
+    "/external-resolvers": {
+      "post": {
+        "operationId": "createExternalResolver",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateExternalResolverDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "summary": "",
+        "tags": [
+          "StackExternalResolver"
+        ]
+      },
+      "get": {
+        "operationId": "getManyExternalResolvers",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "",
+        "tags": [
+          "StackExternalResolver"
+        ]
+      }
+    },
+    "/external-resolvers/{id}": {
+      "put": {
+        "operationId": "updateExternalResolver",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateExternalResolverDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "",
+        "tags": [
+          "StackExternalResolver"
+        ]
+      },
+      "get": {
+        "operationId": "getExternalResolver",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "",
+        "tags": [
+          "StackExternalResolver"
+        ]
+      },
+      "delete": {
+        "operationId": "deleteExternalResolver",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "",
+        "tags": [
+          "StackExternalResolver"
+        ]
+      }
+    },
+    "/credentials/{id}": {
+      "get": {
+        "description": "Retrieves a credential by its ID.",
+        "operationId": "CredentialsController_getCredential",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Retrieves a credential by its ID.",
+        "tags": [
+          "Verifier"
+        ]
+      }
+    },
+    "/credentials/issue": {
+      "post": {
+        "description": "Issues a credential and returns it in the response body.",
+        "operationId": "CredentialsController_issueCredential",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IssueCredentialRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Credential successfully issued!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IssueCredentialResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input!"
+          },
+          "500": {
+            "description": "error!"
+          }
+        },
+        "summary": "Issues a credential and returns it in the response body.",
+        "tags": [
+          "Issuer"
+        ]
+      }
+    },
+    "/credentials/verify": {
+      "post": {
+        "description": "Verifies a verifiableCredential and returns a verificationResult in the response body.",
+        "operationId": "verifyCredential",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VerifyCredentialRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Verifiable Credential successfully verified!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VerifyCredentialResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input!"
+          },
+          "500": {
+            "description": "error!"
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Verifier"
+        ]
+      }
+    },
+    "/organizations": {
+      "post": {
+        "operationId": "createOrganization",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateOrganization"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Organization created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Organization"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request"
+          }
+        },
+        "summary": "Create an organization",
+        "tags": [
+          "Organization"
+        ]
+      }
+    },
+    "/organizations/{id}": {
+      "get": {
+        "operationId": "getOrganization",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Organization retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Organization"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Organization not found"
+          }
+        },
+        "summary": "Get an organization",
+        "tags": [
+          "Organization"
+        ]
+      },
+      "put": {
+        "operationId": "updateOrganization",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateOrganization"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Organization updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Organization"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "404": {
+            "description": "Organization not found"
+          }
+        },
+        "summary": "Update an organization",
+        "tags": [
+          "Organization"
+        ]
+      },
+      "delete": {
+        "operationId": "deleteOrganization",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Organization deleted successfully"
+          },
+          "404": {
+            "description": "Organization not found"
+          }
+        },
+        "summary": "Delete an organization",
+        "tags": [
+          "Organization"
+        ]
+      }
+    },
+    "/did": {
+      "post": {
+        "description": "Create a unique DID for the requested organization.",
+        "operationId": "createDid",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDid"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "DID created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Did"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request"
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Did"
+        ]
+      },
+      "get": {
+        "description": "Get all DIDs for the requested organization.",
+        "operationId": "getDids",
+        "parameters": [
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "description": "Page number (1-based)",
+            "schema": {
+              "example": 1,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items per page",
+            "schema": {
+              "example": 10,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "DIDs fetched successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedDids"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Did"
+        ]
+      }
+    },
+    "/did/{id}": {
+      "get": {
+        "description": "Get a DID by ID",
+        "operationId": "getDid",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "DID fetched successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Did"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "DID not found"
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Did"
+        ]
+      },
+      "delete": {
+        "description": "Delete a DID by ID",
+        "operationId": "deleteDid",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "DID deleted successfully"
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Did"
+        ]
+      }
+    },
+    "/themes": {
+      "post": {
+        "description": "Create a new theme",
+        "operationId": "createTheme",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTheme"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The theme that was created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Theme"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create a new theme",
+        "tags": [
+          "Theme"
+        ]
+      },
+      "get": {
+        "description": "Get all themes",
+        "operationId": "getThemes",
+        "parameters": [
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "description": "Page number (1-based)",
+            "schema": {
+              "example": 1,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items per page",
+            "schema": {
+              "example": 10,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The themes that were found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Theme"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Theme"
+        ]
+      }
+    },
+    "/themes/{id}": {
+      "get": {
+        "description": "Get a theme by id",
+        "operationId": "getTheme",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "The ID of the theme to find",
+            "schema": {
+              "example": "123",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The theme that was found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Theme"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Theme"
+        ]
+      },
+      "put": {
+        "description": "Update a theme by id",
+        "operationId": "updateTheme",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "The ID of the theme to update",
+            "schema": {
+              "example": "123",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTheme"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The theme that was updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Theme"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Theme"
+        ]
+      },
+      "delete": {
+        "description": "Delete a theme by id",
+        "operationId": "deleteTheme",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Theme"
+        ]
+      }
+    },
+    "/canvas-template-instances/{id}/link": {
+      "post": {
+        "description": "Create a link to a canvas template instance via the Hermes resolver.",
+        "operationId": "linkCanvasTemplateInstance",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "The unique identifier of the canvas template instance.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CanvasTemplateInstanceLink"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The link was created successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LinkSetDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create a link to a canvas template instance via the Hermes resolver.",
+        "tags": [
+          "canvas-template-instance"
+        ]
+      }
+    },
+    "/canvas-templates/{id}": {
+      "get": {
+        "description": "Get a Canvas Template by id.",
+        "operationId": "getCanvasTemplate",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "The ID of the Canvas Template to find",
+            "schema": {
+              "example": "123"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Canvas Template was successfully obtained.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CanvasTemplate"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "CanvasTemplates"
+        ]
+      }
+    },
+    "/canvas-templates": {
+      "post": {
+        "description": "Create a Canvas Template.",
+        "operationId": "createCanvasTemplate",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCanvasTemplate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The Canvas Template that was created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CanvasTemplate"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "CanvasTemplates"
+        ]
+      }
+    },
+    "/canvas-templates/{id}/render": {
+      "post": {
+        "description": "Create an instance of a Canvased Template.",
+        "operationId": "renderCanvasTemplate",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "The ID of the Canvas Template to render",
+            "schema": {
+              "example": "123",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "oneOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "boolean"
+                    },
+                    {
+                      "type": "object"
+                    },
+                    {
+                      "type": "array"
+                    }
+                  ],
+                  "description": "Any valid JSON value"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Instantiation of the Canvas Template as a Canvas Template Instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CanvasTemplateInstance"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "CanvasTemplates"
+        ]
+      }
     }
+  },
+  "info": {
+    "title": "Trust Stack API",
+    "description": "Programmatic access to the Trust Stack API.",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      }
+    },
+    "schemas": {
+      "UpsertLinkDto": {
+        "type": "object",
+        "properties": {
+          "relationType": {
+            "type": "string",
+            "description": "The relation type of the link."
+          },
+          "href": {
+            "type": "string",
+            "description": "The href of the link."
+          },
+          "objectKey": {
+            "type": "string",
+            "description": "The object key of the link, if TYPE is OBJECT."
+          },
+          "title": {
+            "type": "string",
+            "description": "The title of the link."
+          },
+          "lang": {
+            "description": "The language of the link.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "relationType",
+          "href",
+          "title"
+        ]
+      },
+      "CreateLinkSetDto": {
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "description": "The identifier of the Link Set."
+          },
+          "qualifier": {
+            "type": "string",
+            "description": "The qualifier of the Link Set."
+          },
+          "links": {
+            "description": "The links of the Link Set.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UpsertLinkDto"
+            }
+          }
+        },
+        "required": [
+          "identifier",
+          "qualifier",
+          "links"
+        ]
+      },
+      "Link": {
+        "type": "object",
+        "properties": {
+          "relationType": {
+            "type": "string",
+            "description": "The relation type of the link."
+          },
+          "href": {
+            "type": "string",
+            "description": "The href of the link."
+          },
+          "objectKey": {
+            "type": "string",
+            "description": "The object key of the link, if TYPE is OBJECT."
+          },
+          "title": {
+            "type": "string",
+            "description": "The title of the link"
+          },
+          "lang": {
+            "description": "The language of the link.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "The creation date of the Link."
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "The last update date of the Link."
+          }
+        },
+        "required": [
+          "relationType",
+          "title",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "LinkSet": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The ID of the Link Set."
+          },
+          "identifier": {
+            "type": "string",
+            "description": "The identifier of the Link Set."
+          },
+          "qualifier": {
+            "type": "string",
+            "description": "The qualifier of the Link Set."
+          },
+          "links": {
+            "description": "The links of the Link Set.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            }
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "The creation date of the Link Set."
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "The last update date of the Link Set."
+          }
+        },
+        "required": [
+          "qualifier",
+          "links",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "UpdateLinkSetDto": {
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "description": "The identifier of the Link Set."
+          },
+          "qualifier": {
+            "type": "string",
+            "description": "The qualifier of the Link Set."
+          },
+          "links": {
+            "description": "The links of the Link Set.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UpsertLinkDto"
+            }
+          }
+        },
+        "required": [
+          "identifier",
+          "qualifier",
+          "links"
+        ]
+      },
+      "CreateExternalResolverDto": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string",
+            "description": "The href of the External Resolver."
+          },
+          "pattern": {
+            "type": "string",
+            "description": "The pattern of the External Resolver."
+          },
+          "qualifier": {
+            "type": "string",
+            "description": "The qualifier of the External Resolver."
+          },
+          "childExternalResolvers": {
+            "description": "The creation data of the External Resolver.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "href",
+          "pattern",
+          "qualifier",
+          "childExternalResolvers"
+        ]
+      },
+      "UpdateExternalResolverDto": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string",
+            "description": "The href of the External Resolver."
+          },
+          "pattern": {
+            "type": "string",
+            "description": "The pattern of the External Resolver."
+          },
+          "qualifier": {
+            "type": "string",
+            "description": "The qualifier of the External Resolver."
+          },
+          "childExternalResolvers": {
+            "description": "The creation data of the External Resolver.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "href",
+          "pattern",
+          "qualifier",
+          "childExternalResolvers"
+        ]
+      },
+      "IssueCredentialRequest": {
+        "type": "object",
+        "properties": {}
+      },
+      "LinkedDataProof": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "created": {
+            "type": "string"
+          },
+          "verificationMethod": {
+            "type": "string"
+          },
+          "proofPurpose": {
+            "type": "string"
+          },
+          "jws": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "type",
+          "created",
+          "verificationMethod",
+          "proofPurpose",
+          "jws"
+        ]
+      },
+      "VerifiableCredential": {
+        "type": "object",
+        "properties": {
+          "@context": {
+            "description": "The JSON-LD context of the credential.",
+            "example": [
+              "https://www.w3.org/2018/credentials/v1",
+              "https://www.w3.org/2018/credentials/examples/v1"
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "id": {
+            "type": "string",
+            "description": "The ID of the credential.",
+            "example": "http://example.gov/credentials/3732"
+          },
+          "type": {
+            "description": "The JSON-LD type of the credential.",
+            "example": [
+              "VerifiableCredential",
+              "UniversityDegreeCredential"
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "issuer": {
+            "type": "string",
+            "description": "The issuer of the credential.",
+            "example": "did:example:123"
+          },
+          "issuanceDate": {
+            "type": "string",
+            "description": "The issuance date of the credential.",
+            "example": "2020-03-16T22:37:26.544Z"
+          },
+          "expirationDate": {
+            "type": "string",
+            "description": "The expiration date of the credential.",
+            "example": "2021-03-16T22:37:26.544Z"
+          },
+          "credentialSubject": {
+            "type": "object",
+            "description": "The subject of the credential.",
+            "example": {
+              "id": "did:example:123",
+              "degree": {
+                "type": "BachelorDegree",
+                "name": "Bachelor of Science and Arts"
+              }
+            }
+          },
+          "proof": {
+            "$ref": "#/components/schemas/LinkedDataProof"
+          }
+        },
+        "required": [
+          "@context",
+          "id",
+          "type",
+          "issuer",
+          "issuanceDate",
+          "expirationDate",
+          "credentialSubject",
+          "proof"
+        ]
+      },
+      "VerifyOptions": {
+        "type": "object",
+        "properties": {
+          "verificationMethod": {
+            "type": "string",
+            "description": "The URI of the verificationMethod used for the proof. Default assertionMethod URI.",
+            "example": "did:example:123#z6MksHh7qHWvybLg5QTPPdG2DgEjjduBDArV9EF9mRiRzMBN"
+          },
+          "proofPurpose": {
+            "type": "string",
+            "description": "The purpose of the proof. Default 'assertionMethod'.",
+            "example": "assertionMethod"
+          },
+          "created": {
+            "type": "string",
+            "description": "The date and time of the proof (with a maximum accuracy in seconds). Default current system time.",
+            "example": "2020-04-02T18:48:36Z"
+          },
+          "challenge": {
+            "type": "string",
+            "description": "A challenge provided by the requesting party of the proof. For example 6e62f66e-67de-11eb-b490-ef3eeefa55f2",
+            "example": "d436f0c8-fbd9-4e48-bbb2-55fc5d0920a8"
+          },
+          "domain": {
+            "type": "string",
+            "description": "The intended domain of validity for the proof. For example website.example",
+            "example": "example.com"
+          }
+        },
+        "description": "Options for specifying how the LinkedDataProof is created."
+      },
+      "VerifyCredentialRequest": {
+        "type": "object",
+        "properties": {
+          "verifiableCredential": {
+            "$ref": "#/components/schemas/VerifiableCredential"
+          },
+          "options": {
+            "$ref": "#/components/schemas/VerifyOptions"
+          }
+        },
+        "required": [
+          "verifiableCredential"
+        ]
+      },
+      "CreateOrganization": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name given to the organization."
+          },
+          "prefix": {
+            "type": "string",
+            "description": "Unique prefix for the organization that will be used in subdomains (e.g., prefix.trustlink.dev).",
+            "example": "my-org",
+            "maxLength": 20,
+            "pattern": "^[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$"
+          }
+        },
+        "required": [
+          "name",
+          "prefix"
+        ]
+      },
+      "Organization": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the organization."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name given to the organization."
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ]
+      },
+      "UpdateOrganization": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name given to the organization."
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "CreateDid": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the DID.",
+            "example": "acme"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "Did": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the DID."
+          },
+          "did": {
+            "type": "string",
+            "description": "The DID."
+          },
+          "alias": {
+            "type": "string",
+            "description": "The DID alias."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name given to the DID."
+          }
+        },
+        "required": [
+          "id",
+          "did",
+          "alias",
+          "name"
+        ]
+      },
+      "Paginated": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "number"
+          },
+          "page": {
+            "type": "number"
+          },
+          "limit": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "total",
+          "page",
+          "limit"
+        ]
+      },
+      "PaginatedDids": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "description": "The list of DIDs",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Did"
+            }
+          },
+          "metadata": {
+            "description": "The pagination metadata",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Paginated"
+              }
+            ]
+          }
+        },
+        "required": [
+          "items",
+          "metadata"
+        ]
+      },
+      "CreateTheme": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the theme"
+          },
+          "color": {
+            "type": "string",
+            "description": "The color of the theme, used to generate the pallette."
+          }
+        },
+        "required": [
+          "name",
+          "color"
+        ]
+      },
+      "Theme": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The ID of the theme"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the theme"
+          },
+          "variables": {
+            "type": "object",
+            "description": "The theme palette"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "The date the theme was created"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "The date the theme was last updated"
+          },
+          "organizationId": {
+            "type": "string",
+            "description": "The organization that owns the theme"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "variables",
+          "createdAt",
+          "updatedAt",
+          "organizationId"
+        ]
+      },
+      "UpdateTheme": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the theme"
+          },
+          "color": {
+            "type": "string",
+            "description": "The color of the theme"
+          }
+        },
+        "required": [
+          "name",
+          "color"
+        ]
+      },
+      "CanvasTemplateInstanceLink": {
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "description": "The relation type of the link."
+          },
+          "qualifier": {
+            "type": "string",
+            "description": "The qualifier of the link."
+          }
+        },
+        "required": [
+          "identifier",
+          "qualifier"
+        ]
+      },
+      "LinkSetDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The ID of the Link Set."
+          },
+          "identifier": {
+            "type": "string",
+            "description": "The identifier of the Link Set."
+          },
+          "qualifier": {
+            "type": "string",
+            "description": "The qualifier of the Link Set."
+          },
+          "links": {
+            "description": "The links of the Link Set.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            }
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "The creation date of the Link Set."
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "The last update date of the Link Set."
+          }
+        },
+        "required": [
+          "qualifier",
+          "links",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "CanvasTemplate": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier of the canvas template",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the template",
+            "example": "Welcome Email Template"
+          },
+          "template": {
+            "type": "string",
+            "description": "The Handlebars template string",
+            "example": "<h1>Hello {{name}}!</h1>"
+          },
+          "schema": {
+            "type": "object",
+            "description": "JSON schema defining the template variables",
+            "example": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "When the template was created",
+            "example": "2024-03-20T15:30:00.000Z"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "When the template was last updated",
+            "example": "2024-03-20T15:30:00.000Z"
+          }
+        },
+        "required": [
+          "id",
+          "template",
+          "schema",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "CreateCanvasTemplate": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "template": {
+            "type": "string"
+          },
+          "schema": {
+            "type": "object"
+          },
+          "themeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "template",
+          "schema"
+        ]
+      },
+      "CanvasTemplateInstance": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "templateId": {
+            "type": "string"
+          },
+          "variables": {
+            "type": "object"
+          },
+          "renderedOutput": {
+            "type": "string"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "templateId",
+          "variables",
+          "renderedOutput",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "IssueCredentialResponse": {
+        "type": "object",
+        "properties": {
+          "credential": {
+            "$ref": "#/components/schemas/VerifiableCredential"
+          }
+        }
+      },
+      "VerifyCredentialResponse": {
+        "type": "object",
+        "properties": {
+          "verified": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  }
 }
