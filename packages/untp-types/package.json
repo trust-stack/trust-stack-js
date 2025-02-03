@@ -1,0 +1,20 @@
+{
+  "name": "@truststack/untp-types",
+  "version": "0.0.1",
+  "description": "UNTP Types",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "fetch": "bash scripts/fetch.sh",
+    "generate": "bash scripts/generate.sh"
+  },
+  "keywords": [],
+  "author": "",
+  "devDependencies": {
+    "tsup": "^8.3.5"
+  }
+}

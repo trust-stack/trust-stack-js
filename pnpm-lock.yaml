@@ -211,6 +211,12 @@ importers:
         specifier: ^8.3.5
         version: 8.3.5(jiti@2.4.2)(postcss@8.5.1)(typescript@5.5.4)
 
+  packages/untp-types:
+    devDependencies:
+      tsup:
+        specifier: ^8.3.5
+        version: 8.3.5(jiti@2.4.2)(postcss@8.5.1)(typescript@5.5.4)
+
 packages:
 
   '@ampproject/remapping@2.3.0':
@@ -2346,6 +2352,7 @@ packages:
 
   js-yaml@4.1.0:
     resolution: {integrity: sha512-wpxZs9NoxZaJESJGIZTyDEaYpl0FKSA+FB9aJiyemKhMwkxQg63h4T1KJgUGHpTqPDNRcmmYLugrRjJlBtWvRA==}
+    hasBin: true
 
   jsdoc-type-pratt-parser@4.1.0:
     resolution: {integrity: sha512-Hicd6JK5Njt2QB6XYFS7ok9e37O8AYk3jTcppG4YVQnYjOemymvTcmc7OWsmq/Qqj5TdRFO5/x/tIPmBeRtGHg==}
