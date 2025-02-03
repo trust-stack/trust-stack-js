@@ -51,7 +51,7 @@ jobs:
         run: turbo test
 
       - name: Upload Test Results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: test-results
           path: ./packages/sdk/reports/junit.xml
