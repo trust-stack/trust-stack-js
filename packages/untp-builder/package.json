@@ -14,8 +14,7 @@
   "keywords": [],
   "author": "",
   "dependencies": {
-    "@truststack/untp-types": "workspace:*",
-    "builder-pattern": "^2.2.0"
+    "@truststack/untp-types": "workspace:*"
   },
   "devDependencies": {
     "tsup": "^8.3.5",

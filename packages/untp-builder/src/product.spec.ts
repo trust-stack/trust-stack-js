@@ -16,7 +16,10 @@ import {ProductBuilder} from "./product";
 
 describe("ProductBuilder", () => {
   it("should create an empty product with default type", () => {
-    const product = ProductBuilder.create().build();
+    const product = ProductBuilder.create()
+      .id("Test Product")
+      .name("Test Product")
+      .build();
     expect(product.type).toEqual(["Product"]);
   });
 

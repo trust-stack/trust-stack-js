@@ -10,23 +10,13 @@ import {
   Material,
   Product,
   TraceabilityPerformance,
-} from "@truststack/untp-types/0.5.0/DPP";
-import {Builder, IBuilder} from "builder-pattern";
+} from "@truststack/untp-types";
+import {Builder} from "./builder";
 
-export class ProductBuilder {
-  private builder: IBuilder<Product>;
-
+export class ProductBuilder extends Builder<Product> {
   constructor(product?: Product) {
-    this.builder = Builder<Product>(product);
-
-    // Initialize with default type array
-    this.builder.type(["Product"]);
-  }
-
-  // Generic method to handle builder calls
-  protected set<K extends keyof Product>(key: K, value: Product[K]): this {
-    (this.builder as any)[key](value);
-    return this;
+    super(product);
+    this.set("type", ["Product"]);
   }
 
   public id(value: string) {
@@ -110,18 +100,5 @@ export class ProductBuilder {
 
   public traceabilityInformation(value: TraceabilityPerformance) {
     return this.set("traceabilityInformation", value);
-  }
-
-  public build(): Product {
-    return this.builder.build();
-  }
-
-  // Static factory methods
-  public static fromJSON(json: Product): Product {
-    return new ProductBuilder(json).build();
-  }
-
-  public static create(): ProductBuilder {
-    return new ProductBuilder();
   }
 }
