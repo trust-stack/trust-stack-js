@@ -19,7 +19,8 @@
     "target": "ES2022",
     "paths": {
       "@truststack/*": ["./packages/*/src"],
-      "@truststack/core/*": ["./packages/core/src/*"]
+      "@truststack/core/*": ["./packages/core/src/*"],
+      "@truststack/untp-types/*": ["./packages/untp-types/src/*"]
     }
   }
 }

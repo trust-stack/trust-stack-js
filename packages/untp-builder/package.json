@@ -1,0 +1,23 @@
+{
+  "name": "@truststack/untp-builder",
+  "version": "0.0.1",
+  "description": "Builder for generating UNTP schemas and objects.",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "test": "vitest"
+  },
+  "keywords": [],
+  "author": "",
+  "dependencies": {
+    "@truststack/untp-types": "workspace:*"
+  },
+  "devDependencies": {
+    "tsup": "^8.3.5",
+    "vitest": "^3.0.4"
+  }
+}

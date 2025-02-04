@@ -13,7 +13,10 @@ export interface DPP {
   /**
    * A list of JSON-LD context URIs that define the semantic meaning of properties within the credential.
    */
-  "@context": ("https://www.w3.org/ns/credentials/v2" | "https://test.uncefact.org/vocabulary/untp/dpp/0.5.0/")[];
+  "@context": (
+    | "https://www.w3.org/ns/credentials/v2"
+    | "https://test.uncefact.org/vocabulary/untp/dpp/0.5.0/"
+  )[];
   /**
    * A unique identifier (URI) assigned to the product passport. May be a UUID
    */

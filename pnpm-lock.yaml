@@ -208,6 +208,19 @@ importers:
         specifier: ^8.3.5
         version: 8.3.5(jiti@2.4.2)(postcss@8.5.1)(typescript@5.5.4)
 
+  packages/untp-builder:
+    dependencies:
+      '@truststack/untp-types':
+        specifier: workspace:*
+        version: link:../untp-types
+    devDependencies:
+      tsup:
+        specifier: ^8.3.5
+        version: 8.3.5(jiti@2.4.2)(postcss@8.5.1)(typescript@5.5.4)
+      vitest:
+        specifier: ^3.0.4
+        version: 3.0.4(@types/node@22.10.7)(jiti@2.4.2)
+
   packages/untp-types:
     devDependencies:
       tsup:
@@ -7024,7 +7037,7 @@ snapshots:
       cac: 6.7.14
       chokidar: 4.0.3
       consola: 3.4.0
-      debug: 4.3.7
+      debug: 4.4.0
       esbuild: 0.24.2
       joycon: 3.1.1
       picocolors: 1.1.1
