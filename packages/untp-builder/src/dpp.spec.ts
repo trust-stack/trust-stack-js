@@ -3,8 +3,13 @@ import {afterEach, beforeEach, describe, expect, it, vi} from "vitest";
 import {DPPBuilder} from "./dpp";
 
 describe("DPPBuilder", () => {
+  let builder: DPPBuilder;
+
+  beforeEach(() => {
+    builder = new DPPBuilder();
+  });
+
   it("should initialize with default type and context", () => {
-    const builder = new DPPBuilder();
     expect(builder.get("type")).toEqual([
       "DigitalProductPassport",
       "VerifiableCredential",
@@ -17,7 +22,6 @@ describe("DPPBuilder", () => {
 
   it("should set id", () => {
     const id = "test-id";
-    const builder = DPPBuilder.create();
     builder.id(id);
     expect(builder.get("id")).toBe(id);
   });
@@ -27,8 +31,6 @@ describe("DPPBuilder", () => {
       id: "product-id",
       name: "Test Product",
     };
-
-    const builder = DPPBuilder.create();
     builder.product(product);
     expect(builder.get("credentialSubject")).toEqual(product);
   });
@@ -38,7 +40,6 @@ describe("DPPBuilder", () => {
       id: "issuer-id",
       name: "Test Issuer",
     };
-    const builder = DPPBuilder.create();
     builder.issuer(issuer);
     expect(builder.get("issuer")).toEqual(issuer);
   });
@@ -56,21 +57,18 @@ describe("DPPBuilder", () => {
 
     it("should set validFrom with string date", () => {
       const date = "2024-03-20";
-      const builder = DPPBuilder.create();
       builder.validFrom(date);
       expect(builder.get("validFrom")).toBe(date);
     });
 
     it("should set validFrom with Date object", () => {
       const date = new Date("2024-03-20");
-      const builder = DPPBuilder.create();
       builder.validFrom(date);
       expect(builder.get("validFrom")).toBe("2024-03-20");
     });
 
     it("should throw error if validFrom is earlier than current date", () => {
       const date = "2024-03-19";
-      const builder = DPPBuilder.create();
       expect(() => builder.validFrom(date)).toThrow(
         "validFrom date cannot be earlier than the current date."
       );
@@ -90,21 +88,18 @@ describe("DPPBuilder", () => {
 
     it("should set validUntil with string date", () => {
       const date = "2024-03-19";
-      const builder = DPPBuilder.create();
       builder.validUntil(date);
       expect(builder.get("validUntil")).toBe(date);
     });
 
     it("should set validUntil with Date object", () => {
       const date = new Date("2024-03-19");
-      const builder = DPPBuilder.create();
       builder.validUntil(date);
       expect(builder.get("validUntil")).toBe("2024-03-19");
     });
 
     it("should throw error if validUntil is later than current date", () => {
       const date = "2024-03-21";
-      const builder = DPPBuilder.create();
       expect(() => builder.validUntil(date)).toThrow(
         "validUntil date cannot be later than the current date."
       );
@@ -112,11 +107,9 @@ describe("DPPBuilder", () => {
   });
 
   it("should build a complete DPP", () => {
-    // Mock current date to 2024-03-20
     vi.useFakeTimers();
     vi.setSystemTime(new Date("2024-03-20"));
 
-    const builder = DPPBuilder.create();
     const dpp = builder
       .id("test-id")
       .issuer({
