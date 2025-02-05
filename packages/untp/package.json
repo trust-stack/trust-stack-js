@@ -1,0 +1,24 @@
+{
+  "name": "@truststack/untp",
+  "version": "0.0.1",
+  "description": "UNTP management for DPPs, DCCs, and more",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "fetch": "bash scripts/fetch.sh",
+    "generate": "bash scripts/generate.sh"
+  },
+  "keywords": [],
+  "author": "",
+  "devDependencies": {
+    "tsup": "^8.3.5"
+  },
+  "dependencies": {
+    "@truststack/core": "workspace:*",
+    "ts-mixer": "^6.0.4"
+  }
+}
