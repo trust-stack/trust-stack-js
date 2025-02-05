@@ -31,7 +31,7 @@ describe("DPPBuilder", () => {
       id: "product-id",
       name: "Test Product",
     };
-    builder.product(product);
+    builder.credentialSubject(product);
     expect(builder.get("credentialSubject")).toEqual(product);
   });
 

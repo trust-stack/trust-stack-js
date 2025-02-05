@@ -1,6 +1,6 @@
-import {Identifier} from "@truststack/untp-types";
-import {beforeEach, describe, expect, it} from "vitest";
-import {CredentialIssuerBuilder} from "./credential-issuer";
+import { Identifier } from "@truststack/untp-types";
+import { beforeEach, describe, expect, it } from "vitest";
+import { CredentialIssuerBuilder } from "./credential-issuer";
 
 describe("CredentialIssuerBuilder", () => {
   let builder: CredentialIssuerBuilder;
@@ -13,10 +13,25 @@ describe("CredentialIssuerBuilder", () => {
     expect(builder.get("type")).toEqual(["CredentialIssuer"]);
   });
 
-  it("should set id", () => {
+  it("should set id when valid did:web format", () => {
     const id = "did:web:example.com";
     builder.id(id);
     expect(builder.get("id")).toBe(id);
+  });
+
+  it("should throw error when id is not in did:web format", () => {
+    const invalidIds = [
+      "example.com",
+      "did:ion:example.com",
+      "https://example.com",
+      "did:web",
+    ];
+
+    invalidIds.forEach((invalidId) => {
+      expect(() => builder.id(invalidId)).toThrow(
+        "Credential issuer ID must be in did:web format (e.g., did:web:example.com)"
+      );
+    });
   });
 
   it("should set name", () => {

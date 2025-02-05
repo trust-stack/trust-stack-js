@@ -19,7 +19,7 @@ export class DPPBuilder extends Builder<DPP> {
     return this.set("id", value);
   }
 
-  public product(value: Product) {
+  public credentialSubject(value: Product) {
     return this.set("credentialSubject", value);
   }
 
