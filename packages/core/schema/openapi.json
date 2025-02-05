@@ -3,14 +3,14 @@
   "paths": {
     "/health/status": {
       "get": {
-        "operationId": "HealthController_getStatus",
+        "operationId": "healthCheck",
         "parameters": [],
         "responses": {
           "200": {
             "description": ""
           }
         },
-        "summary": "Get the health status of the service",
+        "summary": "Health Check",
         "tags": [
           "Health"
         ]
@@ -53,9 +53,9 @@
             }
           }
         },
-        "summary": "Create a link to a canvas template instance via the Hermes resolver.",
+        "summary": "Link canvas template instance",
         "tags": [
-          "canvas-template-instance"
+          "Canvas Template Instance"
         ]
       }
     },
@@ -86,7 +86,7 @@
             }
           }
         },
-        "summary": "Create a new theme",
+        "summary": "Create Theme",
         "tags": [
           "Theme"
         ]
@@ -165,7 +165,7 @@
             }
           }
         },
-        "summary": "",
+        "summary": "Get Theme",
         "tags": [
           "Theme"
         ]
@@ -262,9 +262,10 @@
             }
           }
         },
-        "summary": "Create a new Link Set",
+        "summary": "Create Link Set",
         "tags": [
-          "StackLinkSet"
+          "Link Set",
+          "Link Set"
         ]
       },
       "get": {
@@ -285,9 +286,10 @@
             }
           }
         },
-        "summary": "Get all paginated Link Sets",
+        "summary": "Get Link Sets",
         "tags": [
-          "StackLinkSet"
+          "Link Set",
+          "Link Set"
         ]
       }
     },
@@ -326,9 +328,10 @@
             }
           }
         },
-        "summary": "Update an existing Link Set",
+        "summary": "Update Link Set",
         "tags": [
-          "StackLinkSet"
+          "Link Set",
+          "Link Set"
         ]
       },
       "get": {
@@ -355,9 +358,10 @@
             }
           }
         },
-        "summary": "Get a Link Set by ID",
+        "summary": "Get Link Set",
         "tags": [
-          "StackLinkSet"
+          "Link Set",
+          "Link Set"
         ]
       },
       "delete": {
@@ -377,9 +381,10 @@
             "description": ""
           }
         },
-        "summary": "Delete a Link Set by ID",
+        "summary": "Delete Link Set",
         "tags": [
-          "StackLinkSet"
+          "Link Set",
+          "Link Set"
         ]
       }
     },
@@ -410,9 +415,9 @@
             }
           }
         },
-        "summary": "",
+        "summary": "Get Canvas Template",
         "tags": [
-          "CanvasTemplates"
+          "Canvas Template"
         ]
       }
     },
@@ -443,9 +448,9 @@
             }
           }
         },
-        "summary": "",
+        "summary": "Create Canvas Template",
         "tags": [
-          "CanvasTemplates"
+          "Canvas Template"
         ]
       }
     },
@@ -507,9 +512,9 @@
             }
           }
         },
-        "summary": "",
+        "summary": "Render Canvas Template",
         "tags": [
-          "CanvasTemplates"
+          "Canvas Template"
         ]
       }
     },
@@ -543,9 +548,9 @@
             "description": "Invalid request"
           }
         },
-        "summary": "",
+        "summary": "Create Credential Issuer Profile",
         "tags": [
-          "CredentialIssuerProfile"
+          "Credential Issuer Profile"
         ]
       },
       "get": {
@@ -581,9 +586,9 @@
             }
           }
         },
-        "summary": "",
+        "summary": "Get Credential Issuer Profiles",
         "tags": [
-          "CredentialIssuerProfile"
+          "Credential Issuer Profile"
         ]
       }
     },
@@ -616,9 +621,9 @@
             "description": "Credential issuer profile not found"
           }
         },
-        "summary": "",
+        "summary": "Get Credential Issuer Profile",
         "tags": [
-          "CredentialIssuerProfile"
+          "Credential Issuer Profile"
         ]
       },
       "delete": {
@@ -639,9 +644,9 @@
             "description": "Credential issuer profile deleted successfully"
           }
         },
-        "summary": "",
+        "summary": "Delete Credential Issuer Profile",
         "tags": [
-          "CredentialIssuerProfile"
+          "Credential Issuer Profile"
         ]
       }
     },
@@ -664,9 +669,9 @@
             "description": ""
           }
         },
-        "summary": "Retrieves a credential by its ID.",
+        "summary": "Get Credential",
         "tags": [
-          "Verifier"
+          "Credentials"
         ]
       }
     },
@@ -700,9 +705,9 @@
             "description": "Invalid request"
           }
         },
-        "summary": "Issues a credential and returns it in the response body.",
+        "summary": "Issue Credential",
         "tags": [
-          "Issuer"
+          "Credentials"
         ]
       }
     },
@@ -736,9 +741,9 @@
             "description": "Invalid request"
           }
         },
-        "summary": "",
+        "summary": "Verify Credential",
         "tags": [
-          "Verifier"
+          "Credentials"
         ]
       }
     },
@@ -772,9 +777,9 @@
             "description": "Invalid request"
           }
         },
-        "summary": "",
+        "summary": "Create DID",
         "tags": [
-          "Did"
+          "DID"
         ]
       },
       "get": {
@@ -814,9 +819,9 @@
             }
           }
         },
-        "summary": "",
+        "summary": "Get DIDs",
         "tags": [
-          "Did"
+          "DID"
         ]
       }
     },
@@ -849,9 +854,9 @@
             "description": "DID not found"
           }
         },
-        "summary": "",
+        "summary": "Get DID",
         "tags": [
-          "Did"
+          "DID"
         ]
       },
       "delete": {
@@ -872,9 +877,9 @@
             "description": "DID deleted successfully"
           }
         },
-        "summary": "",
+        "summary": "Delete DID",
         "tags": [
-          "Did"
+          "DID"
         ]
       }
     },
@@ -907,7 +912,7 @@
         },
         "summary": "Create a DPP",
         "tags": [
-          "Dpp"
+          "DPP"
         ]
       }
     },
@@ -932,7 +937,7 @@
         },
         "summary": "Delete a DPP",
         "tags": [
-          "Dpp"
+          "DPP"
         ]
       },
       "get": {
@@ -962,7 +967,7 @@
         },
         "summary": "Get a DPP",
         "tags": [
-          "Dpp"
+          "DPP"
         ]
       }
     },
@@ -985,9 +990,10 @@
             "description": ""
           }
         },
-        "summary": "",
+        "summary": "Create External Resolver",
         "tags": [
-          "StackExternalResolver"
+          "External Resolver",
+          "External Resolver"
         ]
       },
       "get": {
@@ -1000,7 +1006,8 @@
         },
         "summary": "",
         "tags": [
-          "StackExternalResolver"
+          "External Resolver",
+          "External Resolver"
         ]
       }
     },
@@ -1032,9 +1039,10 @@
             "description": ""
           }
         },
-        "summary": "",
+        "summary": "Update External Resolver",
         "tags": [
-          "StackExternalResolver"
+          "External Resolver",
+          "External Resolver"
         ]
       },
       "get": {
@@ -1054,9 +1062,10 @@
             "description": ""
           }
         },
-        "summary": "",
+        "summary": "Get External Resolver",
         "tags": [
-          "StackExternalResolver"
+          "External Resolver",
+          "External Resolver"
         ]
       },
       "delete": {
@@ -1076,9 +1085,10 @@
             "description": ""
           }
         },
-        "summary": "",
+        "summary": "Delete External Resolver",
         "tags": [
-          "StackExternalResolver"
+          "External Resolver",
+          "External Resolver"
         ]
       }
     },

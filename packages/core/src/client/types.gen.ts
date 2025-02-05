@@ -566,14 +566,14 @@ export type UpdateOrganization = {
     name: string;
 };
 
-export type HealthControllerGetStatusData = {
+export type HealthCheckData = {
     body?: never;
     path?: never;
     query?: never;
     url: '/health/status';
 };
 
-export type HealthControllerGetStatusResponses = {
+export type HealthCheckResponses = {
     200: unknown;
 };
 
