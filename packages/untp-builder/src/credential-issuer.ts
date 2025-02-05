@@ -8,6 +8,11 @@ export class CredentialIssuerBuilder extends Builder<CredentialIssuer> {
   }
 
   public id(value: string) {
+    if (!value.startsWith("did:web:")) {
+      throw new Error(
+        "Credential issuer ID must be in did:web format (e.g., did:web:example.com)"
+      );
+    }
     return this.set("id", value);
   }
 
