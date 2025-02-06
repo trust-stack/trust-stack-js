@@ -1,6 +1,6 @@
 {
   "name": "@truststack/untp-builder",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Builder for generating UNTP schemas and objects.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
