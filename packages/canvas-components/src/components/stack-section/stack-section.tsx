@@ -22,6 +22,7 @@ export class StackSection {
           <md-elevation></md-elevation>
           <h2 class="md-typescale-headline-small">{this.headline}</h2>
           <p class="md-typescale-title-medium">{this.subtitle}</p>
+
           <slot></slot>
         </div>
       </Host>

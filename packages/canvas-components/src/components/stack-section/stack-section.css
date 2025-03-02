@@ -7,5 +7,5 @@
   border-top-right-radius: var(--md-sys-shape-corner-medium);
   overflow: hidden;
   text-align: center;
-  --md-elevation-level: 1;
+  --md-elevation-level: 5;
 }
