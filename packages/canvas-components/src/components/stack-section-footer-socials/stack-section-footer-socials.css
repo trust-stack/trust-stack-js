@@ -10,13 +10,13 @@
   align-items: center;
   justify-content: center;
   padding: var(--md-sys-spacing-small);
-  background-color: var(--md-sys-color-surface);
+  background-color: var(--md-sys-color-surface-variant);
 }
 
 .icon {
   font-size: 1.5em;
   border-radius: 50%;
-  background-color: var(--md-sys-color-surface-variant);
+  background-color: var(--md-sys-color-surface);
   width: 40px;
   height: 40px;
   display: flex;
