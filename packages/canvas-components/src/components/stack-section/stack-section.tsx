@@ -20,8 +20,8 @@ export class StackSection {
       <Host>
         <div class={`card ${container}`}>
           <md-elevation></md-elevation>
-          <h2 class="md-typescale-headline-small">{this.headline}</h2>
-          <p class="md-typescale-title-medium">{this.subtitle}</p>
+          {this.headline && <h2 class="md-typescale-headline-small">{this.headline}</h2>}
+          {this.subtitle && <p class="md-typescale-title-medium">{this.subtitle}</p>}
 
           <slot></slot>
         </div>
