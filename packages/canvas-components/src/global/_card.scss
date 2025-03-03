@@ -1,0 +1,9 @@
+@each $size, $value in ('0': 12px, '-1': 8px, '-2': 4px) {
+    .card-density-#{$size} {
+        padding: $value;
+    }
+}
+
+.card {
+    overflow: hidden;
+}

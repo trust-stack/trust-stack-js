@@ -1,0 +1,49 @@
+@each $size, $value in (xs: var(--md-sys-shape-corner-extra-small),
+    sm: var(--md-sys-shape-corner-small),
+    md: var(--md-sys-shape-corner-medium),
+    lg: var(--md-sys-shape-corner-large),
+    xl: var(--md-sys-shape-corner-extra-large),
+    none: var(--md-sys-shape-corner-none),
+    full: var(--md-sys-shape-corner-full)) {
+    .br-#{$size} {
+        border-radius: $value;
+    }
+
+    .br-tl-#{$size} {
+        border-top-left-radius: $value;
+    }
+
+    .br-tr-#{$size} {
+        border-top-right-radius: $value;
+    }
+
+    .br-bl-#{$size} {
+        border-bottom-left-radius: $value;
+    }
+
+    .br-br-#{$size} {
+        border-bottom-right-radius: $value;
+    }
+
+    .br-t-#{$size} {
+        border-top-left-radius: $value;
+        border-top-right-radius: $value;
+    }
+
+    .br-b-#{$size} {
+        border-bottom-left-radius: $value;
+        border-bottom-right-radius: $value;
+    }
+
+    .br-l-#{$size} {
+        border-top-left-radius: $value;
+        border-bottom-left-radius: $value;
+    }
+
+    .br-r-#{$size} {
+        border-top-right-radius: $value;
+        border-bottom-right-radius: $value;
+    }
+
+
+}

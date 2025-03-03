@@ -11,7 +11,18 @@ function getAbsolutePath(value: string): any {
 }
 const config: StorybookConfig = {
   stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
-  addons: [getAbsolutePath('@storybook/addon-essentials'), { name: 'storybook-addon-stencil', options: { stencilOptions: {} } }],
+  addons: [
+    getAbsolutePath('@storybook/addon-essentials'),
+    {
+      name: 'storybook-addon-sass-postcss',
+      options: {
+        rule: {
+          test: /\.(scss|sass)$/i,
+        },
+      },
+    },
+    { name: 'storybook-addon-stencil', options: { stencilOptions: {} } },
+  ],
   framework: {
     name: getAbsolutePath('@storybook/web-components-vite'),
     options: {},
