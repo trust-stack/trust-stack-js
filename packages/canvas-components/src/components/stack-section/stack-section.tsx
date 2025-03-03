@@ -18,7 +18,7 @@ export class StackSection {
 
     return (
       <Host>
-        <div class={`card-density-0 elevation-5 card br-t-xl ${container}`} style={{ textAlign: 'center' }}>
+        <div class={`elevation-5 card br-t-xl ${container}`} style={{ textAlign: 'center' }}>
           <md-elevation></md-elevation>
           {this.headline && <h2 class="md-typescale-headline-small">{this.headline}</h2>}
           {this.subtitle && <p class="md-typescale-title-medium">{this.subtitle}</p>}

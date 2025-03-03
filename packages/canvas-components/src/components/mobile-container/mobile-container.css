@@ -1,0 +1,16 @@
+:host {
+  display: block;
+}
+
+.mobile-container {
+  width: 100vw;
+  height: 100vh;
+  background-color: #1a1a1a;
+}
+
+.mobile-container-content {
+  padding: 0;
+  margin: auto;
+  max-width: 400px;
+  background-color: var(--md-sys-color-surface-container);
+}

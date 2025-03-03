@@ -29,7 +29,8 @@ export class StackProductHeader {
             <h2 class="md-typescale-headline-large stack-product-header-headline">{this.headline}</h2>
           </div>
 
-          <img class="stack-product-header-image" src={this.imageUrl} />
+          <img class="br-sm stack-product-header-image" src={this.imageUrl} />
+
           <p class="md-typescale-body-large stack-product-header-message">Here is how it got here</p>
         </div>
         <slot></slot>

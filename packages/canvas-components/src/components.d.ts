@@ -17,6 +17,8 @@ export namespace Components {
         "itemHeight": number;
         "items": LogoGridItem[];
     }
+    interface MobileContainer {
+    }
     interface StackLayout {
         "overlap": number;
     }
@@ -70,6 +72,12 @@ declare global {
         prototype: HTMLLogoGridElement;
         new (): HTMLLogoGridElement;
     };
+    interface HTMLMobileContainerElement extends Components.MobileContainer, HTMLStencilElement {
+    }
+    var HTMLMobileContainerElement: {
+        prototype: HTMLMobileContainerElement;
+        new (): HTMLMobileContainerElement;
+    };
     interface HTMLStackLayoutElement extends Components.StackLayout, HTMLStencilElement {
     }
     var HTMLStackLayoutElement: {
@@ -121,6 +129,7 @@ declare global {
     interface HTMLElementTagNameMap {
         "header-image": HTMLHeaderImageElement;
         "logo-grid": HTMLLogoGridElement;
+        "mobile-container": HTMLMobileContainerElement;
         "stack-layout": HTMLStackLayoutElement;
         "stack-product-header": HTMLStackProductHeaderElement;
         "stack-section": HTMLStackSectionElement;
@@ -140,6 +149,8 @@ declare namespace LocalJSX {
     interface LogoGrid {
         "itemHeight"?: number;
         "items"?: LogoGridItem[];
+    }
+    interface MobileContainer {
     }
     interface StackLayout {
         "overlap"?: number;
@@ -183,6 +194,7 @@ declare namespace LocalJSX {
     interface IntrinsicElements {
         "header-image": HeaderImage;
         "logo-grid": LogoGrid;
+        "mobile-container": MobileContainer;
         "stack-layout": StackLayout;
         "stack-product-header": StackProductHeader;
         "stack-section": StackSection;
@@ -199,6 +211,7 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "header-image": LocalJSX.HeaderImage & JSXBase.HTMLAttributes<HTMLHeaderImageElement>;
             "logo-grid": LocalJSX.LogoGrid & JSXBase.HTMLAttributes<HTMLLogoGridElement>;
+            "mobile-container": LocalJSX.MobileContainer & JSXBase.HTMLAttributes<HTMLMobileContainerElement>;
             "stack-layout": LocalJSX.StackLayout & JSXBase.HTMLAttributes<HTMLStackLayoutElement>;
             "stack-product-header": LocalJSX.StackProductHeader & JSXBase.HTMLAttributes<HTMLStackProductHeaderElement>;
             "stack-section": LocalJSX.StackSection & JSXBase.HTMLAttributes<HTMLStackSectionElement>;
