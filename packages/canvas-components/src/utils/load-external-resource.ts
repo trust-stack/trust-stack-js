@@ -2,8 +2,6 @@ export const loadExternalCSS = async (url: string, checkSelector?: string): Prom
   // Check if already loaded using provided selector or URL match
   const isLoaded = checkSelector ? document.querySelector(checkSelector) : document.querySelector(`link[href="${url}"]`);
 
-  console.log('isLoaded', isLoaded);
-
   if (isLoaded) return;
 
   // Load CSS

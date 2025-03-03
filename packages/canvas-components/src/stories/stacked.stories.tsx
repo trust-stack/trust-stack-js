@@ -1,13 +1,16 @@
 import { Meta } from '@storybook/web-components';
 import { html } from 'lit';
 import '../components/header-image/header-image';
+import '../components/logo-grid/logo-grid';
 import '../components/stack-layout/stack-layout';
+import '../components/stack-product-header/stack-product-header';
 import '../components/stack-section-block-image/stack-section-block-image';
 import '../components/stack-section-block-video/stack-section-block-video';
 import '../components/stack-section-footer-socials/stack-section-footer-socials';
 import '../components/stack-section-map/stack-section-map';
 import '../components/stack-section/stack-section';
 import '../components/trust-provenance-footer/trust-provenance-footer';
+
 export default {
   name: 'Examples/Stacked',
   render: () => html`
@@ -16,6 +19,13 @@ export default {
     </script>
     <stack-layout>
       <header-image subheader="ROCK LOBSTER" headline="A taste of our country" image="/ocean-banner.jpg"></header-image>
+
+      <stack-section>
+        <stack-product-header
+          headline="Rock Lobster"
+          image-url="https://i0.wp.com/eyrewoolfabalone.com.au/wp-content/uploads/2021/04/Eyrewoolf-Abalone-Products-Square-Crop-19-13.jpg?fit=1080%2C1080&ssl=1"
+        ></stack-product-header>
+      </stack-section>
 
       <stack-section headline="Wild Caught" subtitle="12/12/2024" variant="surface">
         <p>
@@ -53,6 +63,27 @@ export default {
       <stack-section>
         <stack-section-block-image url="/rock-lobster.jpg"></stack-section-block-image>
       </stack-section>
+
+      <stack-section>
+        <p>
+          Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
+          architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui
+          ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora
+          incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
+        </p>
+        <script>
+          document.querySelector('logo-grid').items = ${JSON.stringify([
+            {
+              src: '/awa.webp',
+            },
+            {
+              src: '/sapfbia.webp',
+            },
+          ])};
+        </script>
+        <logo-grid item-height="80" />
+      </stack-section>
+
       <stack-section>
         <stack-section-footer-socials
           facebook="https://google.com"

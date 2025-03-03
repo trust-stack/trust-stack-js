@@ -7,9 +7,10 @@
 
 ## Properties
 
-| Property | Attribute | Description | Type     | Default     |
-| -------- | --------- | ----------- | -------- | ----------- |
-| `url`    | `url`     |             | `string` | `undefined` |
+| Property    | Attribute    | Description | Type     | Default     |
+| ----------- | ------------ | ----------- | -------- | ----------- |
+| `maxHeight` | `max-height` |             | `number` | `400`       |
+| `url`       | `url`        |             | `string` | `undefined` |
 
 
 ----------------------------------------------

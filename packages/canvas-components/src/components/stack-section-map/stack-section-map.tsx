@@ -20,7 +20,8 @@ export class StackSectionMap {
   @Prop() height: number = 400;
   @Prop() center: [number, number] = [0, 0];
   @Prop() markers: [number, number][] = [];
-  @Prop() style: 'streets-v12' | 'outdoors-v12' | 'light-v11' | 'dark-v11' | 'satellite-v9' | 'satellite-streets-v12' | 'navigation-day-v1' | 'navigation-night-v1' = 'light-v11';
+  @Prop() mapStyle: 'streets-v12' | 'outdoors-v12' | 'light-v11' | 'dark-v11' | 'satellite-v9' | 'satellite-streets-v12' | 'navigation-day-v1' | 'navigation-night-v1' =
+    'light-v11';
   @Prop() markerColor: `var(--md-sys-color-${string})` = 'var(--md-sys-color-primary)';
 
   private markerInstances: any[] = [];
@@ -55,7 +56,7 @@ export class StackSectionMap {
     window.mapboxgl.accessToken = this.accessToken;
     this.mapInstance = new window.mapboxgl.Map({
       container: this.mapContainer,
-      style: STYLE_MAP[this.style],
+      style: STYLE_MAP[this.mapStyle],
       center: this.center,
       zoom: this.zoom,
     });

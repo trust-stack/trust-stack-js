@@ -1,0 +1,15 @@
+:host {
+  display: block;
+}
+
+.grid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 8px;
+}
+
+.grid-item-6 {
+  width: calc(50% - 8px);
+}

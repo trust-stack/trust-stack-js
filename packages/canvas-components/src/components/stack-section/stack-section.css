@@ -9,3 +9,16 @@
   text-align: center;
   --md-elevation-level: 5;
 }
+
+.card > h2,
+.card > p {
+  margin: 0;
+}
+
+.card > h2 {
+  margin-top: 12px !important;
+}
+
+.card > p {
+  margin-bottom: 12px !important;
+}
