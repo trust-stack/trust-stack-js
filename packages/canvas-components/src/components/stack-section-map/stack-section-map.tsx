@@ -14,6 +14,8 @@ declare global {
 export class StackSectionMap {
   @State() private mapInstance: any;
   private mapContainer: HTMLDivElement;
+  private markerInstances: any[] = [];
+  private polygonLayerId: string = 'polygon-layer';
 
   @Prop() accessToken: string;
   @Prop() zoom: number = 1;
@@ -23,8 +25,8 @@ export class StackSectionMap {
   @Prop() mapStyle: 'streets-v12' | 'outdoors-v12' | 'light-v11' | 'dark-v11' | 'satellite-v9' | 'satellite-streets-v12' | 'navigation-day-v1' | 'navigation-night-v1' =
     'light-v11';
   @Prop() markerColor: `var(--md-sys-color-${string})` = 'var(--md-sys-color-primary)';
-
-  private markerInstances: any[] = [];
+  @Prop() polygonColor: `var(--md-sys-color-${string})` = 'var(--md-sys-color-primary)';
+  @Prop() polygon?: Polygon;
 
   private async loadMapboxResources() {
     if (window.mapboxgl) return;
@@ -61,9 +63,11 @@ export class StackSectionMap {
       zoom: this.zoom,
     });
 
-    // Wait for both map load and style load before adding markers
+    // Wait for both map load and style load before adding markers and polygon
     this.mapInstance.on('style.load', () => {
       this.addMarkers();
+
+      this.addPolygon();
     });
   }
 
@@ -96,7 +100,83 @@ export class StackSectionMap {
     }
   }
 
+  private addPolygon() {
+    // Remove existing layers if they exist
+    if (this.mapInstance.getLayer(this.polygonLayerId)) {
+      this.mapInstance.removeLayer(this.polygonLayerId);
+      this.mapInstance.removeLayer(`${this.polygonLayerId}-label`);
+      this.mapInstance.removeSource(this.polygonLayerId);
+    }
+
+    const computedColor = getComputedStyle(document.documentElement).getPropertyValue(this.polygonColor.replace('var(', '').replace(')', '')).trim();
+
+    // Calculate the center point of the polygon for label placement
+    const bounds = new window.mapboxgl.LngLatBounds();
+    this.polygon.coordinates.forEach(coordinate => {
+      bounds.extend(coordinate);
+    });
+    const center = bounds.getCenter();
+
+    // Add the polygon data as a source
+    this.mapInstance.addSource(this.polygonLayerId, {
+      type: 'geojson',
+      data: {
+        type: 'Feature',
+        properties: {
+          label: this.polygon.label,
+          center: [center.lng, center.lat],
+        },
+        geometry: {
+          type: 'Polygon',
+          coordinates: [this.polygon.coordinates],
+        },
+      },
+    });
+
+    // Add the polygon fill layer
+    this.mapInstance.addLayer({
+      id: this.polygonLayerId,
+      type: 'fill',
+      source: this.polygonLayerId,
+      paint: {
+        'fill-color': computedColor,
+        'fill-opacity': 0.3,
+        'fill-outline-color': computedColor,
+      },
+    });
+
+    // Add the label layer
+    this.mapInstance.addLayer({
+      id: `${this.polygonLayerId}-label`,
+      type: 'symbol',
+      source: this.polygonLayerId,
+      layout: {
+        'text-field': ['get', 'label'],
+        'text-anchor': 'center',
+        'text-size': 12,
+        'text-justify': 'center',
+        'text-offset': [0, 0],
+      },
+      paint: {
+        'text-color': computedColor,
+        'text-halo-color': '#ffffff',
+        'text-halo-width': 2,
+      },
+    });
+
+    // Fit map to polygon bounds
+    this.mapInstance.fitBounds(bounds, {
+      padding: 100,
+    });
+  }
+
   disconnectedCallback() {
+    // Remove both layers before removing map
+    if (this.mapInstance?.getLayer(this.polygonLayerId)) {
+      this.mapInstance.removeLayer(this.polygonLayerId);
+      this.mapInstance.removeLayer(`${this.polygonLayerId}-label`);
+      this.mapInstance.removeSource(this.polygonLayerId);
+    }
     // Remove markers before removing map
     this.markerInstances.forEach(marker => marker.remove());
     if (this.mapInstance) {
@@ -124,4 +204,9 @@ const STYLE_MAP = {
   'satellite-streets-v12': 'mapbox://styles/mapbox/satellite-streets-v12',
   'navigation-day-v1': 'mapbox://styles/mapbox/navigation-day-v1',
   'navigation-night-v1': 'mapbox://styles/mapbox/navigation-night-v1',
+};
+
+export type Polygon = {
+  readonly coordinates: [number, number][];
+  readonly label: string;
 };

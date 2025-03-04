@@ -6,11 +6,15 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { LogoGridItem } from "./components/logo-grid/logo-grid";
+import { Polygon } from "./components/stack-section-map/stack-section-map";
 export { LogoGridItem } from "./components/logo-grid/logo-grid";
+export { Polygon } from "./components/stack-section-map/stack-section-map";
 export namespace Components {
     interface HeaderImage {
         "headline": string;
+        "height"?: number;
         "image": string;
+        "imageBlur"?: number;
         "subheader": string;
     }
     interface LogoGrid {
@@ -54,6 +58,8 @@ export namespace Components {
         "mapStyle": 'streets-v12' | 'outdoors-v12' | 'light-v11' | 'dark-v11' | 'satellite-v9' | 'satellite-streets-v12' | 'navigation-day-v1' | 'navigation-night-v1';
         "markerColor": `var(--md-sys-color-${string})`;
         "markers": [number, number][];
+        "polygon"?: Polygon;
+        "polygonColor": `var(--md-sys-color-${string})`;
         "zoom": number;
     }
     interface TrustProvenanceFooter {
@@ -143,7 +149,9 @@ declare global {
 declare namespace LocalJSX {
     interface HeaderImage {
         "headline"?: string;
+        "height"?: number;
         "image"?: string;
+        "imageBlur"?: number;
         "subheader"?: string;
     }
     interface LogoGrid {
@@ -187,6 +195,8 @@ declare namespace LocalJSX {
         "mapStyle"?: 'streets-v12' | 'outdoors-v12' | 'light-v11' | 'dark-v11' | 'satellite-v9' | 'satellite-streets-v12' | 'navigation-day-v1' | 'navigation-night-v1';
         "markerColor"?: `var(--md-sys-color-${string})`;
         "markers"?: [number, number][];
+        "polygon"?: Polygon;
+        "polygonColor"?: `var(--md-sys-color-${string})`;
         "zoom"?: number;
     }
     interface TrustProvenanceFooter {
