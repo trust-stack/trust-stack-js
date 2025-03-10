@@ -10,6 +10,9 @@ import { Polygon } from "./components/stack-section-map/stack-section-map";
 export { LogoGridItem } from "./components/logo-grid/logo-grid";
 export { Polygon } from "./components/stack-section-map/stack-section-map";
 export namespace Components {
+    interface CallToAction {
+        "href": string;
+    }
     interface HeaderImage {
         "headline": string;
         "height"?: number;
@@ -32,6 +35,7 @@ export namespace Components {
     }
     interface StackSection {
         "headline": string;
+        "paddingBottom"?: number;
         "subtitle": string;
         "variant"?: 'primary' | 'secondary' | 'tertiary' | 'surface' | 'surface-variant';
     }
@@ -41,6 +45,8 @@ export namespace Components {
     }
     interface StackSectionBlockVideo {
         "code": string;
+        "marginBottom": number;
+        "paddingTop": number;
         "videoId": string;
     }
     interface StackSectionFooterSocials {
@@ -66,6 +72,12 @@ export namespace Components {
     }
 }
 declare global {
+    interface HTMLCallToActionElement extends Components.CallToAction, HTMLStencilElement {
+    }
+    var HTMLCallToActionElement: {
+        prototype: HTMLCallToActionElement;
+        new (): HTMLCallToActionElement;
+    };
     interface HTMLHeaderImageElement extends Components.HeaderImage, HTMLStencilElement {
     }
     var HTMLHeaderImageElement: {
@@ -133,6 +145,7 @@ declare global {
         new (): HTMLTrustProvenanceFooterElement;
     };
     interface HTMLElementTagNameMap {
+        "call-to-action": HTMLCallToActionElement;
         "header-image": HTMLHeaderImageElement;
         "logo-grid": HTMLLogoGridElement;
         "mobile-container": HTMLMobileContainerElement;
@@ -147,6 +160,9 @@ declare global {
     }
 }
 declare namespace LocalJSX {
+    interface CallToAction {
+        "href"?: string;
+    }
     interface HeaderImage {
         "headline"?: string;
         "height"?: number;
@@ -169,6 +185,7 @@ declare namespace LocalJSX {
     }
     interface StackSection {
         "headline"?: string;
+        "paddingBottom"?: number;
         "subtitle"?: string;
         "variant"?: 'primary' | 'secondary' | 'tertiary' | 'surface' | 'surface-variant';
     }
@@ -178,6 +195,8 @@ declare namespace LocalJSX {
     }
     interface StackSectionBlockVideo {
         "code"?: string;
+        "marginBottom"?: number;
+        "paddingTop"?: number;
         "videoId"?: string;
     }
     interface StackSectionFooterSocials {
@@ -202,6 +221,7 @@ declare namespace LocalJSX {
     interface TrustProvenanceFooter {
     }
     interface IntrinsicElements {
+        "call-to-action": CallToAction;
         "header-image": HeaderImage;
         "logo-grid": LogoGrid;
         "mobile-container": MobileContainer;
@@ -219,6 +239,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "call-to-action": LocalJSX.CallToAction & JSXBase.HTMLAttributes<HTMLCallToActionElement>;
             "header-image": LocalJSX.HeaderImage & JSXBase.HTMLAttributes<HTMLHeaderImageElement>;
             "logo-grid": LocalJSX.LogoGrid & JSXBase.HTMLAttributes<HTMLLogoGridElement>;
             "mobile-container": LocalJSX.MobileContainer & JSXBase.HTMLAttributes<HTMLMobileContainerElement>;

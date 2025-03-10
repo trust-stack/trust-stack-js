@@ -12,6 +12,7 @@
   padding: var(--md-sys-spacing-small);
   background-color: var(--md-sys-color-surface-variant);
   height: 60;
+  padding-bottom: 140px;
 }
 
 .icon {

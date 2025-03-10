@@ -8,8 +8,11 @@ export default {
   component: 'mobile-container',
   render: () =>
     html`<mobile-container>
-      <div>
-        <h1>Hello</h1>
+      <div style="padding: 16px;">
+        <h1>Scrolling Content</h1>
+        ${Array(20)
+          .fill(0)
+          .map(() => html`<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>`)}
       </div>
     </mobile-container>`,
 } as Meta<MobileContainer>;

@@ -8,13 +8,15 @@ import { Component, h, Host, Prop } from '@stencil/core';
 export class StackSectionBlockVideo {
   @Prop() code: string = 'x75fdruh6bqg6lte';
   @Prop() videoId: string;
+  @Prop() paddingTop: number = 75;
+  @Prop() marginBottom: number = -10;
 
   render() {
     const poster = `https://customer-${this.code}.cloudflarestream.com/${this.videoId}/thumbnails/thumbnail.jpg`;
 
     return (
       <Host>
-        <div class="video-container">
+        <div class="video-container" style={{ paddingTop: `${this.paddingTop}%`, marginBottom: `${this.marginBottom}px` }}>
           <iframe
             src={`https://customer-${this.code}.cloudflarestream.com/${this.videoId}/iframe?muted=true&preload=true&loop=true&autoplay=true&controls=false&poster=${poster}`}
             loading="lazy"

@@ -8,8 +8,6 @@
   border-top-right-radius: var(--md-sys-shape-corner-small);
   overflow: hidden;
   position: relative;
-  padding-top: 75%;
-  margin-bottom: -10px;
   width: 100%;
   background-color: var(--md-sys-color-surface);
 }

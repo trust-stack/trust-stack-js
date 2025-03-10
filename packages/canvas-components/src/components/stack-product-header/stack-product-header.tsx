@@ -17,7 +17,7 @@ export class StackProductHeader {
   render() {
     return (
       <Host>
-        <div class="stack-producer-header">
+        <div class="stack-product-header">
           <div>
             <div class="stack-product-header-supporting-text-container">
               <span class="icon">

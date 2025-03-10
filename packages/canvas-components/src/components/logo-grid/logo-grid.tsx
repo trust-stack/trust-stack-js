@@ -14,8 +14,8 @@ export class LogoGrid {
       <Host>
         <div class="grid">
           {this.items.map(item => (
-            <div class="grid-item-6" style={{ maxHeight: `${this.itemHeight}px`, height: `${this.itemHeight}px` }}>
-              <img src={item.src} alt={item.alt} style={{ maxHeight: `${this.itemHeight}px`, height: `${this.itemHeight}px` }} />
+            <div class="grid-item grid-item-6" style={{ maxHeight: `${this.itemHeight}px`, height: `${this.itemHeight}px` }}>
+              <img src={item.src} alt={item.alt} style={{ maxHeight: `100%`, height: `100%` }} />
             </div>
           ))}
         </div>
