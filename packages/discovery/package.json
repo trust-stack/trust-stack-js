@@ -1,0 +1,33 @@
+{
+  "name": "@truststack/discovery",
+  "version": "0.0.1",
+  "description": "",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "private": false,
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "codegen": "json2ts -i src/schema/ -o src/types/",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@truststack/untp-types": "workspace:*",
+    "n3": "^1.17.4",
+    "object-hash": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/n3": "^1.16.4",
+    "@types/object-hash": "^3.0.6",
+    "json-schema-to-typescript": "^15.0.0",
+    "lint-staged": "^15.2.7",
+    "vitest": "^2.0.4"
+  }
+}
