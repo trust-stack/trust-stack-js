@@ -4,11 +4,13 @@
 export class LinkMap {
   private linkMap: Map<string, string> = new Map();
 
-  constructor(defaultMap?: { [key: string]: string }) {
+  constructor(defaultMap?: {[key: string]: string}) {
     this.linkMap = new Map();
     if (defaultMap) {
       Object.keys(defaultMap).forEach((key) => {
-        this.linkMap.set(key, defaultMap[key]);
+        if (typeof defaultMap[key] === "string") {
+          this.linkMap.set(key, defaultMap[key]);
+        }
       });
     }
   }

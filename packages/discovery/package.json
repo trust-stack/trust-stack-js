@@ -28,6 +28,7 @@
     "@types/object-hash": "^3.0.6",
     "json-schema-to-typescript": "^15.0.0",
     "lint-staged": "^15.2.7",
+    "tsup": "^8.3.5",
     "vitest": "^2.0.4"
   }
 }

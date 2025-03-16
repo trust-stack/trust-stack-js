@@ -7,7 +7,7 @@ import {
   CoreRegistry,
   GraphBuilder,
   LinkMap,
-} from "@trustprovenance/graph-builder";
+} from "@truststack/discovery";
 
 // Create a Empty Link Map
 const linkMap = new LinkMap();
@@ -55,7 +55,7 @@ The **mapper function** return will take this JSON payload, and a `n3` `DataStor
 
 ```typescript
 // The `CoreRegistry` is a "out-of-the-box" registry for handling the basic UNTP data types.
-import { CoreRegistry } from "@trustprovenance/graph-builder";
+import { CoreRegistry } from "@truststack/discovery";
 import { DataStore } from "n3";
 
 const registry = new CoreRegistry();
@@ -75,7 +75,7 @@ The above code is something you would ideally not have to write as the **Graph B
 
 ### Extending the Mapper Registry
 
-Since the UNTP supports extensions, so does `@trustprovenance/graph-builder`. Your industry map have an extension beyond the core UNTP types (such as the Australian Agriculture Transparency Protocol). You can build your own `Mapper` and add it to a `MapperRegistry` which is used to instantiate a `GraphBuilder`.
+Since the UNTP supports extensions, so does `@truststack/discovery`. Your industry map have an extension beyond the core UNTP types (such as the Australian Agriculture Transparency Protocol). You can build your own `Mapper` and add it to a `MapperRegistry` which is used to instantiate a `GraphBuilder`.
 
 Let's take a `DigitalLivestockPassport` from the `AATP` as an example. This _extends_ a `DigitalProductPassport` with additional attributes we may want to capture.
 
@@ -90,7 +90,7 @@ We can then create a mapper that handles this.
 
 ```typescript
 // ./digital-livestock-passport.ts
-import { Mapper } from "@trustprovenance/graph-builder";
+import { Mapper } from "@truststack/discovery";
 import { DigitalLivestockPassport } from "some type definition you have";
 
 export class DigitalLivestockPassportMapper
@@ -105,7 +105,7 @@ export class DigitalLivestockPassportMapper
 and create a custom registry,
 
 ```typescript
-import { CoreRegistry, GraphBuilder } from "@trustprovenance/graph-builder";
+import { CoreRegistry, GraphBuilder } from "@truststack/discovery";
 import { DigitalLivestockPassportMapper } from "./digital-livestock-passport";
 
 // Let's extend the base UNTP registry
@@ -118,7 +118,7 @@ registry.register("DigitalLivestockPassport", DigitalLivestockPassportMapper);
 We can then use this Mapper Registry for Graph building.
 
 ```typescript
-import { GraphBuilder } from "@trustprovenance/graph-builder";
+import { GraphBuilder } from "@truststack/discovery";
 
 const builder = new GraphBuilder({ registry });
 ```

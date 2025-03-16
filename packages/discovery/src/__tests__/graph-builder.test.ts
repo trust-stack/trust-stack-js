@@ -1,14 +1,11 @@
-import {
-  DigitalConformityCredential,
-  DigitalProductPassport,
-} from "@trustprovenance/untp-types";
-import { GraphBuilder, NodeData } from "src/graph-builder";
-import { LinkMap } from "src/link-map";
-import { CoreRegistry } from "src/mapper";
-import { ex, rdf } from "src/mapper/utils";
-import { DeepPartial, EdgeType, NodeType } from "src/types";
-import { assertQuadDefine } from "src/utils.test";
-import { describe, it } from "vitest";
+import {DCC, DPP} from "@truststack/untp-types";
+import {describe, it} from "vitest";
+import {GraphBuilder, NodeData} from "../graph-builder";
+import {LinkMap} from "../link-map";
+import {CoreRegistry} from "../mapper";
+import {ex, rdf} from "../mapper/utils";
+import {DeepPartial, EdgeType, NodeType} from "../types";
+import {assertQuadDefine} from "../utils.test";
 
 describe("graph builder", () => {
   it("Product Passport referencing Conformity Credential.", () => {
@@ -16,7 +13,7 @@ describe("graph builder", () => {
       "acme.com/deforestation-certificate.json": "conformity-id",
     });
 
-    const passport: DeepPartial<DigitalProductPassport> = {
+    const passport: DeepPartial<DPP> = {
       id: "passport-id",
       type: ["DigitalProductPassport", "VerifiableCredential"],
       credentialSubject: {
@@ -34,7 +31,7 @@ describe("graph builder", () => {
       },
     };
 
-    const conformity: DeepPartial<DigitalConformityCredential> = {
+    const conformity: DeepPartial<DCC> = {
       id: "conformity-id",
       type: ["DigitalConformityCredential", "VerifiableCredential"],
     };
@@ -53,27 +50,17 @@ describe("graph builder", () => {
     const quads = store.getQuads(undefined, undefined, undefined, undefined);
 
     //   Assert: Passport added to graph
-    assertQuadDefine(
-      quads,
-      ex("passport-id"),
-      rdf("type"),
-      ex(NodeType.DIGITAL_PRODUCT_PASSPORT),
-    );
+    assertQuadDefine(quads, ex("passport-id"), rdf("type"), ex(NodeType.DPP));
 
     //   Assert: Conformity Credential added to graph
-    assertQuadDefine(
-      quads,
-      ex("conformity-id"),
-      rdf("type"),
-      ex(NodeType.DIGITAL_CONFORMITY_CREDENTIAL),
-    );
+    assertQuadDefine(quads, ex("conformity-id"), rdf("type"), ex(NodeType.DCC));
 
     //   Assert: Passport references conformity credential
     assertQuadDefine(
       quads,
       ex("passport-id"),
       rdf(EdgeType.ConformityInformation),
-      ex("conformity-id"),
+      ex("conformity-id")
     );
   });
 });
