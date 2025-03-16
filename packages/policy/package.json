@@ -1,0 +1,35 @@
+{
+  "name": "@truststack/policy",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "author": "Trust Provenance harley@trustprovenance.com",
+  "type": "module",
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "prepublishOnly": "pnpm run build",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@comunica/query-sparql-rdfjs": "^3.2.3",
+    "@rdfjs/data-model": "^2.0.2",
+    "@rdfjs/dataset": "^2.0.2",
+    "@rdfjs/formats-common": "^3.1.0",
+    "@rdfjs/namespace": "^2.0.1",
+    "@rdfjs/parser-n3": "^2.0.2",
+    "@truststack/untp-types": "workspace:*",
+    "n3": "^1.17.4",
+    "rdf-data-model": "^1.0.0",
+    "rdf-utils-fs": "^3.0.0",
+    "readable-stream": "^4.5.2",
+    "shacl-engine": "^1.0.1",
+    "typescript": "^5.5.4"
+  },
+  "devDependencies": {
+    "@rdfjs/types": "^1.1.0",
+    "lint-staged": "^15.2.7",
+    "tsup": "^8.3.5",
+    "vitest": "^2.0.4"
+  }
+}
