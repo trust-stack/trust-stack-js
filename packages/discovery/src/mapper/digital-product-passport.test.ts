@@ -1,11 +1,11 @@
 import {DPP} from "@truststack/untp-types";
 import {Store} from "n3";
 import {beforeEach, describe, it} from "vitest";
-import {LinkMap} from "../../link-map";
-import {DeepPartial, EdgeType, NodeType} from "../../types";
-import {assertQuadDefine} from "../../utils.test";
-import {DigitalProductPassportMapper} from "../digital-product-passport";
-import {ex, rdf} from "../utils";
+import {LinkMap} from "../link-map";
+import {DeepPartial, EdgeType, NodeType} from "../types";
+import {assertQuadDefine} from "../utils.test";
+import {DigitalProductPassportMapper} from "./digital-product-passport";
+import {ex, rdf} from "./utils";
 
 describe("digital-product-passport", () => {
   let mapper: DigitalProductPassportMapper;
@@ -15,14 +15,13 @@ describe("digital-product-passport", () => {
     id: "test-id",
     type: ["DigitalProductPassport", "VerifiableCredential"],
     credentialSubject: {
-      conformityInformation: [
+      conformityClaim: [
         {
           conformityEvidence: {
-            type: "Link",
+            type: ["Link"],
             linkURL: "acme.com/deforestation-certificate.json",
             linkName: "Deforestation Certificate",
             linkType: "untp.dcc",
-            targetType: "string",
           },
         },
       ],

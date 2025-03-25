@@ -1,11 +1,11 @@
 import {DCC, DPP} from "@truststack/untp-types";
 import {describe, it} from "vitest";
-import {GraphBuilder, NodeData} from "../graph-builder";
-import {LinkMap} from "../link-map";
-import {CoreRegistry} from "../mapper";
-import {ex, rdf} from "../mapper/utils";
-import {DeepPartial, EdgeType, NodeType} from "../types";
-import {assertQuadDefine} from "../utils.test";
+import {GraphBuilder, NodeData} from "./graph-builder";
+import {LinkMap} from "./link-map";
+import {CoreRegistry} from "./mapper";
+import {ex, rdf} from "./mapper/utils";
+import {DeepPartial, EdgeType, NodeType} from "./types";
+import {assertQuadDefine} from "./utils.test";
 
 describe("graph builder", () => {
   it("Product Passport referencing Conformity Credential.", () => {
@@ -17,14 +17,13 @@ describe("graph builder", () => {
       id: "passport-id",
       type: ["DigitalProductPassport", "VerifiableCredential"],
       credentialSubject: {
-        conformityInformation: [
+        conformityClaim: [
           {
             conformityEvidence: {
-              type: "Link",
+              type: ["Link"],
               linkURL: "acme.com/deforestation-certificate.json",
               linkName: "Deforestation Certificate",
               linkType: "untp.dcc",
-              targetType: "string",
             },
           },
         ],
@@ -46,16 +45,16 @@ describe("graph builder", () => {
 
     const store = builder.getGraph();
 
-    //   @ts-ignore
+    // @ts-ignore
     const quads = store.getQuads(undefined, undefined, undefined, undefined);
 
-    //   Assert: Passport added to graph
+    // Assert: Passport added to graph
     assertQuadDefine(quads, ex("passport-id"), rdf("type"), ex(NodeType.DPP));
 
-    //   Assert: Conformity Credential added to graph
+    // Assert: Conformity Credential added to graph
     assertQuadDefine(quads, ex("conformity-id"), rdf("type"), ex(NodeType.DCC));
 
-    //   Assert: Passport references conformity credential
+    // Assert: Passport references conformity credential
     assertQuadDefine(
       quads,
       ex("passport-id"),

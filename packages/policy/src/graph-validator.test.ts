@@ -1,6 +1,6 @@
-import { DataFactory, Store } from "n3";
-import { describe, expect, it } from "vitest";
-import { GraphValidator } from "../graph-validator";
+import {DataFactory, Store} from "n3";
+import {describe, expect, it} from "vitest";
+import {GraphValidator} from "./graph-validator";
 
 describe("graph-validator", () => {
   it("can verify a graph against a SHACL shape", async () => {
@@ -26,8 +26,8 @@ const simpleDataset = () => {
     DataFactory.quad(
       DataFactory.namedNode(ex("A")),
       DataFactory.namedNode(rdf("type")),
-      DataFactory.namedNode(ex("PASSPORT")),
-    ),
+      DataFactory.namedNode(ex("PASSPORT"))
+    )
   );
 
   // Add "B" Credential
@@ -35,8 +35,8 @@ const simpleDataset = () => {
     DataFactory.quad(
       DataFactory.namedNode(ex("B")),
       DataFactory.namedNode(rdf("type")),
-      DataFactory.namedNode(ex("CONFORMITY")),
-    ),
+      DataFactory.namedNode(ex("CONFORMITY"))
+    )
   );
 
   // Add "B" as conformityClaims of "A"
@@ -44,8 +44,8 @@ const simpleDataset = () => {
     DataFactory.quad(
       DataFactory.namedNode(ex("A")),
       DataFactory.namedNode(ex("conformityClaims")),
-      DataFactory.namedNode(ex("B")),
-    ),
+      DataFactory.namedNode(ex("B"))
+    )
   );
 
   return dataset;

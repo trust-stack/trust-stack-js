@@ -1,10 +1,10 @@
 import {DCC} from "@truststack/untp-types";
 import {Store} from "n3";
 import {beforeEach, describe, it} from "vitest";
-import {DeepPartial, NodeType} from "../../types";
-import {assertQuadDefine} from "../../utils.test";
-import {DigitalConformityCredentialMapper} from "../digital-conformity-credential";
-import {ex, rdf} from "../utils";
+import {DeepPartial, NodeType} from "../types";
+import {assertQuadDefine} from "../utils.test";
+import {DigitalConformityCredentialMapper} from "./digital-conformity-credential";
+import {ex, rdf} from "./utils";
 
 describe("digital-conformity-credential", () => {
   let mapper: DigitalConformityCredentialMapper;
