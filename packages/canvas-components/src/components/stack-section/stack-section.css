@@ -2,10 +2,15 @@
   display: block;
 }
 
-.card {
-  border-top-left-radius: var(--md-sys-shape-corner-medium);
-  border-top-right-radius: var(--md-sys-shape-corner-medium);
-  overflow: hidden;
-  text-align: center;
-  --md-elevation-level: 1;
+.card > h2,
+.card > p {
+  margin: 0;
+}
+
+.card > h2 {
+  margin-top: 12px !important;
+}
+
+.card > p {
+  margin-bottom: 12px !important;
 }

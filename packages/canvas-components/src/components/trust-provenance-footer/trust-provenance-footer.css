@@ -1,0 +1,29 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.trust-provenance-footer-container {
+  background-color: #091969;
+  padding: var(--md-sys-spacing-small);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.cls-1 {
+  fill: #fff;
+}
+
+.trust-provenance-footer-container-svg {
+  width: 40px;
+  height: 40px;
+  margin: 'auto';
+}
+
+.trust-provenance-footer-container > p {
+  color: #fff;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}

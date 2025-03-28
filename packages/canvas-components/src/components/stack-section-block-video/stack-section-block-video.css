@@ -1,0 +1,22 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.video-container {
+  border-top-left-radius: var(--md-sys-shape-corner-small);
+  border-top-right-radius: var(--md-sys-shape-corner-small);
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  background-color: var(--md-sys-color-surface);
+}
+
+iframe {
+  border: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}

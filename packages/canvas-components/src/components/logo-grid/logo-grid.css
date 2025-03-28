@@ -1,0 +1,21 @@
+:host {
+  display: block;
+}
+
+.grid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 8px;
+}
+
+.grid-item-6 {
+  max-width: calc(50% - 8px);
+}
+
+.grid-item {
+  border-radius: var(--md-sys-shape-corner-small);
+  border-top-right-radius: var(--md-sys-shape-corner-small);
+  overflow: hidden;
+}

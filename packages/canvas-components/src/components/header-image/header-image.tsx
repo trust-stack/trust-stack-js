@@ -9,13 +9,15 @@ export class HeaderImage {
   @Prop() image: string;
   @Prop() headline: string;
   @Prop() subheader: string;
+  @Prop() height?: number = 200;
+  @Prop() imageBlur?: number = 2;
 
   render() {
     return (
       <Host>
-        <div class="header-container">
+        <div class="header-container" style={{ height: `${this.height}px` }}>
           <div class="image-container">
-            <img src={this.image} alt="Header background" />
+            <img src={this.image} alt="Header background" style={{ filter: `blur(${this.imageBlur}px)` }} />
           </div>
           <div class="text-overlay brand">
             <p class="md-typescale-title-large">{this.subheader}</p>

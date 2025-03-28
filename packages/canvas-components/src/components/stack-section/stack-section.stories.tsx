@@ -4,8 +4,8 @@ import './stack-section';
 import type { StackSection } from './stack-section';
 
 export default {
-  title: 'Event Section',
-  component: 'event-section',
+  title: 'Stack Section',
+  component: 'stack-section',
   render: args =>
     html`<stack-section headline=${args.headline} subtitle=${args.subtitle} variant=${args.variant}>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
@@ -42,5 +42,21 @@ export const Tertiary = {
     headline: 'Tertiary Headline',
     subtitle: 'Subtitle',
     variant: 'tertiary',
+  },
+} satisfies StoryObj<StackSection>;
+
+export const Surface = {
+  args: {
+    headline: 'Surface Headline',
+    subtitle: 'Subtitle',
+    variant: 'surface',
+  },
+} satisfies StoryObj<StackSection>;
+
+export const SurfaceVariant = {
+  args: {
+    headline: 'Surface Variant Headline',
+    subtitle: 'Subtitle',
+    variant: 'surface-variant',
   },
 } satisfies StoryObj<StackSection>;

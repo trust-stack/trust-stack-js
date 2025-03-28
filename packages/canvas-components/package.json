@@ -49,6 +49,7 @@
     "chromatic": "^11.25.1",
     "lit": "^3.2.1",
     "storybook": "^8.1.9",
+    "storybook-addon-sass-postcss": "^0.3.2",
     "storybook-addon-stencil": "^0.2.2",
     "unplugin-stencil": "^0.1.1"
   },
