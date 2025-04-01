@@ -12,6 +12,7 @@ import '../components/stack-section-footer-socials/stack-section-footer-socials'
 import '../components/stack-section-map/stack-section-map';
 import '../components/stack-section/stack-section';
 import '../components/trust-provenance-footer/trust-provenance-footer';
+import '../components/prawn-consumption-form/prawn-consumption-form';
 
 export default {
   name: 'Consumption Form',
