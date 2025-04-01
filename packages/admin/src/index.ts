@@ -1,9 +1,11 @@
 import {
+  CreateEventTag,
   createOrganization,
   CreateOrganization,
   deleteOrganization,
   getOrganization,
   RequestOptions,
+  setEventTags,
   TrustStackClient,
   updateOrganization,
   UpdateOrganization,
@@ -73,6 +75,19 @@ export class AdminClient extends TrustStackClient {
       path: {
         id: id,
       },
+      headers: TrustStackClient.headers(options),
+    });
+  }
+
+  /**
+   * Set event tags
+   * @param eventsTags - The event tags to set
+   * @param options - The request options
+   * @returns The updated event tags
+   */
+  async setEventTags(eventsTags: CreateEventTag[], options?: RequestOptions) {
+    return setEventTags({
+      body: eventsTags,
       headers: TrustStackClient.headers(options),
     });
   }

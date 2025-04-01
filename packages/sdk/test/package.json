@@ -1,0 +1,14 @@
+{
+    "name": "truststack-test",
+    "version": "1.0.0",
+    "description": "Test project for Trust Stack CLI",
+    "scripts": {
+        "apply": "truststack apply",
+        "init": "truststack init"
+    },
+    "dependencies": {
+        "@truststack/sdk": "../",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.8.2"
+    }
+}

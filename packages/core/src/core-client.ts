@@ -25,6 +25,28 @@ export class TrustStackClient {
   protected static sandbox: boolean = false;
   static client = client;
 
+  constructor(config?: TrustStackClientConfig) {
+    if (config?.accessToken) {
+      TrustStackClient.accessToken = config?.accessToken;
+    }
+
+    if (config?.sandbox) {
+      TrustStackClient.sandbox = config?.sandbox;
+    }
+
+    if (config?.baseUrl) {
+      TrustStackClient.baseUrl = config?.baseUrl;
+    }
+
+    if (config?.organizationId) {
+      TrustStackClient.organizationId = config?.organizationId;
+    }
+
+    if (config?.tenantUserId) {
+      TrustStackClient.tenantUserId = config?.tenantUserId;
+    }
+  }
+
   static configure(config: TrustStackClientConfig) {
     this.accessToken = config.accessToken;
     this.sandbox = config.sandbox || false;

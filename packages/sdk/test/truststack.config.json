@@ -1,0 +1,9 @@
+{
+  "eventTags": [
+    {
+      "code": "EXAMPLE_EVENT",
+      "name": "Example Event",
+      "description": "An example event tag."
+    }
+  ]
+}

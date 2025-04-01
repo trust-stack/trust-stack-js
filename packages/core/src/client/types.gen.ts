@@ -611,6 +611,22 @@ export type EventTag = {
      * The description of the event tag
      */
     description: string;
+    /**
+     * The date and time the event tag was created
+     */
+    createdAt: string;
+    /**
+     * The date and time the event tag was updated
+     */
+    updatedAt: string;
+    /**
+     * Whether the event tag is deleted
+     */
+    deleted: boolean;
+    /**
+     * The date and time the event tag was deleted
+     */
+    deletedAt: string;
 };
 
 export type QuantityElement = {
@@ -1810,6 +1826,31 @@ export type GetDppResponses = {
 
 export type GetDppResponse = GetDppResponses[keyof GetDppResponses];
 
+export type GetEventTagsData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * Page number (1-based)
+         */
+        page?: number;
+        /**
+         * Number of items per page
+         */
+        limit?: number;
+    };
+    url: '/event-tags';
+};
+
+export type GetEventTagsResponses = {
+    /**
+     * The event tags have been successfully retrieved
+     */
+    200: Array<EventTag>;
+};
+
+export type GetEventTagsResponse = GetEventTagsResponses[keyof GetEventTagsResponses];
+
 export type CreateEventTagData = {
     body: CreateEventTag;
     path?: never;
@@ -1832,6 +1873,29 @@ export type CreateEventTagResponses = {
 };
 
 export type CreateEventTagResponse = CreateEventTagResponses[keyof CreateEventTagResponses];
+
+export type SetEventTagsData = {
+    body: Array<CreateEventTag>;
+    path?: never;
+    query?: never;
+    url: '/event-tags/set';
+};
+
+export type SetEventTagsErrors = {
+    /**
+     * Invalid request
+     */
+    400: unknown;
+};
+
+export type SetEventTagsResponses = {
+    /**
+     * Event tags set successfully
+     */
+    200: Array<EventTag>;
+};
+
+export type SetEventTagsResponse = SetEventTagsResponses[keyof SetEventTagsResponses];
 
 export type DeleteEventTagData = {
     body?: never;
