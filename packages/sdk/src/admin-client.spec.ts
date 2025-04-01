@@ -64,7 +64,7 @@ describe("AdminStackClient", () => {
       });
     });
 
-    it.only("should include tenant user ID header when provided in request options.", async () => {
+    it("should include tenant user ID header when provided in request options.", async () => {
       // Act: Create admin client
       const adminClient = new AdminClient();
 

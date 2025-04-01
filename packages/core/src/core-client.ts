@@ -5,6 +5,7 @@ export type TrustStackClientConfig = {
   organizationId?: string;
   accessToken: string;
   tenantUserId?: string;
+  sandbox?: boolean;
 };
 
 export type RequestOptions = {
@@ -17,12 +18,16 @@ export type RequestOptions = {
 export class TrustStackClient {
   protected static accessToken: string;
   protected static baseUrl: string = "https://api.truststack.dev";
+  protected static sandboxBaseUrl: string =
+    "https://sandbox.api.truststack.dev";
   protected static organizationId?: string;
   protected static tenantUserId?: string;
+  protected static sandbox: boolean = false;
   static client = client;
 
   static configure(config: TrustStackClientConfig) {
     this.accessToken = config.accessToken;
+    this.sandbox = config.sandbox || false;
     this.baseUrl = this.getBaseUrl(config.baseUrl);
     this.organizationId = config.organizationId;
     this.tenantUserId = config.tenantUserId;
@@ -64,10 +69,15 @@ export class TrustStackClient {
   }
 
   private static getBaseUrl(override?: string) {
-    return (
-      override ||
-      process.env.TRUSTSTACK_BASE_URL ||
-      "https://api.truststack.dev"
-    );
+    if (override) {
+      return override;
+    }
+
+    const envBaseUrl = process.env.TRUSTSTACK_BASE_URL;
+    if (envBaseUrl) {
+      return envBaseUrl;
+    }
+
+    return this.sandbox ? this.sandboxBaseUrl : "https://api.truststack.dev";
   }
 }
