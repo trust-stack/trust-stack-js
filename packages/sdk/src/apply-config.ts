@@ -54,20 +54,16 @@ export async function applyConfig(
   config: TrustStackConfig,
   env: Environment
 ): Promise<void> {
-  console.log(`Applying configuration to environment: ${env}`);
-
   const client = new TrustStack({
     sandbox: env == "sandbox",
     accessToken: process.env.TRUST_STACK_ACCESS_TOKEN as string,
   });
 
-  if (config.eventTags?.length) {
-    await client.admin.setEventTags(
-      config.eventTags.map((tag) => ({
-        code: tag.code,
-        name: tag.name,
-        description: tag.description || tag.name,
-      }))
-    );
-  }
+  await client.admin.setEventTags(
+    config.eventTags?.map((tag) => ({
+      code: tag.code,
+      name: tag.name,
+      description: tag.description || tag.name,
+    })) || []
+  );
 }
