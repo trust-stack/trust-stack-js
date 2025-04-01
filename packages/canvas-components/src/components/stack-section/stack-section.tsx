@@ -10,7 +10,7 @@ export class StackSection {
 
   @Prop() subtitle: string;
 
-  @Prop() variant?: 'primary' | 'secondary' | 'tertiary' | 'surface' | 'surface-variant';
+  @Prop() variant?: 'primary' | 'secondary' | 'tertiary' | 'surface' | 'surface-variant' | 'surface-lowest';
 
   @Prop() paddingBottom?: number = 20;
 
