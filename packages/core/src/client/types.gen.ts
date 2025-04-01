@@ -430,6 +430,86 @@ export type VerifyCredentialResponse = {
     errors: Array<Array<unknown>>;
 };
 
+export type CreateTenantUser = {
+    [key: string]: unknown;
+};
+
+export type TenantUser = {
+    /**
+     * The ID of the tenant user
+     */
+    id: string;
+    /**
+     * The ID of the tenant
+     */
+    tenantId: string;
+    /**
+     * The name of the tenant user
+     */
+    name: string;
+    /**
+     * The email of the tenant user
+     */
+    email: string;
+    /**
+     * The date and time the tenant user was created
+     */
+    createdAt: string;
+    /**
+     * The date and time the tenant user was updated
+     */
+    updatedAt: string;
+};
+
+export type UpdateTenantUser = {
+    [key: string]: unknown;
+};
+
+export type CreateCustodyCommission = {
+    /**
+     * The unique identifier for this commission
+     */
+    identifier: string;
+    /**
+     * List of registered consumer IDs
+     */
+    registeredConsumers?: Array<string>;
+};
+
+export type CustodyCommission = {
+    /**
+     * The unique identifier of the custody commission
+     */
+    id: string;
+    /**
+     * The unique identifier for this commission
+     */
+    identifier: string;
+    /**
+     * List of registered consumer IDs
+     */
+    registeredConsumers: Array<string>;
+    /**
+     * When the custody commission was created
+     */
+    createdAt: string;
+    /**
+     * When the custody commission was last updated
+     */
+    updatedAt: string;
+};
+
+export type ConsumeCustodyCommission = {
+    /**
+     * The identifier of the custody commission to consume
+     */
+    identifier: string;
+    /**
+     * The ID of the consumer consuming the commission
+     */
+    consumedBy: string;
+};
+
 export type CreateDid = {
     /**
      * The name of the DID.
@@ -499,6 +579,229 @@ export type Dpp = {
     id: string;
 };
 
+export type CreateEventTag = {
+    /**
+     * The code of the event tag, a unique identifier
+     */
+    code: string;
+    /**
+     * The name of the event tag
+     */
+    name: string;
+    /**
+     * The description of the event tag
+     */
+    description: string;
+};
+
+export type EventTag = {
+    /**
+     * The id of the event tag
+     */
+    id: string;
+    /**
+     * The code of the event tag, a unique identifier
+     */
+    code: string;
+    /**
+     * The name of the event tag
+     */
+    name: string;
+    /**
+     * The description of the event tag
+     */
+    description: string;
+};
+
+export type QuantityElement = {
+    /**
+     * The EPC class of the quantity element
+     */
+    epcClass: string;
+    /**
+     * The quantity of the item
+     */
+    quantity?: number;
+    /**
+     * The unit of measurement for the quantity
+     */
+    unit?: string;
+};
+
+export type CreateQuantityElement = {
+    /**
+     * The EPC class of the quantity element
+     */
+    epcClass: string;
+    /**
+     * The trade item of the quantity element. This will create an incrementing batch number.
+     */
+    tradeItem: string;
+    /**
+     * Whether the quantity element is a class reference, if false, a lot number is assigned.
+     */
+    classReference?: boolean;
+    /**
+     * The quantity of the item
+     */
+    quantity?: number;
+    /**
+     * The unit of measurement for the quantity
+     */
+    unit?: string;
+};
+
+export type Source = {
+    /**
+     * The type of source
+     */
+    sourceType: 'OWNING_PARTY' | 'POSSESSING_PARTY' | 'LOCATION';
+    /**
+     * The source string
+     */
+    source: string;
+};
+
+export type Destination = {
+    /**
+     * The type of destination
+     */
+    destinationType: 'OWNING_PARTY' | 'POSSESSING_PARTY' | 'LOCATION';
+    /**
+     * The destination string
+     */
+    destination: string;
+};
+
+export type ReadPoint = {
+    /**
+     * The identifier of the read point
+     */
+    identifier: string;
+    /**
+     * The location of the read point
+     */
+    location: string;
+    /**
+     * The latitude of the read point
+     */
+    lat: number;
+    /**
+     * The longitude of the read point
+     */
+    lng: number;
+};
+
+export type CreateEvent = {
+    /**
+     * The time of the event
+     */
+    eventTime: string;
+    /**
+     * The type of the event
+     */
+    eventType: 'ASSOCIATION_EVENT' | 'OBJECT_EVENT' | 'AGGREGATION_EVENT' | 'TRANSACTION_EVENT' | 'TRANSFORMATION_EVENT';
+    /**
+     * The ACTION of the event.
+     */
+    action: 'OBSERVE' | 'ADD' | 'DELETE';
+    /**
+     * The tag associated with the event
+     */
+    eventTag?: string;
+    /**
+     * The business step associated with the event
+     */
+    bizStep?: 'ACCEPTING' | 'ARRIVING' | 'ASSEMBLING' | 'COLLECTING' | 'COMMISSIONING' | 'CONSIGNING' | 'CREATING_CLASS_INSTANCE' | 'CYCLE_COUNTING' | 'DECOMMISSIONING' | 'DEPARTING' | 'DESTROYING' | 'DISASSEMBLING' | 'DISPENSING' | 'ENCODING' | 'ENTERING_EXITING' | 'HOLDING' | 'INSPECTING' | 'INSTALLING' | 'KILLING' | 'LOADING' | 'OTHER' | 'PACKING' | 'PICKING' | 'RECEIVING' | 'REMOVING' | 'REPACKAGING' | 'REPAIRING' | 'REPLACING' | 'RESERVING' | 'RETAIL_SELLING' | 'SHIPPING' | 'STAGING_OUTBOUND' | 'STOCK_TAKING' | 'STOCKING' | 'STORING' | 'TRANSPORTING' | 'UNLOADING' | 'UNPACKING' | 'VOID_SHIPPING' | 'SENSOR_REPORTING' | 'SAMPLING';
+    /**
+     * The disposition of the event
+     */
+    disposition?: 'ACTIVE' | 'CONTAINER_CLOSED' | 'DAMAGED' | 'DESTROYED' | 'DISPENSED' | 'DISPOSED' | 'ENCODED' | 'EXPIRED' | 'IN_PROGRESS' | 'IN_TRANSIT' | 'INACTIVE' | 'NO_PEDIGREE_MATCH' | 'NON_SELLABLE_OTHER' | 'PARTIALLY_DISPENSED' | 'RECALLED' | 'RESERVED' | 'RETAIL_SOLD' | 'RETURNED' | 'SELLABLE_ACCESSIBLE' | 'SELLABLE_NOT_ACCESSIBLE' | 'STOLEN' | 'UNKNOWN' | 'AVAILABLE' | 'COMPLETENESS_VERIFIED' | 'COMPLETENESS_INFERRED' | 'CONFORMANT' | 'CONTAINER_OPEN' | 'MISMATCH_INSTANCE' | 'MISMATCH_CLASS' | 'MISMATCH_QUANTITY' | 'NEEDS_REPLACEMENT' | 'NON_CONFORMANT' | 'UNAVAILABLE';
+    /**
+     * List of quantities associated with the event
+     */
+    quantityList?: Array<QuantityElement>;
+    /**
+     * Output ist of quantities associated with the event
+     */
+    outputQuantityList?: Array<CreateQuantityElement>;
+    /**
+     * Input list of quantities associated with the event
+     */
+    inputQuantityList?: Array<CreateQuantityElement>;
+    /**
+     * List of sources associated with the event
+     */
+    sourceList?: Array<Source>;
+    /**
+     * List of destinations associated with the event
+     */
+    destinationList?: Array<Destination>;
+    /**
+     * The read point associated with the event
+     */
+    readPoint?: ReadPoint;
+};
+
+export type Event = {
+    /**
+     * The id of the event
+     */
+    id: string;
+    /**
+     * The time of the event was created
+     */
+    createdAt: string;
+    /**
+     * The time of the event
+     */
+    eventTime: string;
+    /**
+     * The type of the event
+     */
+    eventType: 'ASSOCIATION_EVENT' | 'OBJECT_EVENT' | 'AGGREGATION_EVENT' | 'TRANSACTION_EVENT' | 'TRANSFORMATION_EVENT';
+    /**
+     * The action of the event
+     */
+    action: 'OBSERVE' | 'ADD' | 'DELETE';
+    /**
+     * The tag associated with the event
+     */
+    eventTag?: string;
+    /**
+     * The business step associated with the event
+     */
+    bizStep?: 'ACCEPTING' | 'ARRIVING' | 'ASSEMBLING' | 'COLLECTING' | 'COMMISSIONING' | 'CONSIGNING' | 'CREATING_CLASS_INSTANCE' | 'CYCLE_COUNTING' | 'DECOMMISSIONING' | 'DEPARTING' | 'DESTROYING' | 'DISASSEMBLING' | 'DISPENSING' | 'ENCODING' | 'ENTERING_EXITING' | 'HOLDING' | 'INSPECTING' | 'INSTALLING' | 'KILLING' | 'LOADING' | 'OTHER' | 'PACKING' | 'PICKING' | 'RECEIVING' | 'REMOVING' | 'REPACKAGING' | 'REPAIRING' | 'REPLACING' | 'RESERVING' | 'RETAIL_SELLING' | 'SHIPPING' | 'STAGING_OUTBOUND' | 'STOCK_TAKING' | 'STOCKING' | 'STORING' | 'TRANSPORTING' | 'UNLOADING' | 'UNPACKING' | 'VOID_SHIPPING' | 'SENSOR_REPORTING' | 'SAMPLING';
+    /**
+     * The disposition of the event
+     */
+    disposition?: 'ACTIVE' | 'CONTAINER_CLOSED' | 'DAMAGED' | 'DESTROYED' | 'DISPENSED' | 'DISPOSED' | 'ENCODED' | 'EXPIRED' | 'IN_PROGRESS' | 'IN_TRANSIT' | 'INACTIVE' | 'NO_PEDIGREE_MATCH' | 'NON_SELLABLE_OTHER' | 'PARTIALLY_DISPENSED' | 'RECALLED' | 'RESERVED' | 'RETAIL_SOLD' | 'RETURNED' | 'SELLABLE_ACCESSIBLE' | 'SELLABLE_NOT_ACCESSIBLE' | 'STOLEN' | 'UNKNOWN' | 'AVAILABLE' | 'COMPLETENESS_VERIFIED' | 'COMPLETENESS_INFERRED' | 'CONFORMANT' | 'CONTAINER_OPEN' | 'MISMATCH_INSTANCE' | 'MISMATCH_CLASS' | 'MISMATCH_QUANTITY' | 'NEEDS_REPLACEMENT' | 'NON_CONFORMANT' | 'UNAVAILABLE';
+    /**
+     * List of quantities associated with the event
+     */
+    quantityList?: Array<QuantityElement>;
+    /**
+     * Output list of quantities associated with the event
+     */
+    outputQuantityList?: Array<QuantityElement>;
+    /**
+     * Input list of quantities associated with the event
+     */
+    inputQuantityList?: Array<QuantityElement>;
+    /**
+     * List of sources associated with the event
+     */
+    sourceList?: Array<Source>;
+    /**
+     * List of destinations associated with the event
+     */
+    destinationList?: Array<Destination>;
+    /**
+     * The read point associated with the event
+     */
+    readPoint?: ReadPoint;
+};
+
 export type CreateExternalResolverDto = {
     /**
      * The href of the External Resolver.
@@ -537,6 +840,50 @@ export type UpdateExternalResolverDto = {
     childExternalResolvers: Array<string>;
 };
 
+export type CreateLocation = {
+    /**
+     * The name of the location
+     */
+    name: string;
+    /**
+     * The id of the parent location
+     */
+    parentLocationId?: string | null;
+};
+
+export type Location = {
+    /**
+     * The id of the location
+     */
+    id: string;
+    /**
+     * The name of the location
+     */
+    name: string;
+    /**
+     * The id of the parent location
+     */
+    parentLocationId?: string | null;
+};
+
+export type CreateTradeItem = {
+    /**
+     * The name of the trade item
+     */
+    name: string;
+};
+
+export type TradeItem = {
+    /**
+     * The id of the trade item
+     */
+    id: string;
+    /**
+     * The name of the trade item
+     */
+    name: string;
+};
+
 export type CreateOrganization = {
     /**
      * Name given to the organization.
@@ -564,6 +911,53 @@ export type UpdateOrganization = {
      * Name given to the organization.
      */
     name: string;
+};
+
+export type CreateSchema = {
+    /**
+     * The name of the schema
+     */
+    name: string;
+    /**
+     * The schema
+     */
+    schema: {
+        [key: string]: unknown;
+    };
+};
+
+export type Schema = {
+    /**
+     * The id of the schema
+     */
+    id: string;
+    /**
+     * The name of the schema
+     */
+    name: string;
+    /**
+     * The schema
+     */
+    schema: {
+        [key: string]: unknown;
+    };
+};
+
+export type UpdateSchema = {
+    /**
+     * The id of the schema
+     */
+    id: string;
+    /**
+     * The name of the schema
+     */
+    name: string;
+    /**
+     * The schema
+     */
+    schema: {
+        [key: string]: unknown;
+    };
 };
 
 export type HealthCheckData = {
@@ -981,6 +1375,300 @@ export type VerifyCredentialResponses = {
 
 export type VerifyCredentialResponse2 = VerifyCredentialResponses[keyof VerifyCredentialResponses];
 
+export type GetTenantUsersData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/auth/tenant-users';
+};
+
+export type GetTenantUsersErrors = {
+    /**
+     * Unauthorized access
+     */
+    401: unknown;
+};
+
+export type GetTenantUsersResponses = {
+    /**
+     * The tenant users have been successfully retrieved
+     */
+    200: Array<TenantUser>;
+};
+
+export type GetTenantUsersResponse = GetTenantUsersResponses[keyof GetTenantUsersResponses];
+
+export type CreateTenantUserData = {
+    body: CreateTenantUser;
+    path?: never;
+    query?: never;
+    url: '/auth/tenant-users';
+};
+
+export type CreateTenantUserErrors = {
+    /**
+     * The tenant user could not be created
+     */
+    400: unknown;
+    /**
+     * The tenant user could not be found
+     */
+    404: unknown;
+};
+
+export type CreateTenantUserResponses = {
+    /**
+     * The tenant user has been successfully created
+     */
+    201: TenantUser;
+};
+
+export type CreateTenantUserResponse = CreateTenantUserResponses[keyof CreateTenantUserResponses];
+
+export type DeleteTenantUserData = {
+    body?: never;
+    path: {
+        id: string;
+    };
+    query?: never;
+    url: '/auth/tenant-users/{id}';
+};
+
+export type DeleteTenantUserErrors = {
+    /**
+     * Unauthorized access
+     */
+    401: unknown;
+    /**
+     * The tenant user could not be found
+     */
+    404: unknown;
+};
+
+export type DeleteTenantUserResponses = {
+    /**
+     * The tenant user has been successfully deleted
+     */
+    200: unknown;
+};
+
+export type GetTenantUserByIdData = {
+    body?: never;
+    path: {
+        id: string;
+    };
+    query?: never;
+    url: '/auth/tenant-users/{id}';
+};
+
+export type GetTenantUserByIdErrors = {
+    /**
+     * Unauthorized access
+     */
+    401: unknown;
+    /**
+     * The tenant user could not be found
+     */
+    404: unknown;
+};
+
+export type GetTenantUserByIdResponses = {
+    /**
+     * The tenant user has been successfully retrieved
+     */
+    200: TenantUser;
+};
+
+export type GetTenantUserByIdResponse = GetTenantUserByIdResponses[keyof GetTenantUserByIdResponses];
+
+export type UpdateTenantUserData = {
+    body: UpdateTenantUser;
+    path: {
+        id: string;
+    };
+    query?: never;
+    url: '/auth/tenant-users/{id}';
+};
+
+export type UpdateTenantUserErrors = {
+    /**
+     * The tenant user could not be updated
+     */
+    400: unknown;
+    /**
+     * Unauthorized access
+     */
+    401: unknown;
+    /**
+     * The tenant user could not be found
+     */
+    404: unknown;
+};
+
+export type UpdateTenantUserResponses = {
+    /**
+     * The tenant user has been successfully updated
+     */
+    200: TenantUser;
+};
+
+export type UpdateTenantUserResponse = UpdateTenantUserResponses[keyof UpdateTenantUserResponses];
+
+export type GetCustodyCommissionsData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * Page number (1-based)
+         */
+        page?: number;
+        /**
+         * Number of items per page
+         */
+        limit?: number;
+    };
+    url: '/custody-commissions';
+};
+
+export type GetCustodyCommissionsResponses = {
+    /**
+     * The custody commissions have been successfully retrieved
+     */
+    200: Array<CustodyCommission>;
+};
+
+export type GetCustodyCommissionsResponse = GetCustodyCommissionsResponses[keyof GetCustodyCommissionsResponses];
+
+export type CreateCustodyCommissionData = {
+    body: CreateCustodyCommission;
+    path?: never;
+    query?: never;
+    url: '/custody-commissions';
+};
+
+export type CreateCustodyCommissionErrors = {
+    /**
+     * The custody commission could not be created
+     */
+    400: unknown;
+};
+
+export type CreateCustodyCommissionResponses = {
+    /**
+     * The custody commission has been successfully created
+     */
+    201: CustodyCommission;
+};
+
+export type CreateCustodyCommissionResponse = CreateCustodyCommissionResponses[keyof CreateCustodyCommissionResponses];
+
+export type DeleteCustodyCommissionData = {
+    body?: never;
+    path: {
+        /**
+         * The ID of the custody commission to delete
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/custody-commissions/{id}';
+};
+
+export type DeleteCustodyCommissionErrors = {
+    /**
+     * The custody commission could not be found
+     */
+    404: unknown;
+};
+
+export type DeleteCustodyCommissionResponses = {
+    /**
+     * The custody commission has been successfully deleted
+     */
+    204: void;
+};
+
+export type DeleteCustodyCommissionResponse = DeleteCustodyCommissionResponses[keyof DeleteCustodyCommissionResponses];
+
+export type GetCustodyCommissionData = {
+    body?: never;
+    path: {
+        /**
+         * The ID of the custody commission to get
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/custody-commissions/{id}';
+};
+
+export type GetCustodyCommissionErrors = {
+    /**
+     * The custody commission could not be found
+     */
+    404: unknown;
+};
+
+export type GetCustodyCommissionResponses = {
+    /**
+     * The custody commission has been successfully retrieved
+     */
+    200: CustodyCommission;
+};
+
+export type GetCustodyCommissionResponse = GetCustodyCommissionResponses[keyof GetCustodyCommissionResponses];
+
+export type UpdateCustodyCommissionData = {
+    body?: never;
+    path: {
+        /**
+         * The ID of the custody commission to update
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/custody-commissions/{id}';
+};
+
+export type UpdateCustodyCommissionErrors = {
+    /**
+     * The custody commission could not be found
+     */
+    404: unknown;
+};
+
+export type UpdateCustodyCommissionResponses = {
+    /**
+     * The custody commission has been successfully updated
+     */
+    200: CustodyCommission;
+};
+
+export type UpdateCustodyCommissionResponse = UpdateCustodyCommissionResponses[keyof UpdateCustodyCommissionResponses];
+
+export type ConsumeCustodyCommissionData = {
+    body: ConsumeCustodyCommission;
+    path?: never;
+    query?: never;
+    url: '/custody-commissions/consume';
+};
+
+export type ConsumeCustodyCommissionErrors = {
+    /**
+     * The custody commission could not be found or has already been consumed
+     */
+    404: unknown;
+};
+
+export type ConsumeCustodyCommissionResponses = {
+    /**
+     * The custody commission has been successfully consumed
+     */
+    200: CustodyCommission;
+};
+
+export type ConsumeCustodyCommissionResponse = ConsumeCustodyCommissionResponses[keyof ConsumeCustodyCommissionResponses];
+
 export type GetDidsData = {
     body?: never;
     path?: never;
@@ -1122,6 +1810,183 @@ export type GetDppResponses = {
 
 export type GetDppResponse = GetDppResponses[keyof GetDppResponses];
 
+export type CreateEventTagData = {
+    body: CreateEventTag;
+    path?: never;
+    query?: never;
+    url: '/event-tags';
+};
+
+export type CreateEventTagErrors = {
+    /**
+     * Invalid request
+     */
+    400: unknown;
+};
+
+export type CreateEventTagResponses = {
+    /**
+     * Event tag created successfully
+     */
+    201: EventTag;
+};
+
+export type CreateEventTagResponse = CreateEventTagResponses[keyof CreateEventTagResponses];
+
+export type DeleteEventTagData = {
+    body?: never;
+    path: {
+        id: string;
+    };
+    query?: never;
+    url: '/event-tags/{id}';
+};
+
+export type DeleteEventTagErrors = {
+    /**
+     * Event tag not found
+     */
+    404: unknown;
+};
+
+export type DeleteEventTagResponses = {
+    /**
+     * Event tag deleted successfully
+     */
+    200: unknown;
+};
+
+export type GetEventTagData = {
+    body?: never;
+    path: {
+        id: string;
+    };
+    query?: never;
+    url: '/event-tags/{id}';
+};
+
+export type GetEventTagErrors = {
+    /**
+     * Event tag not found
+     */
+    404: unknown;
+};
+
+export type GetEventTagResponses = {
+    /**
+     * Event tag retrieved successfully
+     */
+    200: EventTag;
+};
+
+export type GetEventTagResponse = GetEventTagResponses[keyof GetEventTagResponses];
+
+export type GetEventsData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * Page number (1-based)
+         */
+        page?: number;
+        /**
+         * Number of items per page
+         */
+        limit?: number;
+    };
+    url: '/events';
+};
+
+export type GetEventsResponses = {
+    /**
+     * The events have been successfully retrieved
+     */
+    200: Array<Event>;
+};
+
+export type GetEventsResponse = GetEventsResponses[keyof GetEventsResponses];
+
+export type CreateEventData = {
+    body: CreateEvent;
+    path?: never;
+    query?: never;
+    url: '/events';
+};
+
+export type CreateEventErrors = {
+    /**
+     * The location could not be created
+     */
+    400: unknown;
+    /**
+     * The parent location could not be found
+     */
+    404: unknown;
+};
+
+export type CreateEventResponses = {
+    /**
+     * The location has been successfully created
+     */
+    201: Event;
+};
+
+export type CreateEventResponse = CreateEventResponses[keyof CreateEventResponses];
+
+export type DeleteEventData = {
+    body?: never;
+    path: {
+        /**
+         * The ID of the event to delete
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/events/{id}';
+};
+
+export type DeleteEventErrors = {
+    /**
+     * The event could not be found
+     */
+    404: unknown;
+};
+
+export type DeleteEventResponses = {
+    /**
+     * The event has been successfully deleted
+     */
+    200: unknown;
+};
+
+export type GetEventData = {
+    body?: never;
+    path: {
+        /**
+         * The ID of the event to get
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/events/{id}';
+};
+
+export type GetEventErrors = {
+    /**
+     * The event could not be found
+     */
+    404: unknown;
+};
+
+export type GetEventResponses = {
+    /**
+     * The event has been successfully retrieved
+     */
+    200: Event;
+};
+
+export type GetEventResponse = GetEventResponses[keyof GetEventResponses];
+
 export type GetManyExternalResolversData = {
     body?: never;
     path?: never;
@@ -1182,6 +2047,210 @@ export type UpdateExternalResolverData = {
 export type UpdateExternalResolverResponses = {
     200: unknown;
 };
+
+export type GetLocationsData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * Page number (1-based)
+         */
+        page?: number;
+        /**
+         * Number of items per page
+         */
+        limit?: number;
+        /**
+         * The ID of the parent location
+         */
+        parentLocationId?: string;
+    };
+    url: '/locations';
+};
+
+export type GetLocationsResponses = {
+    /**
+     * The locations have been successfully retrieved
+     */
+    200: Array<Location>;
+};
+
+export type GetLocationsResponse = GetLocationsResponses[keyof GetLocationsResponses];
+
+export type CreateLocationData = {
+    body: CreateLocation;
+    path?: never;
+    query?: never;
+    url: '/locations';
+};
+
+export type CreateLocationErrors = {
+    /**
+     * The location could not be created
+     */
+    400: unknown;
+    /**
+     * The parent location could not be found
+     */
+    404: unknown;
+};
+
+export type CreateLocationResponses = {
+    /**
+     * The location has been successfully created
+     */
+    201: Location;
+};
+
+export type CreateLocationResponse = CreateLocationResponses[keyof CreateLocationResponses];
+
+export type GetLocationData = {
+    body?: never;
+    path: {
+        /**
+         * The ID of the location to get
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/locations/{id}';
+};
+
+export type GetLocationErrors = {
+    /**
+     * The location could not be found
+     */
+    404: unknown;
+};
+
+export type GetLocationResponses = {
+    /**
+     * The location has been successfully retrieved
+     */
+    200: Location;
+};
+
+export type GetLocationResponse = GetLocationResponses[keyof GetLocationResponses];
+
+export type GetTradeItemsData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * Page number (1-based)
+         */
+        page?: number;
+        /**
+         * Number of items per page
+         */
+        limit?: number;
+    };
+    url: '/trade-items';
+};
+
+export type GetTradeItemsResponses = {
+    /**
+     * The trade items have been successfully retrieved
+     */
+    200: Array<TradeItem>;
+};
+
+export type GetTradeItemsResponse = GetTradeItemsResponses[keyof GetTradeItemsResponses];
+
+export type CreateTradeItemData = {
+    body: CreateTradeItem;
+    path?: never;
+    query?: never;
+    url: '/trade-items';
+};
+
+export type CreateTradeItemErrors = {
+    /**
+     * The trade item could not be created
+     */
+    400: unknown;
+};
+
+export type CreateTradeItemResponses = {
+    /**
+     * The trade item has been successfully created
+     */
+    201: TradeItem;
+};
+
+export type CreateTradeItemResponse = CreateTradeItemResponses[keyof CreateTradeItemResponses];
+
+export type DeleteTradeItemData = {
+    body?: never;
+    path: {
+        id: string;
+    };
+    query?: never;
+    url: '/trade-items/{id}';
+};
+
+export type DeleteTradeItemResponses = {
+    /**
+     * The trade item has been successfully deleted
+     */
+    200: unknown;
+};
+
+export type GetTradeItemData = {
+    body?: never;
+    path: {
+        /**
+         * The ID of the trade item to get
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/trade-items/{id}';
+};
+
+export type GetTradeItemErrors = {
+    /**
+     * The trade item could not be found
+     */
+    404: unknown;
+};
+
+export type GetTradeItemResponses = {
+    /**
+     * The trade item has been successfully retrieved
+     */
+    200: TradeItem;
+};
+
+export type GetTradeItemResponse = GetTradeItemResponses[keyof GetTradeItemResponses];
+
+export type GetTradeItemByIdentifierData = {
+    body?: never;
+    path: {
+        /**
+         * The identifier of the trade item (format: {prefix}.{referenceNumber} or {prefix}.{referenceNumber}.{batchNumber})
+         */
+        identifier: string;
+    };
+    query?: never;
+    url: '/trade-items/by-identifier/{identifier}';
+};
+
+export type GetTradeItemByIdentifierErrors = {
+    /**
+     * The trade item could not be found
+     */
+    404: unknown;
+};
+
+export type GetTradeItemByIdentifierResponses = {
+    /**
+     * The trade item has been successfully retrieved
+     */
+    200: TradeItem;
+};
+
+export type GetTradeItemByIdentifierResponse = GetTradeItemByIdentifierResponses[keyof GetTradeItemByIdentifierResponses];
 
 export type CreateOrganizationData = {
     body: CreateOrganization;
@@ -1282,3 +2351,103 @@ export type UpdateOrganizationResponses = {
 };
 
 export type UpdateOrganizationResponse = UpdateOrganizationResponses[keyof UpdateOrganizationResponses];
+
+export type CreateSchemaData = {
+    body: CreateSchema;
+    path?: never;
+    query?: never;
+    url: '/schemas';
+};
+
+export type CreateSchemaErrors = {
+    /**
+     * Invalid request
+     */
+    400: unknown;
+};
+
+export type CreateSchemaResponses = {
+    /**
+     * Schema created successfully
+     */
+    201: Schema;
+};
+
+export type CreateSchemaResponse = CreateSchemaResponses[keyof CreateSchemaResponses];
+
+export type DeleteSchemaData = {
+    body?: never;
+    path: {
+        id: string;
+    };
+    query?: never;
+    url: '/schemas/{id}';
+};
+
+export type DeleteSchemaErrors = {
+    /**
+     * Schema not found
+     */
+    404: unknown;
+};
+
+export type DeleteSchemaResponses = {
+    /**
+     * Schema deleted successfully
+     */
+    200: unknown;
+};
+
+export type GetSchemaData = {
+    body?: never;
+    path: {
+        id: string;
+    };
+    query?: never;
+    url: '/schemas/{id}';
+};
+
+export type GetSchemaErrors = {
+    /**
+     * Schema not found
+     */
+    404: unknown;
+};
+
+export type GetSchemaResponses = {
+    /**
+     * Schema retrieved successfully
+     */
+    200: Schema;
+};
+
+export type GetSchemaResponse = GetSchemaResponses[keyof GetSchemaResponses];
+
+export type UpdateSchemaData = {
+    body: UpdateSchema;
+    path: {
+        id: string;
+    };
+    query?: never;
+    url: '/schemas/{id}';
+};
+
+export type UpdateSchemaErrors = {
+    /**
+     * Invalid request
+     */
+    400: unknown;
+    /**
+     * Schema not found
+     */
+    404: unknown;
+};
+
+export type UpdateSchemaResponses = {
+    /**
+     * Schema updated successfully
+     */
+    200: Schema;
+};
+
+export type UpdateSchemaResponse = UpdateSchemaResponses[keyof UpdateSchemaResponses];

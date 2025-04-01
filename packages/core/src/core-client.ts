@@ -4,35 +4,35 @@ export type TrustStackClientConfig = {
   baseUrl?: string;
   organizationId?: string;
   accessToken: string;
+  tenantUserId?: string;
+  sandbox?: boolean;
 };
 
 export type RequestOptions = {
   organizationId?: string;
   accessToken?: string;
   baseUrl?: string;
+  tenantUserId?: string;
 };
 
 export class TrustStackClient {
   protected static accessToken: string;
   protected static baseUrl: string = "https://api.truststack.dev";
+  protected static sandboxBaseUrl: string =
+    "https://sandbox.api.truststack.dev";
   protected static organizationId?: string;
+  protected static tenantUserId?: string;
+  protected static sandbox: boolean = false;
   static client = client;
 
   static configure(config: TrustStackClientConfig) {
     this.accessToken = config.accessToken;
+    this.sandbox = config.sandbox || false;
     this.baseUrl = this.getBaseUrl(config.baseUrl);
     this.organizationId = config.organizationId;
-
+    this.tenantUserId = config.tenantUserId;
     client.setConfig({
       baseUrl: this.baseUrl,
-    });
-
-    client.interceptors.request.use((request) => {
-      request.headers.set(
-        "Authorization",
-        `Bearer ${this.getAccessToken(config.accessToken)}`
-      );
-      return request;
     });
   }
 
@@ -41,6 +41,7 @@ export class TrustStackClient {
       "Content-Type": "application/json",
       Authorization: `Bearer ${this.getAccessToken(options?.accessToken)}`,
       "X-Organization-Id": this.getOrganizationId(options?.organizationId),
+      "X-Tenant-User-Id": this.getTenantUserId(options?.tenantUserId),
     };
   }
 
@@ -61,11 +62,22 @@ export class TrustStackClient {
     );
   }
 
-  private static getBaseUrl(override?: string) {
+  private static getTenantUserId(override?: string) {
     return (
-      override ||
-      process.env.TRUSTSTACK_BASE_URL ||
-      "https://api.truststack.dev"
+      override || this.tenantUserId || process.env.TRUSTSTACK_TENANT_USER_ID
     );
+  }
+
+  private static getBaseUrl(override?: string) {
+    if (override) {
+      return override;
+    }
+
+    const envBaseUrl = process.env.TRUSTSTACK_BASE_URL;
+    if (envBaseUrl) {
+      return envBaseUrl;
+    }
+
+    return this.sandbox ? this.sandboxBaseUrl : "https://api.truststack.dev";
   }
 }
