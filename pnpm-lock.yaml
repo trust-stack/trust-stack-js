@@ -283,6 +283,9 @@ importers:
       commander:
         specifier: ^13.1.0
         version: 13.1.0
+      dotenv:
+        specifier: ^16.4.7
+        version: 16.4.7
       reflect-metadata:
         specifier: ^0.2.2
         version: 0.2.2

@@ -924,6 +924,21 @@
         ]
       }
     },
+    "/sandbox/clear": {
+      "post": {
+        "operationId": "clearSandbox",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The sandbox data has been successfully cleared"
+          }
+        },
+        "summary": "Clear all sandbox data for the authenticated tenant user",
+        "tags": [
+          "sandbox"
+        ]
+      }
+    },
     "/custody-commissions": {
       "post": {
         "description": "Create a custody commission",
@@ -1448,6 +1463,7 @@
         "parameters": [],
         "requestBody": {
           "required": true,
+          "description": "Array of event tags to set",
           "content": {
             "application/json": {
               "schema": {

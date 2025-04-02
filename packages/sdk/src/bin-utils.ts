@@ -67,3 +67,16 @@ export async function applyConfig(
     })) || []
   );
 }
+
+/**
+ * Clean up the sandbox environment
+ */
+export async function cleanSandbox() {
+  const client = new TrustStack({
+    sandbox: true,
+    accessToken: process.env.TRUST_STACK_ACCESS_TOKEN as string,
+    tenantUserId: process.env.TRUST_STACK_TENANT_USER_ID as string,
+  });
+
+  await client.admin.clearSandbox();
+}

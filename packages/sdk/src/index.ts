@@ -5,7 +5,7 @@ import {DidClient} from "@truststack/did";
 import {HermesClient} from "@truststack/hermes";
 import {UntpClient} from "@truststack/untp";
 
-export {loadConfig} from "./apply-config";
+export {loadConfig} from "./bin-utils";
 export * from "./types";
 
 export class TrustStack extends TrustStackClient {

@@ -1,4 +1,5 @@
 import {
+  clearSandbox,
   CreateEventTag,
   createOrganization,
   CreateOrganization,
@@ -88,6 +89,12 @@ export class AdminClient extends TrustStackClient {
   async setEventTags(eventsTags: CreateEventTag[], options?: RequestOptions) {
     return setEventTags({
       body: eventsTags,
+      headers: TrustStackClient.headers(options),
+    });
+  }
+
+  async clearSandbox(options?: RequestOptions) {
+    return clearSandbox({
       headers: TrustStackClient.headers(options),
     });
   }

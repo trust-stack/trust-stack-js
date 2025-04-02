@@ -1530,6 +1530,20 @@ export type UpdateTenantUserResponses = {
 
 export type UpdateTenantUserResponse = UpdateTenantUserResponses[keyof UpdateTenantUserResponses];
 
+export type ClearSandboxData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/sandbox/clear';
+};
+
+export type ClearSandboxResponses = {
+    /**
+     * The sandbox data has been successfully cleared
+     */
+    200: unknown;
+};
+
 export type GetCustodyCommissionsData = {
     body?: never;
     path?: never;
@@ -1875,6 +1889,9 @@ export type CreateEventTagResponses = {
 export type CreateEventTagResponse = CreateEventTagResponses[keyof CreateEventTagResponses];
 
 export type SetEventTagsData = {
+    /**
+     * Array of event tags to set
+     */
     body: Array<CreateEventTag>;
     path?: never;
     query?: never;

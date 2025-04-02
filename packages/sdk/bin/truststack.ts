@@ -1,12 +1,16 @@
 #!/usr/bin/env node
 
+import dotenv from "dotenv";
 import "reflect-metadata";
+
+// Load environment variables from .env file
+dotenv.config();
 
 import {Command} from "commander";
 import * as fs from "fs";
 import * as path from "path";
 import {fileURLToPath} from "url";
-import {applyConfig, loadConfig} from "../src/apply-config";
+import {applyConfig, cleanSandbox, loadConfig} from "../src/bin-utils";
 import {Environment} from "../src/types";
 
 // Fix for ESM modules not having __dirname
@@ -32,7 +36,6 @@ program
   )
   .action(async (options) => {
     try {
-      console.log(`Loading configuration from: ${options.config}`);
       const config = await loadConfig(options.config);
 
       await applyConfig(config, options.env as Environment);
@@ -93,6 +96,23 @@ program
     } catch (error) {
       console.error(
         "Error creating configuration file:",
+        error instanceof Error ? error.message : String(error)
+      );
+      process.exit(1);
+    }
+  });
+
+program
+  .command("clean-sandbox")
+  .description("Clean up resources in the sandbox environment")
+  .action(async (options) => {
+    try {
+      console.log("Cleaning up sandbox resources...");
+      await cleanSandbox();
+      console.log("Sandbox cleanup completed successfully");
+    } catch (error) {
+      console.error(
+        "Error cleaning sandbox:",
         error instanceof Error ? error.message : String(error)
       );
       process.exit(1);
