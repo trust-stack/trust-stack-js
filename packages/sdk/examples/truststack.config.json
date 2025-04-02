@@ -1,0 +1,20 @@
+{
+    "$schema": "../schema/truststack.schema.json",
+    "eventTags": [
+        {
+            "code": "HARVEST_EVENT",
+            "name": "Harvest Event",
+            "description": "Records when crops are harvested from a field."
+        },
+        {
+            "code": "TRANSPORT_EVENT",
+            "name": "Transport Event",
+            "description": "Records movement of goods between locations."
+        },
+        {
+            "code": "QUALITY_CHECK",
+            "name": "Quality Inspection",
+            "description": "Records quality control inspection of products."
+        }
+    ]
+}
