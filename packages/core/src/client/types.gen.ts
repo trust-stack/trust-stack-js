@@ -976,6 +976,61 @@ export type UpdateSchema = {
     };
 };
 
+export enum TrustGraphNodeType {
+    DTE = 'DTE',
+    DCC = 'DCC',
+    DPP = 'DPP',
+    DIA = 'DIA',
+    DFR = 'DFR'
+}
+
+export type TrustGraphNode = {
+    /**
+     * The id of the trust graph node
+     */
+    id: string;
+    /**
+     * The hash of the trust graph node
+     */
+    hash: string;
+    /**
+     * The raw data of the trust graph node
+     */
+    raw: {
+        [key: string]: unknown;
+    };
+    /**
+     * The type of the trust graph node
+     */
+    type: TrustGraphNodeType;
+};
+
+export type TrustGraph = {
+    /**
+     * The id of the trust graph
+     */
+    id: string;
+    /**
+     * The hash of the trust graph
+     */
+    hash: string;
+    /**
+     * The nodes of the trust graph
+     */
+    nodes: Array<TrustGraphNode>;
+    /**
+     * The type of the trust graph
+     */
+    type: TrustGraphNodeType;
+};
+
+export type TraverseTrustGraph = {
+    /**
+     * The target identifier to traverse from.
+     */
+    identifier: string;
+};
+
 export type HealthCheckData = {
     body?: never;
     path?: never;
@@ -2532,3 +2587,44 @@ export type UpdateSchemaResponses = {
 };
 
 export type UpdateSchemaResponse = UpdateSchemaResponses[keyof UpdateSchemaResponses];
+
+export type GetTrustGraphData = {
+    body?: never;
+    path: {
+        id: unknown;
+    };
+    query?: never;
+    url: '/discovery/trust-graph/{id}';
+};
+
+export type GetTrustGraphErrors = {
+    /**
+     * The trust graph was not found
+     */
+    403: unknown;
+};
+
+export type GetTrustGraphResponses = {
+    /**
+     * The trust graph
+     */
+    200: TrustGraph;
+};
+
+export type GetTrustGraphResponse = GetTrustGraphResponses[keyof GetTrustGraphResponses];
+
+export type TraverseTrustGraphData = {
+    body: TraverseTrustGraph;
+    path?: never;
+    query?: never;
+    url: '/discovery/trust-graph/traverse';
+};
+
+export type TraverseTrustGraphResponses = {
+    /**
+     * The trust graph traversed.
+     */
+    200: TrustGraph;
+};
+
+export type TraverseTrustGraphResponse = TraverseTrustGraphResponses[keyof TraverseTrustGraphResponses];

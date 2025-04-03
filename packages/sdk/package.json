@@ -43,6 +43,7 @@
     "dotenv": "^16.4.7",
     "reflect-metadata": "^0.2.2",
     "ts-node": "^10.9.2",
+    "@truststack/discovery": "workspace:*",
     "vitest": "^3.0.4"
   }
 }

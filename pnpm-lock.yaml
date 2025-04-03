@@ -121,6 +121,9 @@ importers:
 
   packages/discovery:
     dependencies:
+      '@truststack/core':
+        specifier: workspace:*
+        version: link:../core
       '@truststack/untp-types':
         specifier: workspace:*
         version: link:../untp-types
@@ -268,6 +271,9 @@ importers:
       '@truststack/did':
         specifier: workspace:*
         version: link:../did
+      '@truststack/discovery':
+        specifier: workspace:*
+        version: link:../discovery
       '@truststack/hermes':
         specifier: workspace:*
         version: link:../hermes

@@ -2409,6 +2409,71 @@
           "Schema"
         ]
       }
+    },
+    "/discovery/trust-graph/{id}": {
+      "get": {
+        "description": "Get a trust graph by id",
+        "operationId": "getTrustGraph",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The trust graph",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TrustGraph"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The trust graph was not found"
+          }
+        },
+        "summary": "Get a trust graph by id",
+        "tags": [
+          "TrustGraph"
+        ]
+      }
+    },
+    "/discovery/trust-graph/traverse": {
+      "post": {
+        "description": "Traverse a trust graph",
+        "operationId": "traverseTrustGraph",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TraverseTrustGraph"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The trust graph traversed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TrustGraph"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Traverse a trust graph",
+        "tags": [
+          "TrustGraph"
+        ]
+      }
     }
   },
   "info": {
@@ -4226,6 +4291,93 @@
           "id",
           "name",
           "schema"
+        ]
+      },
+      "TrustGraphNodeType": {
+        "type": "string",
+        "enum": [
+          "DTE",
+          "DCC",
+          "DPP",
+          "DIA",
+          "DFR"
+        ]
+      },
+      "TrustGraphNode": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The id of the trust graph node"
+          },
+          "hash": {
+            "type": "string",
+            "description": "The hash of the trust graph node"
+          },
+          "raw": {
+            "type": "object",
+            "description": "The raw data of the trust graph node"
+          },
+          "type": {
+            "description": "The type of the trust graph node",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrustGraphNodeType"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "hash",
+          "raw",
+          "type"
+        ]
+      },
+      "TrustGraph": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The id of the trust graph"
+          },
+          "hash": {
+            "type": "string",
+            "description": "The hash of the trust graph"
+          },
+          "nodes": {
+            "description": "The nodes of the trust graph",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TrustGraphNode"
+            }
+          },
+          "type": {
+            "description": "The type of the trust graph",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrustGraphNodeType"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "hash",
+          "nodes",
+          "type"
+        ]
+      },
+      "TraverseTrustGraph": {
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "description": "The target identifier to traverse from."
+          }
+        },
+        "required": [
+          "identifier"
         ]
       }
     }
