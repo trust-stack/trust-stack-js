@@ -2,15 +2,16 @@ import {AdminClient} from "@truststack/admin";
 import {CanvasClient} from "@truststack/canvas";
 import {TrustStackClient} from "@truststack/core";
 import {DidClient} from "@truststack/did";
+import {DiscoveryClient} from "@truststack/discovery";
 import {HermesClient} from "@truststack/hermes";
 import {UntpClient} from "@truststack/untp";
-
 export class TrustStack extends TrustStackClient {
   private _did?: DidClient;
   private _hermes?: HermesClient;
   private _canvas?: CanvasClient;
   private _admin?: AdminClient;
   private _untp?: UntpClient;
+  private _discovery?: DiscoveryClient;
 
   public get did(): DidClient {
     if (!this._did) {
@@ -45,5 +46,12 @@ export class TrustStack extends TrustStackClient {
       this._untp = new UntpClient();
     }
     return this._untp;
+  }
+
+  public get discovery(): DiscoveryClient {
+    if (!this._discovery) {
+      this._discovery = new DiscoveryClient();
+    }
+    return this._discovery;
   }
 }

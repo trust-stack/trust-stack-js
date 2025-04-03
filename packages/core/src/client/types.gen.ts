@@ -611,6 +611,22 @@ export type EventTag = {
      * The description of the event tag
      */
     description: string;
+    /**
+     * The date and time the event tag was created
+     */
+    createdAt: string;
+    /**
+     * The date and time the event tag was updated
+     */
+    updatedAt: string;
+    /**
+     * Whether the event tag is deleted
+     */
+    deleted: boolean;
+    /**
+     * The date and time the event tag was deleted
+     */
+    deletedAt: string;
 };
 
 export type QuantityElement = {
@@ -958,6 +974,61 @@ export type UpdateSchema = {
     schema: {
         [key: string]: unknown;
     };
+};
+
+export enum TrustGraphNodeType {
+    DTE = 'DTE',
+    DCC = 'DCC',
+    DPP = 'DPP',
+    DIA = 'DIA',
+    DFR = 'DFR'
+}
+
+export type TrustGraphNode = {
+    /**
+     * The id of the trust graph node
+     */
+    id: string;
+    /**
+     * The hash of the trust graph node
+     */
+    hash: string;
+    /**
+     * The raw data of the trust graph node
+     */
+    raw: {
+        [key: string]: unknown;
+    };
+    /**
+     * The type of the trust graph node
+     */
+    type: TrustGraphNodeType;
+};
+
+export type TrustGraph = {
+    /**
+     * The id of the trust graph
+     */
+    id: string;
+    /**
+     * The hash of the trust graph
+     */
+    hash: string;
+    /**
+     * The nodes of the trust graph
+     */
+    nodes: Array<TrustGraphNode>;
+    /**
+     * The type of the trust graph
+     */
+    type: TrustGraphNodeType;
+};
+
+export type TraverseTrustGraph = {
+    /**
+     * The target identifier to traverse from.
+     */
+    identifier: string;
 };
 
 export type HealthCheckData = {
@@ -1514,6 +1585,20 @@ export type UpdateTenantUserResponses = {
 
 export type UpdateTenantUserResponse = UpdateTenantUserResponses[keyof UpdateTenantUserResponses];
 
+export type ClearSandboxData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/sandbox/clear';
+};
+
+export type ClearSandboxResponses = {
+    /**
+     * The sandbox data has been successfully cleared
+     */
+    200: unknown;
+};
+
 export type GetCustodyCommissionsData = {
     body?: never;
     path?: never;
@@ -1810,6 +1895,31 @@ export type GetDppResponses = {
 
 export type GetDppResponse = GetDppResponses[keyof GetDppResponses];
 
+export type GetEventTagsData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * Page number (1-based)
+         */
+        page?: number;
+        /**
+         * Number of items per page
+         */
+        limit?: number;
+    };
+    url: '/event-tags';
+};
+
+export type GetEventTagsResponses = {
+    /**
+     * The event tags have been successfully retrieved
+     */
+    200: Array<EventTag>;
+};
+
+export type GetEventTagsResponse = GetEventTagsResponses[keyof GetEventTagsResponses];
+
 export type CreateEventTagData = {
     body: CreateEventTag;
     path?: never;
@@ -1832,6 +1942,32 @@ export type CreateEventTagResponses = {
 };
 
 export type CreateEventTagResponse = CreateEventTagResponses[keyof CreateEventTagResponses];
+
+export type SetEventTagsData = {
+    /**
+     * Array of event tags to set
+     */
+    body: Array<CreateEventTag>;
+    path?: never;
+    query?: never;
+    url: '/event-tags/set';
+};
+
+export type SetEventTagsErrors = {
+    /**
+     * Invalid request
+     */
+    400: unknown;
+};
+
+export type SetEventTagsResponses = {
+    /**
+     * Event tags set successfully
+     */
+    200: Array<EventTag>;
+};
+
+export type SetEventTagsResponse = SetEventTagsResponses[keyof SetEventTagsResponses];
 
 export type DeleteEventTagData = {
     body?: never;
@@ -2451,3 +2587,44 @@ export type UpdateSchemaResponses = {
 };
 
 export type UpdateSchemaResponse = UpdateSchemaResponses[keyof UpdateSchemaResponses];
+
+export type GetTrustGraphData = {
+    body?: never;
+    path: {
+        id: unknown;
+    };
+    query?: never;
+    url: '/discovery/trust-graph/{id}';
+};
+
+export type GetTrustGraphErrors = {
+    /**
+     * The trust graph was not found
+     */
+    403: unknown;
+};
+
+export type GetTrustGraphResponses = {
+    /**
+     * The trust graph
+     */
+    200: TrustGraph;
+};
+
+export type GetTrustGraphResponse = GetTrustGraphResponses[keyof GetTrustGraphResponses];
+
+export type TraverseTrustGraphData = {
+    body: TraverseTrustGraph;
+    path?: never;
+    query?: never;
+    url: '/discovery/trust-graph/traverse';
+};
+
+export type TraverseTrustGraphResponses = {
+    /**
+     * The trust graph traversed.
+     */
+    200: TrustGraph;
+};
+
+export type TraverseTrustGraphResponse = TraverseTrustGraphResponses[keyof TraverseTrustGraphResponses];

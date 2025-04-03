@@ -924,6 +924,21 @@
         ]
       }
     },
+    "/sandbox/clear": {
+      "post": {
+        "operationId": "clearSandbox",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The sandbox data has been successfully cleared"
+          }
+        },
+        "summary": "Clear all sandbox data for the authenticated tenant user",
+        "tags": [
+          "sandbox"
+        ]
+      }
+    },
     "/custody-commissions": {
       "post": {
         "description": "Create a custody commission",
@@ -1392,6 +1407,93 @@
           }
         },
         "summary": "Create an event tag",
+        "tags": [
+          "Event Tag"
+        ]
+      },
+      "get": {
+        "description": "Get event tags",
+        "operationId": "getEventTags",
+        "parameters": [
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "description": "Page number (1-based)",
+            "schema": {
+              "default": 1,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items per page",
+            "schema": {
+              "default": 10,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The event tags have been successfully retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EventTag"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get Event Tags",
+        "tags": [
+          "Event Tag"
+        ]
+      }
+    },
+    "/event-tags/set": {
+      "post": {
+        "operationId": "setEventTags",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "description": "Array of event tags to set",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CreateEventTag"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Event tags set successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EventTag"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request"
+          }
+        },
+        "summary": "Set tags for an event",
         "tags": [
           "Event Tag"
         ]
@@ -2305,6 +2407,71 @@
         "summary": "Delete a schema",
         "tags": [
           "Schema"
+        ]
+      }
+    },
+    "/discovery/trust-graph/{id}": {
+      "get": {
+        "description": "Get a trust graph by id",
+        "operationId": "getTrustGraph",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The trust graph",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TrustGraph"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The trust graph was not found"
+          }
+        },
+        "summary": "Get a trust graph by id",
+        "tags": [
+          "TrustGraph"
+        ]
+      }
+    },
+    "/discovery/trust-graph/traverse": {
+      "post": {
+        "description": "Traverse a trust graph",
+        "operationId": "traverseTrustGraph",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TraverseTrustGraph"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The trust graph traversed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TrustGraph"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Traverse a trust graph",
+        "tags": [
+          "TrustGraph"
         ]
       }
     }
@@ -3373,13 +3540,36 @@
           "description": {
             "type": "string",
             "description": "The description of the event tag"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "The date and time the event tag was created"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "The date and time the event tag was updated"
+          },
+          "deleted": {
+            "type": "boolean",
+            "description": "Whether the event tag is deleted"
+          },
+          "deletedAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "The date and time the event tag was deleted"
           }
         },
         "required": [
           "id",
           "code",
           "name",
-          "description"
+          "description",
+          "createdAt",
+          "updatedAt",
+          "deleted",
+          "deletedAt"
         ]
       },
       "QuantityElement": {
@@ -4101,6 +4291,93 @@
           "id",
           "name",
           "schema"
+        ]
+      },
+      "TrustGraphNodeType": {
+        "type": "string",
+        "enum": [
+          "DTE",
+          "DCC",
+          "DPP",
+          "DIA",
+          "DFR"
+        ]
+      },
+      "TrustGraphNode": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The id of the trust graph node"
+          },
+          "hash": {
+            "type": "string",
+            "description": "The hash of the trust graph node"
+          },
+          "raw": {
+            "type": "object",
+            "description": "The raw data of the trust graph node"
+          },
+          "type": {
+            "description": "The type of the trust graph node",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrustGraphNodeType"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "hash",
+          "raw",
+          "type"
+        ]
+      },
+      "TrustGraph": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The id of the trust graph"
+          },
+          "hash": {
+            "type": "string",
+            "description": "The hash of the trust graph"
+          },
+          "nodes": {
+            "description": "The nodes of the trust graph",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TrustGraphNode"
+            }
+          },
+          "type": {
+            "description": "The type of the trust graph",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrustGraphNodeType"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "hash",
+          "nodes",
+          "type"
+        ]
+      },
+      "TraverseTrustGraph": {
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "description": "The target identifier to traverse from."
+          }
+        },
+        "required": [
+          "identifier"
         ]
       }
     }
