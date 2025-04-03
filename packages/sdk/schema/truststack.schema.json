@@ -1,0 +1,50 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Trust Stack Configuration",
+    "description": "Configuration schema for the Trust Stack platform",
+    "type": "object",
+    "required": [
+        "eventTags"
+    ],
+    "properties": {
+        "api": {
+            "type": "object",
+            "description": "API configuration settings",
+            "required": [
+                "endpoint"
+            ],
+            "properties": {
+                "endpoint": {
+                    "type": "string",
+                    "description": "API endpoint URL",
+                    "format": "uri"
+                },
+                "apiKey": {
+                    "type": "string",
+                    "description": "API key for authentication"
+                }
+            }
+        },
+        "eventTags": {
+            "type": "array",
+            "description": "Event tags to register in the system",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "type": "string",
+                        "description": "Unique code for the event tag"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Human-readable name for the event tag"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Detailed description of the event tag"
+                    }
+                }
+            }
+        }
+    }
+}
