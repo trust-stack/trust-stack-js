@@ -1,5 +1,22 @@
 # @truststack/sdk
 
+## 0.1.2
+
+### Patch Changes
+
+- 772e101: Client configuration issues.
+- Updated dependencies [772e101]
+  - @truststack/link-resolver@0.1.2
+  - @truststack/master-data@0.1.2
+  - @truststack/discovery@0.1.2
+  - @truststack/biolock@0.1.2
+  - @truststack/canvas@0.0.5
+  - @truststack/admin@0.1.2
+  - @truststack/event@0.1.2
+  - @truststack/core@0.1.2
+  - @truststack/untp@0.0.4
+  - @truststack/did@0.0.5
+
 ## 0.1.1
 
 ### Patch Changes
