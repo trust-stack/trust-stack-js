@@ -4716,11 +4716,7 @@
             "type": "string",
             "description": "The trade item of the quantity element"
           }
-        },
-        "required": [
-          "epc",
-          "tradeItem"
-        ]
+        }
       },
       "CreateQuantityElement": {
         "type": "object",
@@ -4747,8 +4743,7 @@
           }
         },
         "required": [
-          "epcClass",
-          "tradeItem"
+          "quantity"
         ]
       },
       "Source": {
@@ -4765,19 +4760,15 @@
           },
           "source": {
             "type": "string",
-            "description": "The source string",
-            "nullable": true
+            "description": "The source string"
           },
           "partner": {
             "type": "string",
-            "description": "The partner id",
-            "nullable": true
+            "description": "The partner id"
           }
         },
         "required": [
-          "sourceType",
-          "source",
-          "partner"
+          "sourceType"
         ]
       },
       "Destination": {
@@ -4794,19 +4785,15 @@
           },
           "destination": {
             "type": "string",
-            "description": "The destination string",
-            "nullable": true
+            "description": "The destination string"
           },
           "partner": {
             "type": "string",
-            "description": "The partner id",
-            "nullable": true
+            "description": "The partner id"
           }
         },
         "required": [
-          "destinationType",
-          "destination",
-          "partner"
+          "destinationType"
         ]
       },
       "ReadPoint": {

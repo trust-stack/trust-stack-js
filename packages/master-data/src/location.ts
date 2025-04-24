@@ -2,6 +2,7 @@ import {
   CreateLocation,
   createLocation,
   getLocation,
+  getLocationByIdentifier,
   getLocations,
   GetLocationsData,
   RequestOptions,
@@ -49,6 +50,23 @@ export class LocationClient extends TrustStackClient {
   ) {
     return getLocations({
       query,
+      headers: this.headers(options),
+      client: this.client,
+    });
+  }
+
+  /**
+   * Get a location by identifier
+   * @param identifier - The identifier of the location
+   * @param options - The request options
+   * @returns The location
+   */
+  public async getLocationByIdentifier(
+    identifier: string,
+    options?: RequestOptions
+  ) {
+    return getLocationByIdentifier({
+      path: {identifier},
       headers: this.headers(options),
       client: this.client,
     });

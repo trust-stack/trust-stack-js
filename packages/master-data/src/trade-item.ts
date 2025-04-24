@@ -2,6 +2,7 @@ import {
   createTradeItem,
   CreateTradeItem,
   getTradeItem,
+  getTradeItemByIdentifier,
   getTradeItems,
   GetTradeItemsData,
   RequestOptions,
@@ -52,6 +53,23 @@ export class TradeItemClient extends TrustStackClient {
   ) {
     return getTradeItems({
       query,
+      headers: this.headers(options),
+      client: this.client,
+    });
+  }
+
+  /**
+   * Get a trade item by identifier
+   * @param identifier - The identifier of the trade item
+   * @param options - The request options
+   * @returns The trade item
+   */
+  public async getTradeItemByIdentifier(
+    identifier: string,
+    options?: RequestOptions
+  ) {
+    return getTradeItemByIdentifier({
+      path: {identifier},
       headers: this.headers(options),
       client: this.client,
     });
