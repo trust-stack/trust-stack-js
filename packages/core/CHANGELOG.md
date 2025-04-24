@@ -1,5 +1,11 @@
 # @truststack/core
 
+## 0.1.3
+
+### Patch Changes
+
+- c883050: Fixing configuration errors
+
 ## 0.1.2
 
 ### Patch Changes
