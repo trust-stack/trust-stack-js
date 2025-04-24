@@ -1,5 +1,11 @@
 # @truststack/canvas-components
 
+## 0.0.4
+
+### Patch Changes
+
+- 209f691: Removing sdk mixing, creating object client.
+
 ## 0.0.3
 
 ### Patch Changes

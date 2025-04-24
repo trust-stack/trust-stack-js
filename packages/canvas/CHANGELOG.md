@@ -1,5 +1,13 @@
 # @truststack/canvas
 
+## 0.0.8
+
+### Patch Changes
+
+- 209f691: Removing sdk mixing, creating object client.
+- Updated dependencies [209f691]
+  - @truststack/core@0.1.5
+
 ## 0.0.7
 
 ### Patch Changes
