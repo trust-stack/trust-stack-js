@@ -1,5 +1,13 @@
 # @truststack/canvas
 
+## 0.0.4
+
+### Patch Changes
+
+- 06e9bda: Updating architecture
+- Updated dependencies [06e9bda]
+  - @truststack/core@0.1.1
+
 ## 0.0.3
 
 ### Patch Changes
