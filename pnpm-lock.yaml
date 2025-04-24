@@ -37,7 +37,7 @@ importers:
         specifier: ^8.3.5
         version: 8.3.5(jiti@2.4.2)(postcss@8.5.1)(typescript@5.5.4)(yaml@2.7.0)
 
-  packages/biosecure:
+  packages/biolock:
     dependencies:
       '@truststack/core':
         specifier: workspace:*
@@ -317,9 +317,9 @@ importers:
       '@truststack/admin':
         specifier: workspace:*
         version: link:../admin
-      '@truststack/biosecure':
+      '@truststack/biolock':
         specifier: workspace:*
-        version: link:../biosecure
+        version: link:../biolock
       '@truststack/canvas':
         specifier: workspace:*
         version: link:../canvas
