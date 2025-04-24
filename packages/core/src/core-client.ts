@@ -35,6 +35,12 @@ export class TrustStackClient {
     if (config?.tenantUserId) {
       this.tenantUserId = config?.tenantUserId;
     }
+
+    this.client = client;
+    this.client.setConfig({
+      baseUrl: this.baseUrl,
+      headers: this.headers(),
+    });
   }
 
   protected headers(options?: RequestOptions) {
