@@ -16,7 +16,7 @@ describe("AdminStackClient", () => {
         accessToken: "test-token",
         organizationId: "test-org-id",
       });
-      await adminClient.getOrganization("123");
+      await adminClient.admin.getOrganization("123");
 
       // Assert: Check that the request was made with the correct headers
       TestUtils.assertHeaders({
@@ -32,7 +32,7 @@ describe("AdminStackClient", () => {
       });
 
       // Act: Make request
-      await adminClient.getOrganization("123", {
+      await adminClient.admin.getOrganization("123", {
         accessToken: "other-token",
         organizationId: "other-org-id",
       });
@@ -51,7 +51,7 @@ describe("AdminStackClient", () => {
         organizationId: "test-org-id",
         tenantUserId: "test-tenant-user-id",
       });
-      await adminClient.getOrganization("123");
+      await adminClient.admin.getOrganization("123");
 
       // Assert: Check that the request was made with the tenant user ID header
       TestUtils.assertHeaders({
@@ -68,7 +68,7 @@ describe("AdminStackClient", () => {
       });
 
       // Act: Make request with tenant user ID
-      await adminClient.getOrganization("123", {
+      await adminClient.admin.getOrganization("123", {
         organizationId: "other-org-id",
         tenantUserId: "other-tenant-user-id",
       });

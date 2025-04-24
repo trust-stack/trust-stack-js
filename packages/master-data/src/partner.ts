@@ -1,6 +1,7 @@
 import {
   CreatePartner,
   createPartner,
+  getPartner,
   getPartners,
   GetPartnersData,
   RequestOptions,
@@ -34,6 +35,22 @@ export class PartnerClient extends TrustStackClient {
   ) {
     return getPartners({
       query,
+      headers: this.headers(options),
+      client: this.client,
+    });
+  }
+
+  /**
+   * Get a partner by id
+   * @param id - The id of the partner
+   * @param options - The request options
+   * @returns The partner
+   */
+  public async getPartner(id: string, options?: RequestOptions) {
+    return getPartner({
+      path: {
+        id: id,
+      },
       headers: this.headers(options),
       client: this.client,
     });
