@@ -218,16 +218,6 @@ importers:
         specifier: ^8.3.5
         version: 8.3.5(jiti@2.4.2)(postcss@8.5.1)(typescript@5.5.4)(yaml@2.7.0)
 
-  packages/hermes:
-    dependencies:
-      '@truststack/core':
-        specifier: workspace:*
-        version: link:../core
-    devDependencies:
-      tsup:
-        specifier: ^8.3.5
-        version: 8.3.5(jiti@2.4.2)(postcss@8.5.1)(typescript@5.5.4)(yaml@2.7.0)
-
   packages/link-resolver:
     dependencies:
       '@truststack/core':
@@ -335,9 +325,6 @@ importers:
       '@truststack/event':
         specifier: workspace:*
         version: link:../event
-      '@truststack/hermes':
-        specifier: workspace:*
-        version: link:../hermes
       '@truststack/link-resolver':
         specifier: workspace:*
         version: link:../link-resolver
