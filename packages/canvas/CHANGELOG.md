@@ -1,5 +1,13 @@
 # @truststack/canvas
 
+## 0.0.6
+
+### Patch Changes
+
+- c883050: Fixing configuration errors
+- Updated dependencies [c883050]
+  - @truststack/core@0.1.3
+
 ## 0.0.5
 
 ### Patch Changes

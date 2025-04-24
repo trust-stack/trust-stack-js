@@ -1,5 +1,22 @@
 # @truststack/sdk
 
+## 0.1.3
+
+### Patch Changes
+
+- c883050: Fixing configuration errors
+- Updated dependencies [c883050]
+  - @truststack/admin@0.1.3
+  - @truststack/biolock@0.1.3
+  - @truststack/canvas@0.0.6
+  - @truststack/core@0.1.3
+  - @truststack/did@0.0.6
+  - @truststack/discovery@0.1.3
+  - @truststack/event@0.1.3
+  - @truststack/link-resolver@0.1.3
+  - @truststack/master-data@0.1.3
+  - @truststack/untp@0.0.5
+
 ## 0.1.2
 
 ### Patch Changes
