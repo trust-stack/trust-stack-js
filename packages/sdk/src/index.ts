@@ -5,7 +5,6 @@ import {TrustStackClient} from "@truststack/core";
 import {DidClient} from "@truststack/did";
 import {DiscoveryClient} from "@truststack/discovery";
 import {EventClient} from "@truststack/event";
-import {HermesClient} from "@truststack/hermes";
 import {LinkResolverClient} from "@truststack/link-resolver";
 import {MasterDataClient} from "@truststack/master-data";
 import {UntpClient} from "@truststack/untp";
@@ -14,7 +13,6 @@ export * from "./types";
 
 export class TrustStack extends TrustStackClient {
   private _did?: DidClient;
-  private _hermes?: HermesClient;
   private _canvas?: CanvasClient;
   private _admin?: AdminClient;
   private _untp?: UntpClient;
@@ -29,13 +27,6 @@ export class TrustStack extends TrustStackClient {
       this._did = new DidClient();
     }
     return this._did;
-  }
-
-  public get hermes(): HermesClient {
-    if (!this._hermes) {
-      this._hermes = new HermesClient();
-    }
-    return this._hermes;
   }
 
   public get canvas(): CanvasClient {

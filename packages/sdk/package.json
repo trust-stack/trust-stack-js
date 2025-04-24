@@ -33,7 +33,6 @@
     "@truststack/did": "workspace:*",
     "@truststack/discovery": "workspace:*",
     "@truststack/event": "workspace:*",
-    "@truststack/hermes": "workspace:*",
     "@truststack/link-resolver": "workspace:*",
     "@truststack/master-data": "workspace:*",
     "@truststack/untp": "workspace:*",
