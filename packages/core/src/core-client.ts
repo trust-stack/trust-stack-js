@@ -37,28 +37,6 @@ export class TrustStackClient {
     }
   }
 
-  public configure(config: TrustStackClientConfig) {
-    let accessToken = config.accessToken || process.env.TRUSTSTACK_ACCESS_TOKEN;
-    if (!accessToken) {
-      throw new Error("No access token provided");
-    }
-
-    let baseUrl =
-      config.baseUrl ||
-      process.env.TRUSTSTACK_BASE_URL ||
-      "https://api.truststack.dev";
-
-    this.accessToken = accessToken;
-    this.baseUrl = baseUrl;
-    this.sandbox = config.sandbox || false;
-    this.organizationId = config.organizationId;
-    this.tenantUserId = config.tenantUserId;
-    this.client = client;
-    this.client.setConfig({
-      baseUrl: this.baseUrl,
-    });
-  }
-
   protected headers(options?: RequestOptions) {
     return {
       "Content-Type": "application/json",
