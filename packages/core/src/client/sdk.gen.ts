@@ -1699,7 +1699,6 @@ export const deleteOrganization = <ThrowOnError extends boolean = false>(
 export const getOrganization = <ThrowOnError extends boolean = false>(
   options: Options<GetOrganizationData, ThrowOnError>
 ) => {
-  console.log(client.getConfig().baseUrl);
   return (options?.client ?? client).get<
     GetOrganizationResponse,
     unknown,
