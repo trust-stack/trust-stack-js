@@ -42,7 +42,8 @@
     "dotenv": "^16.4.7",
     "reflect-metadata": "^0.2.2",
     "ts-node": "^10.9.2",
-    "vitest": "^3.0.4"
+    "vitest": "^3.0.4",
+    "ts-mixer": "^6.0.4"
   },
   "devDependencies": {
     "@hey-api/openapi-ts": "^0.61.3",

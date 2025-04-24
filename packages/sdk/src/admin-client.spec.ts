@@ -1,5 +1,7 @@
-import {AdminClient} from "@truststack/admin";
+import "reflect-metadata";
+
 import {beforeEach, describe, it} from "vitest";
+import {TrustStack} from ".";
 import {TestUtils} from "./test-utils";
 
 describe("AdminStackClient", () => {
@@ -10,7 +12,7 @@ describe("AdminStackClient", () => {
   describe("request handling", () => {
     it("should make requests with correct headers from static config.", async () => {
       // Act: Create admin client
-      const adminClient = new AdminClient({
+      const adminClient = new TrustStack({
         accessToken: "test-token",
         organizationId: "test-org-id",
       });
@@ -25,7 +27,7 @@ describe("AdminStackClient", () => {
 
     it("should make requests with correct headers from request options.", async () => {
       // Act: Create admin client
-      const adminClient = new AdminClient({
+      const adminClient = new TrustStack({
         accessToken: "test-token",
       });
 
@@ -44,7 +46,7 @@ describe("AdminStackClient", () => {
 
     it("should include tenant user ID header when configured in constructor.", async () => {
       // Act: Create admin client and make request
-      const adminClient = new AdminClient({
+      const adminClient = new TrustStack({
         accessToken: "test-token",
         organizationId: "test-org-id",
         tenantUserId: "test-tenant-user-id",
@@ -61,7 +63,7 @@ describe("AdminStackClient", () => {
 
     it("should include tenant user ID header when provided in request options.", async () => {
       // Act: Create admin client
-      const adminClient = new AdminClient({
+      const adminClient = new TrustStack({
         accessToken: "other-token",
       });
 
