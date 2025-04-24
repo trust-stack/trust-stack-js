@@ -1,5 +1,13 @@
 # @truststack/master-data
 
+## 0.1.4
+
+### Patch Changes
+
+- 630325a: Core client base URL.
+- Updated dependencies [630325a]
+  - @truststack/core@0.1.4
+
 ## 0.1.3
 
 ### Patch Changes
