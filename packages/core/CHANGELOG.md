@@ -1,5 +1,11 @@
 # @truststack/core
 
+## 0.1.6
+
+### Patch Changes
+
+- 49ce2bd: Adding location, trade item lookup. Resolving type issues.
+
 ## 0.1.5
 
 ### Patch Changes

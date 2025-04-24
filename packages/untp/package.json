@@ -1,6 +1,6 @@
 {
   "name": "@truststack/untp",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "UNTP management for DPPs, DCCs, and more",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
