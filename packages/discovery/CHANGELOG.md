@@ -1,5 +1,14 @@
 # @truststack/discovery
 
+## 0.1.4
+
+### Patch Changes
+
+- 630325a: Core client base URL.
+- Updated dependencies [630325a]
+  - @truststack/core@0.1.4
+  - @truststack/untp-types@0.0.3
+
 ## 0.1.3
 
 ### Patch Changes

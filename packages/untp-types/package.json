@@ -1,6 +1,6 @@
 {
   "name": "@truststack/untp-types",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "UNTP Types",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

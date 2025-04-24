@@ -1,5 +1,22 @@
 # @truststack/sdk
 
+## 0.1.4
+
+### Patch Changes
+
+- 630325a: Core client base URL.
+- Updated dependencies [630325a]
+  - @truststack/core@0.1.4
+  - @truststack/admin@0.1.4
+  - @truststack/biolock@0.1.4
+  - @truststack/canvas@0.0.7
+  - @truststack/did@0.0.7
+  - @truststack/discovery@0.1.4
+  - @truststack/event@0.1.4
+  - @truststack/link-resolver@0.1.4
+  - @truststack/master-data@0.1.4
+  - @truststack/untp@0.0.6
+
 ## 0.1.3
 
 ### Patch Changes
