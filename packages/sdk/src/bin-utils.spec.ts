@@ -24,6 +24,8 @@ describe("bin-utils", () => {
         eventTags: undefined,
       };
 
+      process.env.TRUST_STACK_ACCESS_TOKEN = "test-token";
+
       await applyConfig(config, "sandbox");
 
       // Assert: The setEventTags method should not have been called

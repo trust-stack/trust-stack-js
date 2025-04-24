@@ -1,5 +1,4 @@
 import {AdminClient} from "@truststack/admin";
-import {TrustStackClient} from "@truststack/core";
 import {beforeEach, describe, it} from "vitest";
 import {TestUtils} from "./test-utils";
 
@@ -10,14 +9,11 @@ describe("AdminStackClient", () => {
 
   describe("request handling", () => {
     it("should make requests with correct headers from static config.", async () => {
-      // Arrange: Configure client with variables under test
-      TrustStackClient.configure({
+      // Act: Create admin client
+      const adminClient = new AdminClient({
         accessToken: "test-token",
         organizationId: "test-org-id",
       });
-
-      // Act: Create admin client
-      const adminClient = new AdminClient();
       await adminClient.getOrganization("123");
 
       // Assert: Check that the request was made with the correct headers
@@ -29,7 +25,9 @@ describe("AdminStackClient", () => {
 
     it("should make requests with correct headers from request options.", async () => {
       // Act: Create admin client
-      const adminClient = new AdminClient();
+      const adminClient = new AdminClient({
+        accessToken: "test-token",
+      });
 
       // Act: Make request
       await adminClient.getOrganization("123", {
@@ -44,16 +42,13 @@ describe("AdminStackClient", () => {
       });
     });
 
-    it("should include tenant user ID header when configured in static config.", async () => {
-      // Arrange: Configure client with tenant user ID
-      TrustStackClient.configure({
+    it("should include tenant user ID header when configured in constructor.", async () => {
+      // Act: Create admin client and make request
+      const adminClient = new AdminClient({
         accessToken: "test-token",
         organizationId: "test-org-id",
         tenantUserId: "test-tenant-user-id",
       });
-
-      // Act: Create admin client and make request
-      const adminClient = new AdminClient();
       await adminClient.getOrganization("123");
 
       // Assert: Check that the request was made with the tenant user ID header
@@ -66,11 +61,12 @@ describe("AdminStackClient", () => {
 
     it("should include tenant user ID header when provided in request options.", async () => {
       // Act: Create admin client
-      const adminClient = new AdminClient();
+      const adminClient = new AdminClient({
+        accessToken: "other-token",
+      });
 
       // Act: Make request with tenant user ID
       await adminClient.getOrganization("123", {
-        accessToken: "other-token",
         organizationId: "other-org-id",
         tenantUserId: "other-tenant-user-id",
       });

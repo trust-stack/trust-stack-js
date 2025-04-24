@@ -21,7 +21,7 @@ export class DidClient extends TrustStackClient {
       body: {
         name: props.name,
       },
-      headers: TrustStackClient.headers(options),
+      headers: this.headers(options),
     });
   }
 
@@ -36,7 +36,7 @@ export class DidClient extends TrustStackClient {
       path: {
         id,
       },
-      headers: TrustStackClient.headers(options),
+      headers: this.headers(options),
     });
   }
 
@@ -51,7 +51,7 @@ export class DidClient extends TrustStackClient {
       path: {
         id,
       },
-      headers: TrustStackClient.headers(options),
+      headers: this.headers(options),
     });
   }
 
@@ -64,7 +64,7 @@ export class DidClient extends TrustStackClient {
   public async getDids(query: GetDidsData["query"], options?: RequestOptions) {
     return getDids({
       query,
-      headers: TrustStackClient.headers(options),
+      headers: this.headers(options),
     });
   }
 }

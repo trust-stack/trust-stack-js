@@ -16,7 +16,7 @@ export class DppClient extends TrustStackClient {
   public async createDpp(data: CreateDppDto, options?: RequestOptions) {
     return createDpp({
       body: data,
-      headers: TrustStackClient.headers(options),
+      headers: this.headers(options),
     });
   }
 
@@ -28,7 +28,7 @@ export class DppClient extends TrustStackClient {
   public async getDpp(id: string, options?: RequestOptions) {
     return getDpp({
       path: {id},
-      headers: TrustStackClient.headers(options),
+      headers: this.headers(options),
     });
   }
 
@@ -40,7 +40,7 @@ export class DppClient extends TrustStackClient {
   public async deleteDpp(id: string, options?: RequestOptions) {
     return deleteDpp({
       path: {id},
-      headers: TrustStackClient.headers(options),
+      headers: this.headers(options),
     });
   }
 }

@@ -16,49 +16,58 @@ export type RequestOptions = {
 };
 
 export class TrustStackClient {
-  protected static accessToken: string;
-  protected static baseUrl: string = "https://api.truststack.dev";
-  protected static sandboxBaseUrl: string =
-    "https://sandbox.api.truststack.dev";
-  protected static organizationId?: string;
-  protected static tenantUserId?: string;
-  protected static sandbox: boolean = false;
-  static client = client;
+  protected accessToken: string;
+  protected baseUrl: string = "https://api.truststack.dev";
+  protected sandboxBaseUrl: string = "https://sandbox.api.truststack.dev";
+  protected organizationId?: string;
+  protected tenantUserId?: string;
+  protected sandbox: boolean = false;
+  protected client = client;
 
   constructor(config?: TrustStackClientConfig) {
-    if (config?.accessToken) {
-      TrustStackClient.accessToken = config?.accessToken;
-    }
-
-    if (config?.sandbox) {
-      TrustStackClient.sandbox = config?.sandbox;
-    }
-
-    if (config?.baseUrl) {
-      TrustStackClient.baseUrl = config?.baseUrl;
-    }
+    this.accessToken = this.getAccessToken(config?.accessToken);
+    this.sandbox = config?.sandbox || false;
+    this.baseUrl = this.getBaseUrl(config?.baseUrl);
 
     if (config?.organizationId) {
-      TrustStackClient.organizationId = config?.organizationId;
+      this.organizationId = config?.organizationId;
     }
 
     if (config?.tenantUserId) {
-      TrustStackClient.tenantUserId = config?.tenantUserId;
+      this.tenantUserId = config?.tenantUserId;
     }
   }
 
-  static configure(config: TrustStackClientConfig) {
-    this.accessToken = config.accessToken;
+  public configure(config: TrustStackClientConfig) {
+    let accessToken = config.accessToken || process.env.TRUSTSTACK_ACCESS_TOKEN;
+    if (!accessToken) {
+      throw new Error("No access token provided");
+    }
+
+    let baseUrl =
+      config.baseUrl ||
+      process.env.TRUSTSTACK_BASE_URL ||
+      "https://api.truststack.dev";
+
+    this.accessToken = accessToken;
+    this.baseUrl = baseUrl;
     this.sandbox = config.sandbox || false;
-    this.baseUrl = this.getBaseUrl(config.baseUrl);
     this.organizationId = config.organizationId;
     this.tenantUserId = config.tenantUserId;
-    client.setConfig({
+    this.client = client;
+    this.client.setConfig({
       baseUrl: this.baseUrl,
+    });
+
+    this.client.interceptors.request.use((request) => {
+      Object.entries(this.headers()).forEach(([key, value]) => {
+        value && request.headers.append(key, value);
+      });
+      return request;
     });
   }
 
-  protected static headers(options?: RequestOptions) {
+  protected headers(options?: RequestOptions) {
     return {
       "Content-Type": "application/json",
       Authorization: `Bearer ${this.getAccessToken(options?.accessToken)}`,
@@ -67,7 +76,7 @@ export class TrustStackClient {
     };
   }
 
-  private static getAccessToken(override?: string) {
+  private getAccessToken(override?: string) {
     // Priority: override > static config > env var
     const token =
       override || this.accessToken || process.env.TRUSTSTACK_ACCESS_TOKEN;
@@ -78,19 +87,19 @@ export class TrustStackClient {
     return token;
   }
 
-  private static getOrganizationId(override?: string) {
+  private getOrganizationId(override?: string) {
     return (
       override || this.organizationId || process.env.TRUSTSTACK_ORGANIZATION_ID
     );
   }
 
-  private static getTenantUserId(override?: string) {
+  private getTenantUserId(override?: string) {
     return (
       override || this.tenantUserId || process.env.TRUSTSTACK_TENANT_USER_ID
     );
   }
 
-  private static getBaseUrl(override?: string) {
+  private getBaseUrl(override?: string) {
     if (override) {
       return override;
     }
@@ -100,6 +109,8 @@ export class TrustStackClient {
       return envBaseUrl;
     }
 
-    return this.sandbox ? this.sandboxBaseUrl : "https://api.truststack.dev";
+    return this.sandbox
+      ? "https://sandbox.api.truststack.dev"
+      : "https://api.truststack.dev";
   }
 }
