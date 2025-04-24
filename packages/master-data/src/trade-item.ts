@@ -1,0 +1,56 @@
+import {
+  createTradeItem,
+  CreateTradeItem,
+  getTradeItem,
+  getTradeItems,
+  GetTradeItemsData,
+  RequestOptions,
+  TrustStackClient,
+} from "@truststack/core";
+
+export class TradeItemClient extends TrustStackClient {
+  /**
+   * Create a trade item
+   * @param props - The properties of the trade item
+   * @param options - The request options
+   * @returns The created trade item
+   */
+  public async createTradeItem(
+    props: CreateTradeItem,
+    options?: RequestOptions
+  ) {
+    return createTradeItem({
+      body: props,
+      headers: TrustStackClient.headers(options),
+    });
+  }
+
+  /**
+   * Get a location
+   * @param id - The ID of the trade item
+   * @param options - The request options
+   * @returns The trade item
+   */
+  public async getTradeItem(id: string, options?: RequestOptions) {
+    return getTradeItem({
+      path: {id},
+      headers: TrustStackClient.headers(options),
+    });
+  }
+
+  /**
+   * Get trade items
+   * @param query - The query parameters
+   * @param options - The request options
+   * @returns The trade items
+   */
+  public async getTradeItems(
+    query: GetTradeItemsData["query"],
+    options?: RequestOptions
+  ) {
+    return getTradeItems({
+      query,
+      headers: TrustStackClient.headers(options),
+    });
+  }
+}

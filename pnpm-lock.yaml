@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  ts-mixer: ^6.0.4
+
 importers:
 
   .:
@@ -26,6 +29,9 @@ importers:
       '@truststack/core':
         specifier: workspace:*
         version: link:../core
+      ts-mixer:
+        specifier: ^6.0.4
+        version: 6.0.4
     devDependencies:
       tsup:
         specifier: ^8.3.5
@@ -189,11 +195,34 @@ importers:
         specifier: ^8.15.0
         version: 8.15.0(eslint@9.15.0(jiti@2.4.2))(typescript@5.5.4)
 
+  packages/event:
+    dependencies:
+      '@truststack/core':
+        specifier: workspace:*
+        version: link:../core
+    devDependencies:
+      tsup:
+        specifier: ^8.3.5
+        version: 8.3.5(jiti@2.4.2)(postcss@8.5.1)(typescript@5.5.4)(yaml@2.7.0)
+
   packages/hermes:
     dependencies:
       '@truststack/core':
         specifier: workspace:*
         version: link:../core
+    devDependencies:
+      tsup:
+        specifier: ^8.3.5
+        version: 8.3.5(jiti@2.4.2)(postcss@8.5.1)(typescript@5.5.4)(yaml@2.7.0)
+
+  packages/master-data:
+    dependencies:
+      '@truststack/core':
+        specifier: workspace:*
+        version: link:../core
+      ts-mixer:
+        specifier: ^6.0.4
+        version: 6.0.4
     devDependencies:
       tsup:
         specifier: ^8.3.5
@@ -274,9 +303,15 @@ importers:
       '@truststack/discovery':
         specifier: workspace:*
         version: link:../discovery
+      '@truststack/event':
+        specifier: workspace:*
+        version: link:../event
       '@truststack/hermes':
         specifier: workspace:*
         version: link:../hermes
+      '@truststack/master-data':
+        specifier: workspace:*
+        version: link:../master-data
       '@truststack/untp':
         specifier: workspace:*
         version: link:../untp

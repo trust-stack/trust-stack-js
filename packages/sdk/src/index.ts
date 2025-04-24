@@ -3,9 +3,10 @@ import {CanvasClient} from "@truststack/canvas";
 import {TrustStackClient} from "@truststack/core";
 import {DidClient} from "@truststack/did";
 import {DiscoveryClient} from "@truststack/discovery";
+import {EventClient} from "@truststack/event";
 import {HermesClient} from "@truststack/hermes";
+import {MasterDataClient} from "@truststack/master-data";
 import {UntpClient} from "@truststack/untp";
-
 export {loadConfig} from "./bin-utils";
 export * from "./types";
 export class TrustStack extends TrustStackClient {
@@ -15,6 +16,8 @@ export class TrustStack extends TrustStackClient {
   private _admin?: AdminClient;
   private _untp?: UntpClient;
   private _discovery?: DiscoveryClient;
+  private _masterData?: MasterDataClient;
+  private _event?: EventClient;
 
   public get did(): DidClient {
     if (!this._did) {
@@ -56,5 +59,19 @@ export class TrustStack extends TrustStackClient {
       this._discovery = new DiscoveryClient();
     }
     return this._discovery;
+  }
+
+  public get masterData(): MasterDataClient {
+    if (!this._masterData) {
+      this._masterData = new MasterDataClient();
+    }
+    return this._masterData;
+  }
+
+  public get event(): EventClient {
+    if (!this._event) {
+      this._event = new EventClient();
+    }
+    return this._event;
   }
 }
