@@ -3,9 +3,10 @@ import {client} from "./client/sdk.gen";
 export type TrustStackClientConfig = {
   baseUrl?: string;
   organizationId?: string;
-  accessToken: string;
+  accessToken?: string;
   tenantUserId?: string;
   sandbox?: boolean;
+  userId?: string;
 };
 
 export type RequestOptions = {
@@ -13,6 +14,7 @@ export type RequestOptions = {
   accessToken?: string;
   baseUrl?: string;
   tenantUserId?: string;
+  userId?: string;
 };
 
 export class TrustStackClient {
@@ -20,6 +22,7 @@ export class TrustStackClient {
   protected baseUrl: string;
   protected organizationId?: string;
   protected tenantUserId?: string;
+  protected userId?: string;
   protected sandbox: boolean = false;
   protected client = client;
 
@@ -27,14 +30,9 @@ export class TrustStackClient {
     this.accessToken = config?.accessToken;
     this.sandbox = config?.sandbox || false;
     this.baseUrl = config?.baseUrl || "https://api.truststack.dev";
-
-    if (config?.organizationId) {
-      this.organizationId = config?.organizationId;
-    }
-
-    if (config?.tenantUserId) {
-      this.tenantUserId = config?.tenantUserId;
-    }
+    this.userId = config?.userId;
+    this.organizationId = config?.organizationId;
+    this.tenantUserId = config?.tenantUserId;
 
     this.client = client;
     this.client.setConfig({
@@ -43,13 +41,30 @@ export class TrustStackClient {
     });
   }
 
+  protected getProps(): TrustStackClientConfig {
+    return {
+      baseUrl: this.baseUrl,
+      sandbox: this.sandbox,
+      organizationId: this.organizationId,
+      tenantUserId: this.tenantUserId,
+      userId: this.userId,
+      accessToken: this.accessToken,
+    };
+  }
+
   protected headers(options?: RequestOptions) {
     return {
       "Content-Type": "application/json",
       Authorization: `Bearer ${this.getAccessToken(options?.accessToken)}`,
       "X-Organization-Id": this.getOrganizationId(options?.organizationId),
       "X-Tenant-User-Id": this.getTenantUserId(options?.tenantUserId),
+      "X-User-Id": this.getUserId(options?.userId),
     };
+  }
+
+  private getUserId(override?: string) {
+    // Priority: override > static config > env var
+    return override || this.userId || process.env.TRUSTSTACK_USER_ID;
   }
 
   private getAccessToken(override?: string) {

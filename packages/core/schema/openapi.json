@@ -484,7 +484,7 @@
     },
     "/s3/upload-url": {
       "post": {
-        "operationId": "S3Controller_createUploadUrl",
+        "operationId": "createUploadUrl",
         "parameters": [],
         "requestBody": {
           "required": true,
@@ -864,7 +864,7 @@
     "/link-anchors/{id}/set": {
       "post": {
         "description": "Set the link set for a link anchor",
-        "operationId": "setLinkAnchorLinkSet",
+        "operationId": "setLinkAnchor",
         "parameters": [
           {
             "name": "id",
@@ -898,7 +898,8 @@
     },
     "/link-anchors/{id}": {
       "get": {
-        "operationId": "StackLinkAnchorController_get",
+        "description": "Get a link anchor",
+        "operationId": "getLinkAnchor",
         "parameters": [
           {
             "name": "id",
@@ -914,6 +915,7 @@
             "description": ""
           }
         },
+        "summary": "Get a link anchor",
         "tags": [
           "Link Anchor"
         ]
@@ -2491,6 +2493,42 @@
         ]
       }
     },
+    "/locations/by-identifier/{identifier}": {
+      "get": {
+        "description": "Get a location by its identifier",
+        "operationId": "getLocationByIdentifier",
+        "parameters": [
+          {
+            "name": "identifier",
+            "required": true,
+            "in": "path",
+            "description": "The identifier of the location",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The location has been successfully retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Location"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The location could not be found"
+          }
+        },
+        "summary": "Get Location by Identifier",
+        "tags": [
+          "Location"
+        ]
+      }
+    },
     "/trade-items": {
       "post": {
         "description": "Create a trade item",
@@ -2751,7 +2789,7 @@
     "/partners/{id}": {
       "get": {
         "description": "Get a partner by ID",
-        "operationId": "getPartnerById",
+        "operationId": "getPartner",
         "parameters": [
           {
             "name": "id",
@@ -2785,7 +2823,7 @@
       },
       "delete": {
         "description": "Delete a partner by ID",
-        "operationId": "deletePartnerById",
+        "operationId": "deletePartner",
         "parameters": [
           {
             "name": "id",
@@ -2808,7 +2846,7 @@
       },
       "put": {
         "description": "Update a partner by ID",
-        "operationId": "updatePartnerById",
+        "operationId": "updatePartner",
         "parameters": [
           {
             "name": "id",
@@ -4667,24 +4705,21 @@
           "deletedAt"
         ]
       },
-      "QuantityElement": {
+      "CreateInstanceIdentifier": {
         "type": "object",
         "properties": {
-          "epcClass": {
+          "epc": {
             "type": "string",
             "description": "The EPC class of the quantity element"
           },
-          "quantity": {
-            "type": "number",
-            "description": "The quantity of the item"
-          },
-          "unit": {
+          "tradeItem": {
             "type": "string",
-            "description": "The unit of measurement for the quantity"
+            "description": "The trade item of the quantity element"
           }
         },
         "required": [
-          "epcClass"
+          "epc",
+          "tradeItem"
         ]
       },
       "CreateQuantityElement": {
@@ -4918,28 +4953,28 @@
             "description": "List of EPCs associated with the event",
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/QuantityElement"
+              "$ref": "#/components/schemas/CreateInstanceIdentifier"
             }
           },
           "inputEpcs": {
             "description": "List of input EPCs associated with the event",
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/QuantityElement"
+              "$ref": "#/components/schemas/CreateInstanceIdentifier"
             }
           },
           "outputEpcs": {
             "description": "List of output EPCs associated with the event",
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/QuantityElement"
+              "$ref": "#/components/schemas/CreateInstanceIdentifier"
             }
           },
           "quantityList": {
             "description": "List of quantities associated with the event",
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/QuantityElement"
+              "$ref": "#/components/schemas/CreateQuantityElement"
             }
           },
           "outputQuantityList": {
@@ -4977,12 +5012,39 @@
                 "$ref": "#/components/schemas/ReadPoint"
               }
             ]
+          },
+          "images": {
+            "description": "List of images associated with the event",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         },
         "required": [
           "eventTime",
           "eventType",
           "action"
+        ]
+      },
+      "QuantityElement": {
+        "type": "object",
+        "properties": {
+          "epcClass": {
+            "type": "string",
+            "description": "The EPC class of the quantity element"
+          },
+          "quantity": {
+            "type": "number",
+            "description": "The quantity of the item"
+          },
+          "unit": {
+            "type": "string",
+            "description": "The unit of measurement for the quantity"
+          }
+        },
+        "required": [
+          "epcClass"
         ]
       },
       "InstanceIdentifierDto": {
@@ -5010,6 +5072,10 @@
             "type": "string",
             "description": "The time of the event was created",
             "format": "date-time"
+          },
+          "userId": {
+            "type": "string",
+            "description": "The user id of the event"
           },
           "eventTime": {
             "type": "string",
@@ -5188,6 +5254,13 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/InstanceIdentifierDto"
+            }
+          },
+          "images": {
+            "description": "The images associated with the event",
+            "type": "array",
+            "items": {
+              "type": "string"
             }
           }
         },

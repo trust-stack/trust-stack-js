@@ -811,19 +811,15 @@ export type EventTag = {
     deletedAt: string;
 };
 
-export type QuantityElement = {
+export type CreateInstanceIdentifier = {
     /**
      * The EPC class of the quantity element
      */
-    epcClass: string;
+    epc: string;
     /**
-     * The quantity of the item
+     * The trade item of the quantity element
      */
-    quantity?: number;
-    /**
-     * The unit of measurement for the quantity
-     */
-    unit?: string;
+    tradeItem: string;
 };
 
 export type CreateQuantityElement = {
@@ -922,19 +918,19 @@ export type CreateEvent = {
     /**
      * List of EPCs associated with the event
      */
-    epcs?: Array<QuantityElement>;
+    epcs?: Array<CreateInstanceIdentifier>;
     /**
      * List of input EPCs associated with the event
      */
-    inputEpcs?: Array<QuantityElement>;
+    inputEpcs?: Array<CreateInstanceIdentifier>;
     /**
      * List of output EPCs associated with the event
      */
-    outputEpcs?: Array<QuantityElement>;
+    outputEpcs?: Array<CreateInstanceIdentifier>;
     /**
      * List of quantities associated with the event
      */
-    quantityList?: Array<QuantityElement>;
+    quantityList?: Array<CreateQuantityElement>;
     /**
      * Output ist of quantities associated with the event
      */
@@ -955,6 +951,25 @@ export type CreateEvent = {
      * The read point associated with the event
      */
     readPoint?: ReadPoint;
+    /**
+     * List of images associated with the event
+     */
+    images?: Array<string>;
+};
+
+export type QuantityElement = {
+    /**
+     * The EPC class of the quantity element
+     */
+    epcClass: string;
+    /**
+     * The quantity of the item
+     */
+    quantity?: number;
+    /**
+     * The unit of measurement for the quantity
+     */
+    unit?: string;
 };
 
 export type InstanceIdentifierDto = {
@@ -973,6 +988,10 @@ export type Event = {
      * The time of the event was created
      */
     createdAt: string;
+    /**
+     * The user id of the event
+     */
+    userId?: string;
     /**
      * The time of the event
      */
@@ -1033,6 +1052,10 @@ export type Event = {
      * The instance identifiers associated with the event
      */
     outputEpcs?: Array<InstanceIdentifierDto>;
+    /**
+     * The images associated with the event
+     */
+    images?: Array<string>;
 };
 
 export type CreateLocation = {
@@ -1693,21 +1716,21 @@ export type CreateOrganizationThemeResponses = {
 
 export type CreateOrganizationThemeResponse = CreateOrganizationThemeResponses[keyof CreateOrganizationThemeResponses];
 
-export type S3ControllerCreateUploadUrlData = {
+export type CreateUploadUrlData = {
     body: S3UploadObject;
     path?: never;
     query?: never;
     url: '/s3/upload-url';
 };
 
-export type S3ControllerCreateUploadUrlResponses = {
+export type CreateUploadUrlResponses = {
     /**
      * Returns a presigned URL and S3 object ID for uploading a file
      */
     201: S3UploadResponse;
 };
 
-export type S3ControllerCreateUploadUrlResponse = S3ControllerCreateUploadUrlResponses[keyof S3ControllerCreateUploadUrlResponses];
+export type CreateUploadUrlResponse = CreateUploadUrlResponses[keyof CreateUploadUrlResponses];
 
 export type ResolveUrlControllerResolveData = {
     body: ResolveUrl;
@@ -1889,7 +1912,7 @@ export type MintManyLinkAnchorsResponses = {
     201: unknown;
 };
 
-export type SetLinkAnchorLinkSetData = {
+export type SetLinkAnchorData = {
     body: SetLinkAnchor;
     path: {
         id: string;
@@ -1898,11 +1921,11 @@ export type SetLinkAnchorLinkSetData = {
     url: '/link-anchors/{id}/set';
 };
 
-export type SetLinkAnchorLinkSetResponses = {
+export type SetLinkAnchorResponses = {
     200: unknown;
 };
 
-export type StackLinkAnchorControllerGetData = {
+export type GetLinkAnchorData = {
     body?: never;
     path: {
         id: string;
@@ -1911,7 +1934,7 @@ export type StackLinkAnchorControllerGetData = {
     url: '/link-anchors/{id}';
 };
 
-export type StackLinkAnchorControllerGetResponses = {
+export type GetLinkAnchorResponses = {
     200: unknown;
 };
 
@@ -2918,6 +2941,34 @@ export type GetLocationResponses = {
 
 export type GetLocationResponse = GetLocationResponses[keyof GetLocationResponses];
 
+export type GetLocationByIdentifierData = {
+    body?: never;
+    path: {
+        /**
+         * The identifier of the location
+         */
+        identifier: string;
+    };
+    query?: never;
+    url: '/locations/by-identifier/{identifier}';
+};
+
+export type GetLocationByIdentifierErrors = {
+    /**
+     * The location could not be found
+     */
+    404: unknown;
+};
+
+export type GetLocationByIdentifierResponses = {
+    /**
+     * The location has been successfully retrieved
+     */
+    200: Location;
+};
+
+export type GetLocationByIdentifierResponse = GetLocationByIdentifierResponses[keyof GetLocationByIdentifierResponses];
+
 export type GetTradeItemsData = {
     body?: never;
     path?: never;
@@ -3086,7 +3137,7 @@ export type CreatePartnerResponses = {
 
 export type CreatePartnerResponse = CreatePartnerResponses[keyof CreatePartnerResponses];
 
-export type DeletePartnerByIdData = {
+export type DeletePartnerData = {
     body?: never;
     path: {
         id: string;
@@ -3095,14 +3146,14 @@ export type DeletePartnerByIdData = {
     url: '/partners/{id}';
 };
 
-export type DeletePartnerByIdResponses = {
+export type DeletePartnerResponses = {
     /**
      * The partner has been successfully deleted.
      */
     200: unknown;
 };
 
-export type GetPartnerByIdData = {
+export type GetPartnerData = {
     body?: never;
     path: {
         /**
@@ -3114,23 +3165,23 @@ export type GetPartnerByIdData = {
     url: '/partners/{id}';
 };
 
-export type GetPartnerByIdErrors = {
+export type GetPartnerErrors = {
     /**
      * The partner could not be found.
      */
     404: unknown;
 };
 
-export type GetPartnerByIdResponses = {
+export type GetPartnerResponses = {
     /**
      * The partner has been successfully retrieved.
      */
     200: Partner;
 };
 
-export type GetPartnerByIdResponse = GetPartnerByIdResponses[keyof GetPartnerByIdResponses];
+export type GetPartnerResponse = GetPartnerResponses[keyof GetPartnerResponses];
 
-export type UpdatePartnerByIdData = {
+export type UpdatePartnerData = {
     body: UpdatePartner;
     path: {
         /**
@@ -3142,21 +3193,21 @@ export type UpdatePartnerByIdData = {
     url: '/partners/{id}';
 };
 
-export type UpdatePartnerByIdErrors = {
+export type UpdatePartnerErrors = {
     /**
      * The partner could not be found.
      */
     404: unknown;
 };
 
-export type UpdatePartnerByIdResponses = {
+export type UpdatePartnerResponses = {
     /**
      * The partner has been successfully updated.
      */
     200: Partner;
 };
 
-export type UpdatePartnerByIdResponse = UpdatePartnerByIdResponses[keyof UpdatePartnerByIdResponses];
+export type UpdatePartnerResponse = UpdatePartnerResponses[keyof UpdatePartnerResponses];
 
 export type CreateOrganizationData = {
     body: CreateOrganization;

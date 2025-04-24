@@ -59,7 +59,7 @@ export async function applyConfig(
     accessToken: process.env.TRUST_STACK_ACCESS_TOKEN as string,
   });
 
-  await client.setEventTags(
+  await client.admin.setEventTags(
     config.eventTags?.map((tag) => ({
       code: tag.code,
       name: tag.name,
@@ -78,5 +78,5 @@ export async function cleanSandbox() {
     tenantUserId: process.env.TRUST_STACK_TENANT_USER_ID as string,
   });
 
-  await client.clearSandbox();
+  await client.admin.clearSandbox();
 }
