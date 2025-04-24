@@ -1,5 +1,23 @@
 # @truststack/sdk
 
+## 0.1.6
+
+### Patch Changes
+
+- 209f691: Removing sdk mixing, creating object client.
+- Updated dependencies [209f691]
+  - @truststack/master-data@0.1.5
+  - @truststack/object@0.1.5
+  - @truststack/core@0.1.5
+  - @truststack/admin@0.1.5
+  - @truststack/biolock@0.1.5
+  - @truststack/canvas@0.0.8
+  - @truststack/did@0.0.8
+  - @truststack/discovery@0.1.5
+  - @truststack/event@0.1.5
+  - @truststack/link-resolver@0.1.6
+  - @truststack/untp@0.0.7
+
 ## 0.1.5
 
 ### Patch Changes

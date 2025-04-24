@@ -1,6 +1,6 @@
 {
   "name": "@truststack/link-resolver",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Trust Stack Link Resolver SDK",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

@@ -1,5 +1,13 @@
 # @truststack/untp-builder
 
+## 0.0.6
+
+### Patch Changes
+
+- 209f691: Removing sdk mixing, creating object client.
+- Updated dependencies [209f691]
+  - @truststack/untp-types@0.0.4
+
 ## 0.0.5
 
 ### Patch Changes
