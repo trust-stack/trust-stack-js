@@ -1,7 +1,7 @@
 {
-  "name": "@truststack/hermes",
+  "name": "@truststack/master-data",
   "version": "0.0.2",
-  "description": "Trust Stack API Client - A lightweight JS library for making with Trust Stacks Hermes API",
+  "description": "Trust Stack Master Data SDK",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -18,7 +18,8 @@
     "build": "tsup src/index.ts --format cjs,esm --dts"
   },
   "dependencies": {
-    "@truststack/core": "workspace:*"
+    "@truststack/core": "workspace:*",
+    "ts-mixer": "^6.0.4"
   },
   "keywords": [],
   "author": "",

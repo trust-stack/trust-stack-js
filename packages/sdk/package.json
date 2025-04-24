@@ -2,19 +2,21 @@
   "name": "@truststack/sdk",
   "version": "0.0.2",
   "description": "Unified Trust Stack SDK.",
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
+  "keywords": [],
   "license": "MIT",
+  "author": "",
   "type": "module",
-  "bin": {
-    "truststack": "./dist/truststack.js"
-  },
   "exports": {
     ".": {
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     }
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "truststack": "./dist/truststack.js"
   },
   "scripts": {
     "build": "tsup src/index.ts --format cjs,esm --dts && pnpm build:cli",
@@ -22,20 +24,17 @@
     "cli": "node dist/truststack.js",
     "test": "vitest --config ./vitest.config.ts"
   },
-  "keywords": [],
-  "author": "",
-  "devDependencies": {
-    "@hey-api/openapi-ts": "^0.61.3",
-    "@types/node": "^22.10.7",
-    "tsup": "^8.3.5"
-  },
   "dependencies": {
     "@hey-api/client-fetch": "^0.6.0",
     "@truststack/admin": "workspace:*",
+    "@truststack/biolock": "workspace:*",
     "@truststack/canvas": "workspace:*",
     "@truststack/core": "workspace:*",
     "@truststack/did": "workspace:*",
-    "@truststack/hermes": "workspace:*",
+    "@truststack/discovery": "workspace:*",
+    "@truststack/event": "workspace:*",
+    "@truststack/link-resolver": "workspace:*",
+    "@truststack/master-data": "workspace:*",
     "@truststack/untp": "workspace:*",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
@@ -43,7 +42,11 @@
     "dotenv": "^16.4.7",
     "reflect-metadata": "^0.2.2",
     "ts-node": "^10.9.2",
-    "@truststack/discovery": "workspace:*",
     "vitest": "^3.0.4"
+  },
+  "devDependencies": {
+    "@hey-api/openapi-ts": "^0.61.3",
+    "@types/node": "^22.10.7",
+    "tsup": "^8.3.5"
   }
 }

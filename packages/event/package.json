@@ -1,7 +1,7 @@
 {
-  "name": "@truststack/admin",
+  "name": "@truststack/event",
   "version": "0.0.2",
-  "description": "Trust Stack API Client - A lightweight JS library for making with Trust Stacks Admin API",
+  "description": "Trust Stack Event SDK",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -18,8 +18,7 @@
     "build": "tsup src/index.ts --format cjs,esm --dts"
   },
   "dependencies": {
-    "@truststack/core": "workspace:*",
-    "ts-mixer": "^6.0.4"
+    "@truststack/core": "workspace:*"
   },
   "keywords": [],
   "author": "",

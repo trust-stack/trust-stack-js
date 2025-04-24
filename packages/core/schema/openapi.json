@@ -16,9 +16,201 @@
         ]
       }
     },
+    "/auth/tenant-users": {
+      "post": {
+        "operationId": "createTenantUser",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTenantUser"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The tenant user has been successfully created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TenantUser"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The tenant user could not be created"
+          },
+          "404": {
+            "description": "The tenant user could not be found"
+          }
+        },
+        "summary": "Create a tenant user",
+        "tags": [
+          "Auth"
+        ]
+      },
+      "get": {
+        "operationId": "getTenantUsers",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The tenant users have been successfully retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TenantUser"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access"
+          }
+        },
+        "summary": "Get all tenant users",
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/auth/tenant-users/{id}": {
+      "get": {
+        "operationId": "getTenantUserById",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The tenant user has been successfully retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TenantUser"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access"
+          },
+          "404": {
+            "description": "The tenant user could not be found"
+          }
+        },
+        "summary": "Get a tenant user by ID",
+        "tags": [
+          "Auth"
+        ]
+      },
+      "put": {
+        "operationId": "updateTenantUser",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTenantUser"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The tenant user has been successfully updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TenantUser"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The tenant user could not be updated"
+          },
+          "401": {
+            "description": "Unauthorized access"
+          },
+          "404": {
+            "description": "The tenant user could not be found"
+          }
+        },
+        "summary": "Update a tenant user",
+        "tags": [
+          "Auth"
+        ]
+      },
+      "delete": {
+        "operationId": "deleteTenantUser",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The tenant user has been successfully deleted"
+          },
+          "401": {
+            "description": "Unauthorized access"
+          },
+          "404": {
+            "description": "The tenant user could not be found"
+          }
+        },
+        "summary": "Delete a tenant user",
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/sandbox/clear": {
+      "post": {
+        "operationId": "clearSandbox",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The sandbox data has been successfully cleared"
+          }
+        },
+        "summary": "Clear all sandbox data for the authenticated tenant user",
+        "tags": [
+          "sandbox"
+        ]
+      }
+    },
     "/canvas-template-instances/{id}/link": {
       "post": {
-        "description": "Create a link to a canvas template instance via the Hermes resolver.",
+        "description": "Create a link to a canvas template instance via the link-resolver resolver.",
         "operationId": "linkCanvasTemplateInstance",
         "parameters": [
           {
@@ -47,7 +239,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/LinkSetDto"
+                  "$ref": "#/components/schemas/LinkSet"
                 }
               }
             }
@@ -236,6 +428,245 @@
         ]
       }
     },
+    "/organization-themes": {
+      "post": {
+        "description": "Create a new organization theme",
+        "operationId": "createOrganizationTheme",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateOrganizationTheme"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The organization theme that was created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganizationTheme"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create Organization Theme",
+        "tags": [
+          "Organization Theme"
+        ]
+      },
+      "get": {
+        "description": "Get the requesting organizations themes",
+        "operationId": "getOrganizationTheme",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The organization theme that was found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganizationTheme"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get Organization Theme",
+        "tags": [
+          "Organization Theme"
+        ]
+      }
+    },
+    "/s3/upload-url": {
+      "post": {
+        "operationId": "S3Controller_createUploadUrl",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/S3UploadObject"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Returns a presigned URL and S3 object ID for uploading a file",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/S3UploadResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get a presigned URL for uploading a file to S3",
+        "tags": [
+          "S3"
+        ]
+      }
+    },
+    "/resolve-url": {
+      "post": {
+        "operationId": "ResolveUrlController_resolve",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResolveUrl"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The URL has been resolved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResolveUrlResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Resolve a URL",
+        "tags": [
+          "Resolve URL"
+        ]
+      }
+    },
+    "/external-resolvers": {
+      "post": {
+        "operationId": "createExternalResolver",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateExternalResolverDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "summary": "Create External Resolver",
+        "tags": [
+          "External Resolver",
+          "External Resolver"
+        ]
+      },
+      "get": {
+        "operationId": "getManyExternalResolvers",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "",
+        "tags": [
+          "External Resolver",
+          "External Resolver"
+        ]
+      }
+    },
+    "/external-resolvers/{id}": {
+      "put": {
+        "operationId": "updateExternalResolver",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateExternalResolverDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Update External Resolver",
+        "tags": [
+          "External Resolver",
+          "External Resolver"
+        ]
+      },
+      "get": {
+        "operationId": "getExternalResolver",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Get External Resolver",
+        "tags": [
+          "External Resolver",
+          "External Resolver"
+        ]
+      },
+      "delete": {
+        "operationId": "deleteExternalResolver",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Delete External Resolver",
+        "tags": [
+          "External Resolver",
+          "External Resolver"
+        ]
+      }
+    },
     "/link-sets": {
       "post": {
         "operationId": "createLinkSet",
@@ -245,7 +676,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateLinkSetDto"
+                "$ref": "#/components/schemas/CreateLinkSet"
               }
             }
           }
@@ -311,7 +742,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateLinkSetDto"
+                "$ref": "#/components/schemas/UpdateLinkSet"
               }
             }
           }
@@ -385,6 +816,150 @@
         "tags": [
           "Link Set",
           "Link Set"
+        ]
+      }
+    },
+    "/link-anchors/mint": {
+      "post": {
+        "description": "Mint a new link anchor",
+        "operationId": "mintLinkAnchor",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "summary": "Mint a new link anchor",
+        "tags": [
+          "Link Anchor"
+        ]
+      }
+    },
+    "/link-anchors/mint-many": {
+      "post": {
+        "description": "Mint many link anchors",
+        "operationId": "mintManyLinkAnchors",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MintManyRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "summary": "Mint many link anchors",
+        "tags": [
+          "Link Anchor"
+        ]
+      }
+    },
+    "/link-anchors/{id}/set": {
+      "post": {
+        "description": "Set the link set for a link anchor",
+        "operationId": "setLinkAnchorLinkSet",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetLinkAnchor"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Set the link set for a link anchor",
+        "tags": [
+          "Link Anchor"
+        ]
+      }
+    },
+    "/link-anchors/{id}": {
+      "get": {
+        "operationId": "StackLinkAnchorController_get",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Link Anchor"
+        ]
+      }
+    },
+    "/link-anchors": {
+      "get": {
+        "description": "Get many link anchors",
+        "operationId": "getManyLinkAnchors",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Get many link anchors",
+        "tags": [
+          "Link Anchor"
+        ]
+      }
+    },
+    "/link-resolver/*": {
+      "get": {
+        "operationId": "StackLinkResolverController_resolve",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "StackLinkResolver"
+        ]
+      }
+    },
+    "/link-resolver/.well-known/resolver": {
+      "get": {
+        "operationId": "StackLinkResolverController_getResolverMetadata",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "StackLinkResolver"
         ]
       }
     },
@@ -747,78 +1322,90 @@
         ]
       }
     },
-    "/auth/tenant-users": {
+    "/bio-locks": {
       "post": {
-        "operationId": "createTenantUser",
+        "description": "Create a BioLock",
+        "operationId": "createBioLock",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateTenantUser"
+                "$ref": "#/components/schemas/CreateBioLock"
               }
             }
           }
         },
         "responses": {
           "201": {
-            "description": "The tenant user has been successfully created",
+            "description": "The BioLock has been successfully created",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TenantUser"
+                  "$ref": "#/components/schemas/BioLock"
                 }
               }
             }
           },
           "400": {
-            "description": "The tenant user could not be created"
+            "description": "The BioLock could not be created"
           },
           "404": {
-            "description": "The tenant user could not be found"
+            "description": "The BioLock could not be found"
           }
         },
-        "summary": "Create a tenant user",
+        "summary": "Create Bio Lock",
         "tags": [
-          "Auth"
+          "BioLock"
         ]
       },
       "get": {
-        "operationId": "getTenantUsers",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "The tenant users have been successfully retrieved",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/TenantUser"
-                  }
-                }
-              }
+        "description": "Get Bio Locks",
+        "operationId": "getBioLocks",
+        "parameters": [
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "description": "Page number (1-based)",
+            "schema": {
+              "default": 1,
+              "type": "number"
             }
           },
-          "401": {
-            "description": "Unauthorized access"
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items per page",
+            "schema": {
+              "default": 10,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
           }
         },
-        "summary": "Get all tenant users",
+        "summary": "Get Bio Locks",
         "tags": [
-          "Auth"
+          "BioLock"
         ]
       }
     },
-    "/auth/tenant-users/{id}": {
+    "/bio-locks/{id}": {
       "get": {
-        "operationId": "getTenantUserById",
+        "description": "Get Bio Lock",
+        "operationId": "getBioLock",
         "parameters": [
           {
             "name": "id",
             "required": true,
             "in": "path",
+            "description": "The id of the Bio Lock",
             "schema": {
               "type": "string"
             }
@@ -826,116 +1413,12 @@
         ],
         "responses": {
           "200": {
-            "description": "The tenant user has been successfully retrieved",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TenantUser"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access"
-          },
-          "404": {
-            "description": "The tenant user could not be found"
+            "description": ""
           }
         },
-        "summary": "Get a tenant user by ID",
+        "summary": "Get Bio Lock",
         "tags": [
-          "Auth"
-        ]
-      },
-      "put": {
-        "operationId": "updateTenantUser",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateTenantUser"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "The tenant user has been successfully updated",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TenantUser"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "The tenant user could not be updated"
-          },
-          "401": {
-            "description": "Unauthorized access"
-          },
-          "404": {
-            "description": "The tenant user could not be found"
-          }
-        },
-        "summary": "Update a tenant user",
-        "tags": [
-          "Auth"
-        ]
-      },
-      "delete": {
-        "operationId": "deleteTenantUser",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The tenant user has been successfully deleted"
-          },
-          "401": {
-            "description": "Unauthorized access"
-          },
-          "404": {
-            "description": "The tenant user could not be found"
-          }
-        },
-        "summary": "Delete a tenant user",
-        "tags": [
-          "Auth"
-        ]
-      }
-    },
-    "/sandbox/clear": {
-      "post": {
-        "operationId": "clearSandbox",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "The sandbox data has been successfully cleared"
-          }
-        },
-        "summary": "Clear all sandbox data for the authenticated tenant user",
-        "tags": [
-          "sandbox"
+          "BioLock"
         ]
       }
     },
@@ -1377,6 +1860,179 @@
         ]
       }
     },
+    "/provenance-forms": {
+      "post": {
+        "description": "Create a new provenance form",
+        "operationId": "createProvenanceForm",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProvenanceForm"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The provenance form has been successfully created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProvenanceForm"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create Provenance Form",
+        "tags": [
+          "Provenance Form"
+        ]
+      },
+      "get": {
+        "description": "Get many provenance forms",
+        "operationId": "getProvenanceForms",
+        "parameters": [
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "description": "Page number (1-based)",
+            "schema": {
+              "default": 1,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items per page",
+            "schema": {
+              "default": 10,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The provenance forms have been successfully retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProvenanceForm"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get Provenance Forms",
+        "tags": [
+          "Provenance Form"
+        ]
+      }
+    },
+    "/provenance-forms/{id}": {
+      "get": {
+        "description": "Get a provenance form by ID",
+        "operationId": "getProvenanceForm",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The provenance form has been successfully retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProvenanceForm"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get Provenance Form",
+        "tags": [
+          "Provenance Form"
+        ]
+      },
+      "put": {
+        "description": "Update a provenance form",
+        "operationId": "updateProvenanceForm",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProvenanceForm"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The provenance form has been successfully updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProvenanceForm"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Update Provenance Form",
+        "tags": [
+          "Provenance Form"
+        ]
+      },
+      "delete": {
+        "description": "Delete a provenance form",
+        "operationId": "deleteProvenanceForm",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The provenance form has been successfully deleted"
+          }
+        },
+        "summary": "Delete Provenance Form",
+        "tags": [
+          "Provenance Form"
+        ]
+      }
+    },
     "/event-tags": {
       "post": {
         "operationId": "createEventTag",
@@ -1705,127 +2361,6 @@
         ]
       }
     },
-    "/external-resolvers": {
-      "post": {
-        "operationId": "createExternalResolver",
-        "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateExternalResolverDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": ""
-          }
-        },
-        "summary": "Create External Resolver",
-        "tags": [
-          "External Resolver",
-          "External Resolver"
-        ]
-      },
-      "get": {
-        "operationId": "getManyExternalResolvers",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        },
-        "summary": "",
-        "tags": [
-          "External Resolver",
-          "External Resolver"
-        ]
-      }
-    },
-    "/external-resolvers/{id}": {
-      "put": {
-        "operationId": "updateExternalResolver",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateExternalResolverDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        },
-        "summary": "Update External Resolver",
-        "tags": [
-          "External Resolver",
-          "External Resolver"
-        ]
-      },
-      "get": {
-        "operationId": "getExternalResolver",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        },
-        "summary": "Get External Resolver",
-        "tags": [
-          "External Resolver",
-          "External Resolver"
-        ]
-      },
-      "delete": {
-        "operationId": "deleteExternalResolver",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        },
-        "summary": "Delete External Resolver",
-        "tags": [
-          "External Resolver",
-          "External Resolver"
-        ]
-      }
-    },
     "/locations": {
       "post": {
         "description": "Create a location",
@@ -2132,6 +2667,190 @@
         ]
       }
     },
+    "/partners": {
+      "post": {
+        "description": "Create a partner",
+        "operationId": "createPartner",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePartner"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The partner has been successfully created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Partner"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The partner could not be created."
+          }
+        },
+        "summary": "Create a partner",
+        "tags": [
+          "Partners"
+        ]
+      },
+      "get": {
+        "description": "Get all partners",
+        "operationId": "getPartners",
+        "parameters": [
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "description": "Page number (1-based)",
+            "schema": {
+              "default": 1,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items per page",
+            "schema": {
+              "default": 10,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The partners have been successfully retrieved.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Partner"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get all partners",
+        "tags": [
+          "Partners"
+        ]
+      }
+    },
+    "/partners/{id}": {
+      "get": {
+        "description": "Get a partner by ID",
+        "operationId": "getPartnerById",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "The ID of the partner to get",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The partner has been successfully retrieved.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Partner"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The partner could not be found."
+          }
+        },
+        "summary": "Get a partner by ID",
+        "tags": [
+          "Partners"
+        ]
+      },
+      "delete": {
+        "description": "Delete a partner by ID",
+        "operationId": "deletePartnerById",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The partner has been successfully deleted."
+          }
+        },
+        "summary": "Delete a partner by ID",
+        "tags": [
+          "Partners"
+        ]
+      },
+      "put": {
+        "description": "Update a partner by ID",
+        "operationId": "updatePartnerById",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "The ID of the partner to update",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePartner"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The partner has been successfully updated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Partner"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The partner could not be found."
+          }
+        },
+        "summary": "Update a partner by ID",
+        "tags": [
+          "Partners"
+        ]
+      }
+    },
     "/organizations": {
       "post": {
         "operationId": "createOrganization",
@@ -2268,6 +2987,77 @@
         "summary": "Delete an organization",
         "tags": [
           "Organization"
+        ]
+      }
+    },
+    "/provenance/{identifier}": {
+      "get": {
+        "description": "Get all events associated with a provided identifier",
+        "operationId": "getEventsByIdentifier",
+        "parameters": [
+          {
+            "name": "identifier",
+            "required": true,
+            "in": "path",
+            "description": "The identifier to get events for",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The events have been successfully retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Event"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No events found for the provided identifier"
+          }
+        },
+        "summary": "Get Events by Identifier",
+        "tags": [
+          "Provenance"
+        ]
+      }
+    },
+    "/render/discovery/trust-graph/{id}": {
+      "get": {
+        "description": "Render a trust graph",
+        "operationId": "renderTrustGraph",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TrustGraphScreen"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Render a trust graph",
+        "tags": [
+          "Render"
         ]
       }
     },
@@ -2418,7 +3208,10 @@
           {
             "name": "id",
             "required": true,
-            "in": "path"
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -2493,6 +3286,59 @@
       }
     },
     "schemas": {
+      "CreateTenantUser": {
+        "type": "object",
+        "properties": {}
+      },
+      "TenantUser": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The ID of the tenant user",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "tenantId": {
+            "type": "string",
+            "description": "The ID of the tenant",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the tenant user",
+            "example": "John Doe"
+          },
+          "email": {
+            "type": "string",
+            "description": "The email of the tenant user",
+            "example": "john.doe@example.com"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "The date and time the tenant user was created",
+            "example": "2021-01-01T00:00:00.000Z"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "The date and time the tenant user was updated",
+            "example": "2021-01-01T00:00:00.000Z"
+          }
+        },
+        "required": [
+          "id",
+          "tenantId",
+          "name",
+          "email",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "UpdateTenantUser": {
+        "type": "object",
+        "properties": {}
+      },
       "CanvasTemplateInstanceLink": {
         "type": "object",
         "properties": {
@@ -2554,7 +3400,7 @@
           "updatedAt"
         ]
       },
-      "LinkSetDto": {
+      "LinkSet": {
         "type": "object",
         "properties": {
           "id": {
@@ -2667,7 +3513,261 @@
           "color"
         ]
       },
-      "UpsertLinkDto": {
+      "CreateOrganizationTheme": {
+        "type": "object",
+        "properties": {
+          "color": {
+            "type": "string",
+            "description": "The primary color for the organization theme in hex format",
+            "example": "#3366FF"
+          },
+          "icon": {
+            "type": "string",
+            "format": "uuid",
+            "description": "The ID of the icon uploaded to the object storage",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          }
+        },
+        "required": [
+          "color",
+          "icon"
+        ]
+      },
+      "S3Object": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The ID of the object",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "url": {
+            "type": "string",
+            "description": "Presigned URL of the object"
+          },
+          "key": {
+            "type": "string",
+            "description": "The key of the object",
+            "example": "test.png"
+          },
+          "mimeType": {
+            "type": "string",
+            "description": "The MIME type of the object",
+            "example": "image/png"
+          },
+          "size": {
+            "type": "number",
+            "description": "The size of the object",
+            "example": 1024
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "The tenant ID of the object",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "description": "The updated at date of the object",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "url",
+          "key",
+          "mimeType",
+          "size",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "OrganizationTheme": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Unique identifier for the organization theme",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "icon": {
+            "description": "The associated icon organization theme",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/S3Object"
+              }
+            ]
+          },
+          "variables": {
+            "type": "object",
+            "description": "The associated theme containing styles and variables",
+            "additionalProperties": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The date and time the organization theme was created"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The date and time the organization theme was updated"
+          }
+        },
+        "required": [
+          "id",
+          "icon",
+          "variables",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "S3UploadObject": {
+        "type": "object",
+        "properties": {
+          "mimeType": {
+            "type": "string",
+            "description": "The MIME type of the object"
+          },
+          "size": {
+            "type": "number",
+            "description": "The size of the object"
+          }
+        },
+        "required": [
+          "mimeType",
+          "size"
+        ]
+      },
+      "S3UploadResponse": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "The presigned URL to upload the file to",
+            "example": "https://example-bucket.s3.amazonaws.com/path/to/file.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&..."
+          },
+          "s3ObjectId": {
+            "type": "string",
+            "description": "The created S3 object record",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          }
+        },
+        "required": [
+          "url",
+          "s3ObjectId"
+        ]
+      },
+      "ResolveUrl": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "The url to resolve",
+            "example": "https://truststack.link/<UUID>"
+          }
+        },
+        "required": [
+          "url"
+        ]
+      },
+      "ResolveUrlResponse": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "The URL that was resolved"
+          },
+          "target": {
+            "type": "string",
+            "description": "If a redirect, this is where you have been redirected to. Otherwise, it is just the url provided"
+          },
+          "status": {
+            "type": "string",
+            "description": "The resolution status",
+            "enum": [
+              "resolved",
+              "not_found",
+              "invalid",
+              "error"
+            ]
+          },
+          "resolutionType": {
+            "type": "string",
+            "description": "The type of resolution that occurred",
+            "enum": [
+              "redirect",
+              "linkset"
+            ]
+          }
+        },
+        "required": [
+          "url",
+          "target",
+          "status"
+        ]
+      },
+      "CreateExternalResolverDto": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string",
+            "description": "The href of the External Resolver."
+          },
+          "pattern": {
+            "type": "string",
+            "description": "The pattern of the External Resolver."
+          },
+          "qualifier": {
+            "type": "string",
+            "description": "The qualifier of the External Resolver."
+          },
+          "childExternalResolvers": {
+            "description": "The creation data of the External Resolver.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "href",
+          "pattern",
+          "qualifier",
+          "childExternalResolvers"
+        ]
+      },
+      "UpdateExternalResolverDto": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string",
+            "description": "The href of the External Resolver."
+          },
+          "pattern": {
+            "type": "string",
+            "description": "The pattern of the External Resolver."
+          },
+          "qualifier": {
+            "type": "string",
+            "description": "The qualifier of the External Resolver."
+          },
+          "childExternalResolvers": {
+            "description": "The creation data of the External Resolver.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "href",
+          "pattern",
+          "qualifier",
+          "childExternalResolvers"
+        ]
+      },
+      "UpsertLink": {
         "type": "object",
         "properties": {
           "relationType": {
@@ -2677,10 +3777,6 @@
           "href": {
             "type": "string",
             "description": "The href of the link."
-          },
-          "objectKey": {
-            "type": "string",
-            "description": "The object key of the link, if TYPE is OBJECT."
           },
           "title": {
             "type": "string",
@@ -2700,7 +3796,7 @@
           "title"
         ]
       },
-      "CreateLinkSetDto": {
+      "CreateLinkSet": {
         "type": "object",
         "properties": {
           "identifier": {
@@ -2715,7 +3811,7 @@
             "description": "The links of the Link Set.",
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/UpsertLinkDto"
+              "$ref": "#/components/schemas/UpsertLink"
             }
           }
         },
@@ -2725,47 +3821,7 @@
           "links"
         ]
       },
-      "LinkSet": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "The ID of the Link Set."
-          },
-          "identifier": {
-            "type": "string",
-            "description": "The identifier of the Link Set."
-          },
-          "qualifier": {
-            "type": "string",
-            "description": "The qualifier of the Link Set."
-          },
-          "links": {
-            "description": "The links of the Link Set.",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Link"
-            }
-          },
-          "createdAt": {
-            "format": "date-time",
-            "type": "string",
-            "description": "The creation date of the Link Set."
-          },
-          "updatedAt": {
-            "format": "date-time",
-            "type": "string",
-            "description": "The last update date of the Link Set."
-          }
-        },
-        "required": [
-          "qualifier",
-          "links",
-          "createdAt",
-          "updatedAt"
-        ]
-      },
-      "UpdateLinkSetDto": {
+      "UpdateLinkSet": {
         "type": "object",
         "properties": {
           "identifier": {
@@ -2780,7 +3836,7 @@
             "description": "The links of the Link Set.",
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/UpsertLinkDto"
+              "$ref": "#/components/schemas/UpsertLink"
             }
           }
         },
@@ -2788,6 +3844,30 @@
           "identifier",
           "qualifier",
           "links"
+        ]
+      },
+      "MintManyRequest": {
+        "type": "object",
+        "properties": {
+          "quantity": {
+            "type": "number",
+            "description": "The number of link anchors to mint"
+          }
+        },
+        "required": [
+          "quantity"
+        ]
+      },
+      "SetLinkAnchor": {
+        "type": "object",
+        "properties": {
+          "linkSetId": {
+            "type": "string",
+            "description": "The ID of the link set the link anchor belongs to"
+          }
+        },
+        "required": [
+          "linkSetId"
         ]
       },
       "CanvasTemplate": {
@@ -3246,58 +4326,61 @@
           "errors"
         ]
       },
-      "CreateTenantUser": {
+      "CreateBioLock": {
         "type": "object",
-        "properties": {}
+        "properties": {
+          "linkAnchorId": {
+            "type": "string",
+            "description": "The link anchor id of the bio lock",
+            "format": "uuid"
+          },
+          "epc": {
+            "type": "string",
+            "description": "The epc identified assigned the trace lock",
+            "example": "instance:xxxxx.1.1"
+          }
+        },
+        "required": [
+          "linkAnchorId",
+          "epc"
+        ]
       },
-      "TenantUser": {
+      "BioLock": {
         "type": "object",
         "properties": {
           "id": {
             "type": "string",
-            "description": "The ID of the tenant user",
-            "example": "123e4567-e89b-12d3-a456-426614174000"
+            "description": "The id of the bio lock",
+            "format": "uuid"
           },
-          "tenantId": {
+          "linkAnchorId": {
             "type": "string",
-            "description": "The ID of the tenant",
-            "example": "123e4567-e89b-12d3-a456-426614174000"
+            "description": "The link anchor id of the bio lock",
+            "format": "uuid"
           },
-          "name": {
+          "epc": {
             "type": "string",
-            "description": "The name of the tenant user",
-            "example": "John Doe"
-          },
-          "email": {
-            "type": "string",
-            "description": "The email of the tenant user",
-            "example": "john.doe@example.com"
+            "description": "The epc identified assigned the trace lock",
+            "example": "instance:xxxxx.1.1"
           },
           "createdAt": {
-            "format": "date-time",
+            "format": "uuid",
             "type": "string",
-            "description": "The date and time the tenant user was created",
-            "example": "2021-01-01T00:00:00.000Z"
+            "description": "The tenant id of the bio lock"
           },
           "updatedAt": {
             "format": "date-time",
             "type": "string",
-            "description": "The date and time the tenant user was updated",
-            "example": "2021-01-01T00:00:00.000Z"
+            "description": "The updated at date of the bio lock"
           }
         },
         "required": [
           "id",
-          "tenantId",
-          "name",
-          "email",
+          "linkAnchorId",
+          "epc",
           "createdAt",
           "updatedAt"
         ]
-      },
-      "UpdateTenantUser": {
-        "type": "object",
-        "properties": {}
       },
       "CreateCustodyCommission": {
         "type": "object",
@@ -3500,6 +4583,18 @@
           "id"
         ]
       },
+      "CreateProvenanceForm": {
+        "type": "object",
+        "properties": {}
+      },
+      "ProvenanceForm": {
+        "type": "object",
+        "properties": {}
+      },
+      "UpdateProvenanceForm": {
+        "type": "object",
+        "properties": {}
+      },
       "CreateEventTag": {
         "type": "object",
         "properties": {
@@ -3635,12 +4730,19 @@
           },
           "source": {
             "type": "string",
-            "description": "The source string"
+            "description": "The source string",
+            "nullable": true
+          },
+          "partner": {
+            "type": "string",
+            "description": "The partner id",
+            "nullable": true
           }
         },
         "required": [
           "sourceType",
-          "source"
+          "source",
+          "partner"
         ]
       },
       "Destination": {
@@ -3657,12 +4759,19 @@
           },
           "destination": {
             "type": "string",
-            "description": "The destination string"
+            "description": "The destination string",
+            "nullable": true
+          },
+          "partner": {
+            "type": "string",
+            "description": "The partner id",
+            "nullable": true
           }
         },
         "required": [
           "destinationType",
-          "destination"
+          "destination",
+          "partner"
         ]
       },
       "ReadPoint": {
@@ -3671,10 +4780,6 @@
           "identifier": {
             "type": "string",
             "description": "The identifier of the read point"
-          },
-          "location": {
-            "type": "string",
-            "description": "The location of the read point"
           },
           "lat": {
             "type": "number",
@@ -3687,7 +4792,6 @@
         },
         "required": [
           "identifier",
-          "location",
           "lat",
           "lng"
         ]
@@ -3810,6 +4914,27 @@
               "UNAVAILABLE"
             ]
           },
+          "epcs": {
+            "description": "List of EPCs associated with the event",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QuantityElement"
+            }
+          },
+          "inputEpcs": {
+            "description": "List of input EPCs associated with the event",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QuantityElement"
+            }
+          },
+          "outputEpcs": {
+            "description": "List of output EPCs associated with the event",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QuantityElement"
+            }
+          },
           "quantityList": {
             "description": "List of quantities associated with the event",
             "type": "array",
@@ -3858,6 +4983,18 @@
           "eventTime",
           "eventType",
           "action"
+        ]
+      },
+      "InstanceIdentifierDto": {
+        "type": "object",
+        "properties": {
+          "epc": {
+            "type": "string",
+            "description": "The instance identifier"
+          }
+        },
+        "required": [
+          "epc"
         ]
       },
       "Event": {
@@ -4031,6 +5168,27 @@
                 "$ref": "#/components/schemas/ReadPoint"
               }
             ]
+          },
+          "epcs": {
+            "description": "The instance identifiers associated with the event",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InstanceIdentifierDto"
+            }
+          },
+          "inputEpcs": {
+            "description": "The instance identifiers associated with the event",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InstanceIdentifierDto"
+            }
+          },
+          "outputEpcs": {
+            "description": "The instance identifiers associated with the event",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InstanceIdentifierDto"
+            }
           }
         },
         "required": [
@@ -4039,66 +5197,6 @@
           "eventTime",
           "eventType",
           "action"
-        ]
-      },
-      "CreateExternalResolverDto": {
-        "type": "object",
-        "properties": {
-          "href": {
-            "type": "string",
-            "description": "The href of the External Resolver."
-          },
-          "pattern": {
-            "type": "string",
-            "description": "The pattern of the External Resolver."
-          },
-          "qualifier": {
-            "type": "string",
-            "description": "The qualifier of the External Resolver."
-          },
-          "childExternalResolvers": {
-            "description": "The creation data of the External Resolver.",
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          }
-        },
-        "required": [
-          "href",
-          "pattern",
-          "qualifier",
-          "childExternalResolvers"
-        ]
-      },
-      "UpdateExternalResolverDto": {
-        "type": "object",
-        "properties": {
-          "href": {
-            "type": "string",
-            "description": "The href of the External Resolver."
-          },
-          "pattern": {
-            "type": "string",
-            "description": "The pattern of the External Resolver."
-          },
-          "qualifier": {
-            "type": "string",
-            "description": "The qualifier of the External Resolver."
-          },
-          "childExternalResolvers": {
-            "description": "The creation data of the External Resolver.",
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          }
-        },
-        "required": [
-          "href",
-          "pattern",
-          "qualifier",
-          "childExternalResolvers"
         ]
       },
       "CreateLocation": {
@@ -4125,6 +5223,14 @@
             "type": "string",
             "description": "The id of the location"
           },
+          "identifier": {
+            "type": "string",
+            "description": "The identifier of the location"
+          },
+          "referenceNumber": {
+            "type": "number",
+            "description": "The reference number of the location"
+          },
           "name": {
             "type": "string",
             "description": "The name of the location"
@@ -4137,6 +5243,8 @@
         },
         "required": [
           "id",
+          "identifier",
+          "referenceNumber",
           "name"
         ]
       },
@@ -4167,6 +5275,167 @@
         "required": [
           "id",
           "name"
+        ]
+      },
+      "CreatePartner": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the partner"
+          },
+          "email": {
+            "type": "string",
+            "description": "The email of the partner"
+          },
+          "firstName": {
+            "type": "string",
+            "description": "The first name of the partner"
+          },
+          "middleName": {
+            "type": "string",
+            "description": "The middle name of the partner"
+          },
+          "lastName": {
+            "type": "string",
+            "description": "The last name of the partner"
+          },
+          "contactNumber": {
+            "type": "string",
+            "description": "The contact number of the partner"
+          },
+          "streetAddressOne": {
+            "type": "string",
+            "description": "The address of the partner"
+          },
+          "city": {
+            "type": "string",
+            "description": "The city of the partner"
+          },
+          "stateOrRegion": {
+            "type": "string",
+            "description": "The state of the partner"
+          }
+        },
+        "required": [
+          "name",
+          "email",
+          "firstName",
+          "middleName",
+          "lastName",
+          "contactNumber",
+          "streetAddressOne",
+          "city",
+          "stateOrRegion"
+        ]
+      },
+      "Partner": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The id of the partner"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the partner"
+          },
+          "email": {
+            "type": "string",
+            "description": "The email of the partner"
+          },
+          "firstName": {
+            "type": "string",
+            "description": "The first name of the partner"
+          },
+          "middleName": {
+            "type": "string",
+            "description": "The middle name of the partner"
+          },
+          "lastName": {
+            "type": "string",
+            "description": "The last name of the partner"
+          },
+          "contactNumber": {
+            "type": "string",
+            "description": "The contact number of the partner"
+          },
+          "streetAddressOne": {
+            "type": "string",
+            "description": "The address of the partner"
+          },
+          "city": {
+            "type": "string",
+            "description": "The city of the partner"
+          },
+          "stateOrRegion": {
+            "type": "string",
+            "description": "The state of the partner"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "email",
+          "firstName",
+          "middleName",
+          "lastName",
+          "contactNumber",
+          "streetAddressOne",
+          "city",
+          "stateOrRegion"
+        ]
+      },
+      "UpdatePartner": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the partner"
+          },
+          "email": {
+            "type": "string",
+            "description": "The email of the partner"
+          },
+          "firstName": {
+            "type": "string",
+            "description": "The first name of the partner"
+          },
+          "middleName": {
+            "type": "string",
+            "description": "The middle name of the partner"
+          },
+          "lastName": {
+            "type": "string",
+            "description": "The last name of the partner"
+          },
+          "contactNumber": {
+            "type": "string",
+            "description": "The contact number of the partner"
+          },
+          "streetAddressOne": {
+            "type": "string",
+            "description": "The address of the partner"
+          },
+          "city": {
+            "type": "string",
+            "description": "The city of the partner"
+          },
+          "stateOrRegion": {
+            "type": "string",
+            "description": "The state of the partner"
+          }
+        },
+        "required": [
+          "name",
+          "email",
+          "firstName",
+          "middleName",
+          "lastName",
+          "contactNumber",
+          "streetAddressOne",
+          "city",
+          "stateOrRegion"
         ]
       },
       "CreateOrganization": {
@@ -4216,6 +5485,161 @@
         },
         "required": [
           "name"
+        ]
+      },
+      "TrustGraphNodeType": {
+        "type": "string",
+        "enum": [
+          "DTE",
+          "DCC",
+          "DPP",
+          "DIA",
+          "DFR"
+        ]
+      },
+      "TrustGraphNode": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The id of the trust graph node"
+          },
+          "hash": {
+            "type": "string",
+            "description": "The hash of the trust graph node"
+          },
+          "raw": {
+            "type": "object",
+            "description": "The raw data of the trust graph node"
+          },
+          "type": {
+            "description": "The type of the trust graph node",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrustGraphNodeType"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "hash",
+          "raw",
+          "type"
+        ]
+      },
+      "TrustGraphEdge": {
+        "type": "object",
+        "properties": {
+          "source": {
+            "type": "string",
+            "description": "The source of the trust graph edge"
+          },
+          "target": {
+            "type": "string",
+            "description": "The target of the trust graph edge"
+          }
+        },
+        "required": [
+          "source",
+          "target"
+        ]
+      },
+      "TrustGraph": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The id of the trust graph"
+          },
+          "hash": {
+            "type": "string",
+            "description": "The hash of the trust graph"
+          },
+          "nodes": {
+            "description": "The nodes of the trust graph",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TrustGraphNode"
+            }
+          },
+          "edges": {
+            "description": "The edges of the trust graph",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TrustGraphEdge"
+            }
+          },
+          "type": {
+            "description": "The type of the trust graph",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrustGraphNodeType"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "hash",
+          "nodes",
+          "edges",
+          "type"
+        ]
+      },
+      "ScreenHeader": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "The title of the screen",
+            "example": "Screen Title"
+          },
+          "subtitle": {
+            "type": "string",
+            "description": "The subtitle of the screen",
+            "example": "Screen Subtitle"
+          },
+          "size": {
+            "type": "string",
+            "description": "The size of the screen",
+            "example": "small",
+            "enum": [
+              "small",
+              "medium",
+              "large"
+            ]
+          }
+        },
+        "required": [
+          "title",
+          "subtitle",
+          "size"
+        ]
+      },
+      "TrustGraphScreen": {
+        "type": "object",
+        "properties": {
+          "trustGraph": {
+            "description": "The trust graph",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrustGraph"
+              }
+            ]
+          },
+          "header": {
+            "description": "The header of the screen",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ScreenHeader"
+              }
+            ]
+          }
+        },
+        "required": [
+          "trustGraph",
+          "header"
         ]
       },
       "CreateSchema": {
@@ -4291,81 +5715,6 @@
           "id",
           "name",
           "schema"
-        ]
-      },
-      "TrustGraphNodeType": {
-        "type": "string",
-        "enum": [
-          "DTE",
-          "DCC",
-          "DPP",
-          "DIA",
-          "DFR"
-        ]
-      },
-      "TrustGraphNode": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "The id of the trust graph node"
-          },
-          "hash": {
-            "type": "string",
-            "description": "The hash of the trust graph node"
-          },
-          "raw": {
-            "type": "object",
-            "description": "The raw data of the trust graph node"
-          },
-          "type": {
-            "description": "The type of the trust graph node",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/TrustGraphNodeType"
-              }
-            ]
-          }
-        },
-        "required": [
-          "id",
-          "hash",
-          "raw",
-          "type"
-        ]
-      },
-      "TrustGraph": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "The id of the trust graph"
-          },
-          "hash": {
-            "type": "string",
-            "description": "The hash of the trust graph"
-          },
-          "nodes": {
-            "description": "The nodes of the trust graph",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/TrustGraphNode"
-            }
-          },
-          "type": {
-            "description": "The type of the trust graph",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/TrustGraphNodeType"
-              }
-            ]
-          }
-        },
-        "required": [
-          "id",
-          "hash",
-          "nodes",
-          "type"
         ]
       },
       "TraverseTrustGraph": {
