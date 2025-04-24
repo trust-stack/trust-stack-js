@@ -1,5 +1,23 @@
 # @truststack/sdk
 
+## 0.1.8
+
+### Patch Changes
+
+- 5ab039f: Location types.
+- Updated dependencies [5ab039f]
+  - @truststack/core@0.1.7
+  - @truststack/admin@0.1.7
+  - @truststack/biolock@0.1.7
+  - @truststack/canvas@0.0.10
+  - @truststack/did@0.0.10
+  - @truststack/discovery@0.1.7
+  - @truststack/event@0.1.7
+  - @truststack/link-resolver@0.1.8
+  - @truststack/master-data@0.1.7
+  - @truststack/object@0.1.7
+  - @truststack/untp@0.0.9
+
 ## 0.1.7
 
 ### Patch Changes

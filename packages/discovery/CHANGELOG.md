@@ -1,5 +1,13 @@
 # @truststack/discovery
 
+## 0.1.7
+
+### Patch Changes
+
+- 5ab039f: Location types.
+- Updated dependencies [5ab039f]
+  - @truststack/core@0.1.7
+
 ## 0.1.6
 
 ### Patch Changes
