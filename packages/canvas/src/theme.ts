@@ -45,6 +45,7 @@ export class ThemeClient extends TrustStackClient {
     return createTheme({
       body: data,
       headers: this.headers(options),
+      client: this.client,
     });
   }
 
@@ -57,6 +58,7 @@ export class ThemeClient extends TrustStackClient {
     return getTheme({
       headers: this.headers(options),
       path: {id},
+      client: this.client,
     });
   }
 
@@ -75,6 +77,7 @@ export class ThemeClient extends TrustStackClient {
       headers: this.headers(options),
       path: {id},
       body: data,
+      client: this.client,
     });
   }
 
@@ -87,6 +90,7 @@ export class ThemeClient extends TrustStackClient {
     return deleteTheme({
       headers: this.headers(options),
       path: {id},
+      client: this.client,
     });
   }
 }

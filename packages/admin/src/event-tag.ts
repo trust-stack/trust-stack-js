@@ -10,6 +10,7 @@ export class EventTagClient extends TrustStackClient {
     return setEventTags({
       body: props,
       headers: this.headers(options),
+      client: this.client,
     });
   }
 }

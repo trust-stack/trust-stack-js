@@ -19,6 +19,7 @@ export class LocationClient extends TrustStackClient {
     return createLocation({
       body: props,
       headers: this.headers(options),
+      client: this.client,
     });
   }
 
@@ -32,6 +33,7 @@ export class LocationClient extends TrustStackClient {
     return getLocation({
       path: {id},
       headers: this.headers(options),
+      client: this.client,
     });
   }
 
@@ -48,6 +50,7 @@ export class LocationClient extends TrustStackClient {
     return getLocations({
       query,
       headers: this.headers(options),
+      client: this.client,
     });
   }
 }

@@ -20,6 +20,7 @@ export class CanvasTemplateClient extends TrustStackClient {
     return createCanvasTemplate({
       body: data,
       headers: this.headers(options),
+      client: this.client,
     });
   }
 
@@ -32,6 +33,7 @@ export class CanvasTemplateClient extends TrustStackClient {
     return getCanvasTemplate({
       path: {id},
       headers: this.headers(options),
+      client: this.client,
     });
   }
 
@@ -49,6 +51,7 @@ export class CanvasTemplateClient extends TrustStackClient {
       path: {id},
       body: data,
       headers: this.headers(options),
+      client: this.client,
     });
   }
 }

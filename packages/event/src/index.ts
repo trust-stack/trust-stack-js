@@ -20,6 +20,7 @@ export class EventClient extends TrustStackClient {
     return createEvent({
       body: props,
       headers: this.headers(options),
+      client: this.client,
     });
   }
 
@@ -33,6 +34,7 @@ export class EventClient extends TrustStackClient {
     return getEvent({
       path: {id},
       headers: this.headers(options),
+      client: this.client,
     });
   }
 
@@ -49,6 +51,7 @@ export class EventClient extends TrustStackClient {
     return getEvents({
       query,
       headers: this.headers(options),
+      client: this.client,
     });
   }
 
@@ -62,6 +65,7 @@ export class EventClient extends TrustStackClient {
     return deleteEvent({
       path: {id},
       headers: this.headers(options),
+      client: this.client,
     });
   }
 }

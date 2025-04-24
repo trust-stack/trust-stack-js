@@ -22,6 +22,7 @@ export class TradeItemClient extends TrustStackClient {
     return createTradeItem({
       body: props,
       headers: this.headers(options),
+      client: this.client,
     });
   }
 
@@ -35,6 +36,7 @@ export class TradeItemClient extends TrustStackClient {
     return getTradeItem({
       path: {id},
       headers: this.headers(options),
+      client: this.client,
     });
   }
 
@@ -51,6 +53,7 @@ export class TradeItemClient extends TrustStackClient {
     return getTradeItems({
       query,
       headers: this.headers(options),
+      client: this.client,
     });
   }
 }
