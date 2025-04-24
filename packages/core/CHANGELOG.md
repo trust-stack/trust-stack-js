@@ -1,5 +1,11 @@
 # @truststack/core
 
+## 0.1.1
+
+### Patch Changes
+
+- 06e9bda: Updating architecture
+
 ## 0.1.0
 
 ### Minor Changes

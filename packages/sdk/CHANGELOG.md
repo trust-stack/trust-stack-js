@@ -1,5 +1,22 @@
 # @truststack/sdk
 
+## 0.1.1
+
+### Patch Changes
+
+- 06e9bda: Updating architecture
+- Updated dependencies [06e9bda]
+  - @truststack/link-resolver@0.1.1
+  - @truststack/master-data@0.1.1
+  - @truststack/discovery@0.1.1
+  - @truststack/biolock@0.1.1
+  - @truststack/canvas@0.0.4
+  - @truststack/admin@0.1.1
+  - @truststack/event@0.1.1
+  - @truststack/core@0.1.1
+  - @truststack/untp@0.0.3
+  - @truststack/did@0.0.4
+
 ## 0.1.0
 
 ### Minor Changes

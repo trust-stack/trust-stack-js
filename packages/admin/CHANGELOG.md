@@ -1,5 +1,13 @@
 # @truststack/admin
 
+## 0.1.1
+
+### Patch Changes
+
+- 06e9bda: Updating architecture
+- Updated dependencies [06e9bda]
+  - @truststack/core@0.1.1
+
 ## 0.1.0
 
 ### Minor Changes
