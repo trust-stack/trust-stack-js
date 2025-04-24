@@ -1,5 +1,23 @@
 # @truststack/sdk
 
+## 0.1.7
+
+### Patch Changes
+
+- 49ce2bd: Adding location, trade item lookup. Resolving type issues.
+- Updated dependencies [49ce2bd]
+  - @truststack/master-data@0.1.6
+  - @truststack/core@0.1.6
+  - @truststack/admin@0.1.6
+  - @truststack/biolock@0.1.6
+  - @truststack/canvas@0.0.9
+  - @truststack/did@0.0.9
+  - @truststack/discovery@0.1.6
+  - @truststack/event@0.1.6
+  - @truststack/link-resolver@0.1.7
+  - @truststack/object@0.1.6
+  - @truststack/untp@0.0.8
+
 ## 0.1.6
 
 ### Patch Changes
