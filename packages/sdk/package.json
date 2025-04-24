@@ -22,7 +22,7 @@
     "build": "tsup src/index.ts --format cjs,esm --dts && pnpm build:cli",
     "build:cli": "tsup bin/truststack.ts --format esm --dts",
     "cli": "node dist/truststack.js",
-    "test": "vitest --config ./vitest.config.ts"
+    "test": "vitest --config ./vitest.config.ts --watch"
   },
   "dependencies": {
     "@hey-api/client-fetch": "^0.6.0",

@@ -19,7 +19,7 @@ export class CanvasTemplateInstanceClient extends TrustStackClient {
   ) {
     return linkCanvasTemplateInstance({
       body: data,
-      headers: TrustStackClient.headers(options),
+      headers: this.headers(options),
       path: {id},
     });
   }

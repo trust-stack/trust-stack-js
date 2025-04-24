@@ -17,7 +17,7 @@ export class PartnerClient extends TrustStackClient {
   public async createPartner(props: CreatePartner, options?: RequestOptions) {
     return createPartner({
       body: props,
-      headers: TrustStackClient.headers(options),
+      headers: this.headers(options),
     });
   }
 
@@ -33,7 +33,7 @@ export class PartnerClient extends TrustStackClient {
   ) {
     return getPartners({
       query,
-      headers: TrustStackClient.headers(options),
+      headers: this.headers(options),
     });
   }
 }

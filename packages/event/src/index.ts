@@ -19,7 +19,7 @@ export class EventClient extends TrustStackClient {
   public async createEvent(props: CreateEvent, options?: RequestOptions) {
     return createEvent({
       body: props,
-      headers: TrustStackClient.headers(options),
+      headers: this.headers(options),
     });
   }
 
@@ -32,7 +32,7 @@ export class EventClient extends TrustStackClient {
   public async getEvent(id: string, options?: RequestOptions) {
     return getEvent({
       path: {id},
-      headers: TrustStackClient.headers(options),
+      headers: this.headers(options),
     });
   }
 
@@ -48,7 +48,7 @@ export class EventClient extends TrustStackClient {
   ) {
     return getEvents({
       query,
-      headers: TrustStackClient.headers(options),
+      headers: this.headers(options),
     });
   }
 
@@ -61,7 +61,7 @@ export class EventClient extends TrustStackClient {
   public async deleteEvent(id: string, options?: RequestOptions) {
     return deleteEvent({
       path: {id},
-      headers: TrustStackClient.headers(options),
+      headers: this.headers(options),
     });
   }
 }

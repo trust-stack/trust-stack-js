@@ -18,7 +18,7 @@ export class LocationClient extends TrustStackClient {
   public async createLocation(props: CreateLocation, options?: RequestOptions) {
     return createLocation({
       body: props,
-      headers: TrustStackClient.headers(options),
+      headers: this.headers(options),
     });
   }
 
@@ -31,7 +31,7 @@ export class LocationClient extends TrustStackClient {
   public async getLocation(id: string, options?: RequestOptions) {
     return getLocation({
       path: {id},
-      headers: TrustStackClient.headers(options),
+      headers: this.headers(options),
     });
   }
 
@@ -47,7 +47,7 @@ export class LocationClient extends TrustStackClient {
   ) {
     return getLocations({
       query,
-      headers: TrustStackClient.headers(options),
+      headers: this.headers(options),
     });
   }
 }

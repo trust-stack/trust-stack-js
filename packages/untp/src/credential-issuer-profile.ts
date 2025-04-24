@@ -21,7 +21,7 @@ export class CredentialIssuerProfileClient extends TrustStackClient {
   ) {
     return createCredentialIssuerProfile({
       body: data,
-      headers: TrustStackClient.headers(options),
+      headers: this.headers(options),
     });
   }
 
@@ -36,7 +36,7 @@ export class CredentialIssuerProfileClient extends TrustStackClient {
   ) {
     return deleteCredentialIssuerProfile({
       path: {id},
-      headers: TrustStackClient.headers(options),
+      headers: this.headers(options),
     });
   }
 
@@ -51,7 +51,7 @@ export class CredentialIssuerProfileClient extends TrustStackClient {
   ) {
     return getCredentialIssuerProfile({
       path: {id},
-      headers: TrustStackClient.headers(options),
+      headers: this.headers(options),
     });
   }
 
@@ -66,7 +66,7 @@ export class CredentialIssuerProfileClient extends TrustStackClient {
   ) {
     return getCredentialIssuerProfiles({
       query,
-      headers: TrustStackClient.headers(options),
+      headers: this.headers(options),
     });
   }
 }

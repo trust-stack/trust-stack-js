@@ -16,7 +16,7 @@ export class DiscoveryClient extends TrustStackClient {
       path: {
         id,
       },
-      headers: TrustStackClient.headers(options),
+      headers: this.headers(options),
     });
   }
 }

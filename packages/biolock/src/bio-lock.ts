@@ -18,7 +18,7 @@ export class BioLockClient extends TrustStackClient {
   public async createBioLock(props: CreateBioLock, options?: RequestOptions) {
     return createBioLock({
       body: props,
-      headers: TrustStackClient.headers(options),
+      headers: this.headers(options),
     });
   }
 
@@ -31,7 +31,7 @@ export class BioLockClient extends TrustStackClient {
   public async getBioLock(id: string, options?: RequestOptions) {
     return getBioLock({
       path: {id},
-      headers: TrustStackClient.headers(options),
+      headers: this.headers(options),
     });
   }
 
@@ -47,7 +47,7 @@ export class BioLockClient extends TrustStackClient {
   ) {
     return getBioLocks({
       query,
-      headers: TrustStackClient.headers(options),
+      headers: this.headers(options),
     });
   }
 }

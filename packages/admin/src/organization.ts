@@ -22,7 +22,7 @@ export class OrganizationClient extends TrustStackClient {
   ) {
     return createOrganization({
       body: props,
-      headers: TrustStackClient.headers(options),
+      headers: this.headers(options),
     });
   }
 
@@ -43,7 +43,7 @@ export class OrganizationClient extends TrustStackClient {
       body: {
         name: props.name,
       },
-      headers: TrustStackClient.headers(options),
+      headers: this.headers(options),
     });
   }
 
@@ -58,7 +58,7 @@ export class OrganizationClient extends TrustStackClient {
       path: {
         id,
       },
-      headers: TrustStackClient.headers(options),
+      headers: this.headers(options),
     });
   }
 
@@ -73,7 +73,7 @@ export class OrganizationClient extends TrustStackClient {
       path: {
         id: id,
       },
-      headers: TrustStackClient.headers(options),
+      headers: this.headers(options),
     });
   }
 }
