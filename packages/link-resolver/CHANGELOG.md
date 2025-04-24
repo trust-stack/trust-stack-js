@@ -1,5 +1,11 @@
 # @truststack/link-resolver
 
+## 0.1.5
+
+### Patch Changes
+
+- fde342c: Adding link anchor methods.
+
 ## 0.1.4
 
 ### Patch Changes

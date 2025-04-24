@@ -1,5 +1,13 @@
 # @truststack/sdk
 
+## 0.1.5
+
+### Patch Changes
+
+- fde342c: Adding link anchor methods.
+- Updated dependencies [fde342c]
+  - @truststack/link-resolver@0.1.5
+
 ## 0.1.4
 
 ### Patch Changes
