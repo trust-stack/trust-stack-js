@@ -875,19 +875,19 @@ export type Destination = {
     partner?: string;
 };
 
-export type ReadPoint = {
+export type CreateReadPoint = {
     /**
      * The identifier of the read point
      */
-    identifier: string;
+    identifier?: string;
     /**
-     * The latitude of the read point
+     * The latitude of the location.
      */
-    lat: number;
+    lat?: number;
     /**
-     * The longitude of the read point
+     * The longitude of the location.
      */
-    lng: number;
+    lng?: number;
 };
 
 export type CreateEvent = {
@@ -950,7 +950,7 @@ export type CreateEvent = {
     /**
      * The read point associated with the event
      */
-    readPoint?: ReadPoint;
+    readPoint?: CreateReadPoint;
     /**
      * List of images associated with the event
      */
@@ -965,11 +965,26 @@ export type QuantityElement = {
     /**
      * The quantity of the item
      */
-    quantity?: number;
+    quantity: number;
     /**
      * The unit of measurement for the quantity
      */
-    unit?: string;
+    unit: string;
+};
+
+export type ReadPoint = {
+    /**
+     * The identifier of the read point
+     */
+    identifier?: string;
+    /**
+     * The latitude of the read point
+     */
+    lat?: number;
+    /**
+     * The longitude of the read point
+     */
+    lng?: number;
 };
 
 export type InstanceIdentifierDto = {
