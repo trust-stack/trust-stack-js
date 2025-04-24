@@ -22,6 +22,7 @@ export class DidClient extends TrustStackClient {
         name: props.name,
       },
       headers: this.headers(options),
+      client: this.client,
     });
   }
 
@@ -37,6 +38,7 @@ export class DidClient extends TrustStackClient {
         id,
       },
       headers: this.headers(options),
+      client: this.client,
     });
   }
 
@@ -52,6 +54,7 @@ export class DidClient extends TrustStackClient {
         id,
       },
       headers: this.headers(options),
+      client: this.client,
     });
   }
 
@@ -65,6 +68,7 @@ export class DidClient extends TrustStackClient {
     return getDids({
       query,
       headers: this.headers(options),
+      client: this.client,
     });
   }
 }

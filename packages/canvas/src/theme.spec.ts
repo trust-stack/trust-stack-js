@@ -5,7 +5,7 @@ import {ThemeClient} from "./theme";
 vi.mock("@truststack/core", () => ({
   createTheme: vi.fn().mockResolvedValue({}),
   TrustStackClient: class {
-    static headers = vi.fn();
+    headers = vi.fn();
   },
 }));
 

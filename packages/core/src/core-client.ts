@@ -16,18 +16,17 @@ export type RequestOptions = {
 };
 
 export class TrustStackClient {
-  protected accessToken: string;
-  protected baseUrl: string = "https://api.truststack.dev";
-  protected sandboxBaseUrl: string = "https://sandbox.api.truststack.dev";
+  protected accessToken?: string;
+  protected baseUrl: string;
   protected organizationId?: string;
   protected tenantUserId?: string;
   protected sandbox: boolean = false;
   protected client = client;
 
   constructor(config?: TrustStackClientConfig) {
-    this.accessToken = this.getAccessToken(config?.accessToken);
+    this.accessToken = config?.accessToken;
     this.sandbox = config?.sandbox || false;
-    this.baseUrl = this.getBaseUrl(config?.baseUrl);
+    this.baseUrl = config?.baseUrl || "https://api.truststack.dev";
 
     if (config?.organizationId) {
       this.organizationId = config?.organizationId;
@@ -58,13 +57,6 @@ export class TrustStackClient {
     this.client.setConfig({
       baseUrl: this.baseUrl,
     });
-
-    this.client.interceptors.request.use((request) => {
-      Object.entries(this.headers()).forEach(([key, value]) => {
-        value && request.headers.append(key, value);
-      });
-      return request;
-    });
   }
 
   protected headers(options?: RequestOptions) {
@@ -78,39 +70,33 @@ export class TrustStackClient {
 
   private getAccessToken(override?: string) {
     // Priority: override > static config > env var
-    const token =
-      override || this.accessToken || process.env.TRUSTSTACK_ACCESS_TOKEN;
-
-    if (!token) {
-      throw new Error("No access token provided");
-    }
-    return token;
+    return override || this.accessToken || process.env.TRUSTSTACK_ACCESS_TOKEN;
   }
 
   private getOrganizationId(override?: string) {
+    // Priority: override > static config > env var
     return (
       override || this.organizationId || process.env.TRUSTSTACK_ORGANIZATION_ID
     );
   }
 
   private getTenantUserId(override?: string) {
+    // Priority: override > static config > env var
     return (
       override || this.tenantUserId || process.env.TRUSTSTACK_TENANT_USER_ID
     );
   }
 
   private getBaseUrl(override?: string) {
-    if (override) {
-      return override;
+    // Priority: sandbox >override > static config > env var
+    if (this.sandbox) {
+      return "https://sandbox.api.truststack.dev";
     }
 
-    const envBaseUrl = process.env.TRUSTSTACK_BASE_URL;
-    if (envBaseUrl) {
-      return envBaseUrl;
-    }
-
-    return this.sandbox
-      ? "https://sandbox.api.truststack.dev"
-      : "https://api.truststack.dev";
+    return (
+      override ||
+      process.env.TRUSTSTACK_BASE_URL ||
+      "https://api.truststack.dev"
+    );
   }
 }

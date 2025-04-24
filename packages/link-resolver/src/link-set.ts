@@ -19,6 +19,7 @@ export class LinkSetClient extends TrustStackClient {
     return createLinkSet({
       body: props,
       headers: this.headers(options),
+      client: this.client,
     });
   }
 
@@ -32,6 +33,7 @@ export class LinkSetClient extends TrustStackClient {
     return getLinkSet({
       path: {id},
       headers: this.headers(options),
+      client: this.client,
     });
   }
 
@@ -43,6 +45,7 @@ export class LinkSetClient extends TrustStackClient {
   public async getLinkSets(options?: RequestOptions) {
     return getLinkSets({
       headers: this.headers(options),
+      client: this.client,
     });
   }
 
@@ -56,6 +59,7 @@ export class LinkSetClient extends TrustStackClient {
     return deleteLinkSet({
       path: {id},
       headers: this.headers(options),
+      client: this.client,
     });
   }
 }

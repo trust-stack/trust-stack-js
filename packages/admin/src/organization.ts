@@ -74,6 +74,7 @@ export class OrganizationClient extends TrustStackClient {
         id: id,
       },
       headers: this.headers(options),
+      client: this.client,
     });
   }
 }

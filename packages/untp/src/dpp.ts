@@ -17,6 +17,7 @@ export class DppClient extends TrustStackClient {
     return createDpp({
       body: data,
       headers: this.headers(options),
+      client: this.client,
     });
   }
 
@@ -29,6 +30,7 @@ export class DppClient extends TrustStackClient {
     return getDpp({
       path: {id},
       headers: this.headers(options),
+      client: this.client,
     });
   }
 
@@ -41,6 +43,7 @@ export class DppClient extends TrustStackClient {
     return deleteDpp({
       path: {id},
       headers: this.headers(options),
+      client: this.client,
     });
   }
 }

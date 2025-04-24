@@ -21,6 +21,7 @@ export class CanvasTemplateInstanceClient extends TrustStackClient {
       body: data,
       headers: this.headers(options),
       path: {id},
+      client: this.client,
     });
   }
 }

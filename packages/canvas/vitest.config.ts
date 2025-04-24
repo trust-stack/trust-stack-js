@@ -11,7 +11,7 @@ export default defineConfig({
       exclude: ["src/**/*.spec.ts", "src/**/*.test.ts"],
     },
     alias: {
-      "@truststack/core": path.resolve(__dirname, "../*/src"),
+      "@truststack/*": path.resolve(__dirname, "../*/src"),
     },
   },
 });
