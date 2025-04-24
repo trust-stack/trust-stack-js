@@ -815,22 +815,22 @@ export type CreateInstanceIdentifier = {
     /**
      * The EPC class of the quantity element
      */
-    epc: string;
+    epc?: string;
     /**
      * The trade item of the quantity element
      */
-    tradeItem: string;
+    tradeItem?: string;
 };
 
 export type CreateQuantityElement = {
     /**
      * The EPC class of the quantity element
      */
-    epcClass: string;
+    epcClass?: string;
     /**
      * The trade item of the quantity element. This will create an incrementing batch number.
      */
-    tradeItem: string;
+    tradeItem?: string;
     /**
      * Whether the quantity element is a class reference, if false, a lot number is assigned.
      */
@@ -838,7 +838,7 @@ export type CreateQuantityElement = {
     /**
      * The quantity of the item
      */
-    quantity?: number;
+    quantity: number;
     /**
      * The unit of measurement for the quantity
      */
@@ -853,11 +853,11 @@ export type Source = {
     /**
      * The source string
      */
-    source: string | null;
+    source?: string;
     /**
      * The partner id
      */
-    partner: string | null;
+    partner?: string;
 };
 
 export type Destination = {
@@ -868,11 +868,11 @@ export type Destination = {
     /**
      * The destination string
      */
-    destination: string | null;
+    destination?: string;
     /**
      * The partner id
      */
-    partner: string | null;
+    partner?: string;
 };
 
 export type ReadPoint = {
