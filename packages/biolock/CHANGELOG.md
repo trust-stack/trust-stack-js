@@ -1,10 +1,9 @@
-# @truststack/admin
+# @truststack/biolock
 
 ## 0.1.0
 
 ### Minor Changes
 
-- 131ce03: Adding trust-stack config and sandbox clean functionality.
 - 723574e: Link Resolver, Master Data, Event, BioLock sdks.
 
 ### Patch Changes
@@ -14,11 +13,3 @@
 - Updated dependencies [39d7549]
 - Updated dependencies [723574e]
   - @truststack/core@0.1.0
-
-## 0.0.2
-
-### Patch Changes
-
-- SDK consolidation, testing, and additional API support.
-- Updated dependencies
-  - @truststack/core@0.0.2
