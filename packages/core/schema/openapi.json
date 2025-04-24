@@ -4796,7 +4796,7 @@
           "destinationType"
         ]
       },
-      "ReadPoint": {
+      "CreateReadPoint": {
         "type": "object",
         "properties": {
           "identifier": {
@@ -4805,18 +4805,13 @@
           },
           "lat": {
             "type": "number",
-            "description": "The latitude of the read point"
+            "description": "The latitude of the location."
           },
           "lng": {
             "type": "number",
-            "description": "The longitude of the read point"
+            "description": "The longitude of the location."
           }
-        },
-        "required": [
-          "identifier",
-          "lat",
-          "lng"
-        ]
+        }
       },
       "CreateEvent": {
         "type": "object",
@@ -4996,7 +4991,7 @@
             "description": "The read point associated with the event",
             "allOf": [
               {
-                "$ref": "#/components/schemas/ReadPoint"
+                "$ref": "#/components/schemas/CreateReadPoint"
               }
             ]
           },
@@ -5031,8 +5026,27 @@
           }
         },
         "required": [
-          "epcClass"
+          "epcClass",
+          "quantity",
+          "unit"
         ]
+      },
+      "ReadPoint": {
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "description": "The identifier of the read point"
+          },
+          "lat": {
+            "type": "number",
+            "description": "The latitude of the read point"
+          },
+          "lng": {
+            "type": "number",
+            "description": "The longitude of the read point"
+          }
+        }
       },
       "InstanceIdentifierDto": {
         "type": "object",
