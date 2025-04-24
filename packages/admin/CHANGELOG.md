@@ -1,5 +1,13 @@
 # @truststack/admin
 
+## 0.1.2
+
+### Patch Changes
+
+- 772e101: Client configuration issues.
+- Updated dependencies [772e101]
+  - @truststack/core@0.1.2
+
 ## 0.1.1
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @truststack/core
 
+## 0.1.2
+
+### Patch Changes
+
+- 772e101: Client configuration issues.
+
 ## 0.1.1
 
 ### Patch Changes
