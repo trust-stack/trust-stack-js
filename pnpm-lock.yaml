@@ -37,6 +37,19 @@ importers:
         specifier: ^8.3.5
         version: 8.3.5(jiti@2.4.2)(postcss@8.5.1)(typescript@5.5.4)(yaml@2.7.0)
 
+  packages/biosecure:
+    dependencies:
+      '@truststack/core':
+        specifier: workspace:*
+        version: link:../core
+      ts-mixer:
+        specifier: ^6.0.4
+        version: 6.0.4
+    devDependencies:
+      tsup:
+        specifier: ^8.3.5
+        version: 8.3.5(jiti@2.4.2)(postcss@8.5.1)(typescript@5.5.4)(yaml@2.7.0)
+
   packages/canvas:
     dependencies:
       '@truststack/core':
@@ -215,6 +228,19 @@ importers:
         specifier: ^8.3.5
         version: 8.3.5(jiti@2.4.2)(postcss@8.5.1)(typescript@5.5.4)(yaml@2.7.0)
 
+  packages/link-resolver:
+    dependencies:
+      '@truststack/core':
+        specifier: workspace:*
+        version: link:../core
+      ts-mixer:
+        specifier: ^6.0.4
+        version: 6.0.4
+    devDependencies:
+      tsup:
+        specifier: ^8.3.5
+        version: 8.3.5(jiti@2.4.2)(postcss@8.5.1)(typescript@5.5.4)(yaml@2.7.0)
+
   packages/master-data:
     dependencies:
       '@truststack/core':
@@ -291,6 +317,9 @@ importers:
       '@truststack/admin':
         specifier: workspace:*
         version: link:../admin
+      '@truststack/biosecure':
+        specifier: workspace:*
+        version: link:../biosecure
       '@truststack/canvas':
         specifier: workspace:*
         version: link:../canvas
@@ -309,6 +338,9 @@ importers:
       '@truststack/hermes':
         specifier: workspace:*
         version: link:../hermes
+      '@truststack/link-resolver':
+        specifier: workspace:*
+        version: link:../link-resolver
       '@truststack/master-data':
         specifier: workspace:*
         version: link:../master-data

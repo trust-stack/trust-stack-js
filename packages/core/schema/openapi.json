@@ -239,7 +239,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/LinkSetDto"
+                  "$ref": "#/components/schemas/LinkSet"
                 }
               }
             }
@@ -676,7 +676,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateLinkSetDto"
+                "$ref": "#/components/schemas/CreateLinkSet"
               }
             }
           }
@@ -742,7 +742,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateLinkSetDto"
+                "$ref": "#/components/schemas/UpdateLinkSet"
               }
             }
           }
@@ -932,6 +932,34 @@
         "summary": "Get many link anchors",
         "tags": [
           "Link Anchor"
+        ]
+      }
+    },
+    "/link-resolver/*": {
+      "get": {
+        "operationId": "StackLinkResolverController_resolve",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "StackLinkResolver"
+        ]
+      }
+    },
+    "/link-resolver/.well-known/resolver": {
+      "get": {
+        "operationId": "StackLinkResolverController_getResolverMetadata",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "StackLinkResolver"
         ]
       }
     },
@@ -1291,6 +1319,106 @@
         "summary": "Verify Credential",
         "tags": [
           "Credentials"
+        ]
+      }
+    },
+    "/bio-locks": {
+      "post": {
+        "description": "Create a BioLock",
+        "operationId": "createBioLock",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBioLock"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The BioLock has been successfully created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BioLock"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The BioLock could not be created"
+          },
+          "404": {
+            "description": "The BioLock could not be found"
+          }
+        },
+        "summary": "Create Bio Lock",
+        "tags": [
+          "BioLock"
+        ]
+      },
+      "get": {
+        "description": "Get Bio Locks",
+        "operationId": "getBioLocks",
+        "parameters": [
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "description": "Page number (1-based)",
+            "schema": {
+              "default": 1,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items per page",
+            "schema": {
+              "default": 10,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Get Bio Locks",
+        "tags": [
+          "BioLock"
+        ]
+      }
+    },
+    "/bio-locks/{id}": {
+      "get": {
+        "description": "Get Bio Lock",
+        "operationId": "getBioLock",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "The id of the Bio Lock",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Get Bio Lock",
+        "tags": [
+          "BioLock"
         ]
       }
     },
@@ -3272,7 +3400,7 @@
           "updatedAt"
         ]
       },
-      "LinkSetDto": {
+      "LinkSet": {
         "type": "object",
         "properties": {
           "id": {
@@ -3639,7 +3767,7 @@
           "childExternalResolvers"
         ]
       },
-      "UpsertLinkDto": {
+      "UpsertLink": {
         "type": "object",
         "properties": {
           "relationType": {
@@ -3649,10 +3777,6 @@
           "href": {
             "type": "string",
             "description": "The href of the link."
-          },
-          "objectKey": {
-            "type": "string",
-            "description": "The object key of the link, if TYPE is OBJECT."
           },
           "title": {
             "type": "string",
@@ -3672,7 +3796,7 @@
           "title"
         ]
       },
-      "CreateLinkSetDto": {
+      "CreateLinkSet": {
         "type": "object",
         "properties": {
           "identifier": {
@@ -3687,7 +3811,7 @@
             "description": "The links of the Link Set.",
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/UpsertLinkDto"
+              "$ref": "#/components/schemas/UpsertLink"
             }
           }
         },
@@ -3697,47 +3821,7 @@
           "links"
         ]
       },
-      "LinkSet": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "The ID of the Link Set."
-          },
-          "identifier": {
-            "type": "string",
-            "description": "The identifier of the Link Set."
-          },
-          "qualifier": {
-            "type": "string",
-            "description": "The qualifier of the Link Set."
-          },
-          "links": {
-            "description": "The links of the Link Set.",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Link"
-            }
-          },
-          "createdAt": {
-            "format": "date-time",
-            "type": "string",
-            "description": "The creation date of the Link Set."
-          },
-          "updatedAt": {
-            "format": "date-time",
-            "type": "string",
-            "description": "The last update date of the Link Set."
-          }
-        },
-        "required": [
-          "qualifier",
-          "links",
-          "createdAt",
-          "updatedAt"
-        ]
-      },
-      "UpdateLinkSetDto": {
+      "UpdateLinkSet": {
         "type": "object",
         "properties": {
           "identifier": {
@@ -3752,7 +3836,7 @@
             "description": "The links of the Link Set.",
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/UpsertLinkDto"
+              "$ref": "#/components/schemas/UpsertLink"
             }
           }
         },
@@ -4242,6 +4326,62 @@
           "errors"
         ]
       },
+      "CreateBioLock": {
+        "type": "object",
+        "properties": {
+          "linkAnchorId": {
+            "type": "string",
+            "description": "The link anchor id of the bio lock",
+            "format": "uuid"
+          },
+          "epc": {
+            "type": "string",
+            "description": "The epc identified assigned the trace lock",
+            "example": "instance:xxxxx.1.1"
+          }
+        },
+        "required": [
+          "linkAnchorId",
+          "epc"
+        ]
+      },
+      "BioLock": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The id of the bio lock",
+            "format": "uuid"
+          },
+          "linkAnchorId": {
+            "type": "string",
+            "description": "The link anchor id of the bio lock",
+            "format": "uuid"
+          },
+          "epc": {
+            "type": "string",
+            "description": "The epc identified assigned the trace lock",
+            "example": "instance:xxxxx.1.1"
+          },
+          "createdAt": {
+            "format": "uuid",
+            "type": "string",
+            "description": "The tenant id of the bio lock"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "The updated at date of the bio lock"
+          }
+        },
+        "required": [
+          "id",
+          "linkAnchorId",
+          "epc",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
       "CreateCustodyCommission": {
         "type": "object",
         "properties": {
@@ -4641,10 +4781,6 @@
             "type": "string",
             "description": "The identifier of the read point"
           },
-          "location": {
-            "type": "string",
-            "description": "The location of the read point"
-          },
           "lat": {
             "type": "number",
             "description": "The latitude of the read point"
@@ -4656,7 +4792,6 @@
         },
         "required": [
           "identifier",
-          "location",
           "lat",
           "lng"
         ]
@@ -4779,6 +4914,27 @@
               "UNAVAILABLE"
             ]
           },
+          "epcs": {
+            "description": "List of EPCs associated with the event",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QuantityElement"
+            }
+          },
+          "inputEpcs": {
+            "description": "List of input EPCs associated with the event",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QuantityElement"
+            }
+          },
+          "outputEpcs": {
+            "description": "List of output EPCs associated with the event",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QuantityElement"
+            }
+          },
           "quantityList": {
             "description": "List of quantities associated with the event",
             "type": "array",
@@ -4827,6 +4983,18 @@
           "eventTime",
           "eventType",
           "action"
+        ]
+      },
+      "InstanceIdentifierDto": {
+        "type": "object",
+        "properties": {
+          "epc": {
+            "type": "string",
+            "description": "The instance identifier"
+          }
+        },
+        "required": [
+          "epc"
         ]
       },
       "Event": {
@@ -5000,6 +5168,27 @@
                 "$ref": "#/components/schemas/ReadPoint"
               }
             ]
+          },
+          "epcs": {
+            "description": "The instance identifiers associated with the event",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InstanceIdentifierDto"
+            }
+          },
+          "inputEpcs": {
+            "description": "The instance identifiers associated with the event",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InstanceIdentifierDto"
+            }
+          },
+          "outputEpcs": {
+            "description": "The instance identifiers associated with the event",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InstanceIdentifierDto"
+            }
           }
         },
         "required": [
@@ -5034,6 +5223,14 @@
             "type": "string",
             "description": "The id of the location"
           },
+          "identifier": {
+            "type": "string",
+            "description": "The identifier of the location"
+          },
+          "referenceNumber": {
+            "type": "number",
+            "description": "The reference number of the location"
+          },
           "name": {
             "type": "string",
             "description": "The name of the location"
@@ -5046,6 +5243,8 @@
         },
         "required": [
           "id",
+          "identifier",
+          "referenceNumber",
           "name"
         ]
       },

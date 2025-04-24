@@ -77,7 +77,7 @@ export type Link = {
     updatedAt: string;
 };
 
-export type LinkSetDto = {
+export type LinkSet = {
     /**
      * The ID of the Link Set.
      */
@@ -308,7 +308,7 @@ export type UpdateExternalResolverDto = {
     childExternalResolvers: Array<string>;
 };
 
-export type UpsertLinkDto = {
+export type UpsertLink = {
     /**
      * The relation type of the link.
      */
@@ -317,10 +317,6 @@ export type UpsertLinkDto = {
      * The href of the link.
      */
     href: string;
-    /**
-     * The object key of the link, if TYPE is OBJECT.
-     */
-    objectKey?: string;
     /**
      * The title of the link.
      */
@@ -331,7 +327,7 @@ export type UpsertLinkDto = {
     lang?: Array<string>;
 };
 
-export type CreateLinkSetDto = {
+export type CreateLinkSet = {
     /**
      * The identifier of the Link Set.
      */
@@ -343,37 +339,10 @@ export type CreateLinkSetDto = {
     /**
      * The links of the Link Set.
      */
-    links: Array<UpsertLinkDto>;
+    links: Array<UpsertLink>;
 };
 
-export type LinkSet = {
-    /**
-     * The ID of the Link Set.
-     */
-    id?: string;
-    /**
-     * The identifier of the Link Set.
-     */
-    identifier?: string;
-    /**
-     * The qualifier of the Link Set.
-     */
-    qualifier: string;
-    /**
-     * The links of the Link Set.
-     */
-    links: Array<Link>;
-    /**
-     * The creation date of the Link Set.
-     */
-    createdAt: string;
-    /**
-     * The last update date of the Link Set.
-     */
-    updatedAt: string;
-};
-
-export type UpdateLinkSetDto = {
+export type UpdateLinkSet = {
     /**
      * The identifier of the Link Set.
      */
@@ -385,7 +354,7 @@ export type UpdateLinkSetDto = {
     /**
      * The links of the Link Set.
      */
-    links: Array<UpsertLinkDto>;
+    links: Array<UpsertLink>;
 };
 
 export type MintManyRequest = {
@@ -630,6 +599,40 @@ export type VerifyCredentialResponse = {
      * Errors
      */
     errors: Array<Array<unknown>>;
+};
+
+export type CreateBioLock = {
+    /**
+     * The link anchor id of the bio lock
+     */
+    linkAnchorId: string;
+    /**
+     * The epc identified assigned the trace lock
+     */
+    epc: string;
+};
+
+export type BioLock = {
+    /**
+     * The id of the bio lock
+     */
+    id: string;
+    /**
+     * The link anchor id of the bio lock
+     */
+    linkAnchorId: string;
+    /**
+     * The epc identified assigned the trace lock
+     */
+    epc: string;
+    /**
+     * The tenant id of the bio lock
+     */
+    createdAt: string;
+    /**
+     * The updated at date of the bio lock
+     */
+    updatedAt: string;
 };
 
 export type CreateCustodyCommission = {
@@ -882,10 +885,6 @@ export type ReadPoint = {
      */
     identifier: string;
     /**
-     * The location of the read point
-     */
-    location: string;
-    /**
      * The latitude of the read point
      */
     lat: number;
@@ -921,6 +920,18 @@ export type CreateEvent = {
      */
     disposition?: 'ACTIVE' | 'CONTAINER_CLOSED' | 'DAMAGED' | 'DESTROYED' | 'DISPENSED' | 'DISPOSED' | 'ENCODED' | 'EXPIRED' | 'IN_PROGRESS' | 'IN_TRANSIT' | 'INACTIVE' | 'NO_PEDIGREE_MATCH' | 'NON_SELLABLE_OTHER' | 'PARTIALLY_DISPENSED' | 'RECALLED' | 'RESERVED' | 'RETAIL_SOLD' | 'RETURNED' | 'SELLABLE_ACCESSIBLE' | 'SELLABLE_NOT_ACCESSIBLE' | 'STOLEN' | 'UNKNOWN' | 'AVAILABLE' | 'COMPLETENESS_VERIFIED' | 'COMPLETENESS_INFERRED' | 'CONFORMANT' | 'CONTAINER_OPEN' | 'MISMATCH_INSTANCE' | 'MISMATCH_CLASS' | 'MISMATCH_QUANTITY' | 'NEEDS_REPLACEMENT' | 'NON_CONFORMANT' | 'UNAVAILABLE';
     /**
+     * List of EPCs associated with the event
+     */
+    epcs?: Array<QuantityElement>;
+    /**
+     * List of input EPCs associated with the event
+     */
+    inputEpcs?: Array<QuantityElement>;
+    /**
+     * List of output EPCs associated with the event
+     */
+    outputEpcs?: Array<QuantityElement>;
+    /**
      * List of quantities associated with the event
      */
     quantityList?: Array<QuantityElement>;
@@ -944,6 +955,13 @@ export type CreateEvent = {
      * The read point associated with the event
      */
     readPoint?: ReadPoint;
+};
+
+export type InstanceIdentifierDto = {
+    /**
+     * The instance identifier
+     */
+    epc: string;
 };
 
 export type Event = {
@@ -1003,6 +1021,18 @@ export type Event = {
      * The read point associated with the event
      */
     readPoint?: ReadPoint;
+    /**
+     * The instance identifiers associated with the event
+     */
+    epcs?: Array<InstanceIdentifierDto>;
+    /**
+     * The instance identifiers associated with the event
+     */
+    inputEpcs?: Array<InstanceIdentifierDto>;
+    /**
+     * The instance identifiers associated with the event
+     */
+    outputEpcs?: Array<InstanceIdentifierDto>;
 };
 
 export type CreateLocation = {
@@ -1021,6 +1051,14 @@ export type Location = {
      * The id of the location
      */
     id: string;
+    /**
+     * The identifier of the location
+     */
+    identifier: string;
+    /**
+     * The reference number of the location
+     */
+    referenceNumber: number;
     /**
      * The name of the location
      */
@@ -1522,7 +1560,7 @@ export type LinkCanvasTemplateInstanceResponses = {
     /**
      * The link was created successfully.
      */
-    200: LinkSetDto;
+    200: LinkSet;
 };
 
 export type LinkCanvasTemplateInstanceResponse = LinkCanvasTemplateInstanceResponses[keyof LinkCanvasTemplateInstanceResponses];
@@ -1765,7 +1803,7 @@ export type GetLinkSetsResponses = {
 export type GetLinkSetsResponse = GetLinkSetsResponses[keyof GetLinkSetsResponses];
 
 export type CreateLinkSetData = {
-    body: CreateLinkSetDto;
+    body: CreateLinkSet;
     path?: never;
     query?: never;
     url: '/link-sets';
@@ -1812,7 +1850,7 @@ export type GetLinkSetResponses = {
 export type GetLinkSetResponse = GetLinkSetResponses[keyof GetLinkSetResponses];
 
 export type UpdateLinkSetData = {
-    body: UpdateLinkSetDto;
+    body: UpdateLinkSet;
     path: {
         id: string;
     };
@@ -1885,6 +1923,28 @@ export type GetManyLinkAnchorsData = {
 };
 
 export type GetManyLinkAnchorsResponses = {
+    200: unknown;
+};
+
+export type StackLinkResolverControllerResolveData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/link-resolver/*';
+};
+
+export type StackLinkResolverControllerResolveResponses = {
+    200: unknown;
+};
+
+export type StackLinkResolverControllerGetResolverMetadataData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/link-resolver/.well-known/resolver';
+};
+
+export type StackLinkResolverControllerGetResolverMetadataResponses = {
     200: unknown;
 };
 
@@ -2093,6 +2153,69 @@ export type VerifyCredentialResponses = {
 };
 
 export type VerifyCredentialResponse2 = VerifyCredentialResponses[keyof VerifyCredentialResponses];
+
+export type GetBioLocksData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * Page number (1-based)
+         */
+        page?: number;
+        /**
+         * Number of items per page
+         */
+        limit?: number;
+    };
+    url: '/bio-locks';
+};
+
+export type GetBioLocksResponses = {
+    200: unknown;
+};
+
+export type CreateBioLockData = {
+    body: CreateBioLock;
+    path?: never;
+    query?: never;
+    url: '/bio-locks';
+};
+
+export type CreateBioLockErrors = {
+    /**
+     * The BioLock could not be created
+     */
+    400: unknown;
+    /**
+     * The BioLock could not be found
+     */
+    404: unknown;
+};
+
+export type CreateBioLockResponses = {
+    /**
+     * The BioLock has been successfully created
+     */
+    201: BioLock;
+};
+
+export type CreateBioLockResponse = CreateBioLockResponses[keyof CreateBioLockResponses];
+
+export type GetBioLockData = {
+    body?: never;
+    path: {
+        /**
+         * The id of the Bio Lock
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/bio-locks/{id}';
+};
+
+export type GetBioLockResponses = {
+    200: unknown;
+};
 
 export type GetCustodyCommissionsData = {
     body?: never;

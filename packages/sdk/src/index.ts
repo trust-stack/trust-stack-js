@@ -1,14 +1,17 @@
 import {AdminClient} from "@truststack/admin";
+import {BioLockClient} from "@truststack/biolock";
 import {CanvasClient} from "@truststack/canvas";
 import {TrustStackClient} from "@truststack/core";
 import {DidClient} from "@truststack/did";
 import {DiscoveryClient} from "@truststack/discovery";
 import {EventClient} from "@truststack/event";
 import {HermesClient} from "@truststack/hermes";
+import {LinkResolverClient} from "@truststack/link-resolver";
 import {MasterDataClient} from "@truststack/master-data";
 import {UntpClient} from "@truststack/untp";
 export {loadConfig} from "./bin-utils";
 export * from "./types";
+
 export class TrustStack extends TrustStackClient {
   private _did?: DidClient;
   private _hermes?: HermesClient;
@@ -18,6 +21,8 @@ export class TrustStack extends TrustStackClient {
   private _discovery?: DiscoveryClient;
   private _masterData?: MasterDataClient;
   private _event?: EventClient;
+  private _linkResolver?: LinkResolverClient;
+  private _bioLock?: BioLockClient;
 
   public get did(): DidClient {
     if (!this._did) {
@@ -73,5 +78,19 @@ export class TrustStack extends TrustStackClient {
       this._event = new EventClient();
     }
     return this._event;
+  }
+
+  public get linkResolver(): LinkResolverClient {
+    if (!this._linkResolver) {
+      this._linkResolver = new LinkResolverClient();
+    }
+    return this._linkResolver;
+  }
+
+  public get biolock(): BioLockClient {
+    if (!this._bioLock) {
+      this._bioLock = new BioLockClient();
+    }
+    return this._bioLock;
   }
 }

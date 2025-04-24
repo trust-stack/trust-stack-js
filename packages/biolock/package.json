@@ -1,0 +1,29 @@
+{
+  "name": "@truststack/biolock",
+  "version": "0.0.2",
+  "description": "Trust Stack BioLock SDK",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "license": "MIT",
+  "private": false,
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts"
+  },
+  "dependencies": {
+    "@truststack/core": "workspace:*",
+    "ts-mixer": "^6.0.4"
+  },
+  "keywords": [],
+  "author": "",
+  "devDependencies": {
+    "tsup": "^8.3.5"
+  }
+}
