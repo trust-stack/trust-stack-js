@@ -547,7 +547,7 @@
     },
     "/resolve-url": {
       "post": {
-        "operationId": "ResolveUrlController_resolve",
+        "operationId": "resolveUrl",
         "parameters": [],
         "requestBody": {
           "required": true,

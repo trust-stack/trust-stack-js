@@ -1765,21 +1765,21 @@ export type GetObjectResponses = {
 
 export type GetObjectResponse = GetObjectResponses[keyof GetObjectResponses];
 
-export type ResolveUrlControllerResolveData = {
+export type ResolveUrlData = {
     body: ResolveUrl;
     path?: never;
     query?: never;
     url: '/resolve-url';
 };
 
-export type ResolveUrlControllerResolveResponses = {
+export type ResolveUrlResponses = {
     /**
      * The URL has been resolved
      */
     200: ResolveUrlResponse;
 };
 
-export type ResolveUrlControllerResolveResponse = ResolveUrlControllerResolveResponses[keyof ResolveUrlControllerResolveResponses];
+export type ResolveUrlResponse2 = ResolveUrlResponses[keyof ResolveUrlResponses];
 
 export type GetManyExternalResolversData = {
     body?: never;
