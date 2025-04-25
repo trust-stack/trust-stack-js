@@ -1,5 +1,23 @@
 # @truststack/sdk
 
+## 0.1.10
+
+### Patch Changes
+
+- e106083: Updating openapi types.
+- Updated dependencies [e106083]
+  - @truststack/core@0.1.9
+  - @truststack/admin@0.1.9
+  - @truststack/biolock@0.1.9
+  - @truststack/canvas@0.0.12
+  - @truststack/did@0.0.12
+  - @truststack/discovery@0.1.9
+  - @truststack/event@0.1.9
+  - @truststack/link-resolver@0.1.10
+  - @truststack/master-data@0.1.9
+  - @truststack/object@0.1.9
+  - @truststack/untp@0.0.11
+
 ## 0.1.9
 
 ### Patch Changes

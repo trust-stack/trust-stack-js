@@ -1,5 +1,11 @@
 # @truststack/core
 
+## 0.1.9
+
+### Patch Changes
+
+- e106083: Updating openapi types.
+
 ## 0.1.8
 
 ### Patch Changes

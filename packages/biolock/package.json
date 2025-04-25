@@ -1,6 +1,6 @@
 {
   "name": "@truststack/biolock",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Trust Stack BioLock SDK",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
