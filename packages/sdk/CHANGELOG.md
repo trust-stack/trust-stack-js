@@ -1,5 +1,23 @@
 # @truststack/sdk
 
+## 0.1.12
+
+### Patch Changes
+
+- 521f13b: Resolve url method.
+- Updated dependencies [521f13b]
+  - @truststack/link-resolver@0.1.11
+  - @truststack/core@0.1.10
+  - @truststack/admin@0.1.10
+  - @truststack/biolock@0.1.10
+  - @truststack/canvas@0.0.13
+  - @truststack/did@0.0.13
+  - @truststack/discovery@0.1.10
+  - @truststack/event@0.1.11
+  - @truststack/master-data@0.1.10
+  - @truststack/object@0.1.10
+  - @truststack/untp@0.0.12
+
 ## 0.1.11
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # @truststack/link-resolver
 
+## 0.1.11
+
+### Patch Changes
+
+- 521f13b: Resolve url method.
+- Updated dependencies [521f13b]
+  - @truststack/core@0.1.10
+
 ## 0.1.10
 
 ### Patch Changes
