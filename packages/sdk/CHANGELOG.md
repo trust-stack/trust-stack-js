@@ -1,5 +1,13 @@
 # @truststack/sdk
 
+## 0.1.11
+
+### Patch Changes
+
+- 45169e5: Adding getEventsByIdentifier query.
+- Updated dependencies [45169e5]
+  - @truststack/event@0.1.10
+
 ## 0.1.10
 
 ### Patch Changes
