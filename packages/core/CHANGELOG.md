@@ -1,5 +1,11 @@
 # @truststack/core
 
+## 0.1.8
+
+### Patch Changes
+
+- d590c60: Adding getObject method
+
 ## 0.1.7
 
 ### Patch Changes

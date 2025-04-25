@@ -1,5 +1,13 @@
 # @truststack/event
 
+## 0.1.8
+
+### Patch Changes
+
+- d590c60: Adding getObject method
+- Updated dependencies [d590c60]
+  - @truststack/core@0.1.8
+
 ## 0.1.7
 
 ### Patch Changes

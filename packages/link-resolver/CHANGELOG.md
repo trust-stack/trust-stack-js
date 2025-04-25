@@ -1,5 +1,12 @@
 # @truststack/link-resolver
 
+## 0.1.9
+
+### Patch Changes
+
+- Updated dependencies [d590c60]
+  - @truststack/core@0.1.8
+
 ## 0.1.8
 
 ### Patch Changes
