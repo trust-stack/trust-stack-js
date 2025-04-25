@@ -5131,8 +5131,12 @@
             ]
           },
           "eventTag": {
-            "type": "string",
-            "description": "The tag associated with the event"
+            "description": "The tag associated with the event",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EventTag"
+              }
+            ]
           },
           "bizStep": {
             "type": "string",

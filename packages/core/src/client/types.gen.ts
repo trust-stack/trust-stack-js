@@ -1022,7 +1022,7 @@ export type Event = {
     /**
      * The tag associated with the event
      */
-    eventTag?: string;
+    eventTag?: EventTag;
     /**
      * The business step associated with the event
      */
