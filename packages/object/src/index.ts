@@ -1,5 +1,6 @@
 import {
   createUploadUrl,
+  getObject,
   RequestOptions,
   S3UploadObject,
   TrustStackClient,
@@ -18,6 +19,20 @@ export class ObjectClient extends TrustStackClient {
   ) {
     return createUploadUrl({
       body: props,
+      headers: this.headers(options),
+      client: this.client,
+    });
+  }
+
+  /**
+   * Get an object by its ID
+   * @param id - The ID of the object
+   * @param options - The request options
+   * @returns The object
+   */
+  public async getObject(id: string, options?: RequestOptions) {
+    return getObject({
+      path: {id},
       headers: this.headers(options),
       client: this.client,
     });

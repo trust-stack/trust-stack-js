@@ -182,11 +182,11 @@ export type S3Object = {
     /**
      * The MIME type of the object
      */
-    mimeType: string;
+    mimeType?: string;
     /**
      * The size of the object
      */
-    size: number;
+    size?: number;
     /**
      * The tenant ID of the object
      */
@@ -769,11 +769,11 @@ export type CreateEventTag = {
     /**
      * The name of the event tag
      */
-    name: string;
+    name?: string;
     /**
      * The description of the event tag
      */
-    description: string;
+    description?: string;
 };
 
 export type EventTag = {
@@ -1746,6 +1746,24 @@ export type CreateUploadUrlResponses = {
 };
 
 export type CreateUploadUrlResponse = CreateUploadUrlResponses[keyof CreateUploadUrlResponses];
+
+export type GetObjectData = {
+    body?: never;
+    path: {
+        id: string;
+    };
+    query?: never;
+    url: '/s3/object/{id}';
+};
+
+export type GetObjectResponses = {
+    /**
+     * Returns a S3 object by its ID
+     */
+    200: S3Object;
+};
+
+export type GetObjectResponse = GetObjectResponses[keyof GetObjectResponses];
 
 export type ResolveUrlControllerResolveData = {
     body: ResolveUrl;

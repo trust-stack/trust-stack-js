@@ -514,6 +514,37 @@
         ]
       }
     },
+    "/s3/object/{id}": {
+      "get": {
+        "operationId": "getObject",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a S3 object by its ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/S3Object"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get a S3 object by its ID",
+        "tags": [
+          "S3"
+        ]
+      }
+    },
     "/resolve-url": {
       "post": {
         "operationId": "ResolveUrlController_resolve",
@@ -3613,8 +3644,6 @@
           "id",
           "url",
           "key",
-          "mimeType",
-          "size",
           "createdAt",
           "updatedAt"
         ]
@@ -4650,9 +4679,7 @@
           }
         },
         "required": [
-          "code",
-          "name",
-          "description"
+          "code"
         ]
       },
       "EventTag": {
