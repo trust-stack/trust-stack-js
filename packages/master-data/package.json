@@ -1,6 +1,6 @@
 {
   "name": "@truststack/master-data",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Trust Stack Master Data SDK",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

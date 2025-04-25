@@ -1,5 +1,23 @@
 # @truststack/sdk
 
+## 0.1.9
+
+### Patch Changes
+
+- d590c60: Adding getObject method
+- Updated dependencies [d590c60]
+  - @truststack/object@0.1.8
+  - @truststack/core@0.1.8
+  - @truststack/admin@0.1.8
+  - @truststack/biolock@0.1.8
+  - @truststack/canvas@0.0.11
+  - @truststack/did@0.0.11
+  - @truststack/discovery@0.1.8
+  - @truststack/event@0.1.8
+  - @truststack/link-resolver@0.1.9
+  - @truststack/master-data@0.1.8
+  - @truststack/untp@0.0.10
+
 ## 0.1.8
 
 ### Patch Changes
