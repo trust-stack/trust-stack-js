@@ -4,6 +4,7 @@ import {
   deleteEvent,
   getEvent,
   getEvents,
+  getEventsByIdentifier,
   GetEventsData,
   RequestOptions,
   TrustStackClient,
@@ -64,6 +65,23 @@ export class EventClient extends TrustStackClient {
   public async deleteEvent(id: string, options?: RequestOptions) {
     return deleteEvent({
       path: {id},
+      headers: this.headers(options),
+      client: this.client,
+    });
+  }
+
+  /**
+   * Get events by identifier
+   * @param identifier - The identifier of the events
+   * @param options - The request options
+   * @returns The events
+   */
+  public async getEventsByIdentifier(
+    identifier: string,
+    options?: RequestOptions
+  ) {
+    return getEventsByIdentifier({
+      path: {identifier},
       headers: this.headers(options),
       client: this.client,
     });
