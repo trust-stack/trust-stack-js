@@ -261,6 +261,10 @@ export type ResolveUrlResponse = {
      */
     target: string;
     /**
+     * Identifier associated with the url, if found.
+     */
+    identifier?: string;
+    /**
      * The resolution status
      */
     status: 'resolved' | 'not_found' | 'invalid' | 'error';
@@ -1211,7 +1215,7 @@ export type UpdatePartner = {
     /**
      * The name of the partner
      */
-    name: string;
+    name?: string;
     /**
      * The email of the partner
      */
