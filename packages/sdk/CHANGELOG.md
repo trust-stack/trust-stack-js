@@ -1,5 +1,23 @@
 # @truststack/sdk
 
+## 0.1.13
+
+### Patch Changes
+
+- 8c86343: Updated openapi types.
+- Updated dependencies [8c86343]
+  - @truststack/core@0.1.11
+  - @truststack/master-data@0.1.11
+  - @truststack/admin@0.1.11
+  - @truststack/biolock@0.1.11
+  - @truststack/canvas@0.0.14
+  - @truststack/did@0.0.14
+  - @truststack/discovery@0.1.11
+  - @truststack/event@0.1.12
+  - @truststack/link-resolver@0.1.12
+  - @truststack/object@0.1.11
+  - @truststack/untp@0.0.13
+
 ## 0.1.12
 
 ### Patch Changes

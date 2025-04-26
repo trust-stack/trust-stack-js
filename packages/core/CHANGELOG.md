@@ -1,5 +1,11 @@
 # @truststack/core
 
+## 0.1.11
+
+### Patch Changes
+
+- 8c86343: Updated openapi types.
+
 ## 0.1.10
 
 ### Patch Changes

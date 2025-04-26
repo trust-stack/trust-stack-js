@@ -1,5 +1,13 @@
 # @truststack/master-data
 
+## 0.1.11
+
+### Patch Changes
+
+- 8c86343: Updated openapi types.
+- Updated dependencies [8c86343]
+  - @truststack/core@0.1.11
+
 ## 0.1.10
 
 ### Patch Changes
