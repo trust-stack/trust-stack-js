@@ -1,5 +1,23 @@
 # @truststack/sdk
 
+## 0.1.14
+
+### Patch Changes
+
+- a1ae8da: Updated openapi types.
+- Updated dependencies [a1ae8da]
+  - @truststack/core@0.1.12
+  - @truststack/link-resolver@0.1.13
+  - @truststack/master-data@0.1.12
+  - @truststack/admin@0.1.12
+  - @truststack/biolock@0.1.12
+  - @truststack/canvas@0.0.15
+  - @truststack/did@0.0.15
+  - @truststack/discovery@0.1.12
+  - @truststack/event@0.1.13
+  - @truststack/object@0.1.12
+  - @truststack/untp@0.0.14
+
 ## 0.1.13
 
 ### Patch Changes
