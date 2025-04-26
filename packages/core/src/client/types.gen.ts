@@ -1133,35 +1133,35 @@ export type CreatePartner = {
     /**
      * The email of the partner
      */
-    email: string;
+    email?: string;
     /**
      * The first name of the partner
      */
-    firstName: string;
+    firstName?: string;
     /**
      * The middle name of the partner
      */
-    middleName: string;
+    middleName?: string;
     /**
      * The last name of the partner
      */
-    lastName: string;
+    lastName?: string;
     /**
      * The contact number of the partner
      */
-    contactNumber: string;
+    contactNumber?: string;
     /**
      * The address of the partner
      */
-    streetAddressOne: string;
+    streetAddressOne?: string;
     /**
      * The city of the partner
      */
-    city: string;
+    city?: string;
     /**
      * The state of the partner
      */
-    stateOrRegion: string;
+    stateOrRegion?: string;
 };
 
 export type Partner = {
@@ -1176,35 +1176,35 @@ export type Partner = {
     /**
      * The email of the partner
      */
-    email: string;
+    email?: string;
     /**
      * The first name of the partner
      */
-    firstName: string;
+    firstName?: string;
     /**
      * The middle name of the partner
      */
-    middleName: string;
+    middleName?: string;
     /**
      * The last name of the partner
      */
-    lastName: string;
+    lastName?: string;
     /**
      * The contact number of the partner
      */
-    contactNumber: string;
+    contactNumber?: string;
     /**
      * The address of the partner
      */
-    streetAddressOne: string;
+    streetAddressOne?: string;
     /**
      * The city of the partner
      */
-    city: string;
+    city?: string;
     /**
      * The state of the partner
      */
-    stateOrRegion: string;
+    stateOrRegion?: string;
 };
 
 export type UpdatePartner = {
@@ -1215,35 +1215,35 @@ export type UpdatePartner = {
     /**
      * The email of the partner
      */
-    email: string;
+    email?: string;
     /**
      * The first name of the partner
      */
-    firstName: string;
+    firstName?: string;
     /**
      * The middle name of the partner
      */
-    middleName: string;
+    middleName?: string;
     /**
      * The last name of the partner
      */
-    lastName: string;
+    lastName?: string;
     /**
      * The contact number of the partner
      */
-    contactNumber: string;
+    contactNumber?: string;
     /**
      * The address of the partner
      */
-    streetAddressOne: string;
+    streetAddressOne?: string;
     /**
      * The city of the partner
      */
-    city: string;
+    city?: string;
     /**
      * The state of the partner
      */
-    stateOrRegion: string;
+    stateOrRegion?: string;
 };
 
 export type CreateOrganization = {

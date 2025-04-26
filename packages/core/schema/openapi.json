@@ -5423,15 +5423,7 @@
           }
         },
         "required": [
-          "name",
-          "email",
-          "firstName",
-          "middleName",
-          "lastName",
-          "contactNumber",
-          "streetAddressOne",
-          "city",
-          "stateOrRegion"
+          "name"
         ]
       },
       "Partner": {
@@ -5480,15 +5472,7 @@
         },
         "required": [
           "id",
-          "name",
-          "email",
-          "firstName",
-          "middleName",
-          "lastName",
-          "contactNumber",
-          "streetAddressOne",
-          "city",
-          "stateOrRegion"
+          "name"
         ]
       },
       "UpdatePartner": {
@@ -5532,15 +5516,7 @@
           }
         },
         "required": [
-          "name",
-          "email",
-          "firstName",
-          "middleName",
-          "lastName",
-          "contactNumber",
-          "streetAddressOne",
-          "city",
-          "stateOrRegion"
+          "name"
         ]
       },
       "CreateOrganization": {
