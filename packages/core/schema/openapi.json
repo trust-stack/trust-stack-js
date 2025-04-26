@@ -3749,6 +3749,10 @@
             "type": "string",
             "description": "If a redirect, this is where you have been redirected to. Otherwise, it is just the url provided"
           },
+          "identifier": {
+            "type": "string",
+            "description": "Identifier associated with the url, if found."
+          },
           "status": {
             "type": "string",
             "description": "The resolution status",
@@ -5514,10 +5518,7 @@
             "type": "string",
             "description": "The state of the partner"
           }
-        },
-        "required": [
-          "name"
-        ]
+        }
       },
       "CreateOrganization": {
         "type": "object",
