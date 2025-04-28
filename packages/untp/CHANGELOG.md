@@ -1,5 +1,12 @@
 # @truststack/untp
 
+## 0.0.15
+
+### Patch Changes
+
+- Updated dependencies [9effa57]
+  - @truststack/core@0.2.0
+
 ## 0.0.14
 
 ### Patch Changes
