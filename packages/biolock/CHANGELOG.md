@@ -1,5 +1,16 @@
 # @truststack/biolock
 
+## 0.2.0
+
+### Minor Changes
+
+- 9effa57: adding bio lock consumption
+
+### Patch Changes
+
+- Updated dependencies [9effa57]
+  - @truststack/core@0.2.0
+
 ## 0.1.12
 
 ### Patch Changes
