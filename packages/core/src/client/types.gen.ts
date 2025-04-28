@@ -639,6 +639,17 @@ export type BioLock = {
     updatedAt: string;
 };
 
+export type ConsumeBioLock = {
+    /**
+     * The latitude coordinate where the bio lock was consumed
+     */
+    latitude: number;
+    /**
+     * The longitude coordinate where the bio lock was consumed
+     */
+    longitude: number;
+};
+
 export type CreateCustodyCommission = {
     /**
      * The unique identifier for this commission
@@ -1949,7 +1960,7 @@ export type MintManyLinkAnchorsResponses = {
     201: unknown;
 };
 
-export type SetLinkAnchorData = {
+export type SetLinkAnchorLinkSetData = {
     body: SetLinkAnchor;
     path: {
         id: string;
@@ -1958,11 +1969,11 @@ export type SetLinkAnchorData = {
     url: '/link-anchors/{id}/set';
 };
 
-export type SetLinkAnchorResponses = {
+export type SetLinkAnchorLinkSetResponses = {
     200: unknown;
 };
 
-export type GetLinkAnchorData = {
+export type StackLinkAnchorControllerGetData = {
     body?: never;
     path: {
         id: string;
@@ -1971,7 +1982,7 @@ export type GetLinkAnchorData = {
     url: '/link-anchors/{id}';
 };
 
-export type GetLinkAnchorResponses = {
+export type StackLinkAnchorControllerGetResponses = {
     200: unknown;
 };
 
@@ -2260,6 +2271,41 @@ export type CreateBioLockResponses = {
 };
 
 export type CreateBioLockResponse = CreateBioLockResponses[keyof CreateBioLockResponses];
+
+export type ConsumeBioLockData = {
+    /**
+     * The consume bio lock payload
+     */
+    body: ConsumeBioLock;
+    path: {
+        /**
+         * The id of the Bio Lock to consume
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/bio-locks/{id}/consume';
+};
+
+export type ConsumeBioLockErrors = {
+    /**
+     * The BioLock could not be consumed
+     */
+    400: unknown;
+    /**
+     * The BioLock could not be found
+     */
+    404: unknown;
+};
+
+export type ConsumeBioLockResponses = {
+    /**
+     * The BioLock has been successfully consumed
+     */
+    201: BioLock;
+};
+
+export type ConsumeBioLockResponse = ConsumeBioLockResponses[keyof ConsumeBioLockResponses];
 
 export type GetBioLockData = {
     body?: never;
