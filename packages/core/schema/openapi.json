@@ -895,7 +895,7 @@
     "/link-anchors/{id}/set": {
       "post": {
         "description": "Set the link set for a link anchor",
-        "operationId": "setLinkAnchor",
+        "operationId": "setLinkAnchorLinkSet",
         "parameters": [
           {
             "name": "id",
@@ -929,8 +929,7 @@
     },
     "/link-anchors/{id}": {
       "get": {
-        "description": "Get a link anchor",
-        "operationId": "getLinkAnchor",
+        "operationId": "StackLinkAnchorController_get",
         "parameters": [
           {
             "name": "id",
@@ -946,7 +945,6 @@
             "description": ""
           }
         },
-        "summary": "Get a link anchor",
         "tags": [
           "Link Anchor"
         ]
@@ -1424,6 +1422,56 @@
           }
         },
         "summary": "Get Bio Locks",
+        "tags": [
+          "BioLock"
+        ]
+      }
+    },
+    "/bio-locks/{id}/consume": {
+      "post": {
+        "description": "Consume a Bio Lock",
+        "operationId": "consumeBioLock",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "The id of the Bio Lock to consume",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "The consume bio lock payload",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConsumeBioLock"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The BioLock has been successfully consumed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BioLock"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The BioLock could not be consumed"
+          },
+          "404": {
+            "description": "The BioLock could not be found"
+          }
+        },
+        "summary": "Consume Bio Lock",
         "tags": [
           "BioLock"
         ]
@@ -4451,6 +4499,23 @@
           "epc",
           "createdAt",
           "updatedAt"
+        ]
+      },
+      "ConsumeBioLock": {
+        "type": "object",
+        "properties": {
+          "latitude": {
+            "type": "number",
+            "description": "The latitude coordinate where the bio lock was consumed"
+          },
+          "longitude": {
+            "type": "number",
+            "description": "The longitude coordinate where the bio lock was consumed"
+          }
+        },
+        "required": [
+          "latitude",
+          "longitude"
         ]
       },
       "CreateCustodyCommission": {
