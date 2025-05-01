@@ -152,6 +152,9 @@ importers:
       object-hash:
         specifier: ^3.0.0
         version: 3.0.0
+      ts-mixer:
+        specifier: ^6.0.4
+        version: 6.0.4
     devDependencies:
       '@types/n3':
         specifier: ^1.16.4

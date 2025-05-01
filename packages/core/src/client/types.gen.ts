@@ -639,17 +639,6 @@ export type BioLock = {
     updatedAt: string;
 };
 
-export type ConsumeBioLock = {
-    /**
-     * The latitude coordinate where the bio lock was consumed
-     */
-    latitude: number;
-    /**
-     * The longitude coordinate where the bio lock was consumed
-     */
-    longitude: number;
-};
-
 export type CreateCustodyCommission = {
     /**
      * The unique identifier for this commission
@@ -864,7 +853,7 @@ export type Source = {
     /**
      * The type of source
      */
-    sourceType: 'OWNING_PARTY' | 'POSSESSING_PARTY' | 'LOCATION';
+    sourceType: 'OWNING_PARTY' | 'POSSESSING_PARTY' | 'LOCATION' | 'LOGISTICS_PROVIDER';
     /**
      * The source string
      */
@@ -879,7 +868,7 @@ export type Destination = {
     /**
      * The type of destination
      */
-    destinationType: 'OWNING_PARTY' | 'POSSESSING_PARTY' | 'LOCATION';
+    destinationType: 'OWNING_PARTY' | 'POSSESSING_PARTY' | 'LOCATION' | 'LOGISTICS_PROVIDER';
     /**
      * The destination string
      */
@@ -903,6 +892,13 @@ export type CreateReadPoint = {
      * The longitude of the location.
      */
     lng?: number;
+};
+
+export type SeafoodElements = {
+    /**
+     * The catch area of the seafood event data
+     */
+    catchArea: string;
 };
 
 export type CreateEvent = {
@@ -966,6 +962,10 @@ export type CreateEvent = {
      * The read point associated with the event
      */
     readPoint?: CreateReadPoint;
+    /**
+     * The seafood event data associated with the event
+     */
+    seafood?: SeafoodElements;
     /**
      * List of images associated with the event
      */
@@ -1086,6 +1086,10 @@ export type Event = {
      * The images associated with the event
      */
     images?: Array<string>;
+    /**
+     * The seafood elements associated with the event
+     */
+    seafood?: SeafoodElements;
 };
 
 export type CreateLocation = {
@@ -1097,6 +1101,45 @@ export type CreateLocation = {
      * The id of the parent location
      */
     parentLocationId?: string | null;
+    /**
+     * The tag associated with the location
+     */
+    locationTag?: string;
+};
+
+export type LocationTag = {
+    /**
+     * The id of the location tag
+     */
+    id: string;
+    /**
+     * The code of the location tag, a unique identifier
+     */
+    code: string;
+    /**
+     * The name of the location tag
+     */
+    name: string;
+    /**
+     * The description of the location tag
+     */
+    description: string;
+    /**
+     * The date and time the location tag was created
+     */
+    createdAt: string;
+    /**
+     * The date and time the location tag was updated
+     */
+    updatedAt: string;
+    /**
+     * Whether the location tag is deleted
+     */
+    deleted: boolean;
+    /**
+     * The date and time the location tag was deleted
+     */
+    deletedAt: string;
 };
 
 export type Location = {
@@ -1120,6 +1163,25 @@ export type Location = {
      * The id of the parent location
      */
     parentLocationId?: string | null;
+    /**
+     * The tag associated with the location
+     */
+    locationTag?: LocationTag;
+};
+
+export type CreateLocationTag = {
+    /**
+     * The code of the location tag, a unique identifier
+     */
+    code: string;
+    /**
+     * The name of the location tag
+     */
+    name: string;
+    /**
+     * The description of the location tag
+     */
+    description: string;
 };
 
 export type CreateTradeItem = {
@@ -1127,6 +1189,45 @@ export type CreateTradeItem = {
      * The name of the trade item
      */
     name: string;
+    /**
+     * The tag associated with the trade item
+     */
+    tradeItemTag?: string;
+};
+
+export type TradeItemTag = {
+    /**
+     * The id of the trade item tag
+     */
+    id: string;
+    /**
+     * The code of the trade item tag, a unique identifier
+     */
+    code: string;
+    /**
+     * The name of the trade item tag
+     */
+    name: string;
+    /**
+     * The description of the trade item tag
+     */
+    description: string;
+    /**
+     * The date and time the trade item tag was created
+     */
+    createdAt: string;
+    /**
+     * The date and time the trade item tag was updated
+     */
+    updatedAt: string;
+    /**
+     * Whether the trade item tag is deleted
+     */
+    deleted: boolean;
+    /**
+     * The date and time the trade item tag was deleted
+     */
+    deletedAt: string;
 };
 
 export type TradeItem = {
@@ -1138,6 +1239,25 @@ export type TradeItem = {
      * The name of the trade item
      */
     name: string;
+    /**
+     * The tag associated with the trade item
+     */
+    tradeItemTag?: TradeItemTag;
+};
+
+export type CreateTradeItemTag = {
+    /**
+     * The code of the trade item tag, a unique identifier
+     */
+    code: string;
+    /**
+     * The name of the trade item tag
+     */
+    name: string;
+    /**
+     * The description of the trade item tag
+     */
+    description: string;
 };
 
 export type CreatePartner = {
@@ -1145,6 +1265,10 @@ export type CreatePartner = {
      * The name of the partner
      */
     name: string;
+    /**
+     * The tag associated with the partner
+     */
+    partnerTag?: string;
     /**
      * The email of the partner
      */
@@ -1179,11 +1303,50 @@ export type CreatePartner = {
     stateOrRegion?: string;
 };
 
+export type PartnerTag = {
+    /**
+     * The id of the partner tag
+     */
+    id: string;
+    /**
+     * The code of the partner tag, a unique identifier
+     */
+    code: string;
+    /**
+     * The name of the partner tag
+     */
+    name: string;
+    /**
+     * The description of the partner tag
+     */
+    description: string;
+    /**
+     * The date and time the partner tag was created
+     */
+    createdAt: string;
+    /**
+     * The date and time the partner tag was updated
+     */
+    updatedAt: string;
+    /**
+     * Whether the partner tag is deleted
+     */
+    deleted: boolean;
+    /**
+     * The date and time the partner tag was deleted
+     */
+    deletedAt: string;
+};
+
 export type Partner = {
     /**
      * The id of the partner
      */
     id: string;
+    /**
+     * The tag associated with the partner
+     */
+    partnerTag?: PartnerTag;
     /**
      * The name of the partner
      */
@@ -1261,6 +1424,21 @@ export type UpdatePartner = {
     stateOrRegion?: string;
 };
 
+export type CreatePartnerTag = {
+    /**
+     * The code of the partner tag, a unique identifier
+     */
+    code: string;
+    /**
+     * The name of the partner tag
+     */
+    name: string;
+    /**
+     * The description of the partner tag
+     */
+    description: string;
+};
+
 export type CreateOrganization = {
     /**
      * Name given to the organization.
@@ -1330,6 +1508,70 @@ export type TrustGraphEdge = {
     target: string;
 };
 
+export enum PolicyResultStatus {
+    PENDING = 'PENDING',
+    SUCCESS = 'SUCCESS',
+    FAILURE = 'FAILURE'
+}
+
+export type PolicyResult = {
+    /**
+     * The id of the policy result
+     */
+    id: string;
+    /**
+     * The updated at date of the policy result
+     */
+    updatedAt: string;
+    /**
+     * The created at date of the policy result
+     */
+    createdAt: string;
+    /**
+     * The status of the policy result
+     */
+    status: PolicyResultStatus;
+    /**
+     * The name of the policy
+     */
+    policyName: string;
+    /**
+     * The description of the policy
+     */
+    policyDescription?: string;
+    /**
+     * The constraints that were evaluated
+     */
+    constraints: Array<string>;
+};
+
+export type Policy = {
+    /**
+     * The id of the policy
+     */
+    id: string;
+    /**
+     * The updated at date of the policy result
+     */
+    updatedAt: string;
+    /**
+     * The created at date of the policy result
+     */
+    createdAt: string;
+    /**
+     * The name of the policy
+     */
+    name: string;
+    /**
+     * The description of the policy
+     */
+    description: string;
+    /**
+     * The constraints of the policy
+     */
+    constraints: Array<string>;
+};
+
 export type TrustGraph = {
     /**
      * The id of the trust graph
@@ -1351,6 +1593,14 @@ export type TrustGraph = {
      * The type of the trust graph
      */
     type: TrustGraphNodeType;
+    /**
+     * The policy results of the trust graph
+     */
+    policyResults: Array<PolicyResult>;
+    /**
+     * The policies applied to the trust graph
+     */
+    policies: Array<Policy>;
 };
 
 export type ScreenHeader = {
@@ -1431,6 +1681,10 @@ export type TraverseTrustGraph = {
      * The target identifier to traverse from.
      */
     identifier: string;
+    /**
+     * The policies to evaluate
+     */
+    policies?: Array<string>;
 };
 
 export type HealthCheckData = {
@@ -2272,41 +2526,6 @@ export type CreateBioLockResponses = {
 
 export type CreateBioLockResponse = CreateBioLockResponses[keyof CreateBioLockResponses];
 
-export type ConsumeBioLockData = {
-    /**
-     * The consume bio lock payload
-     */
-    body: ConsumeBioLock;
-    path: {
-        /**
-         * The id of the Bio Lock to consume
-         */
-        id: string;
-    };
-    query?: never;
-    url: '/bio-locks/{id}/consume';
-};
-
-export type ConsumeBioLockErrors = {
-    /**
-     * The BioLock could not be consumed
-     */
-    400: unknown;
-    /**
-     * The BioLock could not be found
-     */
-    404: unknown;
-};
-
-export type ConsumeBioLockResponses = {
-    /**
-     * The BioLock has been successfully consumed
-     */
-    201: BioLock;
-};
-
-export type ConsumeBioLockResponse = ConsumeBioLockResponses[keyof ConsumeBioLockResponses];
-
 export type GetBioLockData = {
     body?: never;
     path: {
@@ -2940,6 +3159,20 @@ export type GetEventResponses = {
 
 export type GetEventResponse = GetEventResponses[keyof GetEventResponses];
 
+export type GetFaoCodesData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/fao-codes';
+};
+
+export type GetFaoCodesResponses = {
+    /**
+     * All FAO codes
+     */
+    200: unknown;
+};
+
 export type GetLocationsData = {
     body?: never;
     path?: never;
@@ -3051,6 +3284,128 @@ export type GetLocationByIdentifierResponses = {
 };
 
 export type GetLocationByIdentifierResponse = GetLocationByIdentifierResponses[keyof GetLocationByIdentifierResponses];
+
+export type GetLocationTagsData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * Page number (1-based)
+         */
+        page?: number;
+        /**
+         * Number of items per page
+         */
+        limit?: number;
+    };
+    url: '/location-tags';
+};
+
+export type GetLocationTagsResponses = {
+    /**
+     * The location tags have been successfully retrieved
+     */
+    200: Array<LocationTag>;
+};
+
+export type GetLocationTagsResponse = GetLocationTagsResponses[keyof GetLocationTagsResponses];
+
+export type CreateLocationTagData = {
+    body: CreateLocationTag;
+    path?: never;
+    query?: never;
+    url: '/location-tags';
+};
+
+export type CreateLocationTagErrors = {
+    /**
+     * Invalid request
+     */
+    400: unknown;
+};
+
+export type CreateLocationTagResponses = {
+    /**
+     * Location tag created successfully
+     */
+    201: LocationTag;
+};
+
+export type CreateLocationTagResponse = CreateLocationTagResponses[keyof CreateLocationTagResponses];
+
+export type SetLocationTagsData = {
+    /**
+     * Array of location tags to set
+     */
+    body: Array<CreateLocationTag>;
+    path?: never;
+    query?: never;
+    url: '/location-tags/set';
+};
+
+export type SetLocationTagsErrors = {
+    /**
+     * Invalid request
+     */
+    400: unknown;
+};
+
+export type SetLocationTagsResponses = {
+    /**
+     * Location tags set successfully
+     */
+    200: Array<LocationTag>;
+};
+
+export type SetLocationTagsResponse = SetLocationTagsResponses[keyof SetLocationTagsResponses];
+
+export type DeleteLocationTagData = {
+    body?: never;
+    path: {
+        id: string;
+    };
+    query?: never;
+    url: '/location-tags/{id}';
+};
+
+export type DeleteLocationTagErrors = {
+    /**
+     * Event tag not found
+     */
+    404: unknown;
+};
+
+export type DeleteLocationTagResponses = {
+    /**
+     * Location tag deleted successfully
+     */
+    200: unknown;
+};
+
+export type GetLocationTagData = {
+    body?: never;
+    path: {
+        id: string;
+    };
+    query?: never;
+    url: '/location-tags/{id}';
+};
+
+export type GetLocationTagErrors = {
+    /**
+     * Location tag not found
+     */
+    404: unknown;
+};
+
+export type GetLocationTagResponses = {
+    /**
+     * Location tag retrieved successfully
+     */
+    200: LocationTag;
+};
+
+export type GetLocationTagResponse = GetLocationTagResponses[keyof GetLocationTagResponses];
 
 export type GetTradeItemsData = {
     body?: never;
@@ -3172,6 +3527,128 @@ export type GetTradeItemByIdentifierResponses = {
 
 export type GetTradeItemByIdentifierResponse = GetTradeItemByIdentifierResponses[keyof GetTradeItemByIdentifierResponses];
 
+export type GetTradeItemTagsData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * Page number (1-based)
+         */
+        page?: number;
+        /**
+         * Number of items per page
+         */
+        limit?: number;
+    };
+    url: '/trade-item-tags';
+};
+
+export type GetTradeItemTagsResponses = {
+    /**
+     * The trade item tags have been successfully retrieved
+     */
+    200: Array<TradeItemTag>;
+};
+
+export type GetTradeItemTagsResponse = GetTradeItemTagsResponses[keyof GetTradeItemTagsResponses];
+
+export type CreateTradeItemTagData = {
+    body: CreateTradeItemTag;
+    path?: never;
+    query?: never;
+    url: '/trade-item-tags';
+};
+
+export type CreateTradeItemTagErrors = {
+    /**
+     * Invalid request
+     */
+    400: unknown;
+};
+
+export type CreateTradeItemTagResponses = {
+    /**
+     * Trade item tag created successfully
+     */
+    201: TradeItemTag;
+};
+
+export type CreateTradeItemTagResponse = CreateTradeItemTagResponses[keyof CreateTradeItemTagResponses];
+
+export type SetTradeItemTagsData = {
+    /**
+     * Array of trade item tags to set
+     */
+    body: Array<CreateTradeItemTag>;
+    path?: never;
+    query?: never;
+    url: '/trade-item-tags/set';
+};
+
+export type SetTradeItemTagsErrors = {
+    /**
+     * Invalid request
+     */
+    400: unknown;
+};
+
+export type SetTradeItemTagsResponses = {
+    /**
+     * Trade item tags set successfully
+     */
+    200: Array<TradeItemTag>;
+};
+
+export type SetTradeItemTagsResponse = SetTradeItemTagsResponses[keyof SetTradeItemTagsResponses];
+
+export type DeleteTradeItemTagData = {
+    body?: never;
+    path: {
+        id: string;
+    };
+    query?: never;
+    url: '/trade-item-tags/{id}';
+};
+
+export type DeleteTradeItemTagErrors = {
+    /**
+     * Trade item tag not found
+     */
+    404: unknown;
+};
+
+export type DeleteTradeItemTagResponses = {
+    /**
+     * Trade item tag deleted successfully
+     */
+    200: unknown;
+};
+
+export type GetTradeItemTagData = {
+    body?: never;
+    path: {
+        id: string;
+    };
+    query?: never;
+    url: '/trade-item-tags/{id}';
+};
+
+export type GetTradeItemTagErrors = {
+    /**
+     * Trade item tag not found
+     */
+    404: unknown;
+};
+
+export type GetTradeItemTagResponses = {
+    /**
+     * Trade item tag retrieved successfully
+     */
+    200: TradeItemTag;
+};
+
+export type GetTradeItemTagResponse = GetTradeItemTagResponses[keyof GetTradeItemTagResponses];
+
 export type GetPartnersData = {
     body?: never;
     path?: never;
@@ -3291,6 +3768,128 @@ export type UpdatePartnerResponses = {
 };
 
 export type UpdatePartnerResponse = UpdatePartnerResponses[keyof UpdatePartnerResponses];
+
+export type GetPartnerTagsData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * Page number (1-based)
+         */
+        page?: number;
+        /**
+         * Number of items per page
+         */
+        limit?: number;
+    };
+    url: '/partner-tags';
+};
+
+export type GetPartnerTagsResponses = {
+    /**
+     * The partner tags have been successfully retrieved
+     */
+    200: Array<PartnerTag>;
+};
+
+export type GetPartnerTagsResponse = GetPartnerTagsResponses[keyof GetPartnerTagsResponses];
+
+export type CreatePartnerTagData = {
+    body: CreatePartnerTag;
+    path?: never;
+    query?: never;
+    url: '/partner-tags';
+};
+
+export type CreatePartnerTagErrors = {
+    /**
+     * Invalid request
+     */
+    400: unknown;
+};
+
+export type CreatePartnerTagResponses = {
+    /**
+     * Partner tag created successfully
+     */
+    201: PartnerTag;
+};
+
+export type CreatePartnerTagResponse = CreatePartnerTagResponses[keyof CreatePartnerTagResponses];
+
+export type SetPartnerTagsData = {
+    /**
+     * Array of partner tags to set
+     */
+    body: Array<CreatePartnerTag>;
+    path?: never;
+    query?: never;
+    url: '/partner-tags/set';
+};
+
+export type SetPartnerTagsErrors = {
+    /**
+     * Invalid request
+     */
+    400: unknown;
+};
+
+export type SetPartnerTagsResponses = {
+    /**
+     * Partner tags set successfully
+     */
+    200: Array<PartnerTag>;
+};
+
+export type SetPartnerTagsResponse = SetPartnerTagsResponses[keyof SetPartnerTagsResponses];
+
+export type DeletePartnerTagData = {
+    body?: never;
+    path: {
+        id: string;
+    };
+    query?: never;
+    url: '/partner-tags/{id}';
+};
+
+export type DeletePartnerTagErrors = {
+    /**
+     * Partner tag not found
+     */
+    404: unknown;
+};
+
+export type DeletePartnerTagResponses = {
+    /**
+     * Partner tag deleted successfully
+     */
+    200: unknown;
+};
+
+export type GetPartnerTagData = {
+    body?: never;
+    path: {
+        id: string;
+    };
+    query?: never;
+    url: '/partner-tags/{id}';
+};
+
+export type GetPartnerTagErrors = {
+    /**
+     * Partner tag not found
+     */
+    404: unknown;
+};
+
+export type GetPartnerTagResponses = {
+    /**
+     * Partner tag retrieved successfully
+     */
+    200: PartnerTag;
+};
+
+export type GetPartnerTagResponse = GetPartnerTagResponses[keyof GetPartnerTagResponses];
 
 export type CreateOrganizationData = {
     body: CreateOrganization;
@@ -3575,3 +4174,50 @@ export type TraverseTrustGraphResponses = {
 };
 
 export type TraverseTrustGraphResponse = TraverseTrustGraphResponses[keyof TraverseTrustGraphResponses];
+
+export type GetPolicyByIdData = {
+    body?: never;
+    path: {
+        id: string;
+    };
+    query?: never;
+    url: '/policies/{id}';
+};
+
+export type GetPolicyByIdResponses = {
+    /**
+     * The policy was successfully retrieved.
+     */
+    200: Policy;
+};
+
+export type GetPolicyByIdResponse = GetPolicyByIdResponses[keyof GetPolicyByIdResponses];
+
+export type GetPoliciesData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * Page number (1-based)
+         */
+        page?: number;
+        /**
+         * Number of items per page
+         */
+        limit?: number;
+        /**
+         * The ID of the parent location
+         */
+        parentLocationId?: string;
+    };
+    url: '/policies';
+};
+
+export type GetPoliciesResponses = {
+    /**
+     * The locations have been successfully retrieved
+     */
+    200: Array<Policy>;
+};
+
+export type GetPoliciesResponse = GetPoliciesResponses[keyof GetPoliciesResponses];
