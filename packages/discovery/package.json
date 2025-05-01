@@ -22,7 +22,8 @@
     "@truststack/untp-types": "workspace:*",
     "@truststack/core": "workspace:*",
     "n3": "^1.17.4",
-    "object-hash": "^3.0.0"
+    "object-hash": "^3.0.0",
+    "ts-mixer": "*"
   },
   "devDependencies": {
     "@types/n3": "^1.16.4",
