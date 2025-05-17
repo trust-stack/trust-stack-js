@@ -2235,6 +2235,69 @@
         ]
       }
     },
+    "/app-entry/organization": {
+      "get": {
+        "description": "Get the app entry for the current organization, returns default routes if none exists",
+        "operationId": "getAppEntryOrganization",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The app entry has been successfully retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppEntry"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - User does not have access to this organization"
+          }
+        },
+        "summary": "Get Organization App Entry",
+        "tags": [
+          "App Entry"
+        ]
+      },
+      "put": {
+        "description": "Create or update the app entry for the current organization",
+        "operationId": "setAppEntryOrganization",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetAppEntry"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The app entry has been successfully created or updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppEntry"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Invalid app entry data provided"
+          },
+          "403": {
+            "description": "Forbidden - User does not have access to this organization"
+          }
+        },
+        "summary": "Set Organization App Entry",
+        "tags": [
+          "App Entry"
+        ]
+      }
+    },
     "/event-schemas": {
       "post": {
         "operationId": "createEventSchema",
@@ -5552,6 +5615,50 @@
         "type": "object",
         "properties": {}
       },
+      "AppEntry": {
+        "type": "object",
+        "properties": {
+          "organizationId": {
+            "type": "string",
+            "description": "The organization id of the app entry",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "routeMobile": {
+            "type": "string",
+            "description": "The mobile route of the app entry",
+            "example": "/mobile"
+          },
+          "routeWeb": {
+            "type": "string",
+            "description": "The web route of the app entry",
+            "example": "/web"
+          }
+        },
+        "required": [
+          "organizationId",
+          "routeMobile",
+          "routeWeb"
+        ]
+      },
+      "SetAppEntry": {
+        "type": "object",
+        "properties": {
+          "routeMobile": {
+            "type": "string",
+            "description": "The mobile route of the app entry",
+            "example": "/mobile"
+          },
+          "routeWeb": {
+            "type": "string",
+            "description": "The web route of the app entry",
+            "example": "/web"
+          }
+        },
+        "required": [
+          "routeMobile",
+          "routeWeb"
+        ]
+      },
       "CreateEventExtensionSchema": {
         "type": "object",
         "properties": {
@@ -7075,7 +7182,6 @@
           }
         },
         "required": [
-          "code",
           "name"
         ]
       },
