@@ -1,5 +1,12 @@
 # @truststack/sdk
 
+## 0.1.18
+
+### Patch Changes
+
+- Updated dependencies [56f5fa0]
+  - @truststack/admin@0.1.16
+
 ## 0.1.17
 
 ### Patch Changes
