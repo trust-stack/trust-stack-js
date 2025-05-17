@@ -878,6 +878,30 @@ export type SetAppEntry = {
     routeWeb: string;
 };
 
+export type AppTheme = {
+    /**
+     * The organization ID
+     */
+    organizationId: string;
+    /**
+     * The color value
+     */
+    color: string;
+    /**
+     * The theme variables
+     */
+    variables: {
+        [key: string]: unknown;
+    };
+};
+
+export type SetAppTheme = {
+    /**
+     * The color value
+     */
+    color: string;
+};
+
 export type CreateEventExtensionSchema = {
     /**
      * The JSON schema definition
@@ -3418,6 +3442,56 @@ export type SetAppEntryOrganizationResponses = {
 };
 
 export type SetAppEntryOrganizationResponse = SetAppEntryOrganizationResponses[keyof SetAppEntryOrganizationResponses];
+
+export type GetAppThemeOrganizationData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/app-theme/organization';
+};
+
+export type GetAppThemeOrganizationErrors = {
+    /**
+     * Forbidden - User does not have access to this organization
+     */
+    403: unknown;
+};
+
+export type GetAppThemeOrganizationResponses = {
+    /**
+     * The app theme has been successfully retrieved
+     */
+    200: AppTheme;
+};
+
+export type GetAppThemeOrganizationResponse = GetAppThemeOrganizationResponses[keyof GetAppThemeOrganizationResponses];
+
+export type SetAppThemeOrganizationData = {
+    body: SetAppTheme;
+    path?: never;
+    query?: never;
+    url: '/app-theme/organization';
+};
+
+export type SetAppThemeOrganizationErrors = {
+    /**
+     * Bad Request - Invalid app theme data provided
+     */
+    400: unknown;
+    /**
+     * Forbidden - User does not have access to this organization
+     */
+    403: unknown;
+};
+
+export type SetAppThemeOrganizationResponses = {
+    /**
+     * The app theme has been successfully created or updated
+     */
+    200: AppTheme;
+};
+
+export type SetAppThemeOrganizationResponse = SetAppThemeOrganizationResponses[keyof SetAppThemeOrganizationResponses];
 
 export type GetEventSchemasData = {
     body?: never;
