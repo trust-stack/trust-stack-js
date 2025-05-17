@@ -1,5 +1,12 @@
 # @truststack/biolock
 
+## 0.2.2
+
+### Patch Changes
+
+- Updated dependencies [aa805e7]
+  - @truststack/core@0.2.2
+
 ## 0.2.1
 
 ### Patch Changes
