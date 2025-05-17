@@ -1,5 +1,13 @@
 # @truststack/admin
 
+## 0.1.17
+
+### Patch Changes
+
+- 8ba3e53: Adding app-theme methods.
+- Updated dependencies [8ba3e53]
+  - @truststack/core@0.2.3
+
 ## 0.1.16
 
 ### Patch Changes
