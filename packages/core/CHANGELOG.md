@@ -1,5 +1,11 @@
 # @truststack/core
 
+## 0.2.2
+
+### Patch Changes
+
+- aa805e7: App entry routes.
+
 ## 0.2.1
 
 ### Patch Changes
