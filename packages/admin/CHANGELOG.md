@@ -1,5 +1,11 @@
 # @truststack/admin
 
+## 0.1.16
+
+### Patch Changes
+
+- 56f5fa0: Adding getAppEntryOrganization method.
+
 ## 0.1.15
 
 ### Patch Changes
