@@ -852,6 +852,32 @@ export type UpdateProvenanceForm = {
     [key: string]: unknown;
 };
 
+export type AppEntry = {
+    /**
+     * The organization id of the app entry
+     */
+    organizationId: string;
+    /**
+     * The mobile route of the app entry
+     */
+    routeMobile: string;
+    /**
+     * The web route of the app entry
+     */
+    routeWeb: string;
+};
+
+export type SetAppEntry = {
+    /**
+     * The mobile route of the app entry
+     */
+    routeMobile: string;
+    /**
+     * The web route of the app entry
+     */
+    routeWeb: string;
+};
+
 export type CreateEventExtensionSchema = {
     /**
      * The JSON schema definition
@@ -1709,7 +1735,7 @@ export type CreateTradeItem = {
     /**
      * The code of the trade item, a unique identifier
      */
-    code: string;
+    code?: string;
     /**
      * The name of the trade item
      */
@@ -3342,6 +3368,56 @@ export type UpdateProvenanceFormResponses = {
 };
 
 export type UpdateProvenanceFormResponse = UpdateProvenanceFormResponses[keyof UpdateProvenanceFormResponses];
+
+export type GetAppEntryOrganizationData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/app-entry/organization';
+};
+
+export type GetAppEntryOrganizationErrors = {
+    /**
+     * Forbidden - User does not have access to this organization
+     */
+    403: unknown;
+};
+
+export type GetAppEntryOrganizationResponses = {
+    /**
+     * The app entry has been successfully retrieved
+     */
+    200: AppEntry;
+};
+
+export type GetAppEntryOrganizationResponse = GetAppEntryOrganizationResponses[keyof GetAppEntryOrganizationResponses];
+
+export type SetAppEntryOrganizationData = {
+    body: SetAppEntry;
+    path?: never;
+    query?: never;
+    url: '/app-entry/organization';
+};
+
+export type SetAppEntryOrganizationErrors = {
+    /**
+     * Bad Request - Invalid app entry data provided
+     */
+    400: unknown;
+    /**
+     * Forbidden - User does not have access to this organization
+     */
+    403: unknown;
+};
+
+export type SetAppEntryOrganizationResponses = {
+    /**
+     * The app entry has been successfully created or updated
+     */
+    200: AppEntry;
+};
+
+export type SetAppEntryOrganizationResponse = SetAppEntryOrganizationResponses[keyof SetAppEntryOrganizationResponses];
 
 export type GetEventSchemasData = {
     body?: never;
