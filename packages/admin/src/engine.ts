@@ -1,4 +1,5 @@
 import {
+  getAppEntryOrganization,
   RequestOptions,
   SetAppEntry,
   setAppEntryOrganization,
@@ -18,6 +19,18 @@ export class EngineClient extends TrustStackClient {
   ) {
     return setAppEntryOrganization({
       body: props,
+      headers: this.headers(options),
+      client: this.client,
+    });
+  }
+
+  /**
+   * Get the app entry organization
+   * @param options - The request options
+   * @returns The app entry organization
+   */
+  public async getAppEntryOrganization(options?: RequestOptions) {
+    return getAppEntryOrganization({
       headers: this.headers(options),
       client: this.client,
     });
