@@ -1,6 +1,6 @@
 {
   "name": "@truststack/object",
-  "version": "0.1.13",
+  "version": "0.1.14",
   "description": "Trust Stack Event SDK",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

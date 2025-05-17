@@ -1,5 +1,13 @@
 # @truststack/biolock
 
+## 0.2.1
+
+### Patch Changes
+
+- be76399: Adding policy queries.
+- Updated dependencies [be76399]
+  - @truststack/core@0.2.1
+
 ## 0.2.0
 
 ### Minor Changes

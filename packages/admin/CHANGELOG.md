@@ -1,5 +1,12 @@
 # @truststack/admin
 
+## 0.1.14
+
+### Patch Changes
+
+- Updated dependencies [be76399]
+  - @truststack/core@0.2.1
+
 ## 0.1.13
 
 ### Patch Changes

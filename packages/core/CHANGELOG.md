@@ -1,5 +1,11 @@
 # @truststack/core
 
+## 0.2.1
+
+### Patch Changes
+
+- be76399: Adding policy queries.
+
 ## 0.2.0
 
 ### Minor Changes
