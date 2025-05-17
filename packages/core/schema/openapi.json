@@ -2298,6 +2298,69 @@
         ]
       }
     },
+    "/app-theme/organization": {
+      "get": {
+        "description": "Get the app theme for the current organization, returns default theme if none exists",
+        "operationId": "getAppThemeOrganization",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The app theme has been successfully retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppTheme"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - User does not have access to this organization"
+          }
+        },
+        "summary": "Get Organization App Theme",
+        "tags": [
+          "App Theme"
+        ]
+      },
+      "put": {
+        "description": "Create or update the app theme for the current organization",
+        "operationId": "setAppThemeOrganization",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetAppTheme"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The app theme has been successfully created or updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppTheme"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Invalid app theme data provided"
+          },
+          "403": {
+            "description": "Forbidden - User does not have access to this organization"
+          }
+        },
+        "summary": "Set Organization App Theme",
+        "tags": [
+          "App Theme"
+        ]
+      }
+    },
     "/event-schemas": {
       "post": {
         "operationId": "createEventSchema",
@@ -5657,6 +5720,40 @@
         "required": [
           "routeMobile",
           "routeWeb"
+        ]
+      },
+      "AppTheme": {
+        "type": "object",
+        "properties": {
+          "organizationId": {
+            "type": "string",
+            "description": "The organization ID"
+          },
+          "color": {
+            "type": "string",
+            "description": "The color value"
+          },
+          "variables": {
+            "type": "object",
+            "description": "The theme variables"
+          }
+        },
+        "required": [
+          "organizationId",
+          "color",
+          "variables"
+        ]
+      },
+      "SetAppTheme": {
+        "type": "object",
+        "properties": {
+          "color": {
+            "type": "string",
+            "description": "The color value"
+          }
+        },
+        "required": [
+          "color"
         ]
       },
       "CreateEventExtensionSchema": {
