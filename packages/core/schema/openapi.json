@@ -6324,6 +6324,10 @@
             "type": "string",
             "description": "The EPC class of the quantity element"
           },
+          "resolverUrl": {
+            "type": "string",
+            "description": "The resolver URL of the quantity element"
+          },
           "quantity": {
             "type": "number",
             "description": "The quantity of the item"
@@ -6335,6 +6339,7 @@
         },
         "required": [
           "epcClass",
+          "resolverUrl",
           "quantity",
           "unit"
         ]
@@ -6362,10 +6367,15 @@
           "epc": {
             "type": "string",
             "description": "The instance identifier"
+          },
+          "resolverUrl": {
+            "type": "string",
+            "description": "The resolver URL of the quantity element"
           }
         },
         "required": [
-          "epc"
+          "epc",
+          "resolverUrl"
         ]
       },
       "EventIlmd": {
