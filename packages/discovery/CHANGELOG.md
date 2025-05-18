@@ -1,5 +1,12 @@
 # @truststack/discovery
 
+## 0.1.17
+
+### Patch Changes
+
+- Updated dependencies [e3179d7]
+  - @truststack/core@0.2.4
+
 ## 0.1.16
 
 ### Patch Changes
