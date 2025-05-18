@@ -1198,6 +1198,10 @@ export type QuantityElement = {
      */
     epcClass: string;
     /**
+     * The resolver URL of the quantity element
+     */
+    resolverUrl: string;
+    /**
      * The quantity of the item
      */
     quantity: number;
@@ -1227,6 +1231,10 @@ export type InstanceIdentifierDto = {
      * The instance identifier
      */
     epc: string;
+    /**
+     * The resolver URL of the quantity element
+     */
+    resolverUrl: string;
 };
 
 export type EventIlmd = {
