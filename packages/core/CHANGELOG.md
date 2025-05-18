@@ -1,5 +1,11 @@
 # @truststack/core
 
+## 0.2.4
+
+### Patch Changes
+
+- e3179d7: Updating types.
+
 ## 0.2.3
 
 ### Patch Changes

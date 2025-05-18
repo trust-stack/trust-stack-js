@@ -1,5 +1,22 @@
 # @truststack/sdk
 
+## 0.1.20
+
+### Patch Changes
+
+- Updated dependencies [e3179d7]
+  - @truststack/core@0.2.4
+  - @truststack/admin@0.1.18
+  - @truststack/biolock@0.2.4
+  - @truststack/canvas@0.0.20
+  - @truststack/did@0.0.20
+  - @truststack/discovery@0.1.17
+  - @truststack/event@0.1.18
+  - @truststack/link-resolver@0.1.18
+  - @truststack/master-data@0.1.17
+  - @truststack/object@0.1.17
+  - @truststack/untp@0.0.19
+
 ## 0.1.19
 
 ### Patch Changes
