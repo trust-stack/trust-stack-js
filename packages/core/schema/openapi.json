@@ -3576,6 +3576,29 @@
       }
     },
     "/trade-items/{id}": {
+      "delete": {
+        "description": "Delete a trade item",
+        "operationId": "deleteTradeItem",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The trade item has been successfully deleted"
+          }
+        },
+        "summary": "Delete Trade Item",
+        "tags": [
+          "Trade Item"
+        ]
+      },
       "get": {
         "description": "Get a trade item",
         "operationId": "getTradeItem",
@@ -3609,32 +3632,9 @@
         "tags": [
           "Trade Item"
         ]
-      },
-      "delete": {
-        "description": "Delete a trade item",
-        "operationId": "deleteTradeItem",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The trade item has been successfully deleted"
-          }
-        },
-        "summary": "Delete Trade Item",
-        "tags": [
-          "Trade Item"
-        ]
       }
     },
-    "/trade-items/by-identifier/{identifier}": {
+    "/trade-items/by-identifier": {
       "get": {
         "description": "Get a trade item by its identifier",
         "operationId": "getTradeItemByIdentifier",
@@ -3642,8 +3642,8 @@
           {
             "name": "identifier",
             "required": true,
-            "in": "path",
-            "description": "The identifier of the trade item (format: {prefix}.{referenceNumber} or {prefix}.{referenceNumber}.{batchNumber})",
+            "in": "query",
+            "description": "The identifier of the trade item. Can be either a resolver URL (https://truststack.link/class/PREFIX.REF) or an internal identifier (format: {prefix}.{referenceNumber} or {prefix}.{referenceNumber}.{batchNumber})",
             "schema": {
               "type": "string"
             }
