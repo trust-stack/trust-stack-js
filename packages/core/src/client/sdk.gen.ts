@@ -1266,7 +1266,7 @@ export const getTradeItem = <ThrowOnError extends boolean = false>(options: Opti
 export const getTradeItemByIdentifier = <ThrowOnError extends boolean = false>(options: Options<GetTradeItemByIdentifierData, ThrowOnError>) => {
     return (options?.client ?? client).get<GetTradeItemByIdentifierResponse, unknown, ThrowOnError>({
         ...options,
-        url: '/trade-items/by-identifier/{identifier}'
+        url: '/trade-items/by-identifier'
     });
 };
 

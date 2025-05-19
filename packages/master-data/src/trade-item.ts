@@ -69,7 +69,7 @@ export class TradeItemClient extends TrustStackClient {
     options?: RequestOptions
   ) {
     return getTradeItemByIdentifier({
-      path: {identifier},
+      query: {identifier},
       headers: this.headers(options),
       client: this.client,
     });

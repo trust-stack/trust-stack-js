@@ -4325,14 +4325,14 @@ export type GetTradeItemResponse = GetTradeItemResponses[keyof GetTradeItemRespo
 
 export type GetTradeItemByIdentifierData = {
     body?: never;
-    path: {
+    path?: never;
+    query: {
         /**
-         * The identifier of the trade item (format: {prefix}.{referenceNumber} or {prefix}.{referenceNumber}.{batchNumber})
+         * The identifier of the trade item. Can be either a resolver URL (https://truststack.link/class/PREFIX.REF) or an internal identifier (format: {prefix}.{referenceNumber} or {prefix}.{referenceNumber}.{batchNumber})
          */
         identifier: string;
     };
-    query?: never;
-    url: '/trade-items/by-identifier/{identifier}';
+    url: '/trade-items/by-identifier';
 };
 
 export type GetTradeItemByIdentifierErrors = {
