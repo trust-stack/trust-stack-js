@@ -1,5 +1,12 @@
 # @truststack/did
 
+## 0.0.21
+
+### Patch Changes
+
+- Updated dependencies [a25d7e4]
+  - @truststack/core@0.2.5
+
 ## 0.0.20
 
 ### Patch Changes
