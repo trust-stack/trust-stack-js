@@ -1,5 +1,13 @@
 # @truststack/master-data
 
+## 0.1.18
+
+### Patch Changes
+
+- a25d7e4: Updating openapi schema.
+- Updated dependencies [a25d7e4]
+  - @truststack/core@0.2.5
+
 ## 0.1.17
 
 ### Patch Changes

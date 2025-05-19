@@ -1,6 +1,6 @@
 {
   "name": "@truststack/core",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Core utilities for Trust Stack SDK, not intended for direct use",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
