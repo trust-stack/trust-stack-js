@@ -1,5 +1,11 @@
 # @truststack/link-resolver
 
+## 0.1.20
+
+### Patch Changes
+
+- d0f4387: Adding link operations
+
 ## 0.1.19
 
 ### Patch Changes
