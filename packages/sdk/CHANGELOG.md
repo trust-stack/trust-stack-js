@@ -1,5 +1,12 @@
 # @truststack/sdk
 
+## 0.1.22
+
+### Patch Changes
+
+- Updated dependencies [d0f4387]
+  - @truststack/link-resolver@0.1.20
+
 ## 0.1.21
 
 ### Patch Changes
