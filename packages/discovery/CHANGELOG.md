@@ -1,5 +1,14 @@
 # @truststack/discovery
 
+## 0.1.20
+
+### Patch Changes
+
+- 1285e7e: Fixing workspace declarations.
+- Updated dependencies [1285e7e]
+  - @truststack/core@0.2.7
+  - @truststack/untp-types@0.0.5
+
 ## 0.1.19
 
 ### Patch Changes

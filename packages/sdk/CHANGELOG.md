@@ -1,5 +1,24 @@
 # @truststack/sdk
 
+## 0.1.24
+
+### Patch Changes
+
+- bb27e21: Adding setAppTheme operation
+- 1285e7e: Fixing workspace declarations.
+- Updated dependencies [bb27e21]
+- Updated dependencies [1285e7e]
+  - @truststack/admin@0.1.21
+  - @truststack/canvas@0.0.23
+  - @truststack/core@0.2.7
+  - @truststack/did@0.0.23
+  - @truststack/discovery@0.1.20
+  - @truststack/event@0.1.21
+  - @truststack/link-resolver@0.1.22
+  - @truststack/master-data@0.1.20
+  - @truststack/object@0.1.20
+  - @truststack/untp@0.0.22
+
 ## 0.1.23
 
 ### Patch Changes
