@@ -1,5 +1,13 @@
 # @truststack/sdk
 
+## 0.1.25
+
+### Patch Changes
+
+- 1c29330: Adding admin theme methods.
+- Updated dependencies [1c29330]
+  - @truststack/admin@0.1.22
+
 ## 0.1.24
 
 ### Patch Changes
