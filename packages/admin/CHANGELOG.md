@@ -1,5 +1,11 @@
 # @truststack/admin
 
+## 0.1.24
+
+### Patch Changes
+
+- 3c43609: Removing redudant argument.
+
 ## 0.1.23
 
 ### Patch Changes
