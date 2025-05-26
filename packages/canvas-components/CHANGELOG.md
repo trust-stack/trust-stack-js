@@ -1,5 +1,11 @@
 # @truststack/canvas-components
 
+## 0.0.6
+
+### Patch Changes
+
+- 1285e7e: Fixing workspace declarations.
+
 ## 0.0.5
 
 ### Patch Changes

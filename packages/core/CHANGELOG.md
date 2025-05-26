@@ -1,5 +1,11 @@
 # @truststack/core
 
+## 0.2.7
+
+### Patch Changes
+
+- 1285e7e: Fixing workspace declarations.
+
 ## 0.2.6
 
 ### Patch Changes

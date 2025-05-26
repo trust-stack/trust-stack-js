@@ -37,10 +37,9 @@ export class EngineClient extends TrustStackClient {
   }
 
   /**
-   * Set the app theme
-   * @param props - The app theme
+   * Get the app entry organization
    * @param options - The request options
-   * @returns The app theme
+   * @returns The app entry organization
    */
   public async setAppTheme(props: SetAppTheme, options?: RequestOptions) {
     return setAppThemeOrganization({
@@ -51,7 +50,7 @@ export class EngineClient extends TrustStackClient {
   }
 
   /**
-   * Get the app theme
+   * Get the app entry organization
    * @param options - The request options
    * @returns The app theme
    */
