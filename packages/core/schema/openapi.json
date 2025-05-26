@@ -385,6 +385,151 @@
         ]
       }
     },
+    "/assets/{assetId}/calendar-entries": {
+      "post": {
+        "description": "Create a new calendar entry for an asset",
+        "operationId": "createCalendarEntry",
+        "parameters": [
+          {
+            "name": "assetId",
+            "required": true,
+            "in": "path",
+            "description": "The ID of the asset",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCalendarEntry"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Calendar entry created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CalendarEntry"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid calendar entry data"
+          }
+        },
+        "summary": "Create a new calendar entry",
+        "tags": [
+          "CalendarEntry"
+        ]
+      },
+      "get": {
+        "description": "Get all calendar entries for an asset",
+        "operationId": "getCalendarEntries",
+        "parameters": [
+          {
+            "name": "assetId",
+            "required": true,
+            "in": "path",
+            "description": "The ID of the asset",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "description": "Page number (1-based)",
+            "schema": {
+              "default": 1,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items per page",
+            "schema": {
+              "default": 10,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The calendar entries have been successfully retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CalendarEntry"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get calendar entries",
+        "tags": [
+          "CalendarEntry"
+        ]
+      }
+    },
+    "/assets/{assetId}/calendar-entries/{id}": {
+      "get": {
+        "description": "Get a specific calendar entry for an asset",
+        "operationId": "getCalendarEntryById",
+        "parameters": [
+          {
+            "name": "assetId",
+            "required": true,
+            "in": "path",
+            "description": "The ID of the asset",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "The ID of the calendar entry",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The calendar entry has been successfully retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CalendarEntry"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Calendar entry not found"
+          }
+        },
+        "summary": "Get calendar entry by ID",
+        "tags": [
+          "CalendarEntry"
+        ]
+      }
+    },
     "/auth/tenant-users": {
       "post": {
         "operationId": "createTenantUser",
@@ -640,84 +785,133 @@
         ]
       }
     },
-    "/bio-locks/mint": {
-      "post": {
-        "description": "Mint a BioLock",
-        "operationId": "mintBioLock",
-        "parameters": [],
+    "/canvas-templates/{id}": {
+      "get": {
+        "description": "Get a Canvas Template by id.",
+        "operationId": "getCanvasTemplate",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "The ID of the Canvas Template to find",
+            "schema": {
+              "example": "123"
+            }
+          }
+        ],
         "responses": {
-          "201": {
-            "description": ""
+          "200": {
+            "description": "The Canvas Template was successfully obtained.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CanvasTemplate"
+                }
+              }
+            }
           }
         },
-        "summary": "Mint Bio Lock",
+        "summary": "Get Canvas Template",
         "tags": [
-          "BioLock"
+          "Canvas Template"
         ]
       }
     },
-    "/bio-locks/set": {
+    "/canvas-templates": {
       "post": {
-        "description": "Set a BioLock",
-        "operationId": "setBioLock",
+        "description": "Create a Canvas Template.",
+        "operationId": "createCanvasTemplate",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateBioLock"
+                "$ref": "#/components/schemas/CreateCanvasTemplate"
               }
             }
           }
         },
         "responses": {
-          "201": {
-            "description": "The BioLock has been successfully created",
+          "200": {
+            "description": "The Canvas Template that was created.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BioLock"
+                  "$ref": "#/components/schemas/CanvasTemplate"
                 }
               }
             }
-          },
-          "400": {
-            "description": "The BioLock could not be created"
-          },
-          "404": {
-            "description": "The BioLock could not be found"
           }
         },
-        "summary": "Set Bio Lock",
+        "summary": "Create Canvas Template",
         "tags": [
-          "BioLock"
+          "Canvas Template"
         ]
       }
     },
-    "/bio-locks/{id}": {
-      "get": {
-        "description": "Get Bio Lock",
-        "operationId": "getBioLock",
+    "/canvas-templates/{id}/render": {
+      "post": {
+        "description": "Create an instance of a Canvased Template.",
+        "operationId": "renderCanvasTemplate",
         "parameters": [
           {
             "name": "id",
             "required": true,
             "in": "path",
-            "description": "The id of the Bio Lock",
+            "description": "The ID of the Canvas Template to render",
             "schema": {
+              "example": "123",
               "type": "string"
             }
           }
         ],
-        "responses": {
-          "200": {
-            "description": ""
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "oneOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "boolean"
+                    },
+                    {
+                      "type": "object"
+                    },
+                    {
+                      "type": "array"
+                    }
+                  ],
+                  "description": "Any valid JSON value"
+                }
+              }
+            }
           }
         },
-        "summary": "Get Bio Lock",
+        "responses": {
+          "200": {
+            "description": "Instantiation of the Canvas Template as a Canvas Template Instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CanvasTemplateInstance"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Render Canvas Template",
         "tags": [
-          "BioLock"
+          "Canvas Template"
         ]
       }
     },
@@ -1105,136 +1299,6 @@
         },
         "tags": [
           "LinkResolver"
-        ]
-      }
-    },
-    "/canvas-templates/{id}": {
-      "get": {
-        "description": "Get a Canvas Template by id.",
-        "operationId": "getCanvasTemplate",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "description": "The ID of the Canvas Template to find",
-            "schema": {
-              "example": "123"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The Canvas Template was successfully obtained.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CanvasTemplate"
-                }
-              }
-            }
-          }
-        },
-        "summary": "Get Canvas Template",
-        "tags": [
-          "Canvas Template"
-        ]
-      }
-    },
-    "/canvas-templates": {
-      "post": {
-        "description": "Create a Canvas Template.",
-        "operationId": "createCanvasTemplate",
-        "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateCanvasTemplate"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "The Canvas Template that was created.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CanvasTemplate"
-                }
-              }
-            }
-          }
-        },
-        "summary": "Create Canvas Template",
-        "tags": [
-          "Canvas Template"
-        ]
-      }
-    },
-    "/canvas-templates/{id}/render": {
-      "post": {
-        "description": "Create an instance of a Canvased Template.",
-        "operationId": "renderCanvasTemplate",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "description": "The ID of the Canvas Template to render",
-            "schema": {
-              "example": "123",
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": {
-                  "oneOf": [
-                    {
-                      "type": "string"
-                    },
-                    {
-                      "type": "number"
-                    },
-                    {
-                      "type": "boolean"
-                    },
-                    {
-                      "type": "object"
-                    },
-                    {
-                      "type": "array"
-                    }
-                  ],
-                  "description": "Any valid JSON value"
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Instantiation of the Canvas Template as a Canvas Template Instance",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CanvasTemplateInstance"
-                }
-              }
-            }
-          }
-        },
-        "summary": "Render Canvas Template",
-        "tags": [
-          "Canvas Template"
         ]
       }
     },
@@ -2235,69 +2299,6 @@
         ]
       }
     },
-    "/app-entry/organization": {
-      "get": {
-        "description": "Get the app entry for the current organization, returns default routes if none exists",
-        "operationId": "getAppEntryOrganization",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "The app entry has been successfully retrieved",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AppEntry"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden - User does not have access to this organization"
-          }
-        },
-        "summary": "Get Organization App Entry",
-        "tags": [
-          "App Entry"
-        ]
-      },
-      "put": {
-        "description": "Create or update the app entry for the current organization",
-        "operationId": "setAppEntryOrganization",
-        "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SetAppEntry"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "The app entry has been successfully created or updated",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AppEntry"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request - Invalid app entry data provided"
-          },
-          "403": {
-            "description": "Forbidden - User does not have access to this organization"
-          }
-        },
-        "summary": "Set Organization App Entry",
-        "tags": [
-          "App Entry"
-        ]
-      }
-    },
     "/app-theme/organization": {
       "get": {
         "description": "Get the app theme for the current organization, returns default theme if none exists",
@@ -2361,6 +2362,59 @@
         ]
       }
     },
+    "/engine/app/frame": {
+      "get": {
+        "operationId": "getAppFrame",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The App Frame has been successfully retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppFrame"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get app.",
+        "tags": [
+          "AppFrame"
+        ]
+      },
+      "put": {
+        "description": "Update the frame of the app.",
+        "operationId": "setAppFrame",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetAppFrame"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The App Frame has been successfully updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppFrame"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Update app frame.",
+        "tags": [
+          "AppFrame"
+        ]
+      }
+    },
     "/event-schemas": {
       "post": {
         "operationId": "createEventSchema",
@@ -2392,7 +2446,7 @@
         },
         "summary": "Create an event schema",
         "tags": [
-          "Event Schema"
+          "EventSchema"
         ]
       },
       "get": {
@@ -2437,7 +2491,7 @@
         },
         "summary": "Get Event Schemas",
         "tags": [
-          "Event Schema"
+          "EventSchema"
         ]
       }
     },
@@ -2479,7 +2533,7 @@
         },
         "summary": "Set schemas for an event",
         "tags": [
-          "Event Schema"
+          "EventSchema"
         ]
       }
     },
@@ -2513,7 +2567,7 @@
         },
         "summary": "Get an event schema",
         "tags": [
-          "Event Schema"
+          "EventSchema"
         ]
       },
       "delete": {
@@ -2538,7 +2592,7 @@
         },
         "summary": "Delete an event schema",
         "tags": [
-          "Event Schema"
+          "EventSchema"
         ]
       }
     },
@@ -2572,7 +2626,7 @@
         },
         "summary": "Create an extension schema for an event schema",
         "tags": [
-          "Event Schema"
+          "EventSchema"
         ]
       }
     },
@@ -2606,7 +2660,7 @@
         },
         "summary": "Create an ILMD schema for an event schema",
         "tags": [
-          "Event Schema"
+          "EventSchema"
         ]
       }
     },
@@ -4249,10 +4303,18 @@
           "description": {
             "type": "string",
             "description": "The description of the asset"
+          },
+          "objects": {
+            "description": "The S3 object ID of the asset",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         },
         "required": [
-          "name"
+          "name",
+          "objects"
         ]
       },
       "Asset": {
@@ -4285,6 +4347,13 @@
             "type": "boolean",
             "description": "Whether the asset is deleted",
             "default": false
+          },
+          "objects": {
+            "description": "The S3 objects associated with the asset",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         },
         "required": [
@@ -4292,7 +4361,8 @@
           "name",
           "createdAt",
           "updatedAt",
-          "deleted"
+          "deleted",
+          "objects"
         ]
       },
       "UpdateAsset": {
@@ -4305,10 +4375,18 @@
           "description": {
             "type": "string",
             "description": "The description of the asset"
+          },
+          "objects": {
+            "description": "The S3 object ID of the asset",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         },
         "required": [
-          "name"
+          "name",
+          "objects"
         ]
       },
       "CreateAssetObservation": {
@@ -4350,11 +4428,8 @@
             "format": "date-time"
           },
           "objects": {
-            "description": "The objects associated with the observation",
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
+            "type": "string",
+            "description": "The objects associated with the observation"
           }
         },
         "required": [
@@ -4362,6 +4437,81 @@
           "observation",
           "createdAt",
           "objects"
+        ]
+      },
+      "CreateCalendarEntry": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "The title of the calendar entry",
+            "example": "Meeting with John Doe"
+          },
+          "description": {
+            "type": "string",
+            "description": "The description of the calendar entry",
+            "example": "This is a description of the calendar entry"
+          },
+          "startDate": {
+            "format": "date-time",
+            "type": "string",
+            "description": "The start date and time of the calendar entry",
+            "example": "2021-01-01T00:00:00.000Z"
+          },
+          "endDate": {
+            "format": "date-time",
+            "type": "string",
+            "description": "The end date and time of the calendar entry",
+            "example": "2021-01-01T00:00:00.000Z"
+          }
+        },
+        "required": [
+          "title",
+          "startDate",
+          "endDate"
+        ]
+      },
+      "CalendarEntry": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier of the calendar entry",
+            "format": "uuid",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "title": {
+            "type": "string",
+            "description": "The title of the calendar entry",
+            "example": "Meeting with John Doe"
+          },
+          "description": {
+            "type": "string",
+            "description": "The description of the calendar entry",
+            "example": "This is a description of the calendar entry"
+          },
+          "startDate": {
+            "format": "date-time",
+            "type": "string",
+            "description": "The start date and time of the calendar entry",
+            "example": "2021-01-01T00:00:00.000Z"
+          },
+          "endDate": {
+            "format": "date-time",
+            "type": "string",
+            "description": "The end date and time of the calendar entry",
+            "example": "2021-01-01T00:00:00.000Z"
+          },
+          "assetId": {
+            "type": "string",
+            "description": "The ID of the associated asset"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "startDate",
+          "endDate"
         ]
       },
       "CreateTenantUser": {
@@ -4499,52 +4649,108 @@
           "updatedAt"
         ]
       },
-      "CreateBioLock": {
+      "CanvasTemplate": {
         "type": "object",
         "properties": {
           "id": {
             "type": "string",
-            "description": "The id of the bio lock",
-            "format": "uuid"
+            "description": "The unique identifier of the canvas template",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
           },
-          "epc": {
+          "name": {
             "type": "string",
-            "description": "The epc identified assigned the trace lock",
-            "example": "instance:xxxxx.1.1"
-          }
-        },
-        "required": [
-          "id",
-          "epc"
-        ]
-      },
-      "BioLock": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "The id of the bio lock",
-            "format": "uuid"
+            "description": "The name of the template",
+            "example": "Welcome Email Template"
           },
-          "epc": {
+          "template": {
             "type": "string",
-            "description": "The epc identified assigned the trace lock",
-            "example": "instance:xxxxx.1.1"
+            "description": "The Handlebars template string",
+            "example": "<h1>Hello {{name}}!</h1>"
+          },
+          "schema": {
+            "type": "object",
+            "description": "JSON schema defining the template variables",
+            "example": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                }
+              }
+            }
           },
           "createdAt": {
-            "format": "uuid",
+            "format": "date-time",
             "type": "string",
-            "description": "The tenant id of the bio lock"
+            "description": "When the template was created",
+            "example": "2024-03-20T15:30:00.000Z"
           },
           "updatedAt": {
             "format": "date-time",
             "type": "string",
-            "description": "The updated at date of the bio lock"
+            "description": "When the template was last updated",
+            "example": "2024-03-20T15:30:00.000Z"
           }
         },
         "required": [
           "id",
-          "epc",
+          "template",
+          "schema",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "CreateCanvasTemplate": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "template": {
+            "type": "string"
+          },
+          "schema": {
+            "type": "object"
+          },
+          "themeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "template",
+          "schema"
+        ]
+      },
+      "CanvasTemplateInstance": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "templateId": {
+            "type": "string"
+          },
+          "variables": {
+            "type": "object"
+          },
+          "renderedOutput": {
+            "type": "string"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "templateId",
+          "variables",
+          "renderedOutput",
           "createdAt",
           "updatedAt"
         ]
@@ -4772,112 +4978,6 @@
           "path",
           "type",
           "href"
-        ]
-      },
-      "CanvasTemplate": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "The unique identifier of the canvas template",
-            "example": "123e4567-e89b-12d3-a456-426614174000"
-          },
-          "name": {
-            "type": "string",
-            "description": "The name of the template",
-            "example": "Welcome Email Template"
-          },
-          "template": {
-            "type": "string",
-            "description": "The Handlebars template string",
-            "example": "<h1>Hello {{name}}!</h1>"
-          },
-          "schema": {
-            "type": "object",
-            "description": "JSON schema defining the template variables",
-            "example": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "createdAt": {
-            "format": "date-time",
-            "type": "string",
-            "description": "When the template was created",
-            "example": "2024-03-20T15:30:00.000Z"
-          },
-          "updatedAt": {
-            "format": "date-time",
-            "type": "string",
-            "description": "When the template was last updated",
-            "example": "2024-03-20T15:30:00.000Z"
-          }
-        },
-        "required": [
-          "id",
-          "template",
-          "schema",
-          "createdAt",
-          "updatedAt"
-        ]
-      },
-      "CreateCanvasTemplate": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "template": {
-            "type": "string"
-          },
-          "schema": {
-            "type": "object"
-          },
-          "themeId": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "name",
-          "template",
-          "schema"
-        ]
-      },
-      "CanvasTemplateInstance": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "templateId": {
-            "type": "string"
-          },
-          "variables": {
-            "type": "object"
-          },
-          "renderedOutput": {
-            "type": "string"
-          },
-          "createdAt": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "updatedAt": {
-            "format": "date-time",
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "templateId",
-          "variables",
-          "renderedOutput",
-          "createdAt",
-          "updatedAt"
         ]
       },
       "CreateCredentialIssuerProfile": {
@@ -5678,50 +5778,6 @@
         "type": "object",
         "properties": {}
       },
-      "AppEntry": {
-        "type": "object",
-        "properties": {
-          "organizationId": {
-            "type": "string",
-            "description": "The organization id of the app entry",
-            "example": "123e4567-e89b-12d3-a456-426614174000"
-          },
-          "routeMobile": {
-            "type": "string",
-            "description": "The mobile route of the app entry",
-            "example": "/mobile"
-          },
-          "routeWeb": {
-            "type": "string",
-            "description": "The web route of the app entry",
-            "example": "/web"
-          }
-        },
-        "required": [
-          "organizationId",
-          "routeMobile",
-          "routeWeb"
-        ]
-      },
-      "SetAppEntry": {
-        "type": "object",
-        "properties": {
-          "routeMobile": {
-            "type": "string",
-            "description": "The mobile route of the app entry",
-            "example": "/mobile"
-          },
-          "routeWeb": {
-            "type": "string",
-            "description": "The web route of the app entry",
-            "example": "/web"
-          }
-        },
-        "required": [
-          "routeMobile",
-          "routeWeb"
-        ]
-      },
       "AppTheme": {
         "type": "object",
         "properties": {
@@ -5754,6 +5810,168 @@
         },
         "required": [
           "color"
+        ]
+      },
+      "AppRailItem": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string",
+            "description": "Label of the item."
+          },
+          "icon": {
+            "type": "string",
+            "description": "Icon to render "
+          },
+          "route": {
+            "type": "string",
+            "description": "Href of the item."
+          }
+        },
+        "required": [
+          "label",
+          "icon",
+          "route"
+        ]
+      },
+      "AppBarItem": {
+        "type": "object",
+        "properties": {
+          "icon": {
+            "type": "string"
+          },
+          "route": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "icon",
+          "route",
+          "label"
+        ]
+      },
+      "AppEntry": {
+        "type": "object",
+        "properties": {
+          "routeMobile": {
+            "type": "string",
+            "description": "The mobile route of the app entry",
+            "example": "/mobile"
+          },
+          "routeWeb": {
+            "type": "string",
+            "description": "The web route of the app entry",
+            "example": "/web"
+          }
+        },
+        "required": [
+          "routeMobile",
+          "routeWeb"
+        ]
+      },
+      "AppFrame": {
+        "type": "object",
+        "properties": {
+          "rail": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppRailItem"
+            }
+          },
+          "bar": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppBarItem"
+            }
+          },
+          "actions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "entry": {
+            "$ref": "#/components/schemas/AppEntry"
+          }
+        },
+        "required": [
+          "rail",
+          "bar",
+          "actions",
+          "entry"
+        ]
+      },
+      "AppAction": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "icon": {
+            "type": "string"
+          },
+          "route": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "label",
+          "icon",
+          "route"
+        ]
+      },
+      "AppActionGroup": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "actions": {
+            "description": "Actions rendered in the group.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppAction"
+            }
+          }
+        },
+        "required": [
+          "label",
+          "actions"
+        ]
+      },
+      "SetAppFrame": {
+        "type": "object",
+        "properties": {
+          "rail": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppRailItem"
+            }
+          },
+          "bar": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppBarItem"
+            }
+          },
+          "actions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppActionGroup"
+            }
+          },
+          "entry": {
+            "$ref": "#/components/schemas/AppEntry"
+          }
+        },
+        "required": [
+          "rail",
+          "bar",
+          "actions",
+          "entry"
         ]
       },
       "CreateEventExtensionSchema": {
@@ -5832,6 +6050,10 @@
                 "$ref": "#/components/schemas/CreateIlmdSchemaDto"
               }
             ]
+          },
+          "icon": {
+            "type": "string",
+            "description": "The icon of the event tag"
           }
         },
         "required": [
@@ -5963,6 +6185,10 @@
             "format": "date-time",
             "type": "string",
             "description": "The date and time the event tag was deleted"
+          },
+          "icon": {
+            "type": "string",
+            "description": "The icon of the event tag"
           }
         },
         "required": [
@@ -5973,7 +6199,8 @@
           "createdAt",
           "updatedAt",
           "deleted",
-          "deletedAt"
+          "deletedAt",
+          "icon"
         ]
       },
       "CreateInstanceIdentifier": {
@@ -6309,6 +6536,13 @@
           "ilmd": {
             "type": "object",
             "description": "The ILMD of the event"
+          },
+          "objects": {
+            "description": "The list of objects associated with the event",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         },
         "required": [
@@ -6622,6 +6856,13 @@
                 "$ref": "#/components/schemas/SeafoodElements"
               }
             ]
+          },
+          "objects": {
+            "description": "The objects associated with the event",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         },
         "required": [
@@ -7494,6 +7735,13 @@
       "CreateOrganization": {
         "type": "object",
         "properties": {
+          "id": {
+            "type": "string",
+            "description": "Optional ID for the organization. Only allowed in sandbox environments.",
+            "example": "123e4567-e89b-12d3-a456-426614174000",
+            "format": "uuid",
+            "nullable": true
+          },
           "name": {
             "type": "string",
             "description": "Name given to the organization."
