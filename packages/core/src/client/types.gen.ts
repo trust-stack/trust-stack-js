@@ -9,6 +9,10 @@ export type CreateAsset = {
      * The description of the asset
      */
     description?: string;
+    /**
+     * The S3 object ID of the asset
+     */
+    objects: Array<string>;
 };
 
 export type Asset = {
@@ -36,6 +40,10 @@ export type Asset = {
      * Whether the asset is deleted
      */
     deleted: boolean;
+    /**
+     * The S3 objects associated with the asset
+     */
+    objects: Array<string>;
 };
 
 export type UpdateAsset = {
@@ -47,6 +55,10 @@ export type UpdateAsset = {
      * The description of the asset
      */
     description?: string;
+    /**
+     * The S3 object ID of the asset
+     */
+    objects: Array<string>;
 };
 
 export type CreateAssetObservation = {
@@ -76,7 +88,53 @@ export type AssetObservation = {
     /**
      * The objects associated with the observation
      */
-    objects: Array<string>;
+    objects: string;
+};
+
+export type CreateCalendarEntry = {
+    /**
+     * The title of the calendar entry
+     */
+    title: string;
+    /**
+     * The description of the calendar entry
+     */
+    description?: string;
+    /**
+     * The start date and time of the calendar entry
+     */
+    startDate: string;
+    /**
+     * The end date and time of the calendar entry
+     */
+    endDate: string;
+};
+
+export type CalendarEntry = {
+    /**
+     * The unique identifier of the calendar entry
+     */
+    id: string;
+    /**
+     * The title of the calendar entry
+     */
+    title: string;
+    /**
+     * The description of the calendar entry
+     */
+    description?: string;
+    /**
+     * The start date and time of the calendar entry
+     */
+    startDate: string;
+    /**
+     * The end date and time of the calendar entry
+     */
+    endDate: string;
+    /**
+     * The ID of the associated asset
+     */
+    assetId?: string;
 };
 
 export type CreateTenantUser = {
@@ -167,33 +225,52 @@ export type S3Object = {
     updatedAt: string;
 };
 
-export type CreateBioLock = {
+export type CanvasTemplate = {
     /**
-     * The id of the bio lock
+     * The unique identifier of the canvas template
      */
     id: string;
     /**
-     * The epc identified assigned the trace lock
+     * The name of the template
      */
-    epc: string;
-};
-
-export type BioLock = {
+    name?: string;
     /**
-     * The id of the bio lock
+     * The Handlebars template string
      */
-    id: string;
+    template: string;
     /**
-     * The epc identified assigned the trace lock
+     * JSON schema defining the template variables
      */
-    epc: string;
+    schema: {
+        [key: string]: unknown;
+    };
     /**
-     * The tenant id of the bio lock
+     * When the template was created
      */
     createdAt: string;
     /**
-     * The updated at date of the bio lock
+     * When the template was last updated
      */
+    updatedAt: string;
+};
+
+export type CreateCanvasTemplate = {
+    name: string;
+    template: string;
+    schema: {
+        [key: string]: unknown;
+    };
+    themeId?: string;
+};
+
+export type CanvasTemplateInstance = {
+    id: string;
+    templateId: string;
+    variables: {
+        [key: string]: unknown;
+    };
+    renderedOutput: string;
+    createdAt: string;
     updatedAt: string;
 };
 
@@ -348,55 +425,6 @@ export type LinkConfiguration = {
      * The href of the Link.
      */
     hrefLang?: Array<string>;
-};
-
-export type CanvasTemplate = {
-    /**
-     * The unique identifier of the canvas template
-     */
-    id: string;
-    /**
-     * The name of the template
-     */
-    name?: string;
-    /**
-     * The Handlebars template string
-     */
-    template: string;
-    /**
-     * JSON schema defining the template variables
-     */
-    schema: {
-        [key: string]: unknown;
-    };
-    /**
-     * When the template was created
-     */
-    createdAt: string;
-    /**
-     * When the template was last updated
-     */
-    updatedAt: string;
-};
-
-export type CreateCanvasTemplate = {
-    name: string;
-    template: string;
-    schema: {
-        [key: string]: unknown;
-    };
-    themeId?: string;
-};
-
-export type CanvasTemplateInstance = {
-    id: string;
-    templateId: string;
-    variables: {
-        [key: string]: unknown;
-    };
-    renderedOutput: string;
-    createdAt: string;
-    updatedAt: string;
 };
 
 export type CreateCredentialIssuerProfile = {
@@ -852,32 +880,6 @@ export type UpdateProvenanceForm = {
     [key: string]: unknown;
 };
 
-export type AppEntry = {
-    /**
-     * The organization id of the app entry
-     */
-    organizationId: string;
-    /**
-     * The mobile route of the app entry
-     */
-    routeMobile: string;
-    /**
-     * The web route of the app entry
-     */
-    routeWeb: string;
-};
-
-export type SetAppEntry = {
-    /**
-     * The mobile route of the app entry
-     */
-    routeMobile: string;
-    /**
-     * The web route of the app entry
-     */
-    routeWeb: string;
-};
-
 export type AppTheme = {
     /**
      * The organization ID
@@ -900,6 +902,66 @@ export type SetAppTheme = {
      * The color value
      */
     color: string;
+};
+
+export type AppRailItem = {
+    /**
+     * Label of the item.
+     */
+    label: string;
+    /**
+     * Icon to render
+     */
+    icon: string;
+    /**
+     * Href of the item.
+     */
+    route: string;
+};
+
+export type AppBarItem = {
+    icon: string;
+    route: string;
+    label: string;
+};
+
+export type AppEntry = {
+    /**
+     * The mobile route of the app entry
+     */
+    routeMobile: string;
+    /**
+     * The web route of the app entry
+     */
+    routeWeb: string;
+};
+
+export type AppFrame = {
+    rail: Array<AppRailItem>;
+    bar: Array<AppBarItem>;
+    actions: Array<string>;
+    entry: AppEntry;
+};
+
+export type AppAction = {
+    label: string;
+    icon: string;
+    route: string;
+};
+
+export type AppActionGroup = {
+    label: string;
+    /**
+     * Actions rendered in the group.
+     */
+    actions: Array<AppAction>;
+};
+
+export type SetAppFrame = {
+    rail: Array<AppRailItem>;
+    bar: Array<AppBarItem>;
+    actions: Array<AppActionGroup>;
+    entry: AppEntry;
 };
 
 export type CreateEventExtensionSchema = {
@@ -941,6 +1003,10 @@ export type CreateEventSchema = {
      * The structured schema for a new version, stored in SchemaDefinition
      */
     ilmdSchema?: CreateIlmdSchemaDto;
+    /**
+     * The icon of the event tag
+     */
+    icon?: string;
 };
 
 export type EventExtensionSchema = {
@@ -1021,6 +1087,10 @@ export type EventSchema = {
      * The date and time the event tag was deleted
      */
     deletedAt: string;
+    /**
+     * The icon of the event tag
+     */
+    icon: string;
 };
 
 export type CreateInstanceIdentifier = {
@@ -1190,6 +1260,10 @@ export type CreateEvent = {
     ilmd?: {
         [key: string]: unknown;
     };
+    /**
+     * The list of objects associated with the event
+     */
+    objects?: Array<string>;
 };
 
 export type QuantityElement = {
@@ -1343,6 +1417,10 @@ export type Event = {
      * The seafood elements associated with the event
      */
     seafood?: SeafoodElements;
+    /**
+     * The objects associated with the event
+     */
+    objects?: Array<string>;
 };
 
 export type CreateLocation = {
@@ -1904,6 +1982,10 @@ export type CreateTradeItemSchema = {
 
 export type CreateOrganization = {
     /**
+     * Optional ID for the organization. Only allowed in sandbox environments.
+     */
+    id?: string | null;
+    /**
      * Name given to the organization.
      */
     name: string;
@@ -2265,6 +2347,96 @@ export type GetAssetObservationByIdResponses = {
 
 export type GetAssetObservationByIdResponse = GetAssetObservationByIdResponses[keyof GetAssetObservationByIdResponses];
 
+export type GetCalendarEntriesData = {
+    body?: never;
+    path: {
+        /**
+         * The ID of the asset
+         */
+        assetId: string;
+    };
+    query?: {
+        /**
+         * Page number (1-based)
+         */
+        page?: number;
+        /**
+         * Number of items per page
+         */
+        limit?: number;
+    };
+    url: '/assets/{assetId}/calendar-entries';
+};
+
+export type GetCalendarEntriesResponses = {
+    /**
+     * The calendar entries have been successfully retrieved
+     */
+    200: Array<CalendarEntry>;
+};
+
+export type GetCalendarEntriesResponse = GetCalendarEntriesResponses[keyof GetCalendarEntriesResponses];
+
+export type CreateCalendarEntryData = {
+    body: CreateCalendarEntry;
+    path: {
+        /**
+         * The ID of the asset
+         */
+        assetId: string;
+    };
+    query?: never;
+    url: '/assets/{assetId}/calendar-entries';
+};
+
+export type CreateCalendarEntryErrors = {
+    /**
+     * Invalid calendar entry data
+     */
+    400: unknown;
+};
+
+export type CreateCalendarEntryResponses = {
+    /**
+     * Calendar entry created successfully
+     */
+    201: CalendarEntry;
+};
+
+export type CreateCalendarEntryResponse = CreateCalendarEntryResponses[keyof CreateCalendarEntryResponses];
+
+export type GetCalendarEntryByIdData = {
+    body?: never;
+    path: {
+        /**
+         * The ID of the asset
+         */
+        assetId: string;
+        /**
+         * The ID of the calendar entry
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/assets/{assetId}/calendar-entries/{id}';
+};
+
+export type GetCalendarEntryByIdErrors = {
+    /**
+     * Calendar entry not found
+     */
+    404: unknown;
+};
+
+export type GetCalendarEntryByIdResponses = {
+    /**
+     * The calendar entry has been successfully retrieved
+     */
+    200: CalendarEntry;
+};
+
+export type GetCalendarEntryByIdResponse = GetCalendarEntryByIdResponses[keyof GetCalendarEntryByIdResponses];
+
 export type GetTenantUsersData = {
     body?: never;
     path?: never;
@@ -2452,59 +2624,67 @@ export type GetObjectResponses = {
 
 export type GetObjectResponse = GetObjectResponses[keyof GetObjectResponses];
 
-export type MintBioLockData = {
-    body?: never;
-    path?: never;
-    query?: never;
-    url: '/bio-locks/mint';
-};
-
-export type MintBioLockResponses = {
-    201: unknown;
-};
-
-export type SetBioLockData = {
-    body: CreateBioLock;
-    path?: never;
-    query?: never;
-    url: '/bio-locks/set';
-};
-
-export type SetBioLockErrors = {
-    /**
-     * The BioLock could not be created
-     */
-    400: unknown;
-    /**
-     * The BioLock could not be found
-     */
-    404: unknown;
-};
-
-export type SetBioLockResponses = {
-    /**
-     * The BioLock has been successfully created
-     */
-    201: BioLock;
-};
-
-export type SetBioLockResponse = SetBioLockResponses[keyof SetBioLockResponses];
-
-export type GetBioLockData = {
+export type GetCanvasTemplateData = {
     body?: never;
     path: {
         /**
-         * The id of the Bio Lock
+         * The ID of the Canvas Template to find
+         */
+        id: unknown;
+    };
+    query?: never;
+    url: '/canvas-templates/{id}';
+};
+
+export type GetCanvasTemplateResponses = {
+    /**
+     * The Canvas Template was successfully obtained.
+     */
+    200: CanvasTemplate;
+};
+
+export type GetCanvasTemplateResponse = GetCanvasTemplateResponses[keyof GetCanvasTemplateResponses];
+
+export type CreateCanvasTemplateData = {
+    body: CreateCanvasTemplate;
+    path?: never;
+    query?: never;
+    url: '/canvas-templates';
+};
+
+export type CreateCanvasTemplateResponses = {
+    /**
+     * The Canvas Template that was created.
+     */
+    200: CanvasTemplate;
+};
+
+export type CreateCanvasTemplateResponse = CreateCanvasTemplateResponses[keyof CreateCanvasTemplateResponses];
+
+export type RenderCanvasTemplateData = {
+    body: {
+        [key: string]: string | number | boolean | {
+            [key: string]: unknown;
+        } | Array<unknown>;
+    };
+    path: {
+        /**
+         * The ID of the Canvas Template to render
          */
         id: string;
     };
     query?: never;
-    url: '/bio-locks/{id}';
+    url: '/canvas-templates/{id}/render';
 };
 
-export type GetBioLockResponses = {
-    200: unknown;
+export type RenderCanvasTemplateResponses = {
+    /**
+     * Instantiation of the Canvas Template as a Canvas Template Instance
+     */
+    200: CanvasTemplateInstance;
 };
+
+export type RenderCanvasTemplateResponse = RenderCanvasTemplateResponses[keyof RenderCanvasTemplateResponses];
 
 export type GetThemesData = {
     body?: never;
@@ -2717,68 +2897,6 @@ export type LinkResolverControllerResolveData = {
 export type LinkResolverControllerResolveResponses = {
     200: unknown;
 };
-
-export type GetCanvasTemplateData = {
-    body?: never;
-    path: {
-        /**
-         * The ID of the Canvas Template to find
-         */
-        id: unknown;
-    };
-    query?: never;
-    url: '/canvas-templates/{id}';
-};
-
-export type GetCanvasTemplateResponses = {
-    /**
-     * The Canvas Template was successfully obtained.
-     */
-    200: CanvasTemplate;
-};
-
-export type GetCanvasTemplateResponse = GetCanvasTemplateResponses[keyof GetCanvasTemplateResponses];
-
-export type CreateCanvasTemplateData = {
-    body: CreateCanvasTemplate;
-    path?: never;
-    query?: never;
-    url: '/canvas-templates';
-};
-
-export type CreateCanvasTemplateResponses = {
-    /**
-     * The Canvas Template that was created.
-     */
-    200: CanvasTemplate;
-};
-
-export type CreateCanvasTemplateResponse = CreateCanvasTemplateResponses[keyof CreateCanvasTemplateResponses];
-
-export type RenderCanvasTemplateData = {
-    body: {
-        [key: string]: string | number | boolean | {
-            [key: string]: unknown;
-        } | Array<unknown>;
-    };
-    path: {
-        /**
-         * The ID of the Canvas Template to render
-         */
-        id: string;
-    };
-    query?: never;
-    url: '/canvas-templates/{id}/render';
-};
-
-export type RenderCanvasTemplateResponses = {
-    /**
-     * Instantiation of the Canvas Template as a Canvas Template Instance
-     */
-    200: CanvasTemplateInstance;
-};
-
-export type RenderCanvasTemplateResponse = RenderCanvasTemplateResponses[keyof RenderCanvasTemplateResponses];
 
 export type GetCredentialIssuerProfilesData = {
     body?: never;
@@ -3401,56 +3519,6 @@ export type UpdateProvenanceFormResponses = {
 
 export type UpdateProvenanceFormResponse = UpdateProvenanceFormResponses[keyof UpdateProvenanceFormResponses];
 
-export type GetAppEntryOrganizationData = {
-    body?: never;
-    path?: never;
-    query?: never;
-    url: '/app-entry/organization';
-};
-
-export type GetAppEntryOrganizationErrors = {
-    /**
-     * Forbidden - User does not have access to this organization
-     */
-    403: unknown;
-};
-
-export type GetAppEntryOrganizationResponses = {
-    /**
-     * The app entry has been successfully retrieved
-     */
-    200: AppEntry;
-};
-
-export type GetAppEntryOrganizationResponse = GetAppEntryOrganizationResponses[keyof GetAppEntryOrganizationResponses];
-
-export type SetAppEntryOrganizationData = {
-    body: SetAppEntry;
-    path?: never;
-    query?: never;
-    url: '/app-entry/organization';
-};
-
-export type SetAppEntryOrganizationErrors = {
-    /**
-     * Bad Request - Invalid app entry data provided
-     */
-    400: unknown;
-    /**
-     * Forbidden - User does not have access to this organization
-     */
-    403: unknown;
-};
-
-export type SetAppEntryOrganizationResponses = {
-    /**
-     * The app entry has been successfully created or updated
-     */
-    200: AppEntry;
-};
-
-export type SetAppEntryOrganizationResponse = SetAppEntryOrganizationResponses[keyof SetAppEntryOrganizationResponses];
-
 export type GetAppThemeOrganizationData = {
     body?: never;
     path?: never;
@@ -3500,6 +3568,38 @@ export type SetAppThemeOrganizationResponses = {
 };
 
 export type SetAppThemeOrganizationResponse = SetAppThemeOrganizationResponses[keyof SetAppThemeOrganizationResponses];
+
+export type GetAppFrameData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/engine/app/frame';
+};
+
+export type GetAppFrameResponses = {
+    /**
+     * The App Frame has been successfully retrieved
+     */
+    200: AppFrame;
+};
+
+export type GetAppFrameResponse = GetAppFrameResponses[keyof GetAppFrameResponses];
+
+export type SetAppFrameData = {
+    body: SetAppFrame;
+    path?: never;
+    query?: never;
+    url: '/engine/app/frame';
+};
+
+export type SetAppFrameResponses = {
+    /**
+     * The App Frame has been successfully updated
+     */
+    200: AppFrame;
+};
+
+export type SetAppFrameResponse = SetAppFrameResponses[keyof SetAppFrameResponses];
 
 export type GetEventSchemasData = {
     body?: never;

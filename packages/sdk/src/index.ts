@@ -1,5 +1,4 @@
 import {AdminClient} from "@truststack/admin";
-import {BioLockClient} from "@truststack/biolock";
 import {CanvasClient} from "@truststack/canvas";
 import {TrustStackClient} from "@truststack/core";
 import {DidClient} from "@truststack/did";
@@ -13,7 +12,6 @@ export * from "@truststack/core";
 
 export class TrustStack extends TrustStackClient {
   private _admin: AdminClient;
-  private _biolock: BioLockClient;
   private _canvas: CanvasClient;
   private _did: DidClient;
   private _discovery: DiscoveryClient;
@@ -27,13 +25,6 @@ export class TrustStack extends TrustStackClient {
       this._admin = new AdminClient(this.getProps());
     }
     return this._admin;
-  }
-
-  public get biolock() {
-    if (!this._biolock) {
-      this._biolock = new BioLockClient(this.getProps());
-    }
-    return this._biolock;
   }
 
   public get canvas() {
