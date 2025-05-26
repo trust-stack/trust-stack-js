@@ -1,5 +1,14 @@
 # @truststack/admin
 
+## 0.1.21
+
+### Patch Changes
+
+- bb27e21: Adding setAppTheme operation
+- 1285e7e: Fixing workspace declarations.
+- Updated dependencies [1285e7e]
+  - @truststack/core@0.2.7
+
 ## 0.1.20
 
 ### Patch Changes

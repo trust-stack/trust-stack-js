@@ -1,5 +1,13 @@
 # @truststack/link-resolver
 
+## 0.1.22
+
+### Patch Changes
+
+- 1285e7e: Fixing workspace declarations.
+- Updated dependencies [1285e7e]
+  - @truststack/core@0.2.7
+
 ## 0.1.21
 
 ### Patch Changes

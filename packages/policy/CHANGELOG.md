@@ -1,5 +1,13 @@
 # @truststack/policy
 
+## 1.0.4
+
+### Patch Changes
+
+- 1285e7e: Fixing workspace declarations.
+- Updated dependencies [1285e7e]
+  - @truststack/untp-types@0.0.5
+
 ## 1.0.3
 
 ### Patch Changes

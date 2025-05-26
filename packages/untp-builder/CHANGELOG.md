@@ -1,5 +1,13 @@
 # @truststack/untp-builder
 
+## 0.0.7
+
+### Patch Changes
+
+- 1285e7e: Fixing workspace declarations.
+- Updated dependencies [1285e7e]
+  - @truststack/untp-types@0.0.5
+
 ## 0.0.6
 
 ### Patch Changes
