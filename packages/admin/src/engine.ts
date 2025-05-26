@@ -29,7 +29,7 @@ export class EngineClient extends TrustStackClient {
    * @param options - The request options
    * @returns The app entry organization
    */
-  public async getAppFrame(id: string, options?: RequestOptions) {
+  public async getAppFrame(options?: RequestOptions) {
     return getAppFrame({
       headers: this.headers(options),
       client: this.client,
