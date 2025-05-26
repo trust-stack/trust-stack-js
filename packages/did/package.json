@@ -1,6 +1,6 @@
 {
   "name": "@truststack/did",
-  "version": "0.0.21",
+  "version": "0.0.22",
   "description": "Trust Stack API Client - A lightweight JS library for making with Trust Stacks DID API",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

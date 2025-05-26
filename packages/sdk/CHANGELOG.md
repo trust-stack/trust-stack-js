@@ -1,5 +1,22 @@
 # @truststack/sdk
 
+## 0.1.23
+
+### Patch Changes
+
+- 0f0344b: Updating openapi schema, removing biolock.
+- Updated dependencies [0f0344b]
+  - @truststack/admin@0.1.20
+  - @truststack/core@0.2.6
+  - @truststack/canvas@0.0.22
+  - @truststack/did@0.0.22
+  - @truststack/discovery@0.1.19
+  - @truststack/event@0.1.20
+  - @truststack/link-resolver@0.1.21
+  - @truststack/master-data@0.1.19
+  - @truststack/object@0.1.19
+  - @truststack/untp@0.0.21
+
 ## 0.1.22
 
 ### Patch Changes

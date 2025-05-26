@@ -1,5 +1,12 @@
 # @truststack/canvas
 
+## 0.0.22
+
+### Patch Changes
+
+- Updated dependencies [0f0344b]
+  - @truststack/core@0.2.6
+
 ## 0.0.21
 
 ### Patch Changes

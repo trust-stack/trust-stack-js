@@ -1,6 +1,6 @@
 {
   "name": "@truststack/admin",
-  "version": "0.1.19",
+  "version": "0.1.20",
   "description": "Trust Stack API Client - A lightweight JS library for making with Trust Stacks Admin API",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
