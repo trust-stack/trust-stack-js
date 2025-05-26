@@ -1,5 +1,6 @@
 import {
   getAppFrame,
+  getAppThemeOrganization,
   RequestOptions,
   setAppFrame,
   SetAppFrame,
@@ -24,6 +25,18 @@ export class EngineClient extends TrustStackClient {
   }
 
   /**
+   * Get the app entry organization
+   * @param options - The request options
+   * @returns The app entry organization
+   */
+  public async getAppFrame(id: string, options?: RequestOptions) {
+    return getAppFrame({
+      headers: this.headers(options),
+      client: this.client,
+    });
+  }
+
+  /**
    * Set the app theme
    * @param props - The app theme
    * @param options - The request options
@@ -38,12 +51,12 @@ export class EngineClient extends TrustStackClient {
   }
 
   /**
-   * Get the app entry organization
+   * Get the app theme
    * @param options - The request options
-   * @returns The app entry organization
+   * @returns The app theme
    */
-  public async getAppFrame(id: string, options?: RequestOptions) {
-    return getAppFrame({
+  public async getAppTheme(options?: RequestOptions) {
+    return getAppThemeOrganization({
       headers: this.headers(options),
       client: this.client,
     });
