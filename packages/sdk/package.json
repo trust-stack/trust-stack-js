@@ -27,7 +27,6 @@
   "dependencies": {
     "@hey-api/client-fetch": "^0.6.0",
     "@truststack/admin": "workspace:*",
-    "@truststack/biolock": "workspace:*",
     "@truststack/canvas": "workspace:*",
     "@truststack/core": "workspace:*",
     "@truststack/did": "workspace:*",
