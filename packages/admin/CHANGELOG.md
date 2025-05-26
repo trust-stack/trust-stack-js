@@ -1,5 +1,13 @@
 # @truststack/admin
 
+## 0.1.20
+
+### Patch Changes
+
+- 0f0344b: Updating openapi schema, removing biolock.
+- Updated dependencies [0f0344b]
+  - @truststack/core@0.2.6
+
 ## 0.1.19
 
 ### Patch Changes
