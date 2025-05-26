@@ -1,5 +1,11 @@
 # @truststack/admin
 
+## 0.1.22
+
+### Patch Changes
+
+- 1c29330: Adding admin theme methods.
+
 ## 0.1.21
 
 ### Patch Changes
