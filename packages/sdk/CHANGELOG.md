@@ -1,5 +1,13 @@
 # @truststack/sdk
 
+## 0.1.26
+
+### Patch Changes
+
+- 8e884a8: Missing theme method
+- Updated dependencies [8e884a8]
+  - @truststack/admin@0.1.23
+
 ## 0.1.25
 
 ### Patch Changes

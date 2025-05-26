@@ -1,5 +1,11 @@
 # @truststack/admin
 
+## 0.1.23
+
+### Patch Changes
+
+- 8e884a8: Missing theme method
+
 ## 0.1.22
 
 ### Patch Changes
