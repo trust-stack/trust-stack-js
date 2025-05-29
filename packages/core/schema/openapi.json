@@ -5530,7 +5530,7 @@
           "label": {
             "type": "string"
           },
-          "actions": {
+          "items": {
             "description": "Actions rendered in the group.",
             "type": "array",
             "items": {
@@ -5540,7 +5540,7 @@
         },
         "required": [
           "label",
-          "actions"
+          "items"
         ]
       },
       "AppEntry": {
