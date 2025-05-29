@@ -813,7 +813,7 @@ export type SetEventForm = {
     hydrator: string;
 };
 
-export type SetEventSchemaDto = {
+export type SetEventSchema = {
     /**
      * The code of the event tag, a unique identifier
      */
@@ -3258,7 +3258,7 @@ export type GetEventSchemasResponses = {
 export type GetEventSchemasResponse = GetEventSchemasResponses[keyof GetEventSchemasResponses];
 
 export type SetEventSchemaData = {
-    body: SetEventSchemaDto;
+    body: SetEventSchema;
     path?: never;
     query?: never;
     url: '/event-schemas';

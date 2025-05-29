@@ -1904,7 +1904,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/SetEventSchemaDto"
+                "$ref": "#/components/schemas/SetEventSchema"
               }
             }
           }
@@ -5224,7 +5224,7 @@
           "hydrator"
         ]
       },
-      "SetEventSchemaDto": {
+      "SetEventSchema": {
         "type": "object",
         "properties": {
           "code": {
