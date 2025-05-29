@@ -1,5 +1,22 @@
 # @truststack/sdk
 
+## 0.1.29
+
+### Patch Changes
+
+- 5515fc7: Updating openapi schema and resolving poor types.
+- Updated dependencies [5515fc7]
+  - @truststack/admin@0.1.26
+  - @truststack/core@0.2.9
+  - @truststack/canvas@0.0.25
+  - @truststack/did@0.0.25
+  - @truststack/discovery@0.1.22
+  - @truststack/event@0.1.23
+  - @truststack/link-resolver@0.1.24
+  - @truststack/master-data@0.1.22
+  - @truststack/object@0.1.22
+  - @truststack/untp@0.0.24
+
 ## 0.1.28
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @truststack/core
 
+## 0.2.9
+
+### Patch Changes
+
+- 5515fc7: Updating openapi schema and resolving poor types.
+
 ## 0.2.8
 
 ### Patch Changes
