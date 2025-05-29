@@ -274,93 +274,6 @@ export type CanvasTemplateInstance = {
     updatedAt: string;
 };
 
-export type CreateTheme = {
-    /**
-     * The name of the theme
-     */
-    name: string;
-    /**
-     * The color of the theme, used to generate the pallette.
-     */
-    color: string;
-};
-
-export type Theme = {
-    /**
-     * The ID of the theme
-     */
-    id: string;
-    /**
-     * The name of the theme
-     */
-    name: string;
-    /**
-     * The theme palette
-     */
-    variables: {
-        [key: string]: unknown;
-    };
-    /**
-     * The date the theme was created
-     */
-    createdAt: string;
-    /**
-     * The date the theme was last updated
-     */
-    updatedAt: string;
-    /**
-     * The organization that owns the theme
-     */
-    organizationId: string;
-};
-
-export type UpdateTheme = {
-    /**
-     * The name of the theme
-     */
-    name: string;
-    /**
-     * The color of the theme
-     */
-    color: string;
-};
-
-export type CreateOrganizationTheme = {
-    /**
-     * The primary color for the organization theme in hex format
-     */
-    color: string;
-    /**
-     * The ID of the icon uploaded to the object storage
-     */
-    icon: string;
-};
-
-export type OrganizationTheme = {
-    /**
-     * Unique identifier for the organization theme
-     */
-    id: string;
-    /**
-     * The associated icon organization theme
-     */
-    icon: S3Object;
-    /**
-     * The associated theme containing styles and variables
-     */
-    variables: {
-        [key: string]: unknown;
-    };
-    /**
-     * The date and time the organization theme was created
-     */
-    createdAt: string;
-    /**
-     * The date and time the organization theme was updated
-     */
-    updatedAt: string;
-};
-
 export type CreateLink = {
     /**
      * The path of the Link.
@@ -868,103 +781,7 @@ export type Dpp = {
     id: string;
 };
 
-export type CreateProvenanceForm = {
-    [key: string]: unknown;
-};
-
-export type ProvenanceForm = {
-    [key: string]: unknown;
-};
-
-export type UpdateProvenanceForm = {
-    [key: string]: unknown;
-};
-
-export type AppTheme = {
-    /**
-     * The organization ID
-     */
-    organizationId: string;
-    /**
-     * The color value
-     */
-    color: string;
-    /**
-     * The theme variables
-     */
-    variables: {
-        [key: string]: unknown;
-    };
-};
-
-export type SetAppTheme = {
-    /**
-     * The color value
-     */
-    color: string;
-};
-
-export type AppRailItem = {
-    /**
-     * Label of the item.
-     */
-    label: string;
-    /**
-     * Icon to render
-     */
-    icon: string;
-    /**
-     * Href of the item.
-     */
-    route: string;
-};
-
-export type AppBarItem = {
-    icon: string;
-    route: string;
-    label: string;
-};
-
-export type AppEntry = {
-    /**
-     * The mobile route of the app entry
-     */
-    routeMobile: string;
-    /**
-     * The web route of the app entry
-     */
-    routeWeb: string;
-};
-
-export type AppFrame = {
-    rail: Array<AppRailItem>;
-    bar: Array<AppBarItem>;
-    actions: Array<string>;
-    entry: AppEntry;
-};
-
-export type AppAction = {
-    label: string;
-    icon: string;
-    route: string;
-};
-
-export type AppActionGroup = {
-    label: string;
-    /**
-     * Actions rendered in the group.
-     */
-    actions: Array<AppAction>;
-};
-
-export type SetAppFrame = {
-    rail: Array<AppRailItem>;
-    bar: Array<AppBarItem>;
-    actions: Array<AppActionGroup>;
-    entry: AppEntry;
-};
-
-export type CreateEventExtensionSchema = {
+export type SetEventExtensionSchema = {
     /**
      * The JSON schema definition
      */
@@ -973,7 +790,7 @@ export type CreateEventExtensionSchema = {
     };
 };
 
-export type CreateIlmdSchemaDto = {
+export type SetIlmdSchema = {
     /**
      * The JSON schema definition
      */
@@ -982,7 +799,21 @@ export type CreateIlmdSchemaDto = {
     };
 };
 
-export type CreateEventSchema = {
+export type SetEventForm = {
+    schema: {
+        [key: string]: unknown;
+    };
+    /**
+     * Handler of a event form.
+     */
+    handler: string;
+    /**
+     * Hydrator of an event form.
+     */
+    hydrator: string;
+};
+
+export type SetEventSchemaDto = {
     /**
      * The code of the event tag, a unique identifier
      */
@@ -998,11 +829,15 @@ export type CreateEventSchema = {
     /**
      * Schema of the event extension associated with this event schema.
      */
-    extensionSchema?: CreateEventExtensionSchema;
+    extensionSchema?: SetEventExtensionSchema;
     /**
      * The structured schema for a new version, stored in SchemaDefinition
      */
-    ilmdSchema?: CreateIlmdSchemaDto;
+    ilmdSchema?: SetIlmdSchema;
+    /**
+     * The event form associated with this event schema.
+     */
+    eventForm?: SetEventForm;
     /**
      * The icon of the event tag
      */
@@ -1046,6 +881,19 @@ export type IlmdSchema = {
     createdAt: string;
 };
 
+export type EventForm = {
+    id: string;
+    schema: {
+        [key: string]: unknown;
+    };
+    handler: string;
+    handlerCompiled: string;
+    hydrator: string;
+    hydratorCompiled: string;
+    createdAt: string;
+    updatedAt: string;
+};
+
 export type EventSchema = {
     /**
      * The id of the event tag
@@ -1072,6 +920,10 @@ export type EventSchema = {
      */
     ilmdSchema?: IlmdSchema;
     /**
+     * The event form definition for custom fields
+     */
+    eventForm?: EventForm;
+    /**
      * The date and time the event tag was created
      */
     createdAt: string;
@@ -1091,6 +943,88 @@ export type EventSchema = {
      * The icon of the event tag
      */
     icon: string;
+};
+
+export type AppRailItem = {
+    /**
+     * Label of the item.
+     */
+    label: string;
+    /**
+     * Icon to render
+     */
+    icon: string;
+    /**
+     * Href of the item.
+     */
+    route: string;
+};
+
+export type AppBarItem = {
+    icon: string;
+    route: string;
+    label: string;
+};
+
+export type AppAction = {
+    label: string;
+    icon: string;
+    route: string;
+};
+
+export type AppActionGroup = {
+    label: string;
+    /**
+     * Actions rendered in the group.
+     */
+    actions: Array<AppAction>;
+};
+
+export type AppEntry = {
+    /**
+     * The mobile route of the app entry
+     */
+    routeMobile: string;
+    /**
+     * The web route of the app entry
+     */
+    routeWeb: string;
+};
+
+export type AppTheme = {
+    /**
+     * The source color value
+     */
+    color: string;
+    /**
+     * The theme variables
+     */
+    variables: {
+        [key: string]: unknown;
+    };
+};
+
+export type AppFrame = {
+    /**
+     * The name of the app, by default is the organisation name
+     */
+    name: string;
+    rail: Array<AppRailItem>;
+    bar: Array<AppBarItem>;
+    actions: Array<AppActionGroup>;
+    entry: AppEntry;
+    theme: AppTheme;
+};
+
+export type SetAppFrame = {
+    rail: Array<AppRailItem>;
+    bar: Array<AppBarItem>;
+    actions: Array<AppActionGroup>;
+    entry: AppEntry;
+    /**
+     * The color of the app theme
+     */
+    themeColor: string;
 };
 
 export type CreateInstanceIdentifier = {
@@ -2686,134 +2620,6 @@ export type RenderCanvasTemplateResponses = {
 
 export type RenderCanvasTemplateResponse = RenderCanvasTemplateResponses[keyof RenderCanvasTemplateResponses];
 
-export type GetThemesData = {
-    body?: never;
-    path?: never;
-    query?: {
-        /**
-         * Page number (1-based)
-         */
-        page?: number;
-        /**
-         * Number of items per page
-         */
-        limit?: number;
-    };
-    url: '/themes';
-};
-
-export type GetThemesResponses = {
-    /**
-     * The themes that were found
-     */
-    200: Array<Theme>;
-};
-
-export type GetThemesResponse = GetThemesResponses[keyof GetThemesResponses];
-
-export type CreateThemeData = {
-    body: CreateTheme;
-    path?: never;
-    query?: never;
-    url: '/themes';
-};
-
-export type CreateThemeResponses = {
-    /**
-     * The theme that was created
-     */
-    200: Theme;
-};
-
-export type CreateThemeResponse = CreateThemeResponses[keyof CreateThemeResponses];
-
-export type DeleteThemeData = {
-    body?: never;
-    path: {
-        id: string;
-    };
-    query?: never;
-    url: '/themes/{id}';
-};
-
-export type DeleteThemeResponses = {
-    200: unknown;
-};
-
-export type GetThemeData = {
-    body?: never;
-    path: {
-        /**
-         * The ID of the theme to find
-         */
-        id: string;
-    };
-    query?: never;
-    url: '/themes/{id}';
-};
-
-export type GetThemeResponses = {
-    /**
-     * The theme that was found
-     */
-    200: Theme;
-};
-
-export type GetThemeResponse = GetThemeResponses[keyof GetThemeResponses];
-
-export type UpdateThemeData = {
-    body: UpdateTheme;
-    path: {
-        /**
-         * The ID of the theme to update
-         */
-        id: string;
-    };
-    query?: never;
-    url: '/themes/{id}';
-};
-
-export type UpdateThemeResponses = {
-    /**
-     * The theme that was updated
-     */
-    200: Theme;
-};
-
-export type UpdateThemeResponse = UpdateThemeResponses[keyof UpdateThemeResponses];
-
-export type GetOrganizationThemeData = {
-    body?: never;
-    path?: never;
-    query?: never;
-    url: '/organization-themes';
-};
-
-export type GetOrganizationThemeResponses = {
-    /**
-     * The organization theme that was found
-     */
-    200: OrganizationTheme;
-};
-
-export type GetOrganizationThemeResponse = GetOrganizationThemeResponses[keyof GetOrganizationThemeResponses];
-
-export type CreateOrganizationThemeData = {
-    body: CreateOrganizationTheme;
-    path?: never;
-    query?: never;
-    url: '/organization-themes';
-};
-
-export type CreateOrganizationThemeResponses = {
-    /**
-     * The organization theme that was created
-     */
-    200: OrganizationTheme;
-};
-
-export type CreateOrganizationThemeResponse = CreateOrganizationThemeResponses[keyof CreateOrganizationThemeResponses];
-
 export type GetLinksData = {
     body?: never;
     path?: never;
@@ -3426,7 +3232,7 @@ export type GetDppResponses = {
 
 export type GetDppResponse = GetDppResponses[keyof GetDppResponses];
 
-export type GetProvenanceFormsData = {
+export type GetEventSchemasData = {
     body?: never;
     path?: never;
     query?: {
@@ -3439,135 +3245,127 @@ export type GetProvenanceFormsData = {
          */
         limit?: number;
     };
-    url: '/provenance-forms';
+    url: '/event-schemas';
 };
 
-export type GetProvenanceFormsResponses = {
+export type GetEventSchemasResponses = {
     /**
-     * The provenance forms have been successfully retrieved
+     * The event schemas have been successfully retrieved
      */
-    200: Array<ProvenanceForm>;
+    200: Array<EventSchema>;
 };
 
-export type GetProvenanceFormsResponse = GetProvenanceFormsResponses[keyof GetProvenanceFormsResponses];
+export type GetEventSchemasResponse = GetEventSchemasResponses[keyof GetEventSchemasResponses];
 
-export type CreateProvenanceFormData = {
-    body: CreateProvenanceForm;
+export type SetEventSchemaData = {
+    body: SetEventSchemaDto;
     path?: never;
     query?: never;
-    url: '/provenance-forms';
+    url: '/event-schemas';
 };
 
-export type CreateProvenanceFormResponses = {
+export type SetEventSchemaErrors = {
     /**
-     * The provenance form has been successfully created
+     * Invalid request
      */
-    201: ProvenanceForm;
+    400: unknown;
 };
 
-export type CreateProvenanceFormResponse = CreateProvenanceFormResponses[keyof CreateProvenanceFormResponses];
+export type SetEventSchemaResponses = {
+    /**
+     * Event schema created successfully
+     */
+    201: EventSchema;
+};
 
-export type DeleteProvenanceFormData = {
+export type SetEventSchemaResponse = SetEventSchemaResponses[keyof SetEventSchemaResponses];
+
+export type DeleteEventSchemaData = {
     body?: never;
     path: {
-        id: string;
+        code: string;
     };
     query?: never;
-    url: '/provenance-forms/{id}';
+    url: '/event-schemas/{code}';
 };
 
-export type DeleteProvenanceFormResponses = {
+export type DeleteEventSchemaErrors = {
     /**
-     * The provenance form has been successfully deleted
+     * Event schema not found
+     */
+    404: unknown;
+};
+
+export type DeleteEventSchemaResponses = {
+    /**
+     * Event schema deleted successfully
      */
     200: unknown;
 };
 
-export type GetProvenanceFormData = {
+export type GetEventSchemaData = {
     body?: never;
     path: {
-        id: string;
+        code: string;
     };
     query?: never;
-    url: '/provenance-forms/{id}';
+    url: '/event-schemas/{code}';
 };
 
-export type GetProvenanceFormResponses = {
+export type GetEventSchemaErrors = {
     /**
-     * The provenance form has been successfully retrieved
+     * Event schema not found
      */
-    200: ProvenanceForm;
+    404: unknown;
 };
 
-export type GetProvenanceFormResponse = GetProvenanceFormResponses[keyof GetProvenanceFormResponses];
+export type GetEventSchemaResponses = {
+    /**
+     * Event schema retrieved successfully
+     */
+    200: EventSchema;
+};
 
-export type UpdateProvenanceFormData = {
-    body: UpdateProvenanceForm;
+export type GetEventSchemaResponse = GetEventSchemaResponses[keyof GetEventSchemaResponses];
+
+export type CreateEventExtensionSchemaData = {
+    body: SetEventExtensionSchema;
     path: {
-        id: string;
+        code: string;
     };
     query?: never;
-    url: '/provenance-forms/{id}';
+    url: '/event-schemas/{code}/extension-schemas';
 };
 
-export type UpdateProvenanceFormResponses = {
-    /**
-     * The provenance form has been successfully updated
-     */
-    200: ProvenanceForm;
+export type CreateEventExtensionSchemaResponses = {
+    201: unknown;
 };
 
-export type UpdateProvenanceFormResponse = UpdateProvenanceFormResponses[keyof UpdateProvenanceFormResponses];
-
-export type GetAppThemeOrganizationData = {
-    body?: never;
-    path?: never;
+export type CreateIlmdSchemaData = {
+    body: SetIlmdSchema;
+    path: {
+        code: string;
+    };
     query?: never;
-    url: '/app-theme/organization';
+    url: '/event-schemas/{code}/ilmd-schemas';
 };
 
-export type GetAppThemeOrganizationErrors = {
-    /**
-     * Forbidden - User does not have access to this organization
-     */
-    403: unknown;
+export type CreateIlmdSchemaResponses = {
+    201: unknown;
 };
 
-export type GetAppThemeOrganizationResponses = {
-    /**
-     * The app theme has been successfully retrieved
-     */
-    200: AppTheme;
-};
-
-export type GetAppThemeOrganizationResponse = GetAppThemeOrganizationResponses[keyof GetAppThemeOrganizationResponses];
-
-export type SetAppThemeOrganizationData = {
-    body: SetAppTheme;
-    path?: never;
+export type CreateEventFormData = {
+    body: SetEventForm;
+    path: {
+        code: string;
+    };
     query?: never;
-    url: '/app-theme/organization';
+    url: '/event-schemas/{code}/event-forms';
 };
 
-export type SetAppThemeOrganizationErrors = {
-    /**
-     * Bad Request - Invalid app theme data provided
-     */
-    400: unknown;
-    /**
-     * Forbidden - User does not have access to this organization
-     */
-    403: unknown;
+export type CreateEventFormResponses = {
+    201: unknown;
 };
-
-export type SetAppThemeOrganizationResponses = {
-    /**
-     * The app theme has been successfully created or updated
-     */
-    200: AppTheme;
-};
-
-export type SetAppThemeOrganizationResponse = SetAppThemeOrganizationResponses[keyof SetAppThemeOrganizationResponses];
 
 export type GetAppFrameData = {
     body?: never;
@@ -3600,154 +3398,6 @@ export type SetAppFrameResponses = {
 };
 
 export type SetAppFrameResponse = SetAppFrameResponses[keyof SetAppFrameResponses];
-
-export type GetEventSchemasData = {
-    body?: never;
-    path?: never;
-    query?: {
-        /**
-         * Page number (1-based)
-         */
-        page?: number;
-        /**
-         * Number of items per page
-         */
-        limit?: number;
-    };
-    url: '/event-schemas';
-};
-
-export type GetEventSchemasResponses = {
-    /**
-     * The event schemas have been successfully retrieved
-     */
-    200: Array<EventSchema>;
-};
-
-export type GetEventSchemasResponse = GetEventSchemasResponses[keyof GetEventSchemasResponses];
-
-export type CreateEventSchemaData = {
-    body: CreateEventSchema;
-    path?: never;
-    query?: never;
-    url: '/event-schemas';
-};
-
-export type CreateEventSchemaErrors = {
-    /**
-     * Invalid request
-     */
-    400: unknown;
-};
-
-export type CreateEventSchemaResponses = {
-    /**
-     * Event schema created successfully
-     */
-    201: EventSchema;
-};
-
-export type CreateEventSchemaResponse = CreateEventSchemaResponses[keyof CreateEventSchemaResponses];
-
-export type SetEventSchemasData = {
-    /**
-     * Array of event schemas to set
-     */
-    body: Array<CreateEventSchema>;
-    path?: never;
-    query?: never;
-    url: '/event-schemas/set';
-};
-
-export type SetEventSchemasErrors = {
-    /**
-     * Invalid request
-     */
-    400: unknown;
-};
-
-export type SetEventSchemasResponses = {
-    /**
-     * Event schemas set successfully
-     */
-    200: Array<EventSchema>;
-};
-
-export type SetEventSchemasResponse = SetEventSchemasResponses[keyof SetEventSchemasResponses];
-
-export type DeleteEventSchemaData = {
-    body?: never;
-    path: {
-        id: string;
-    };
-    query?: never;
-    url: '/event-schemas/{id}';
-};
-
-export type DeleteEventSchemaErrors = {
-    /**
-     * Event schema not found
-     */
-    404: unknown;
-};
-
-export type DeleteEventSchemaResponses = {
-    /**
-     * Event schema deleted successfully
-     */
-    200: unknown;
-};
-
-export type GetEventSchemaData = {
-    body?: never;
-    path: {
-        id: string;
-    };
-    query?: never;
-    url: '/event-schemas/{id}';
-};
-
-export type GetEventSchemaErrors = {
-    /**
-     * Event schema not found
-     */
-    404: unknown;
-};
-
-export type GetEventSchemaResponses = {
-    /**
-     * Event schema retrieved successfully
-     */
-    200: EventSchema;
-};
-
-export type GetEventSchemaResponse = GetEventSchemaResponses[keyof GetEventSchemaResponses];
-
-export type CreateEventExtensionSchemaData = {
-    body: CreateEventExtensionSchema;
-    path: {
-        id: string;
-    };
-    query?: never;
-    url: '/event-schemas/{id}/extension-schemas';
-};
-
-export type CreateEventExtensionSchemaResponses = {
-    201: unknown;
-};
-
-export type CreateIlmdSchemaData = {
-    body: CreateIlmdSchemaDto;
-    path: {
-        id: string;
-    };
-    query?: never;
-    url: '/event-schemas/{id}/ilmd-schemas';
-};
-
-export type CreateIlmdSchemaResponses = {
-    201: unknown;
-};
 
 export type GetEventsData = {
     body?: never;
