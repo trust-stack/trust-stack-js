@@ -1,5 +1,11 @@
 # @truststack/core
 
+## 0.2.8
+
+### Patch Changes
+
+- 09c13b1: Updating openapi schema and methods accordingly.
+
 ## 0.2.7
 
 ### Patch Changes
