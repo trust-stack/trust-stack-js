@@ -1,5 +1,22 @@
 # @truststack/sdk
 
+## 0.1.28
+
+### Patch Changes
+
+- 09c13b1: Updating openapi schema and methods accordingly.
+- Updated dependencies [09c13b1]
+  - @truststack/canvas@0.0.24
+  - @truststack/admin@0.1.25
+  - @truststack/core@0.2.8
+  - @truststack/did@0.0.24
+  - @truststack/discovery@0.1.21
+  - @truststack/event@0.1.22
+  - @truststack/link-resolver@0.1.23
+  - @truststack/master-data@0.1.21
+  - @truststack/object@0.1.21
+  - @truststack/untp@0.0.23
+
 ## 0.1.27
 
 ### Patch Changes
