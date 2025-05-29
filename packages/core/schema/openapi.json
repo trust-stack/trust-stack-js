@@ -915,237 +915,6 @@
         ]
       }
     },
-    "/themes": {
-      "post": {
-        "description": "Create a new theme",
-        "operationId": "createTheme",
-        "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateTheme"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "The theme that was created",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Theme"
-                }
-              }
-            }
-          }
-        },
-        "summary": "Create Theme",
-        "tags": [
-          "Theme"
-        ]
-      },
-      "get": {
-        "description": "Get all themes",
-        "operationId": "getThemes",
-        "parameters": [
-          {
-            "name": "page",
-            "required": false,
-            "in": "query",
-            "description": "Page number (1-based)",
-            "schema": {
-              "example": 1,
-              "type": "number"
-            }
-          },
-          {
-            "name": "limit",
-            "required": false,
-            "in": "query",
-            "description": "Number of items per page",
-            "schema": {
-              "example": 10,
-              "type": "number"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The themes that were found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Theme"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "Theme"
-        ]
-      }
-    },
-    "/themes/{id}": {
-      "get": {
-        "description": "Get a theme by id",
-        "operationId": "getTheme",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "description": "The ID of the theme to find",
-            "schema": {
-              "example": "123",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The theme that was found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Theme"
-                }
-              }
-            }
-          }
-        },
-        "summary": "Get Theme",
-        "tags": [
-          "Theme"
-        ]
-      },
-      "put": {
-        "description": "Update a theme by id",
-        "operationId": "updateTheme",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "description": "The ID of the theme to update",
-            "schema": {
-              "example": "123",
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateTheme"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "The theme that was updated",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Theme"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "Theme"
-        ]
-      },
-      "delete": {
-        "description": "Delete a theme by id",
-        "operationId": "deleteTheme",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        },
-        "summary": "",
-        "tags": [
-          "Theme"
-        ]
-      }
-    },
-    "/organization-themes": {
-      "post": {
-        "description": "Create a new organization theme",
-        "operationId": "createOrganizationTheme",
-        "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateOrganizationTheme"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "The organization theme that was created",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OrganizationTheme"
-                }
-              }
-            }
-          }
-        },
-        "summary": "Create Organization Theme",
-        "tags": [
-          "Organization Theme"
-        ]
-      },
-      "get": {
-        "description": "Get the requesting organizations themes",
-        "operationId": "getOrganizationTheme",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "The organization theme that was found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OrganizationTheme"
-                }
-              }
-            }
-          }
-        },
-        "summary": "Get Organization Theme",
-        "tags": [
-          "Organization Theme"
-        ]
-      }
-    },
     "/links": {
       "post": {
         "operationId": "createLink",
@@ -2126,41 +1895,43 @@
         ]
       }
     },
-    "/provenance-forms": {
+    "/event-schemas": {
       "post": {
-        "description": "Create a new provenance form",
-        "operationId": "createProvenanceForm",
+        "operationId": "setEventSchema",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateProvenanceForm"
+                "$ref": "#/components/schemas/SetEventSchemaDto"
               }
             }
           }
         },
         "responses": {
           "201": {
-            "description": "The provenance form has been successfully created",
+            "description": "Event schema created successfully",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProvenanceForm"
+                  "$ref": "#/components/schemas/EventSchema"
                 }
               }
             }
+          },
+          "400": {
+            "description": "Invalid request"
           }
         },
-        "summary": "Create Provenance Form",
+        "summary": "Set an event schema",
         "tags": [
-          "Provenance Form"
+          "EventSchema"
         ]
       },
       "get": {
-        "description": "Get many provenance forms",
-        "operationId": "getProvenanceForms",
+        "description": "Get event schemas",
+        "operationId": "getEventSchemas",
         "parameters": [
           {
             "name": "page",
@@ -2185,32 +1956,31 @@
         ],
         "responses": {
           "200": {
-            "description": "The provenance forms have been successfully retrieved",
+            "description": "The event schemas have been successfully retrieved",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ProvenanceForm"
+                    "$ref": "#/components/schemas/EventSchema"
                   }
                 }
               }
             }
           }
         },
-        "summary": "Get Provenance Forms",
+        "summary": "Get Event Schemas",
         "tags": [
-          "Provenance Form"
+          "EventSchema"
         ]
       }
     },
-    "/provenance-forms/{id}": {
+    "/event-schemas/{code}": {
       "get": {
-        "description": "Get a provenance form by ID",
-        "operationId": "getProvenanceForm",
+        "operationId": "getEventSchema",
         "parameters": [
           {
-            "name": "id",
+            "name": "code",
             "required": true,
             "in": "path",
             "schema": {
@@ -2220,67 +1990,29 @@
         ],
         "responses": {
           "200": {
-            "description": "The provenance form has been successfully retrieved",
+            "description": "Event schema retrieved successfully",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProvenanceForm"
+                  "$ref": "#/components/schemas/EventSchema"
                 }
               }
             }
+          },
+          "404": {
+            "description": "Event schema not found"
           }
         },
-        "summary": "Get Provenance Form",
+        "summary": "Get an event schema",
         "tags": [
-          "Provenance Form"
-        ]
-      },
-      "put": {
-        "description": "Update a provenance form",
-        "operationId": "updateProvenanceForm",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateProvenanceForm"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "The provenance form has been successfully updated",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProvenanceForm"
-                }
-              }
-            }
-          }
-        },
-        "summary": "Update Provenance Form",
-        "tags": [
-          "Provenance Form"
+          "EventSchema"
         ]
       },
       "delete": {
-        "description": "Delete a provenance form",
-        "operationId": "deleteProvenanceForm",
+        "operationId": "deleteEventSchema",
         "parameters": [
           {
-            "name": "id",
+            "name": "code",
             "required": true,
             "in": "path",
             "schema": {
@@ -2290,75 +2022,117 @@
         ],
         "responses": {
           "200": {
-            "description": "The provenance form has been successfully deleted"
+            "description": "Event schema deleted successfully"
+          },
+          "404": {
+            "description": "Event schema not found"
           }
         },
-        "summary": "Delete Provenance Form",
+        "summary": "Delete an event schema",
         "tags": [
-          "Provenance Form"
+          "EventSchema"
         ]
       }
     },
-    "/app-theme/organization": {
-      "get": {
-        "description": "Get the app theme for the current organization, returns default theme if none exists",
-        "operationId": "getAppThemeOrganization",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "The app theme has been successfully retrieved",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AppTheme"
-                }
-              }
+    "/event-schemas/{code}/extension-schemas": {
+      "post": {
+        "operationId": "createEventExtensionSchema",
+        "parameters": [
+          {
+            "name": "code",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
             }
-          },
-          "403": {
-            "description": "Forbidden - User does not have access to this organization"
           }
-        },
-        "summary": "Get Organization App Theme",
-        "tags": [
-          "App Theme"
-        ]
-      },
-      "put": {
-        "description": "Create or update the app theme for the current organization",
-        "operationId": "setAppThemeOrganization",
-        "parameters": [],
+        ],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/SetAppTheme"
+                "$ref": "#/components/schemas/SetEventExtensionSchema"
               }
             }
           }
         },
         "responses": {
-          "200": {
-            "description": "The app theme has been successfully created or updated",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AppTheme"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request - Invalid app theme data provided"
-          },
-          "403": {
-            "description": "Forbidden - User does not have access to this organization"
+          "201": {
+            "description": ""
           }
         },
-        "summary": "Set Organization App Theme",
+        "summary": "Create an extension schema for an event schema",
         "tags": [
-          "App Theme"
+          "EventSchema"
+        ]
+      }
+    },
+    "/event-schemas/{code}/ilmd-schemas": {
+      "post": {
+        "operationId": "createIlmdSchema",
+        "parameters": [
+          {
+            "name": "code",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetIlmdSchema"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "summary": "Create an ILMD schema for an event schema",
+        "tags": [
+          "EventSchema"
+        ]
+      }
+    },
+    "/event-schemas/{code}/event-forms": {
+      "post": {
+        "operationId": "createEventForm",
+        "parameters": [
+          {
+            "name": "code",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetEventForm"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "summary": "Create an event form for an event schema",
+        "tags": [
+          "EventSchema"
         ]
       }
     },
@@ -2412,255 +2186,6 @@
         "summary": "Update app frame.",
         "tags": [
           "AppFrame"
-        ]
-      }
-    },
-    "/event-schemas": {
-      "post": {
-        "operationId": "createEventSchema",
-        "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateEventSchema"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Event schema created successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/EventSchema"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid request"
-          }
-        },
-        "summary": "Create an event schema",
-        "tags": [
-          "EventSchema"
-        ]
-      },
-      "get": {
-        "description": "Get event schemas",
-        "operationId": "getEventSchemas",
-        "parameters": [
-          {
-            "name": "page",
-            "required": false,
-            "in": "query",
-            "description": "Page number (1-based)",
-            "schema": {
-              "default": 1,
-              "type": "number"
-            }
-          },
-          {
-            "name": "limit",
-            "required": false,
-            "in": "query",
-            "description": "Number of items per page",
-            "schema": {
-              "default": 10,
-              "type": "number"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The event schemas have been successfully retrieved",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/EventSchema"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "summary": "Get Event Schemas",
-        "tags": [
-          "EventSchema"
-        ]
-      }
-    },
-    "/event-schemas/set": {
-      "post": {
-        "operationId": "setEventSchemas",
-        "parameters": [],
-        "requestBody": {
-          "required": true,
-          "description": "Array of event schemas to set",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/CreateEventSchema"
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Event schemas set successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/EventSchema"
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid request"
-          }
-        },
-        "summary": "Set schemas for an event",
-        "tags": [
-          "EventSchema"
-        ]
-      }
-    },
-    "/event-schemas/{id}": {
-      "get": {
-        "operationId": "getEventSchema",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Event schema retrieved successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/EventSchema"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Event schema not found"
-          }
-        },
-        "summary": "Get an event schema",
-        "tags": [
-          "EventSchema"
-        ]
-      },
-      "delete": {
-        "operationId": "deleteEventSchema",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Event schema deleted successfully"
-          },
-          "404": {
-            "description": "Event schema not found"
-          }
-        },
-        "summary": "Delete an event schema",
-        "tags": [
-          "EventSchema"
-        ]
-      }
-    },
-    "/event-schemas/{id}/extension-schemas": {
-      "post": {
-        "operationId": "createEventExtensionSchema",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateEventExtensionSchema"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": ""
-          }
-        },
-        "summary": "Create an extension schema for an event schema",
-        "tags": [
-          "EventSchema"
-        ]
-      }
-    },
-    "/event-schemas/{id}/ilmd-schemas": {
-      "post": {
-        "operationId": "createIlmdSchema",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateIlmdSchemaDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": ""
-          }
-        },
-        "summary": "Create an ILMD schema for an event schema",
-        "tags": [
-          "EventSchema"
         ]
       }
     },
@@ -4755,140 +4280,6 @@
           "updatedAt"
         ]
       },
-      "CreateTheme": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "The name of the theme"
-          },
-          "color": {
-            "type": "string",
-            "description": "The color of the theme, used to generate the pallette."
-          }
-        },
-        "required": [
-          "name",
-          "color"
-        ]
-      },
-      "Theme": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "The ID of the theme"
-          },
-          "name": {
-            "type": "string",
-            "description": "The name of the theme"
-          },
-          "variables": {
-            "type": "object",
-            "description": "The theme palette"
-          },
-          "createdAt": {
-            "format": "date-time",
-            "type": "string",
-            "description": "The date the theme was created"
-          },
-          "updatedAt": {
-            "format": "date-time",
-            "type": "string",
-            "description": "The date the theme was last updated"
-          },
-          "organizationId": {
-            "type": "string",
-            "description": "The organization that owns the theme"
-          }
-        },
-        "required": [
-          "id",
-          "name",
-          "variables",
-          "createdAt",
-          "updatedAt",
-          "organizationId"
-        ]
-      },
-      "UpdateTheme": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "The name of the theme"
-          },
-          "color": {
-            "type": "string",
-            "description": "The color of the theme"
-          }
-        },
-        "required": [
-          "name",
-          "color"
-        ]
-      },
-      "CreateOrganizationTheme": {
-        "type": "object",
-        "properties": {
-          "color": {
-            "type": "string",
-            "description": "The primary color for the organization theme in hex format",
-            "example": "#3366FF"
-          },
-          "icon": {
-            "type": "string",
-            "format": "uuid",
-            "description": "The ID of the icon uploaded to the object storage",
-            "example": "123e4567-e89b-12d3-a456-426614174000"
-          }
-        },
-        "required": [
-          "color",
-          "icon"
-        ]
-      },
-      "OrganizationTheme": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid",
-            "description": "Unique identifier for the organization theme",
-            "example": "123e4567-e89b-12d3-a456-426614174000"
-          },
-          "icon": {
-            "description": "The associated icon organization theme",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/S3Object"
-              }
-            ]
-          },
-          "variables": {
-            "type": "object",
-            "description": "The associated theme containing styles and variables",
-            "additionalProperties": true
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time",
-            "description": "The date and time the organization theme was created"
-          },
-          "updatedAt": {
-            "type": "string",
-            "format": "date-time",
-            "description": "The date and time the organization theme was updated"
-          }
-        },
-        "required": [
-          "id",
-          "icon",
-          "variables",
-          "createdAt",
-          "updatedAt"
-        ]
-      },
       "CreateLink": {
         "type": "object",
         "properties": {
@@ -5766,215 +5157,7 @@
           "id"
         ]
       },
-      "CreateProvenanceForm": {
-        "type": "object",
-        "properties": {}
-      },
-      "ProvenanceForm": {
-        "type": "object",
-        "properties": {}
-      },
-      "UpdateProvenanceForm": {
-        "type": "object",
-        "properties": {}
-      },
-      "AppTheme": {
-        "type": "object",
-        "properties": {
-          "organizationId": {
-            "type": "string",
-            "description": "The organization ID"
-          },
-          "color": {
-            "type": "string",
-            "description": "The color value"
-          },
-          "variables": {
-            "type": "object",
-            "description": "The theme variables"
-          }
-        },
-        "required": [
-          "organizationId",
-          "color",
-          "variables"
-        ]
-      },
-      "SetAppTheme": {
-        "type": "object",
-        "properties": {
-          "color": {
-            "type": "string",
-            "description": "The color value"
-          }
-        },
-        "required": [
-          "color"
-        ]
-      },
-      "AppRailItem": {
-        "type": "object",
-        "properties": {
-          "label": {
-            "type": "string",
-            "description": "Label of the item."
-          },
-          "icon": {
-            "type": "string",
-            "description": "Icon to render "
-          },
-          "route": {
-            "type": "string",
-            "description": "Href of the item."
-          }
-        },
-        "required": [
-          "label",
-          "icon",
-          "route"
-        ]
-      },
-      "AppBarItem": {
-        "type": "object",
-        "properties": {
-          "icon": {
-            "type": "string"
-          },
-          "route": {
-            "type": "string"
-          },
-          "label": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "icon",
-          "route",
-          "label"
-        ]
-      },
-      "AppEntry": {
-        "type": "object",
-        "properties": {
-          "routeMobile": {
-            "type": "string",
-            "description": "The mobile route of the app entry",
-            "example": "/mobile"
-          },
-          "routeWeb": {
-            "type": "string",
-            "description": "The web route of the app entry",
-            "example": "/web"
-          }
-        },
-        "required": [
-          "routeMobile",
-          "routeWeb"
-        ]
-      },
-      "AppFrame": {
-        "type": "object",
-        "properties": {
-          "rail": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AppRailItem"
-            }
-          },
-          "bar": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AppBarItem"
-            }
-          },
-          "actions": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "entry": {
-            "$ref": "#/components/schemas/AppEntry"
-          }
-        },
-        "required": [
-          "rail",
-          "bar",
-          "actions",
-          "entry"
-        ]
-      },
-      "AppAction": {
-        "type": "object",
-        "properties": {
-          "label": {
-            "type": "string"
-          },
-          "icon": {
-            "type": "string"
-          },
-          "route": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "label",
-          "icon",
-          "route"
-        ]
-      },
-      "AppActionGroup": {
-        "type": "object",
-        "properties": {
-          "label": {
-            "type": "string"
-          },
-          "actions": {
-            "description": "Actions rendered in the group.",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AppAction"
-            }
-          }
-        },
-        "required": [
-          "label",
-          "actions"
-        ]
-      },
-      "SetAppFrame": {
-        "type": "object",
-        "properties": {
-          "rail": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AppRailItem"
-            }
-          },
-          "bar": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AppBarItem"
-            }
-          },
-          "actions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AppActionGroup"
-            }
-          },
-          "entry": {
-            "$ref": "#/components/schemas/AppEntry"
-          }
-        },
-        "required": [
-          "rail",
-          "bar",
-          "actions",
-          "entry"
-        ]
-      },
-      "CreateEventExtensionSchema": {
+      "SetEventExtensionSchema": {
         "type": "object",
         "properties": {
           "schema": {
@@ -5997,7 +5180,7 @@
           "schema"
         ]
       },
-      "CreateIlmdSchemaDto": {
+      "SetIlmdSchema": {
         "type": "object",
         "properties": {
           "schema": {
@@ -6020,7 +5203,28 @@
           "schema"
         ]
       },
-      "CreateEventSchema": {
+      "SetEventForm": {
+        "type": "object",
+        "properties": {
+          "schema": {
+            "type": "object"
+          },
+          "handler": {
+            "type": "string",
+            "description": "Handler of a event form."
+          },
+          "hydrator": {
+            "type": "string",
+            "description": "Hydrator of an event form."
+          }
+        },
+        "required": [
+          "schema",
+          "handler",
+          "hydrator"
+        ]
+      },
+      "SetEventSchemaDto": {
         "type": "object",
         "properties": {
           "code": {
@@ -6039,7 +5243,7 @@
             "description": "Schema of the event extension associated with this event schema.",
             "allOf": [
               {
-                "$ref": "#/components/schemas/CreateEventExtensionSchema"
+                "$ref": "#/components/schemas/SetEventExtensionSchema"
               }
             ]
           },
@@ -6047,7 +5251,15 @@
             "description": "The structured schema for a new version, stored in SchemaDefinition",
             "allOf": [
               {
-                "$ref": "#/components/schemas/CreateIlmdSchemaDto"
+                "$ref": "#/components/schemas/SetIlmdSchema"
+              }
+            ]
+          },
+          "eventForm": {
+            "description": "The event form associated with this event schema.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SetEventForm"
               }
             ]
           },
@@ -6133,6 +5345,47 @@
           "createdAt"
         ]
       },
+      "EventForm": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "schema": {
+            "type": "object"
+          },
+          "handler": {
+            "type": "string"
+          },
+          "handlerCompiled": {
+            "type": "string"
+          },
+          "hydrator": {
+            "type": "string"
+          },
+          "hydratorCompiled": {
+            "type": "string"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "schema",
+          "handler",
+          "handlerCompiled",
+          "hydrator",
+          "hydratorCompiled",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
       "EventSchema": {
         "type": "object",
         "properties": {
@@ -6164,6 +5417,14 @@
             "allOf": [
               {
                 "$ref": "#/components/schemas/IlmdSchema"
+              }
+            ]
+          },
+          "eventForm": {
+            "description": "The event form definition for custom fields",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EventForm"
               }
             ]
           },
@@ -6201,6 +5462,199 @@
           "deleted",
           "deletedAt",
           "icon"
+        ]
+      },
+      "AppRailItem": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string",
+            "description": "Label of the item."
+          },
+          "icon": {
+            "type": "string",
+            "description": "Icon to render "
+          },
+          "route": {
+            "type": "string",
+            "description": "Href of the item."
+          }
+        },
+        "required": [
+          "label",
+          "icon",
+          "route"
+        ]
+      },
+      "AppBarItem": {
+        "type": "object",
+        "properties": {
+          "icon": {
+            "type": "string"
+          },
+          "route": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "icon",
+          "route",
+          "label"
+        ]
+      },
+      "AppAction": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "icon": {
+            "type": "string"
+          },
+          "route": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "label",
+          "icon",
+          "route"
+        ]
+      },
+      "AppActionGroup": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "actions": {
+            "description": "Actions rendered in the group.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppAction"
+            }
+          }
+        },
+        "required": [
+          "label",
+          "actions"
+        ]
+      },
+      "AppEntry": {
+        "type": "object",
+        "properties": {
+          "routeMobile": {
+            "type": "string",
+            "description": "The mobile route of the app entry",
+            "example": "/mobile"
+          },
+          "routeWeb": {
+            "type": "string",
+            "description": "The web route of the app entry",
+            "example": "/web"
+          }
+        },
+        "required": [
+          "routeMobile",
+          "routeWeb"
+        ]
+      },
+      "AppTheme": {
+        "type": "object",
+        "properties": {
+          "color": {
+            "type": "string",
+            "description": "The source color value"
+          },
+          "variables": {
+            "type": "object",
+            "description": "The theme variables"
+          }
+        },
+        "required": [
+          "color",
+          "variables"
+        ]
+      },
+      "AppFrame": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the app, by default is the organisation name"
+          },
+          "rail": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppRailItem"
+            }
+          },
+          "bar": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppBarItem"
+            }
+          },
+          "actions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppActionGroup"
+            }
+          },
+          "entry": {
+            "$ref": "#/components/schemas/AppEntry"
+          },
+          "theme": {
+            "$ref": "#/components/schemas/AppTheme"
+          }
+        },
+        "required": [
+          "name",
+          "rail",
+          "bar",
+          "actions",
+          "entry",
+          "theme"
+        ]
+      },
+      "SetAppFrame": {
+        "type": "object",
+        "properties": {
+          "rail": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppRailItem"
+            }
+          },
+          "bar": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppBarItem"
+            }
+          },
+          "actions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppActionGroup"
+            }
+          },
+          "entry": {
+            "$ref": "#/components/schemas/AppEntry"
+          },
+          "themeColor": {
+            "type": "string",
+            "description": "The color of the app theme"
+          }
+        },
+        "required": [
+          "rail",
+          "bar",
+          "actions",
+          "entry",
+          "themeColor"
         ]
       },
       "CreateInstanceIdentifier": {
