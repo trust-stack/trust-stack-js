@@ -1,7 +1,7 @@
 import {
   RequestOptions,
   setEventSchema,
-  SetEventSchemaData,
+  SetEventSchema,
   TrustStackClient,
 } from "@truststack/core";
 
@@ -12,10 +12,7 @@ export class EventSchemaClient extends TrustStackClient {
    * @param options - The request options
    * @returns The event schema
    */
-  public async setEventSchema(
-    props: SetEventSchemaData,
-    options?: RequestOptions
-  ) {
+  public async setEventSchema(props: SetEventSchema, options?: RequestOptions) {
     return setEventSchema({
       body: props as any,
       headers: this.headers(options),
@@ -30,13 +27,13 @@ export class EventSchemaClient extends TrustStackClient {
    * @returns The event schemas
    */
   public async setEventSchemas(
-    data: SetEventSchemaData[],
+    data: SetEventSchema[],
     options?: RequestOptions
   ) {
     const results = await Promise.all(
       data.map(async (item) => {
         return setEventSchema({
-          body: item as any,
+          body: item,
           headers: this.headers(options),
           client: this.client,
         });
