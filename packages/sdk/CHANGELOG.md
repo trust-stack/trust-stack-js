@@ -1,5 +1,21 @@
 # @truststack/sdk
 
+## 0.1.30
+
+### Patch Changes
+
+- Updated dependencies [6fefdff]
+  - @truststack/core@0.2.10
+  - @truststack/admin@0.1.27
+  - @truststack/canvas@0.0.26
+  - @truststack/did@0.0.26
+  - @truststack/discovery@0.1.23
+  - @truststack/event@0.1.24
+  - @truststack/link-resolver@0.1.25
+  - @truststack/master-data@0.1.23
+  - @truststack/object@0.1.23
+  - @truststack/untp@0.0.25
+
 ## 0.1.29
 
 ### Patch Changes

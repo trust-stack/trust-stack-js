@@ -1,5 +1,12 @@
 # @truststack/event
 
+## 0.1.23
+
+### Patch Changes
+
+- Updated dependencies [6fefdff]
+  - @truststack/core@0.2.10
+
 ## 0.1.22
 
 ### Patch Changes
