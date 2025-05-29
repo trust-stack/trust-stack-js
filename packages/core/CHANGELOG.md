@@ -1,5 +1,11 @@
 # @truststack/core
 
+## 0.2.10
+
+### Patch Changes
+
+- 6fefdff: Updating OpenAPI schema.
+
 ## 0.2.9
 
 ### Patch Changes
