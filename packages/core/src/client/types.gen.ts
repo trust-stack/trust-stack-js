@@ -977,7 +977,7 @@ export type AppActionGroup = {
     /**
      * Actions rendered in the group.
      */
-    actions: Array<AppAction>;
+    items: Array<AppAction>;
 };
 
 export type AppEntry = {
