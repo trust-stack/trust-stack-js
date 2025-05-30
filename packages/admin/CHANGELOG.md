@@ -1,5 +1,13 @@
 # @truststack/admin
 
+## 0.1.28
+
+### Patch Changes
+
+- 9acf937: Updating schema and methods.
+- Updated dependencies [9acf937]
+  - @truststack/core@0.2.11
+
 ## 0.1.27
 
 ### Patch Changes

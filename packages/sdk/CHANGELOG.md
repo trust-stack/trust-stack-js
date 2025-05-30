@@ -1,5 +1,22 @@
 # @truststack/sdk
 
+## 0.1.31
+
+### Patch Changes
+
+- 9acf937: Updating schema and methods.
+- Updated dependencies [9acf937]
+  - @truststack/canvas@0.0.27
+  - @truststack/admin@0.1.28
+  - @truststack/core@0.2.11
+  - @truststack/did@0.0.27
+  - @truststack/discovery@0.1.24
+  - @truststack/event@0.1.25
+  - @truststack/link-resolver@0.1.26
+  - @truststack/master-data@0.1.24
+  - @truststack/object@0.1.24
+  - @truststack/untp@0.0.26
+
 ## 0.1.30
 
 ### Patch Changes
