@@ -1,5 +1,13 @@
 # @truststack/canvas
 
+## 0.0.27
+
+### Patch Changes
+
+- 9acf937: Updating schema and methods.
+- Updated dependencies [9acf937]
+  - @truststack/core@0.2.11
+
 ## 0.0.26
 
 ### Patch Changes

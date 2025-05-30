@@ -1,5 +1,11 @@
 # @truststack/core
 
+## 0.2.11
+
+### Patch Changes
+
+- 9acf937: Updating schema and methods.
+
 ## 0.2.10
 
 ### Patch Changes
