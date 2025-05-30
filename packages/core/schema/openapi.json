@@ -796,7 +796,8 @@
             "in": "path",
             "description": "The ID of the Canvas Template to find",
             "schema": {
-              "example": "123"
+              "example": "123",
+              "type": "string"
             }
           }
         ],
@@ -816,9 +817,121 @@
         "tags": [
           "Canvas Template"
         ]
+      },
+      "put": {
+        "description": "Update a Canvas Template.",
+        "operationId": "updateCanvasTemplate",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "The ID of the Canvas Template to update",
+            "schema": {
+              "example": "123",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCanvasTemplate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The Canvas Template was successfully updated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CanvasTemplate"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Update Canvas Template",
+        "tags": [
+          "Canvas Template"
+        ]
+      },
+      "delete": {
+        "description": "Delete a Canvas Template.",
+        "operationId": "deleteCanvasTemplate",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "The ID of the Canvas Template to delete",
+            "schema": {
+              "example": "123",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Canvas Template was successfully deleted."
+          }
+        },
+        "summary": "Delete Canvas Template",
+        "tags": [
+          "Canvas Template"
+        ]
       }
     },
     "/canvas-templates": {
+      "get": {
+        "description": "Get many Canvas Templates.",
+        "operationId": "getCanvasTemplates",
+        "parameters": [
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "description": "Page number (0-based)",
+            "schema": {
+              "default": 0,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items per page",
+            "schema": {
+              "default": 10,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Canvas Templates were successfully obtained.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CanvasTemplate"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get Canvas Templates",
+        "tags": [
+          "Canvas Template"
+        ]
+      },
       "post": {
         "description": "Create a Canvas Template.",
         "operationId": "createCanvasTemplate",
@@ -851,223 +964,68 @@
         ]
       }
     },
-    "/canvas-templates/{id}/render": {
-      "post": {
-        "description": "Create an instance of a Canvased Template.",
-        "operationId": "renderCanvasTemplate",
+    "/identifiers/{id}/ilmd": {
+      "get": {
+        "operationId": "IdentifierController_ilmd",
         "parameters": [
           {
             "name": "id",
             "required": true,
             "in": "path",
-            "description": "The ID of the Canvas Template to render",
+            "description": "The id of the identifier",
             "schema": {
-              "example": "123",
+              "example": "instance:xxxxx.1.1",
               "type": "string"
             }
           }
         ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": {
-                  "oneOf": [
-                    {
-                      "type": "string"
-                    },
-                    {
-                      "type": "number"
-                    },
-                    {
-                      "type": "boolean"
-                    },
-                    {
-                      "type": "object"
-                    },
-                    {
-                      "type": "array"
+        "responses": {
+          "200": {
+            "description": "The ILMD for the identifier",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "oneOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "boolean"
+                      },
+                      {
+                        "type": "object"
+                      },
+                      {
+                        "type": "array"
+                      }
+                    ]
+                  },
+                  "example": {
+                    "productName": "Sample Product",
+                    "batchNumber": "12345",
+                    "temperature": 25.5,
+                    "isActive": true,
+                    "metadata": {
+                      "category": "Electronics",
+                      "tags": [
+                        "test",
+                        "sample"
+                      ]
                     }
-                  ],
-                  "description": "Any valid JSON value"
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Instantiation of the Canvas Template as a Canvas Template Instance",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CanvasTemplateInstance"
-                }
-              }
-            }
-          }
-        },
-        "summary": "Render Canvas Template",
-        "tags": [
-          "Canvas Template"
-        ]
-      }
-    },
-    "/links": {
-      "post": {
-        "operationId": "createLink",
-        "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateLink"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "The Link was created successfully.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LinkConfiguration"
-                }
-              }
-            }
-          }
-        },
-        "summary": "Create Link",
-        "tags": [
-          "Link"
-        ]
-      },
-      "get": {
-        "operationId": "getLinks",
-        "parameters": [
-          {
-            "name": "offset",
-            "required": true,
-            "in": "query",
-            "schema": {
-              "type": "number"
-            }
-          },
-          {
-            "name": "limit",
-            "required": true,
-            "in": "query",
-            "schema": {
-              "type": "number"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The Links were found and returned.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/LinkConfiguration"
                   }
                 }
               }
             }
           }
         },
-        "summary": "Get Links",
+        "summary": "Get the ILMD for an identifier",
         "tags": [
-          "Link"
-        ]
-      }
-    },
-    "/links/{id}": {
-      "get": {
-        "operationId": "getLink",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The Link was found and returned.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LinkConfiguration"
-                }
-              }
-            }
-          }
-        },
-        "summary": "Get Link by ID",
-        "tags": [
-          "Link"
-        ]
-      },
-      "delete": {
-        "operationId": "deleteLink",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The Link was deleted successfully."
-          }
-        },
-        "summary": "Delete Link",
-        "tags": [
-          "Link"
-        ]
-      }
-    },
-    "/link-resolver/{path}": {
-      "get": {
-        "operationId": "LinkResolverController_resolve",
-        "parameters": [
-          {
-            "name": "path",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "linkType",
-            "required": true,
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        },
-        "tags": [
-          "LinkResolver"
+          "Identifier"
         ]
       }
     },
@@ -2189,6 +2147,117 @@
         ]
       }
     },
+    "/engine/app-routes": {
+      "put": {
+        "description": "Create or update an app route.",
+        "operationId": "setAppRoute",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetAppRoute"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The app route has been successfully updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppRoute"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Update app route.",
+        "tags": [
+          "App Route"
+        ]
+      },
+      "get": {
+        "description": "Get a paginated list of app routes.",
+        "operationId": "getAppRoutes",
+        "parameters": [
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "description": "Page number (1-based)",
+            "schema": {
+              "default": 1,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items per page",
+            "schema": {
+              "default": 10,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The app routes have been successfully retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AppRoute"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get app routes.",
+        "tags": [
+          "App Route"
+        ]
+      }
+    },
+    "/engine/app-routes/by-path": {
+      "get": {
+        "description": "Get an app route by its path.",
+        "operationId": "getAppRouteByPath",
+        "parameters": [
+          {
+            "name": "path",
+            "required": true,
+            "in": "query",
+            "description": "The path of the app route",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The app route has been successfully retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppRoute"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get app route by path.",
+        "tags": [
+          "App Route"
+        ]
+      }
+    },
     "/events": {
       "post": {
         "description": "Create an event",
@@ -2333,71 +2402,6 @@
         "summary": "Delete Event",
         "tags": [
           "Event"
-        ]
-      }
-    },
-    "/identifiers/{id}/ilmd": {
-      "get": {
-        "operationId": "IdentifierController_ilmd",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "description": "The id of the identifier",
-            "schema": {
-              "example": "instance:xxxxx.1.1",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The ILMD for the identifier",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "oneOf": [
-                      {
-                        "type": "string"
-                      },
-                      {
-                        "type": "number"
-                      },
-                      {
-                        "type": "boolean"
-                      },
-                      {
-                        "type": "object"
-                      },
-                      {
-                        "type": "array"
-                      }
-                    ]
-                  },
-                  "example": {
-                    "productName": "Sample Product",
-                    "batchNumber": "12345",
-                    "temperature": 25.5,
-                    "isActive": true,
-                    "metadata": {
-                      "category": "Electronics",
-                      "tags": [
-                        "test",
-                        "sample"
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "summary": "Get the ILMD for an identifier",
-        "tags": [
-          "Identifier"
         ]
       }
     },
@@ -3451,6 +3455,162 @@
         ]
       }
     },
+    "/links": {
+      "post": {
+        "operationId": "createLink",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateLink"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The Link was created successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LinkConfiguration"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create Link",
+        "tags": [
+          "Link"
+        ]
+      },
+      "get": {
+        "operationId": "getLinks",
+        "parameters": [
+          {
+            "name": "offset",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Links were found and returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LinkConfiguration"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get Links",
+        "tags": [
+          "Link"
+        ]
+      }
+    },
+    "/links/{id}": {
+      "get": {
+        "operationId": "getLink",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Link was found and returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LinkConfiguration"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get Link by ID",
+        "tags": [
+          "Link"
+        ]
+      },
+      "delete": {
+        "operationId": "deleteLink",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Link was deleted successfully."
+          }
+        },
+        "summary": "Delete Link",
+        "tags": [
+          "Link"
+        ]
+      }
+    },
+    "/link-resolver/{path}": {
+      "get": {
+        "operationId": "LinkResolverController_resolve",
+        "parameters": [
+          {
+            "name": "path",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "linkType",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "LinkResolver"
+        ]
+      }
+    },
     "/organizations": {
       "post": {
         "operationId": "createOrganization",
@@ -3481,6 +3641,60 @@
           }
         },
         "summary": "Create an organization",
+        "tags": [
+          "Organization"
+        ]
+      },
+      "get": {
+        "description": "Get many organizations",
+        "operationId": "getOrganizations",
+        "parameters": [
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "description": "Page number (default: 1)",
+            "schema": {
+              "default": 1,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items per page (default: 10)",
+            "schema": {
+              "default": 10,
+              "type": "number"
+            }
+          },
+          {
+            "name": "search",
+            "required": false,
+            "in": "query",
+            "description": "Search term for organization name or prefix",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The organizations have been successfully retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Organization"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get Organizations",
         "tags": [
           "Organization"
         ]
@@ -4187,6 +4401,11 @@
             "description": "The name of the template",
             "example": "Welcome Email Template"
           },
+          "identifier": {
+            "type": "string",
+            "description": "The identifier of the template",
+            "example": "instance:XXXX.1.1"
+          },
           "template": {
             "type": "string",
             "description": "The Handlebars template string",
@@ -4229,146 +4448,56 @@
         "type": "object",
         "properties": {
           "name": {
-            "type": "string"
+            "type": "string",
+            "description": "The name of the canvas template"
+          },
+          "identifier": {
+            "type": "string",
+            "description": "The identifier of the canvas template"
           },
           "template": {
-            "type": "string"
+            "type": "string",
+            "description": "The template of the canvas template"
+          },
+          "hydrator": {
+            "type": "string",
+            "description": "The hydrator of the canvas template"
           },
           "schema": {
-            "type": "object"
-          },
-          "themeId": {
-            "type": "string"
+            "type": "object",
+            "description": "The schema of the canvas template"
           }
         },
         "required": [
           "name",
           "template",
+          "hydrator",
           "schema"
         ]
       },
-      "CanvasTemplateInstance": {
+      "UpdateCanvasTemplate": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "string"
+          "name": {
+            "type": "string",
+            "description": "The name of the canvas template"
           },
-          "templateId": {
-            "type": "string"
+          "template": {
+            "type": "string",
+            "description": "The template of the canvas template"
           },
-          "variables": {
-            "type": "object"
+          "schema": {
+            "type": "object",
+            "description": "The schema of the canvas template"
           },
-          "renderedOutput": {
-            "type": "string"
-          },
-          "createdAt": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "updatedAt": {
-            "format": "date-time",
-            "type": "string"
+          "hydrator": {
+            "type": "string",
+            "description": "The hydrator of the canvas template"
           }
         },
         "required": [
-          "id",
-          "templateId",
-          "variables",
-          "renderedOutput",
-          "createdAt",
-          "updatedAt"
-        ]
-      },
-      "CreateLink": {
-        "type": "object",
-        "properties": {
-          "path": {
-            "type": "string",
-            "description": "The path of the Link."
-          },
-          "relationType": {
-            "type": "string",
-            "description": "The type of the Link."
-          },
-          "title": {
-            "type": "string",
-            "description": "The title of the Link."
-          },
-          "href": {
-            "type": "string",
-            "description": "The href of the Link."
-          },
-          "type": {
-            "type": "string",
-            "description": "The type of the Link."
-          },
-          "hreflang": {
-            "description": "The href language of the Link.",
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "default": {
-            "type": "boolean",
-            "description": "Whether the Link is the default Link."
-          }
-        },
-        "required": [
-          "path",
-          "relationType",
-          "href"
-        ]
-      },
-      "LinkConfiguration": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "The id of the Link."
-          },
-          "createdAt": {
-            "format": "date-time",
-            "type": "string",
-            "description": "The created at date of the Link."
-          },
-          "updatedAt": {
-            "format": "date-time",
-            "type": "string",
-            "description": "The updated at date of the Link."
-          },
-          "path": {
-            "type": "string",
-            "description": "The path of the Link."
-          },
-          "type": {
-            "type": "string",
-            "description": "The type of the Link."
-          },
-          "title": {
-            "type": "string",
-            "description": "The title of the Link."
-          },
-          "href": {
-            "type": "string",
-            "description": "The href of the Link."
-          },
-          "hrefLang": {
-            "description": "The href of the Link.",
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          }
-        },
-        "required": [
-          "id",
-          "createdAt",
-          "updatedAt",
-          "path",
-          "type",
-          "href"
+          "name",
+          "template"
         ]
       },
       "CreateCredentialIssuerProfile": {
@@ -5655,6 +5784,48 @@
           "actions",
           "entry",
           "themeColor"
+        ]
+      },
+      "SetAppRoute": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "The path of the app route"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the app route"
+          },
+          "description": {
+            "type": "string",
+            "description": "The description of the app route"
+          }
+        },
+        "required": [
+          "path"
+        ]
+      },
+      "AppRoute": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "The path of the app route"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the app route"
+          },
+          "description": {
+            "type": "string",
+            "description": "The description of the app route"
+          }
+        },
+        "required": [
+          "path",
+          "name",
+          "description"
         ]
       },
       "CreateInstanceIdentifier": {
@@ -7184,6 +7355,97 @@
         },
         "required": [
           "code"
+        ]
+      },
+      "CreateLink": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "The path of the Link."
+          },
+          "relationType": {
+            "type": "string",
+            "description": "The type of the Link."
+          },
+          "title": {
+            "type": "string",
+            "description": "The title of the Link."
+          },
+          "href": {
+            "type": "string",
+            "description": "The href of the Link."
+          },
+          "type": {
+            "type": "string",
+            "description": "The type of the Link."
+          },
+          "hreflang": {
+            "description": "The href language of the Link.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "type": "boolean",
+            "description": "Whether the Link is the default Link."
+          }
+        },
+        "required": [
+          "path",
+          "relationType",
+          "href"
+        ]
+      },
+      "LinkConfiguration": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The id of the Link."
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "The created at date of the Link."
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "The updated at date of the Link."
+          },
+          "path": {
+            "type": "string",
+            "description": "The path of the Link."
+          },
+          "type": {
+            "type": "string",
+            "description": "The type of the Link."
+          },
+          "title": {
+            "type": "string",
+            "description": "The title of the Link."
+          },
+          "href": {
+            "type": "string",
+            "description": "The href of the Link."
+          },
+          "hrefLang": {
+            "description": "The href of the Link.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "createdAt",
+          "updatedAt",
+          "path",
+          "type",
+          "href"
         ]
       },
       "CreateOrganization": {

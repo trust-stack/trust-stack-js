@@ -235,6 +235,10 @@ export type CanvasTemplate = {
      */
     name?: string;
     /**
+     * The identifier of the template
+     */
+    identifier?: string;
+    /**
      * The Handlebars template string
      */
     template: string;
@@ -255,89 +259,49 @@ export type CanvasTemplate = {
 };
 
 export type CreateCanvasTemplate = {
+    /**
+     * The name of the canvas template
+     */
     name: string;
+    /**
+     * The identifier of the canvas template
+     */
+    identifier?: string;
+    /**
+     * The template of the canvas template
+     */
     template: string;
+    /**
+     * The hydrator of the canvas template
+     */
+    hydrator: string;
+    /**
+     * The schema of the canvas template
+     */
     schema: {
         [key: string]: unknown;
     };
-    themeId?: string;
 };
 
-export type CanvasTemplateInstance = {
-    id: string;
-    templateId: string;
-    variables: {
+export type UpdateCanvasTemplate = {
+    /**
+     * The name of the canvas template
+     */
+    name: string;
+    /**
+     * The template of the canvas template
+     */
+    template: string;
+    /**
+     * The schema of the canvas template
+     */
+    schema?: {
         [key: string]: unknown;
     };
-    renderedOutput: string;
-    createdAt: string;
-    updatedAt: string;
-};
-
-export type CreateLink = {
     /**
-     * The path of the Link.
+     * The hydrator of the canvas template
      */
-    path: string;
-    /**
-     * The type of the Link.
-     */
-    relationType: string;
-    /**
-     * The title of the Link.
-     */
-    title?: string;
-    /**
-     * The href of the Link.
-     */
-    href: string;
-    /**
-     * The type of the Link.
-     */
-    type?: string;
-    /**
-     * The href language of the Link.
-     */
-    hreflang?: Array<string>;
-    /**
-     * Whether the Link is the default Link.
-     */
-    default?: boolean;
-};
-
-export type LinkConfiguration = {
-    /**
-     * The id of the Link.
-     */
-    id: string;
-    /**
-     * The created at date of the Link.
-     */
-    createdAt: string;
-    /**
-     * The updated at date of the Link.
-     */
-    updatedAt: string;
-    /**
-     * The path of the Link.
-     */
-    path: string;
-    /**
-     * The type of the Link.
-     */
-    type: string;
-    /**
-     * The title of the Link.
-     */
-    title?: string;
-    /**
-     * The href of the Link.
-     */
-    href: string;
-    /**
-     * The href of the Link.
-     */
-    hrefLang?: Array<string>;
+    hydrator?: string;
 };
 
 export type CreateCredentialIssuerProfile = {
@@ -1025,6 +989,36 @@ export type SetAppFrame = {
      * The color of the app theme
      */
     themeColor: string;
+};
+
+export type SetAppRoute = {
+    /**
+     * The path of the app route
+     */
+    path: string;
+    /**
+     * The name of the app route
+     */
+    name?: string;
+    /**
+     * The description of the app route
+     */
+    description?: string;
+};
+
+export type AppRoute = {
+    /**
+     * The path of the app route
+     */
+    path: string;
+    /**
+     * The name of the app route
+     */
+    name: string;
+    /**
+     * The description of the app route
+     */
+    description: string;
 };
 
 export type CreateInstanceIdentifier = {
@@ -1914,6 +1908,72 @@ export type CreateTradeItemSchema = {
     extensionSchema?: CreateTradeItemExtensionSchema;
 };
 
+export type CreateLink = {
+    /**
+     * The path of the Link.
+     */
+    path: string;
+    /**
+     * The type of the Link.
+     */
+    relationType: string;
+    /**
+     * The title of the Link.
+     */
+    title?: string;
+    /**
+     * The href of the Link.
+     */
+    href: string;
+    /**
+     * The type of the Link.
+     */
+    type?: string;
+    /**
+     * The href language of the Link.
+     */
+    hreflang?: Array<string>;
+    /**
+     * Whether the Link is the default Link.
+     */
+    default?: boolean;
+};
+
+export type LinkConfiguration = {
+    /**
+     * The id of the Link.
+     */
+    id: string;
+    /**
+     * The created at date of the Link.
+     */
+    createdAt: string;
+    /**
+     * The updated at date of the Link.
+     */
+    updatedAt: string;
+    /**
+     * The path of the Link.
+     */
+    path: string;
+    /**
+     * The type of the Link.
+     */
+    type: string;
+    /**
+     * The title of the Link.
+     */
+    title?: string;
+    /**
+     * The href of the Link.
+     */
+    href: string;
+    /**
+     * The href of the Link.
+     */
+    hrefLang?: Array<string>;
+};
+
 export type CreateOrganization = {
     /**
      * Optional ID for the organization. Only allowed in sandbox environments.
@@ -2558,13 +2618,32 @@ export type GetObjectResponses = {
 
 export type GetObjectResponse = GetObjectResponses[keyof GetObjectResponses];
 
+export type DeleteCanvasTemplateData = {
+    body?: never;
+    path: {
+        /**
+         * The ID of the Canvas Template to delete
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/canvas-templates/{id}';
+};
+
+export type DeleteCanvasTemplateResponses = {
+    /**
+     * The Canvas Template was successfully deleted.
+     */
+    200: unknown;
+};
+
 export type GetCanvasTemplateData = {
     body?: never;
     path: {
         /**
          * The ID of the Canvas Template to find
          */
-        id: unknown;
+        id: string;
     };
     query?: never;
     url: '/canvas-templates/{id}';
@@ -2578,6 +2657,52 @@ export type GetCanvasTemplateResponses = {
 };
 
 export type GetCanvasTemplateResponse = GetCanvasTemplateResponses[keyof GetCanvasTemplateResponses];
+
+export type UpdateCanvasTemplateData = {
+    body: UpdateCanvasTemplate;
+    path: {
+        /**
+         * The ID of the Canvas Template to update
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/canvas-templates/{id}';
+};
+
+export type UpdateCanvasTemplateResponses = {
+    /**
+     * The Canvas Template was successfully updated.
+     */
+    200: CanvasTemplate;
+};
+
+export type UpdateCanvasTemplateResponse = UpdateCanvasTemplateResponses[keyof UpdateCanvasTemplateResponses];
+
+export type GetCanvasTemplatesData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * Page number (0-based)
+         */
+        page?: number;
+        /**
+         * Number of items per page
+         */
+        limit?: number;
+    };
+    url: '/canvas-templates';
+};
+
+export type GetCanvasTemplatesResponses = {
+    /**
+     * The Canvas Templates were successfully obtained.
+     */
+    200: Array<CanvasTemplate>;
+};
+
+export type GetCanvasTemplatesResponse = GetCanvasTemplatesResponses[keyof GetCanvasTemplatesResponses];
 
 export type CreateCanvasTemplateData = {
     body: CreateCanvasTemplate;
@@ -2595,114 +2720,30 @@ export type CreateCanvasTemplateResponses = {
 
 export type CreateCanvasTemplateResponse = CreateCanvasTemplateResponses[keyof CreateCanvasTemplateResponses];
 
-export type RenderCanvasTemplateData = {
-    body: {
-        [key: string]: string | number | boolean | {
-            [key: string]: unknown;
-        } | Array<unknown>;
-    };
+export type IdentifierControllerIlmdData = {
+    body?: never;
     path: {
         /**
-         * The ID of the Canvas Template to render
+         * The id of the identifier
          */
         id: string;
     };
     query?: never;
-    url: '/canvas-templates/{id}/render';
+    url: '/identifiers/{id}/ilmd';
 };
 
-export type RenderCanvasTemplateResponses = {
+export type IdentifierControllerIlmdResponses = {
     /**
-     * Instantiation of the Canvas Template as a Canvas Template Instance
+     * The ILMD for the identifier
      */
-    200: CanvasTemplateInstance;
-};
-
-export type RenderCanvasTemplateResponse = RenderCanvasTemplateResponses[keyof RenderCanvasTemplateResponses];
-
-export type GetLinksData = {
-    body?: never;
-    path?: never;
-    query: {
-        offset: number;
-        limit: number;
+    200: {
+        [key: string]: string | number | boolean | {
+            [key: string]: unknown;
+        } | Array<unknown>;
     };
-    url: '/links';
 };
 
-export type GetLinksResponses = {
-    /**
-     * The Links were found and returned.
-     */
-    200: Array<LinkConfiguration>;
-};
-
-export type GetLinksResponse = GetLinksResponses[keyof GetLinksResponses];
-
-export type CreateLinkData = {
-    body: CreateLink;
-    path?: never;
-    query?: never;
-    url: '/links';
-};
-
-export type CreateLinkResponses = {
-    /**
-     * The Link was created successfully.
-     */
-    201: LinkConfiguration;
-};
-
-export type CreateLinkResponse = CreateLinkResponses[keyof CreateLinkResponses];
-
-export type DeleteLinkData = {
-    body?: never;
-    path: {
-        id: string;
-    };
-    query?: never;
-    url: '/links/{id}';
-};
-
-export type DeleteLinkResponses = {
-    /**
-     * The Link was deleted successfully.
-     */
-    200: unknown;
-};
-
-export type GetLinkData = {
-    body?: never;
-    path: {
-        id: string;
-    };
-    query?: never;
-    url: '/links/{id}';
-};
-
-export type GetLinkResponses = {
-    /**
-     * The Link was found and returned.
-     */
-    200: LinkConfiguration;
-};
-
-export type GetLinkResponse = GetLinkResponses[keyof GetLinkResponses];
-
-export type LinkResolverControllerResolveData = {
-    body?: never;
-    path: {
-        path: string;
-    };
-    query: {
-        linkType: string;
-    };
-    url: '/link-resolver/{path}';
-};
-
-export type LinkResolverControllerResolveResponses = {
-    200: unknown;
-};
+export type IdentifierControllerIlmdResponse = IdentifierControllerIlmdResponses[keyof IdentifierControllerIlmdResponses];
 
 export type GetCredentialIssuerProfilesData = {
     body?: never;
@@ -3399,6 +3440,68 @@ export type SetAppFrameResponses = {
 
 export type SetAppFrameResponse = SetAppFrameResponses[keyof SetAppFrameResponses];
 
+export type GetAppRoutesData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * Page number (1-based)
+         */
+        page?: number;
+        /**
+         * Number of items per page
+         */
+        limit?: number;
+    };
+    url: '/engine/app-routes';
+};
+
+export type GetAppRoutesResponses = {
+    /**
+     * The app routes have been successfully retrieved
+     */
+    200: Array<AppRoute>;
+};
+
+export type GetAppRoutesResponse = GetAppRoutesResponses[keyof GetAppRoutesResponses];
+
+export type SetAppRouteData = {
+    body: SetAppRoute;
+    path?: never;
+    query?: never;
+    url: '/engine/app-routes';
+};
+
+export type SetAppRouteResponses = {
+    /**
+     * The app route has been successfully updated
+     */
+    200: AppRoute;
+};
+
+export type SetAppRouteResponse = SetAppRouteResponses[keyof SetAppRouteResponses];
+
+export type GetAppRouteByPathData = {
+    body?: never;
+    path?: never;
+    query: {
+        /**
+         * The path of the app route
+         */
+        path: string;
+    };
+    url: '/engine/app-routes/by-path';
+};
+
+export type GetAppRouteByPathResponses = {
+    /**
+     * The app route has been successfully retrieved
+     */
+    200: AppRoute;
+};
+
+export type GetAppRouteByPathResponse = GetAppRouteByPathResponses[keyof GetAppRouteByPathResponses];
+
 export type GetEventsData = {
     body?: never;
     path?: never;
@@ -3504,31 +3607,6 @@ export type GetEventResponses = {
 };
 
 export type GetEventResponse = GetEventResponses[keyof GetEventResponses];
-
-export type IdentifierControllerIlmdData = {
-    body?: never;
-    path: {
-        /**
-         * The id of the identifier
-         */
-        id: string;
-    };
-    query?: never;
-    url: '/identifiers/{id}/ilmd';
-};
-
-export type IdentifierControllerIlmdResponses = {
-    /**
-     * The ILMD for the identifier
-     */
-    200: {
-        [key: string]: string | number | boolean | {
-            [key: string]: unknown;
-        } | Array<unknown>;
-    };
-};
-
-export type IdentifierControllerIlmdResponse = IdentifierControllerIlmdResponses[keyof IdentifierControllerIlmdResponses];
 
 export type GetFaoCodesData = {
     body?: never;
@@ -4212,6 +4290,119 @@ export type GetIconsResponses = {
 };
 
 export type GetIconsResponse = GetIconsResponses[keyof GetIconsResponses];
+
+export type GetLinksData = {
+    body?: never;
+    path?: never;
+    query: {
+        offset: number;
+        limit: number;
+    };
+    url: '/links';
+};
+
+export type GetLinksResponses = {
+    /**
+     * The Links were found and returned.
+     */
+    200: Array<LinkConfiguration>;
+};
+
+export type GetLinksResponse = GetLinksResponses[keyof GetLinksResponses];
+
+export type CreateLinkData = {
+    body: CreateLink;
+    path?: never;
+    query?: never;
+    url: '/links';
+};
+
+export type CreateLinkResponses = {
+    /**
+     * The Link was created successfully.
+     */
+    201: LinkConfiguration;
+};
+
+export type CreateLinkResponse = CreateLinkResponses[keyof CreateLinkResponses];
+
+export type DeleteLinkData = {
+    body?: never;
+    path: {
+        id: string;
+    };
+    query?: never;
+    url: '/links/{id}';
+};
+
+export type DeleteLinkResponses = {
+    /**
+     * The Link was deleted successfully.
+     */
+    200: unknown;
+};
+
+export type GetLinkData = {
+    body?: never;
+    path: {
+        id: string;
+    };
+    query?: never;
+    url: '/links/{id}';
+};
+
+export type GetLinkResponses = {
+    /**
+     * The Link was found and returned.
+     */
+    200: LinkConfiguration;
+};
+
+export type GetLinkResponse = GetLinkResponses[keyof GetLinkResponses];
+
+export type LinkResolverControllerResolveData = {
+    body?: never;
+    path: {
+        path: string;
+    };
+    query: {
+        linkType: string;
+    };
+    url: '/link-resolver/{path}';
+};
+
+export type LinkResolverControllerResolveResponses = {
+    200: unknown;
+};
+
+export type GetOrganizationsData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * Page number (default: 1)
+         */
+        page?: number;
+        /**
+         * Number of items per page (default: 10)
+         */
+        limit?: number;
+        /**
+         * Search term for organization name or prefix
+         */
+        search?: string;
+    };
+    url: '/organizations';
+};
+
+export type GetOrganizationsResponses = {
+    /**
+     * The organizations have been successfully retrieved
+     */
+    200: Array<Organization>;
+};
+
+export type GetOrganizationsResponse = GetOrganizationsResponses[keyof GetOrganizationsResponses];
 
 export type CreateOrganizationData = {
     body: CreateOrganization;
