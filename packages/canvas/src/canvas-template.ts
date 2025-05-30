@@ -2,7 +2,6 @@ import {
   CreateCanvasTemplate,
   createCanvasTemplate,
   getCanvasTemplate,
-  renderCanvasTemplate,
   RequestOptions,
   TrustStackClient,
 } from "@truststack/core";
@@ -32,24 +31,6 @@ export class CanvasTemplateClient extends TrustStackClient {
   public async getCanvasTemplate(id: string, options?: RequestOptions) {
     return getCanvasTemplate({
       path: {id},
-      headers: this.headers(options),
-      client: this.client,
-    });
-  }
-
-  /**
-   * Render a Canvas Template.
-   * @param id - The id of the Canvas Template.
-   * @returns The rendered Canvas Template.
-   */
-  public async renderCanvasTemplate(
-    id: string,
-    data: any,
-    options?: RequestOptions
-  ) {
-    return renderCanvasTemplate({
-      path: {id},
-      body: data,
       headers: this.headers(options),
       client: this.client,
     });

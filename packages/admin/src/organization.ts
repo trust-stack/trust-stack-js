@@ -3,6 +3,7 @@ import {
   CreateOrganization,
   deleteOrganization,
   getOrganization,
+  getOrganizations,
   RequestOptions,
   TrustStackClient,
   updateOrganization,
@@ -62,6 +63,20 @@ export class OrganizationClient extends TrustStackClient {
     });
   }
 
+  async getOrganizations(
+    {page = 1, limit = 10, search}: GetOrganizationsProps,
+    options?: RequestOptions
+  ) {
+    return getOrganizations({
+      query: {
+        page,
+        limit,
+        search,
+      },
+      headers: this.headers(options),
+    });
+  }
+
   /**
    * Delete an organization
    * @param id - The ID of the organization
@@ -78,3 +93,9 @@ export class OrganizationClient extends TrustStackClient {
     });
   }
 }
+
+type GetOrganizationsProps = {
+  page?: number;
+  limit?: number;
+  search?: string;
+};
